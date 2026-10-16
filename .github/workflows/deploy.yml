@@ -1,8 +1,9 @@
 name: Deploy GitHub Pages
+run-name: Publish site from ${{ github.ref_name }}
 
 # Start with explicit releases. Enable push deployment after the first live review.
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: read
