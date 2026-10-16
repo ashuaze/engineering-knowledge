@@ -1,6 +1,6 @@
 # 发布工程知识库
 
-配置日期：2026-10-16。仓库已配置 VitePress 1.6.4、中文本地搜索和 GitHub Pages 工作流。公开仓库与域名尚未创建或关联；本地构建通过不代表已经上线。
+配置日期：2026-10-16。仓库已配置 VitePress 1.6.4、中文本地搜索和 GitHub Pages 工作流。源码位于 [ashuaze/engineering-knowledge](https://github.com/ashuaze/engineering-knowledge)，Pages 发布目标为[工程知识库网站](https://ashuaze.github.io/engineering-knowledge/)。本地构建通过不代表公开部署成功，发布状态以 Actions 结果与线上访问为准。
 
 ## 本地阅读与预览
 

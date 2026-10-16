@@ -66,4 +66,6 @@ python3 scripts/generate_indexes.py --check
 - `scripts/`：索引生成、元数据与内部文件链接校验。
 - `drafts/`、`personal/`：仅保留说明文件，具体草稿和个人评估由 Git 忽略。
 
-本版已提供网站与 GitHub Pages 发布配置，尚未关联远程仓库或部署公开网站。原创正文、图表与术语资料采用 CC BY 4.0，原创代码采用 MIT。使用与转载条件见 [RIGHTS.md](RIGHTS.md)，协议全文分别保存在 `LICENSE-CONTENT` 和 `LICENSE-CODE`。
+源码位于 [ashuaze/engineering-knowledge](https://github.com/ashuaze/engineering-knowledge)，Pages 发布目标为[工程知识库网站](https://ashuaze.github.io/engineering-knowledge/)。站点从默认分支手动发布，检查通过后部署同一份构建产物。
+
+原创正文、图表与术语资料采用 CC BY 4.0，原创代码采用 MIT。使用与转载条件见 [RIGHTS.md](RIGHTS.md)，协议全文分别保存在 `LICENSE-CONTENT` 和 `LICENSE-CODE`。
