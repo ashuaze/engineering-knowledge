@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.sqlite*
+node_modules/
+.cache/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+drafts/*
+!drafts/README.md
+personal/*
+!personal/README.md
+.env
+.env.*

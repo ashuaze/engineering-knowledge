@@ -1,0 +1,2946 @@
+[
+  {
+    "id": "systems.execution-units",
+    "domain": "systems",
+    "name": "Process / Thread / Coroutine",
+    "aliases": [
+      "Process",
+      "Thread",
+      "Coroutine"
+    ],
+    "definition": "进程、线程与协程，资源、执行和调度边界。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/process-thread-coroutine.md"
+    ]
+  },
+  {
+    "id": "systems.concurrency",
+    "domain": "systems",
+    "name": "Concurrency / Parallelism",
+    "aliases": [
+      "Concurrency",
+      "Parallelism"
+    ],
+    "definition": "并发推进与并行执行，关注调度和硬件资源。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/process-thread-coroutine.md"
+    ]
+  },
+  {
+    "id": "systems.blocking",
+    "domain": "systems",
+    "name": "Blocking / Non-blocking",
+    "aliases": [
+      "Blocking",
+      "Non-blocking"
+    ],
+    "definition": "指定操作会不会让当前执行线程等待。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/runtime/async-and-blocking.md"
+    ]
+  },
+  {
+    "id": "systems.context-switch",
+    "domain": "systems",
+    "name": "Context Switch",
+    "aliases": [
+      "Context Switch"
+    ],
+    "definition": "保存和恢复执行上下文及其开销。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.privilege",
+    "domain": "systems",
+    "name": "User Mode / Kernel Mode / Syscall",
+    "aliases": [
+      "User Mode",
+      "Kernel Mode",
+      "Syscall"
+    ],
+    "definition": "权限边界、系统调用和内核服务。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.memory-layout",
+    "domain": "systems",
+    "name": "Stack / Heap",
+    "aliases": [
+      "Stack",
+      "Heap"
+    ],
+    "definition": "调用栈、动态分配和对象生命周期。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.virtual-memory",
+    "domain": "systems",
+    "name": "Virtual Memory / Paging",
+    "aliases": [
+      "Virtual Memory",
+      "Paging"
+    ],
+    "definition": "地址映射、分页和缺页处理。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.synchronization",
+    "domain": "systems",
+    "name": "Mutex / Semaphore / CAS",
+    "aliases": [
+      "Mutex",
+      "Semaphore",
+      "CAS"
+    ],
+    "definition": "互斥、资源计数与原子比较交换。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.race-deadlock",
+    "domain": "systems",
+    "name": "Race Condition / Deadlock",
+    "aliases": [
+      "Race Condition",
+      "Deadlock"
+    ],
+    "definition": "时序依赖错误与循环等待。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.fd-socket",
+    "domain": "systems",
+    "name": "File Descriptor / Socket",
+    "aliases": [
+      "File Descriptor",
+      "Socket"
+    ],
+    "definition": "操作系统资源句柄与通信端点。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.io-multiplexing",
+    "domain": "systems",
+    "name": "I/O Multiplexing / epoll",
+    "aliases": [
+      "I/O Multiplexing",
+      "epoll"
+    ],
+    "definition": "监视多个 I/O 就绪事件，减少逐连接阻塞等待。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "systems.memory-order",
+    "domain": "systems",
+    "name": "Memory Model / Happens-before",
+    "aliases": [
+      "Memory Model",
+      "Happens-before"
+    ],
+    "definition": "跨执行单元的可见性、顺序与同步关系。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.network-model",
+    "domain": "networking",
+    "name": "OSI / TCP-IP Model",
+    "aliases": [
+      "OSI",
+      "TCP-IP Model"
+    ],
+    "definition": "网络职责分层和封装。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.transport",
+    "domain": "networking",
+    "name": "IP / TCP / UDP",
+    "aliases": [
+      "IP",
+      "TCP",
+      "UDP"
+    ],
+    "definition": "寻址、字节流可靠传输和数据报。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.dns",
+    "domain": "networking",
+    "name": "DNS / TTL",
+    "aliases": [
+      "DNS",
+      "TTL"
+    ],
+    "definition": "域名解析与记录缓存有效期。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/https-request-lifecycle.md"
+    ]
+  },
+  {
+    "id": "networking.tcp-handshake",
+    "domain": "networking",
+    "name": "TCP Handshake",
+    "aliases": [
+      "TCP Handshake"
+    ],
+    "definition": "连接建立及连接状态。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.transport-control",
+    "domain": "networking",
+    "name": "Flow Control / Congestion Control",
+    "aliases": [
+      "Flow Control",
+      "Congestion Control"
+    ],
+    "definition": "接收方能力约束与网络拥塞调节。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.tls",
+    "domain": "networking",
+    "name": "TLS / HTTPS / PKI",
+    "aliases": [
+      "TLS",
+      "HTTPS",
+      "PKI"
+    ],
+    "definition": "传输加密、身份校验与证书信任。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/https-request-lifecycle.md"
+    ]
+  },
+  {
+    "id": "networking.http-versions",
+    "domain": "networking",
+    "name": "HTTP/1.1 / HTTP/2 / HTTP/3",
+    "aliases": [
+      "HTTP/1.1",
+      "HTTP/2",
+      "HTTP/3"
+    ],
+    "definition": "HTTP 传输机制和多路复用差异。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/https-request-lifecycle.md"
+    ]
+  },
+  {
+    "id": "networking.quic",
+    "domain": "networking",
+    "name": "QUIC",
+    "aliases": [
+      "QUIC"
+    ],
+    "definition": "基于 UDP、集成安全机制的传输协议。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.keepalive",
+    "domain": "networking",
+    "name": "Keep-Alive / Connection Reuse",
+    "aliases": [
+      "Keep-Alive",
+      "Connection Reuse"
+    ],
+    "definition": "连接复用、空闲管理和连接成本。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/https-request-lifecycle.md"
+    ]
+  },
+  {
+    "id": "networking.proxy",
+    "domain": "networking",
+    "name": "Proxy / Reverse Proxy",
+    "aliases": [
+      "Proxy",
+      "Reverse Proxy"
+    ],
+    "definition": "代理客户端或服务端接收请求。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/https-request-lifecycle.md"
+    ]
+  },
+  {
+    "id": "networking.load-balancer",
+    "domain": "networking",
+    "name": "Load Balancer / L4 / L7",
+    "aliases": [
+      "Load Balancer",
+      "L4",
+      "L7"
+    ],
+    "definition": "按传输层或应用层信息分发流量。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "networking.cdn-waf",
+    "domain": "networking",
+    "name": "CDN / WAF",
+    "aliases": [
+      "CDN",
+      "WAF"
+    ],
+    "definition": "内容边缘分发与应用层请求防护。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.complexity",
+    "domain": "algorithms",
+    "name": "Time / Space Complexity",
+    "aliases": [
+      "Time",
+      "Space Complexity"
+    ],
+    "definition": "时间、空间随输入规模增长的趋势。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/algorithms/complexity-and-data-structures.md"
+    ]
+  },
+  {
+    "id": "algorithms.sequences",
+    "domain": "algorithms",
+    "name": "Array / Linked List",
+    "aliases": [
+      "Array",
+      "Linked List"
+    ],
+    "definition": "连续或链式存储及访问和修改成本。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/algorithms/complexity-and-data-structures.md"
+    ]
+  },
+  {
+    "id": "algorithms.hash-table",
+    "domain": "algorithms",
+    "name": "Hash Table / Hash Function",
+    "aliases": [
+      "Hash Table",
+      "Hash Function"
+    ],
+    "definition": "键映射、碰撞处理和负载因子。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/algorithms/complexity-and-data-structures.md"
+    ]
+  },
+  {
+    "id": "algorithms.queues",
+    "domain": "algorithms",
+    "name": "Stack / Queue / Deque",
+    "aliases": [
+      "Stack",
+      "Queue",
+      "Deque"
+    ],
+    "definition": "后进先出、先进先出与双端操作。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.trees",
+    "domain": "algorithms",
+    "name": "Tree / Heap / Trie",
+    "aliases": [
+      "Tree",
+      "Heap",
+      "Trie"
+    ],
+    "definition": "层级关系、优先级和前缀索引。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.b-tree",
+    "domain": "algorithms",
+    "name": "B-Tree / B+Tree",
+    "aliases": [
+      "B-Tree",
+      "B+Tree"
+    ],
+    "definition": "面向页访问的多路平衡树及索引组织。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.sorting-search",
+    "domain": "algorithms",
+    "name": "Sorting / Binary Search",
+    "aliases": [
+      "Sorting",
+      "Binary Search"
+    ],
+    "definition": "排序与有序区间上的查找。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.graph-traversal",
+    "domain": "algorithms",
+    "name": "Graph / BFS / DFS",
+    "aliases": [
+      "Graph",
+      "BFS",
+      "DFS"
+    ],
+    "definition": "关系建模与图遍历。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.bloom",
+    "domain": "algorithms",
+    "name": "Bloom Filter",
+    "aliases": [
+      "Bloom Filter"
+    ],
+    "definition": "允许误报的集合成员近似判断。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.eviction",
+    "domain": "algorithms",
+    "name": "LRU / LFU",
+    "aliases": [
+      "LRU",
+      "LFU"
+    ],
+    "definition": "按访问新近程度或频率淘汰缓存。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "algorithms.amortized",
+    "domain": "algorithms",
+    "name": "Amortized Analysis",
+    "aliases": [
+      "Amortized Analysis"
+    ],
+    "definition": "在一系列操作上分摊成本。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/algorithms/complexity-and-data-structures.md"
+    ]
+  },
+  {
+    "id": "algorithms.probabilistic",
+    "domain": "algorithms",
+    "name": "Probabilistic Data Structure",
+    "aliases": [
+      "Probabilistic Data Structure"
+    ],
+    "definition": "用可控误差换取空间或时间效率。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.compilation",
+    "domain": "runtime",
+    "name": "Compiler / Interpreter / JIT",
+    "aliases": [
+      "Compiler",
+      "Interpreter",
+      "JIT"
+    ],
+    "definition": "编译、解释与运行期间的编译优化。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.virtual-machine",
+    "domain": "runtime",
+    "name": "Runtime / VM",
+    "aliases": [
+      "Runtime",
+      "VM"
+    ],
+    "definition": "执行语言所需的调度、内存和宿主能力。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.event-loop",
+    "domain": "runtime",
+    "name": "Event Loop",
+    "aliases": [
+      "Event Loop"
+    ],
+    "definition": "协调任务、I/O 完成事件和回调执行。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/runtime/async-and-blocking.md",
+      "docs/knowledge/frontend/long-tasks-and-responsiveness.md"
+    ]
+  },
+  {
+    "id": "runtime.async",
+    "domain": "runtime",
+    "name": "Sync / Async / Promise / Async-Await",
+    "aliases": [
+      "Sync",
+      "Async",
+      "Promise",
+      "Async-Await"
+    ],
+    "definition": "调用结果的交付与异步控制流。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/runtime/async-and-blocking.md"
+    ]
+  },
+  {
+    "id": "runtime.microtasks",
+    "domain": "runtime",
+    "name": "Task / Microtask",
+    "aliases": [
+      "Task",
+      "Microtask"
+    ],
+    "definition": "宿主调度任务和微任务，具体规则依 Runtime 而异。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.closure",
+    "domain": "runtime",
+    "name": "Closure / Scope",
+    "aliases": [
+      "Closure",
+      "Scope"
+    ],
+    "definition": "词法作用域和对外部绑定的访问。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.gc",
+    "domain": "runtime",
+    "name": "GC / Reference Counting",
+    "aliases": [
+      "GC",
+      "Reference Counting"
+    ],
+    "definition": "自动内存回收策略及其代价。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.type-system",
+    "domain": "runtime",
+    "name": "Type System / Type Inference",
+    "aliases": [
+      "Type System",
+      "Type Inference"
+    ],
+    "definition": "类型约束和自动类型推导。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.generics",
+    "domain": "runtime",
+    "name": "Generics / Structural Typing",
+    "aliases": [
+      "Generics",
+      "Structural Typing"
+    ],
+    "definition": "参数化类型与按结构兼容的类型关系。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.serialization",
+    "domain": "runtime",
+    "name": "Serialization / Deserialization",
+    "aliases": [
+      "Serialization",
+      "Deserialization"
+    ],
+    "definition": "在运行时对象和交换格式间转换。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.errors",
+    "domain": "runtime",
+    "name": "Exception / Error Propagation",
+    "aliases": [
+      "Exception",
+      "Error Propagation"
+    ],
+    "definition": "失败信号、传播边界与资源清理。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.modules",
+    "domain": "runtime",
+    "name": "Module System / Dependency",
+    "aliases": [
+      "Module System",
+      "Dependency"
+    ],
+    "definition": "模块加载、依赖解析和初始化。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "runtime.ffi-wasm",
+    "domain": "runtime",
+    "name": "FFI / WebAssembly",
+    "aliases": [
+      "FFI",
+      "WebAssembly"
+    ],
+    "definition": "语言边界调用与可移植字节码执行。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "frontend.render-tree",
+    "domain": "frontend",
+    "name": "DOM / CSSOM / Render Tree",
+    "aliases": [
+      "DOM",
+      "CSSOM",
+      "Render Tree"
+    ],
+    "definition": "文档、样式和渲染结构。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.render-pipeline",
+    "domain": "frontend",
+    "name": "Layout / Paint / Compositing",
+    "aliases": [
+      "Layout",
+      "Paint",
+      "Compositing"
+    ],
+    "definition": "布局计算、绘制与图层合成。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.rendering-strategies",
+    "domain": "frontend",
+    "name": "CSR / SSR / SSG / ISR",
+    "aliases": [
+      "CSR",
+      "SSR",
+      "SSG",
+      "ISR"
+    ],
+    "definition": "客户端渲染、服务端渲染、预生成与增量再生成。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.hydration",
+    "domain": "frontend",
+    "name": "Hydration",
+    "aliases": [
+      "Hydration"
+    ],
+    "definition": "让服务端输出的页面连接客户端交互逻辑。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.spa",
+    "domain": "frontend",
+    "name": "SPA / Client-side Routing",
+    "aliases": [
+      "SPA",
+      "Client-side Routing"
+    ],
+    "definition": "单页导航与客户端路由状态。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.state",
+    "domain": "frontend",
+    "name": "Reactivity / State Management",
+    "aliases": [
+      "Reactivity",
+      "State Management"
+    ],
+    "definition": "数据变化、界面更新及状态所有权。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.vdom",
+    "domain": "frontend",
+    "name": "Virtual DOM / Reconciliation",
+    "aliases": [
+      "Virtual DOM",
+      "Reconciliation"
+    ],
+    "definition": "UI 描述与更新协调策略。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.bundling",
+    "domain": "frontend",
+    "name": "Bundling / Tree Shaking",
+    "aliases": [
+      "Bundling",
+      "Tree Shaking"
+    ],
+    "definition": "模块打包与可证明无用代码的移除。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.offline",
+    "domain": "frontend",
+    "name": "Browser Cache / Service Worker",
+    "aliases": [
+      "Browser Cache",
+      "Service Worker"
+    ],
+    "definition": "响应复用、请求代理和离线能力。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.realtime",
+    "domain": "frontend",
+    "name": "WebSocket / SSE",
+    "aliases": [
+      "WebSocket",
+      "SSE"
+    ],
+    "definition": "双向连接通信与服务器事件推送。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.web-vitals",
+    "domain": "frontend",
+    "name": "Core Web Vitals",
+    "aliases": [
+      "Core Web Vitals"
+    ],
+    "definition": "衡量加载、交互和布局稳定性的指标集合。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.bff",
+    "domain": "frontend",
+    "name": "BFF",
+    "aliases": [
+      "BFF"
+    ],
+    "definition": "为特定客户端提供聚合和适配的后端。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "frontend.long-tasks",
+    "domain": "frontend",
+    "name": "Long Task / Main-thread Yielding",
+    "aliases": [
+      "Long Task",
+      "Main-thread Yielding",
+      "scheduler.yield",
+      "长任务",
+      "任务切片"
+    ],
+    "definition": "识别持续占用主线程的任务，分批执行并让出调度机会。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/frontend/long-tasks-and-responsiveness.md"
+    ]
+  },
+  {
+    "id": "api.styles",
+    "domain": "api",
+    "name": "REST / RPC / GraphQL / gRPC",
+    "aliases": [
+      "REST",
+      "RPC",
+      "GraphQL",
+      "gRPC"
+    ],
+    "definition": "API 风格、查询模型与调用协议。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.resource-model",
+    "domain": "api",
+    "name": "Resource Modeling",
+    "aliases": [
+      "Resource Modeling"
+    ],
+    "definition": "资源标识、状态变化与操作语义。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.http-semantics",
+    "domain": "api",
+    "name": "HTTP Method / Status Code",
+    "aliases": [
+      "HTTP Method",
+      "Status Code"
+    ],
+    "definition": "方法意图和响应结果的协议表达。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.idempotency",
+    "domain": "api",
+    "name": "Idempotency",
+    "aliases": [
+      "Idempotency"
+    ],
+    "definition": "同一操作重复执行时约束业务效果。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/api/idempotency.md",
+      "docs/knowledge/api/idempotency-lab.md"
+    ]
+  },
+  {
+    "id": "api.pagination",
+    "domain": "api",
+    "name": "Pagination / Cursor",
+    "aliases": [
+      "Pagination",
+      "Cursor"
+    ],
+    "definition": "按偏移或位置边界分页。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.versioning",
+    "domain": "api",
+    "name": "API Versioning / Compatibility",
+    "aliases": [
+      "API Versioning",
+      "Compatibility"
+    ],
+    "definition": "契约演进与调用方兼容。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.contracts",
+    "domain": "api",
+    "name": "OpenAPI / Protobuf / JSON Schema",
+    "aliases": [
+      "OpenAPI",
+      "Protobuf",
+      "JSON Schema"
+    ],
+    "definition": "接口描述与结构约束。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.validation",
+    "domain": "api",
+    "name": "Validation / Sanitization",
+    "aliases": [
+      "Validation",
+      "Sanitization"
+    ],
+    "definition": "校验输入及按上下文处理危险内容。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.retries",
+    "domain": "api",
+    "name": "Timeout / Retry / Backoff / Jitter",
+    "aliases": [
+      "Timeout",
+      "Retry",
+      "Backoff",
+      "Jitter"
+    ],
+    "definition": "截止时间、重试和随机退避。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/reliability/timeouts-and-retry-budgets.md"
+    ]
+  },
+  {
+    "id": "api.limits",
+    "domain": "api",
+    "name": "Rate Limiting / Quota",
+    "aliases": [
+      "Rate Limiting",
+      "Quota"
+    ],
+    "definition": "速率约束与时间窗口内的用量额度。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.gateway",
+    "domain": "api",
+    "name": "API Gateway",
+    "aliases": [
+      "API Gateway"
+    ],
+    "definition": "统一流量入口和横切治理。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.webhook",
+    "domain": "api",
+    "name": "Webhook",
+    "aliases": [
+      "Webhook"
+    ],
+    "definition": "基于 HTTP 回调的异步事件通知。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "api.pool",
+    "domain": "api",
+    "name": "Connection Pool",
+    "aliases": [
+      "Connection Pool"
+    ],
+    "definition": "复用有限连接并控制等待。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/performance/slow-api-investigation.md"
+    ]
+  },
+  {
+    "id": "api.shutdown",
+    "domain": "api",
+    "name": "Graceful Shutdown",
+    "aliases": [
+      "Graceful Shutdown"
+    ],
+    "definition": "停止接流、处理在途任务和释放资源。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.principles",
+    "domain": "architecture",
+    "name": "SOLID / KISS / DRY / YAGNI",
+    "aliases": [
+      "SOLID",
+      "KISS",
+      "DRY",
+      "YAGNI"
+    ],
+    "definition": "设计原则和复杂度约束，须结合上下文使用。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.coupling",
+    "domain": "architecture",
+    "name": "Cohesion / Coupling",
+    "aliases": [
+      "Cohesion",
+      "Coupling"
+    ],
+    "definition": "职责聚合程度与组件间依赖。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.concerns",
+    "domain": "architecture",
+    "name": "Separation of Concerns",
+    "aliases": [
+      "Separation of Concerns"
+    ],
+    "definition": "按职责隔离不同变化来源。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.layering",
+    "domain": "architecture",
+    "name": "Layered Architecture",
+    "aliases": [
+      "Layered Architecture"
+    ],
+    "definition": "职责分层和依赖方向。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.modular-monolith",
+    "domain": "architecture",
+    "name": "Modular Monolith",
+    "aliases": [
+      "Modular Monolith"
+    ],
+    "definition": "在同一部署单元内保持模块边界。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.microservices",
+    "domain": "architecture",
+    "name": "Microservices",
+    "aliases": [
+      "Microservices"
+    ],
+    "definition": "独立演进和部署的服务及其协调成本。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.ddd",
+    "domain": "architecture",
+    "name": "DDD / Bounded Context",
+    "aliases": [
+      "DDD",
+      "Bounded Context"
+    ],
+    "definition": "领域建模与模型适用范围。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.domain-model",
+    "domain": "architecture",
+    "name": "Entity / Value Object / Aggregate",
+    "aliases": [
+      "Entity",
+      "Value Object",
+      "Aggregate"
+    ],
+    "definition": "标识、值语义与一致性边界。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.ports-adapters",
+    "domain": "architecture",
+    "name": "Clean / Hexagonal Architecture",
+    "aliases": [
+      "Clean",
+      "Hexagonal Architecture"
+    ],
+    "definition": "通过依赖方向和端口隔离核心业务。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.di",
+    "domain": "architecture",
+    "name": "Dependency Injection / IoC",
+    "aliases": [
+      "Dependency Injection",
+      "IoC"
+    ],
+    "definition": "外部提供依赖与控制关系反转。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.cqrs",
+    "domain": "architecture",
+    "name": "CQRS",
+    "aliases": [
+      "CQRS"
+    ],
+    "definition": "分离修改状态与读取状态的模型。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.event-sourcing",
+    "domain": "architecture",
+    "name": "Event Sourcing",
+    "aliases": [
+      "Event Sourcing"
+    ],
+    "definition": "以事件序列记录状态演进。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.patterns",
+    "domain": "architecture",
+    "name": "Design Pattern / Anti-pattern",
+    "aliases": [
+      "Design Pattern",
+      "Anti-pattern"
+    ],
+    "definition": "可复用设计经验及常见不良结构。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.adr",
+    "domain": "architecture",
+    "name": "ADR",
+    "aliases": [
+      "ADR"
+    ],
+    "definition": "记录特定上下文中的决策、备选方案及后果。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/architecture/knowledge-base-adr.md"
+    ]
+  },
+  {
+    "id": "architecture.debt",
+    "domain": "architecture",
+    "name": "Technical Debt / Refactoring",
+    "aliases": [
+      "Technical Debt",
+      "Refactoring"
+    ],
+    "definition": "演进成本与保持行为的结构调整。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "architecture.strangler",
+    "domain": "architecture",
+    "name": "Strangler Fig Pattern",
+    "aliases": [
+      "Strangler Fig Pattern"
+    ],
+    "definition": "渐进替换旧系统的迁移方法。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.identity",
+    "domain": "security",
+    "name": "Authentication / Authorization",
+    "aliases": [
+      "Authentication",
+      "Authorization"
+    ],
+    "definition": "证明身份与判断访问权。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/security/object-level-authorization.md"
+    ]
+  },
+  {
+    "id": "security.sessions",
+    "domain": "security",
+    "name": "Session / Cookie",
+    "aliases": [
+      "Session",
+      "Cookie"
+    ],
+    "definition": "会话状态和浏览器保存、发送的数据。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.oauth",
+    "domain": "security",
+    "name": "OAuth 2.0 / OpenID Connect",
+    "aliases": [
+      "OAuth 2.0",
+      "OpenID Connect"
+    ],
+    "definition": "委托授权框架与其上的身份层。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.tokens",
+    "domain": "security",
+    "name": "JWT / JWS / JWK",
+    "aliases": [
+      "JWT",
+      "JWS",
+      "JWK"
+    ],
+    "definition": "声明容器、签名格式和密钥表示。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.access-control",
+    "domain": "security",
+    "name": "RBAC / ABAC",
+    "aliases": [
+      "RBAC",
+      "ABAC"
+    ],
+    "definition": "按角色或属性判断权限。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/security/object-level-authorization.md"
+    ]
+  },
+  {
+    "id": "security.token-lifecycle",
+    "domain": "security",
+    "name": "Access Token / Refresh Token",
+    "aliases": [
+      "Access Token",
+      "Refresh Token"
+    ],
+    "definition": "访问凭据和更新访问凭据的机制。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.origin",
+    "domain": "security",
+    "name": "CORS / Same-Origin Policy",
+    "aliases": [
+      "CORS",
+      "Same-Origin Policy"
+    ],
+    "definition": "浏览器同源边界与跨源响应访问机制。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.web-attacks",
+    "domain": "security",
+    "name": "XSS / CSRF / SSRF",
+    "aliases": [
+      "XSS",
+      "CSRF",
+      "SSRF"
+    ],
+    "definition": "脚本注入、跨站请求伪造和服务端请求伪造。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.sql-injection",
+    "domain": "security",
+    "name": "SQL Injection / Parameterized Query",
+    "aliases": [
+      "SQL Injection",
+      "Parameterized Query"
+    ],
+    "definition": "查询结构注入与参数绑定防护。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.passwords",
+    "domain": "security",
+    "name": "Hash / Salt / KDF",
+    "aliases": [
+      "Hash",
+      "Salt",
+      "KDF"
+    ],
+    "definition": "哈希、随机盐和适合口令的派生机制。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.mtls",
+    "domain": "security",
+    "name": "mTLS / Certificate",
+    "aliases": [
+      "mTLS",
+      "Certificate"
+    ],
+    "definition": "连接两端的证书身份校验。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.secrets",
+    "domain": "security",
+    "name": "Secrets Management",
+    "aliases": [
+      "Secrets Management"
+    ],
+    "definition": "敏感凭据的保存、分发与轮换。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.trust",
+    "domain": "security",
+    "name": "Least Privilege / Zero Trust",
+    "aliases": [
+      "Least Privilege",
+      "Zero Trust"
+    ],
+    "definition": "最小授权和持续验证访问条件。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.threats",
+    "domain": "security",
+    "name": "Threat Modeling / OWASP",
+    "aliases": [
+      "Threat Modeling",
+      "OWASP"
+    ],
+    "definition": "识别攻击面并参考应用安全研究与规范。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "security.tenant-isolation",
+    "domain": "security",
+    "name": "Tenant Isolation / Object-level Authorization",
+    "aliases": [
+      "Tenant Isolation",
+      "Object-level Authorization"
+    ],
+    "definition": "租户边界与逐对象访问检查。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/security/object-level-authorization.md"
+    ]
+  },
+  {
+    "id": "database.db-models",
+    "domain": "database",
+    "name": "RDBMS / NoSQL",
+    "aliases": [
+      "RDBMS",
+      "NoSQL"
+    ],
+    "definition": "关系模型及多种非关系数据模型。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.workloads",
+    "domain": "database",
+    "name": "OLTP / OLAP",
+    "aliases": [
+      "OLTP",
+      "OLAP"
+    ],
+    "definition": "在线事务与分析型访问模式。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.acid",
+    "domain": "database",
+    "name": "ACID",
+    "aliases": [
+      "ACID"
+    ],
+    "definition": "事务原子性、约束一致性、隔离性和持久性。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.isolation",
+    "domain": "database",
+    "name": "Transaction / Isolation Level",
+    "aliases": [
+      "Transaction",
+      "Isolation Level"
+    ],
+    "definition": "事务边界及并发可见性保证。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/database/concurrent-inventory.md"
+    ]
+  },
+  {
+    "id": "database.anomalies",
+    "domain": "database",
+    "name": "Dirty / Non-repeatable / Phantom Read",
+    "aliases": [
+      "Dirty",
+      "Non-repeatable",
+      "Phantom Read"
+    ],
+    "definition": "读取未提交数据、重复读取变化和结果集变化。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.mvcc",
+    "domain": "database",
+    "name": "MVCC",
+    "aliases": [
+      "MVCC"
+    ],
+    "definition": "用数据版本协调读写并发。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.locking",
+    "domain": "database",
+    "name": "Optimistic / Pessimistic Lock",
+    "aliases": [
+      "Optimistic",
+      "Pessimistic Lock"
+    ],
+    "definition": "检测冲突后处理与提前限制竞争。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/database/concurrent-inventory.md"
+    ]
+  },
+  {
+    "id": "database.indexes",
+    "domain": "database",
+    "name": "Index / Covering Index",
+    "aliases": [
+      "Index",
+      "Covering Index"
+    ],
+    "definition": "缩小访问范围及从索引满足查询。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.plans",
+    "domain": "database",
+    "name": "Query Plan / EXPLAIN",
+    "aliases": [
+      "Query Plan",
+      "EXPLAIN"
+    ],
+    "definition": "数据库执行路径、估算与实际执行信息。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.recovery-log",
+    "domain": "database",
+    "name": "WAL / Redo / Undo",
+    "aliases": [
+      "WAL",
+      "Redo",
+      "Undo"
+    ],
+    "definition": "预写、重放与回滚相关日志机制，细节因引擎而异。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.normalization",
+    "domain": "database",
+    "name": "Normalization / Denormalization",
+    "aliases": [
+      "Normalization",
+      "Denormalization"
+    ],
+    "definition": "减少冗余与按访问需求引入冗余。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.replication",
+    "domain": "database",
+    "name": "Replication / Read Replica",
+    "aliases": [
+      "Replication",
+      "Read Replica"
+    ],
+    "definition": "复制状态并提供副本读取。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.partitioning",
+    "domain": "database",
+    "name": "Partitioning / Sharding",
+    "aliases": [
+      "Partitioning",
+      "Sharding"
+    ],
+    "definition": "在逻辑或节点间拆分数据。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.prepared",
+    "domain": "database",
+    "name": "Prepared Statement",
+    "aliases": [
+      "Prepared Statement"
+    ],
+    "definition": "参数化执行与可能的计划复用，依驱动和数据库而异。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.migration",
+    "domain": "database",
+    "name": "Schema Migration / CDC",
+    "aliases": [
+      "Schema Migration",
+      "CDC"
+    ],
+    "definition": "结构演进与数据变更捕获。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "database.constraints",
+    "domain": "database",
+    "name": "Unique Constraint / Foreign Key",
+    "aliases": [
+      "Unique Constraint",
+      "Foreign Key"
+    ],
+    "definition": "由数据库维护唯一性和引用关系。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/api/idempotency.md",
+      "docs/knowledge/database/concurrent-inventory.md"
+    ]
+  },
+  {
+    "id": "cache-search.cache-read",
+    "domain": "cache-search",
+    "name": "Cache Aside / Read Through",
+    "aliases": [
+      "Cache Aside",
+      "Read Through"
+    ],
+    "definition": "应用管理缓存或由缓存层加载数据。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
+    ]
+  },
+  {
+    "id": "cache-search.cache-write",
+    "domain": "cache-search",
+    "name": "Write Through / Write Behind",
+    "aliases": [
+      "Write Through",
+      "Write Behind"
+    ],
+    "definition": "写入同步持久化或延后异步写回。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.invalidation",
+    "domain": "cache-search",
+    "name": "Cache Invalidation / TTL",
+    "aliases": [
+      "Cache Invalidation",
+      "TTL"
+    ],
+    "definition": "主动失效与按时过期。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
+    ]
+  },
+  {
+    "id": "cache-search.cache-failures",
+    "domain": "cache-search",
+    "name": "Penetration / Breakdown / Avalanche",
+    "aliases": [
+      "Penetration",
+      "Breakdown",
+      "Avalanche"
+    ],
+    "definition": "不存在键回源、热点失效和批量失效问题。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.stampede",
+    "domain": "cache-search",
+    "name": "Cache Stampede",
+    "aliases": [
+      "Cache Stampede"
+    ],
+    "definition": "并发未命中引发重复加载与回源放大。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
+    ]
+  },
+  {
+    "id": "cache-search.redis-types",
+    "domain": "cache-search",
+    "name": "Redis Data Structures",
+    "aliases": [
+      "Redis Data Structures"
+    ],
+    "definition": "按访问语义选择字符串、哈希、集合、有序集合和流。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.lock-lease",
+    "domain": "cache-search",
+    "name": "Distributed Lock / Lease",
+    "aliases": [
+      "Distributed Lock",
+      "Lease"
+    ],
+    "definition": "跨节点互斥及有期限的持有权。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.inverted",
+    "domain": "cache-search",
+    "name": "Inverted Index",
+    "aliases": [
+      "Inverted Index"
+    ],
+    "definition": "从词项定位包含它的文档。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.bm25",
+    "domain": "cache-search",
+    "name": "BM25 / Full-text Search",
+    "aliases": [
+      "BM25",
+      "Full-text Search"
+    ],
+    "definition": "基于词项统计的相关性排序与全文检索。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.vectors",
+    "domain": "cache-search",
+    "name": "Embedding / Similarity Search",
+    "aliases": [
+      "Embedding",
+      "Similarity Search"
+    ],
+    "definition": "向量表示与距离或相似性查找。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.ann",
+    "domain": "cache-search",
+    "name": "ANN / HNSW",
+    "aliases": [
+      "ANN",
+      "HNSW"
+    ],
+    "definition": "近似近邻搜索及分层图索引。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.hybrid",
+    "domain": "cache-search",
+    "name": "Hybrid Search / Reranking",
+    "aliases": [
+      "Hybrid Search",
+      "Reranking"
+    ],
+    "definition": "组合多种召回并重新评分排序。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "cache-search.objects",
+    "domain": "cache-search",
+    "name": "Object Storage / Presigned URL",
+    "aliases": [
+      "Object Storage",
+      "Presigned URL"
+    ],
+    "definition": "按对象保存数据与限时签名访问。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "messaging.models",
+    "domain": "messaging",
+    "name": "MQ / Pub-Sub / Event Streaming",
+    "aliases": [
+      "MQ",
+      "Pub-Sub",
+      "Event Streaming"
+    ],
+    "definition": "队列分发、广播订阅和可重放事件流。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.roles",
+    "domain": "messaging",
+    "name": "Producer / Consumer / Broker",
+    "aliases": [
+      "Producer",
+      "Consumer",
+      "Broker"
+    ],
+    "definition": "消息写入、处理与服务端存储分发角色。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.positions",
+    "domain": "messaging",
+    "name": "Topic / Partition / Offset",
+    "aliases": [
+      "Topic",
+      "Partition",
+      "Offset"
+    ],
+    "definition": "主题、分区和分区内位置。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.groups",
+    "domain": "messaging",
+    "name": "Consumer Group",
+    "aliases": [
+      "Consumer Group"
+    ],
+    "definition": "多个消费者协作分担读取。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.delivery",
+    "domain": "messaging",
+    "name": "At-most-once / At-least-once",
+    "aliases": [
+      "At-most-once",
+      "At-least-once"
+    ],
+    "definition": "可能丢失不重投与可能重复的投递保证。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.exactly-once",
+    "domain": "messaging",
+    "name": "Exactly-once Semantics",
+    "aliases": [
+      "Exactly-once Semantics"
+    ],
+    "definition": "在明确组件和事务范围内限制重复处理效果。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/transactional-outbox.md"
+    ]
+  },
+  {
+    "id": "messaging.consumer-idempotency",
+    "domain": "messaging",
+    "name": "Idempotent Consumer",
+    "aliases": [
+      "Idempotent Consumer"
+    ],
+    "definition": "重复消费仍保持受约束的业务效果。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.ordering",
+    "domain": "messaging",
+    "name": "Ordering / Partition Key",
+    "aliases": [
+      "Ordering",
+      "Partition Key"
+    ],
+    "definition": "在指定范围内维持顺序。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.retry-dlq",
+    "domain": "messaging",
+    "name": "Dead Letter Queue / Retry Queue",
+    "aliases": [
+      "Dead Letter Queue",
+      "Retry Queue"
+    ],
+    "definition": "隔离持续失败消息与安排重试。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.backpressure",
+    "domain": "messaging",
+    "name": "Backpressure",
+    "aliases": [
+      "Backpressure"
+    ],
+    "definition": "下游将容量压力传回上游。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "messaging.outbox",
+    "domain": "messaging",
+    "name": "Transactional Outbox",
+    "aliases": [
+      "Transactional Outbox"
+    ],
+    "definition": "同一事务记录业务变化和待发布事件。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/transactional-outbox.md"
+    ]
+  },
+  {
+    "id": "messaging.cdc",
+    "domain": "messaging",
+    "name": "CDC / Asynchronous Processing",
+    "aliases": [
+      "CDC",
+      "Asynchronous Processing"
+    ],
+    "definition": "捕获数据变化并解耦后续处理。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.cap",
+    "domain": "distributed",
+    "name": "CAP / PACELC",
+    "aliases": [
+      "CAP",
+      "PACELC"
+    ],
+    "definition": "分区下的取舍及正常情况下延迟和一致性的权衡。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.consistency",
+    "domain": "distributed",
+    "name": "Strong / Eventual Consistency",
+    "aliases": [
+      "Strong",
+      "Eventual Consistency"
+    ],
+    "definition": "不同可见性保证，强一致须进一步说明具体模型。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/consistency-and-replication.md"
+    ]
+  },
+  {
+    "id": "distributed.linear-serial",
+    "domain": "distributed",
+    "name": "Linearizability / Serializability",
+    "aliases": [
+      "Linearizability",
+      "Serializability"
+    ],
+    "definition": "实时单操作顺序与事务可串行执行的等价性。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/consistency-and-replication.md"
+    ]
+  },
+  {
+    "id": "distributed.consensus",
+    "domain": "distributed",
+    "name": "Consensus / Raft",
+    "aliases": [
+      "Consensus",
+      "Raft"
+    ],
+    "definition": "在故障模型下就日志或状态达成一致。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.leadership",
+    "domain": "distributed",
+    "name": "Leader Election / Quorum",
+    "aliases": [
+      "Leader Election",
+      "Quorum"
+    ],
+    "definition": "选主与按法定集合达成读写条件。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.fencing",
+    "domain": "distributed",
+    "name": "Heartbeat / Lease / Fencing Token",
+    "aliases": [
+      "Heartbeat",
+      "Lease",
+      "Fencing Token"
+    ],
+    "definition": "存活检测、限时持有与拒绝过期执行者。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.lag",
+    "domain": "distributed",
+    "name": "Replication Lag",
+    "aliases": [
+      "Replication Lag"
+    ],
+    "definition": "副本应用变更落后于上游。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/consistency-and-replication.md"
+    ]
+  },
+  {
+    "id": "distributed.split-brain",
+    "domain": "distributed",
+    "name": "Split Brain",
+    "aliases": [
+      "Split Brain"
+    ],
+    "definition": "多个节点同时认为自己拥有权威。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.partition",
+    "domain": "distributed",
+    "name": "Network Partition",
+    "aliases": [
+      "Network Partition"
+    ],
+    "definition": "节点间通信被切断或严重不可达。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/consistency-and-replication.md"
+    ]
+  },
+  {
+    "id": "distributed.2pc",
+    "domain": "distributed",
+    "name": "Distributed Transaction / 2PC",
+    "aliases": [
+      "Distributed Transaction",
+      "2PC"
+    ],
+    "definition": "跨参与者协调提交及其阻塞等成本。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.saga",
+    "domain": "distributed",
+    "name": "Saga / Compensation",
+    "aliases": [
+      "Saga",
+      "Compensation"
+    ],
+    "definition": "多步业务通过补偿应对部分成功。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.hashing",
+    "domain": "distributed",
+    "name": "Consistent Hashing",
+    "aliases": [
+      "Consistent Hashing"
+    ],
+    "definition": "减少节点变化时键重新分布的范围。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.clocks",
+    "domain": "distributed",
+    "name": "Logical Clock / Clock Skew",
+    "aliases": [
+      "Logical Clock",
+      "Clock Skew"
+    ],
+    "definition": "因果顺序表示与物理时钟偏差。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "distributed.ids",
+    "domain": "distributed",
+    "name": "Snowflake ID / ULID",
+    "aliases": [
+      "Snowflake ID",
+      "ULID"
+    ],
+    "definition": "不同的分布式或可排序标识生成方案。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "performance.latency-throughput",
+    "domain": "performance",
+    "name": "Latency / Throughput",
+    "aliases": [
+      "Latency",
+      "Throughput"
+    ],
+    "definition": "完成一次操作的时间与单位时间处理量。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.rates",
+    "domain": "performance",
+    "name": "QPS / RPS / TPS",
+    "aliases": [
+      "QPS",
+      "RPS",
+      "TPS"
+    ],
+    "definition": "查询、请求和事务速率，须写清计数口径。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.percentiles",
+    "domain": "performance",
+    "name": "P50 / P95 / P99",
+    "aliases": [
+      "P50",
+      "P95",
+      "P99"
+    ],
+    "definition": "观测窗口内延迟分布的分位数。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.bound",
+    "domain": "performance",
+    "name": "CPU-bound / I/O-bound",
+    "aliases": [
+      "CPU-bound",
+      "I/O-bound"
+    ],
+    "definition": "瓶颈主要在计算还是 I/O 等待。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.little",
+    "domain": "performance",
+    "name": "Little’s Law",
+    "aliases": [
+      "Little’s Law"
+    ],
+    "definition": "稳定系统中平均在途量、到达率和停留时间的关系。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.profiling",
+    "domain": "performance",
+    "name": "Profiling / Flame Graph",
+    "aliases": [
+      "Profiling",
+      "Flame Graph"
+    ],
+    "definition": "采样或插桩分析与堆栈聚合展示。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.load-tests",
+    "domain": "performance",
+    "name": "Load / Stress / Soak Test",
+    "aliases": [
+      "Load",
+      "Stress",
+      "Soak Test"
+    ],
+    "definition": "目标负载、极限负载和长时间运行验证。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.scaling",
+    "domain": "performance",
+    "name": "Horizontal / Vertical Scaling",
+    "aliases": [
+      "Horizontal",
+      "Vertical Scaling"
+    ],
+    "definition": "增加实例与提升单实例资源。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.batching",
+    "domain": "performance",
+    "name": "Batching / Pipelining",
+    "aliases": [
+      "Batching",
+      "Pipelining"
+    ],
+    "definition": "合并操作和重叠多个执行阶段。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.overload",
+    "domain": "performance",
+    "name": "Rate Limiting / Load Shedding",
+    "aliases": [
+      "Rate Limiting",
+      "Load Shedding"
+    ],
+    "definition": "约束进入速率和过载时拒绝工作。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.contention",
+    "domain": "performance",
+    "name": "Hotspot / Contention",
+    "aliases": [
+      "Hotspot",
+      "Contention"
+    ],
+    "definition": "局部集中访问与共享资源竞争。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "performance.queueing",
+    "domain": "performance",
+    "name": "Queueing / Backpressure",
+    "aliases": [
+      "Queueing",
+      "Backpressure"
+    ],
+    "definition": "等待队列形成和压力反馈。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/performance/slow-api-investigation.md"
+    ]
+  },
+  {
+    "id": "performance.capacity",
+    "domain": "performance",
+    "name": "Capacity Planning",
+    "aliases": [
+      "Capacity Planning"
+    ],
+    "definition": "用工作负载、资源余量和增长预估容量。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "devops.linux",
+    "domain": "devops",
+    "name": "Linux Process / Signal / Permission",
+    "aliases": [
+      "Linux Process",
+      "Signal",
+      "Permission"
+    ],
+    "definition": "进程生命周期、信号与访问权限。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.isolation",
+    "domain": "devops",
+    "name": "Namespace / cgroups",
+    "aliases": [
+      "Namespace",
+      "cgroups"
+    ],
+    "definition": "资源视图隔离和用量限制。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.containers",
+    "domain": "devops",
+    "name": "Image / Container",
+    "aliases": [
+      "Image",
+      "Container"
+    ],
+    "definition": "文件系统与配置模板及其运行实例。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.k8s",
+    "domain": "devops",
+    "name": "Pod / Deployment / Service",
+    "aliases": [
+      "Pod",
+      "Deployment",
+      "Service"
+    ],
+    "definition": "工作单元、声明式副本管理与服务访问。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.entry",
+    "domain": "devops",
+    "name": "Ingress / Gateway API",
+    "aliases": [
+      "Ingress",
+      "Gateway API"
+    ],
+    "definition": "集群入口路由与流量管理接口。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.discovery",
+    "domain": "devops",
+    "name": "Service Discovery",
+    "aliases": [
+      "Service Discovery"
+    ],
+    "definition": "查找当前可用服务实例。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.cloud-network",
+    "domain": "devops",
+    "name": "VPC / Subnet / Security Group",
+    "aliases": [
+      "VPC",
+      "Subnet",
+      "Security Group"
+    ],
+    "definition": "云网络边界和访问控制。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.iac",
+    "domain": "devops",
+    "name": "IaC / Terraform",
+    "aliases": [
+      "IaC",
+      "Terraform"
+    ],
+    "definition": "以版本化声明管理基础设施。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.cicd",
+    "domain": "devops",
+    "name": "CI / CD",
+    "aliases": [
+      "CI",
+      "CD"
+    ],
+    "definition": "持续集成、交付或自动部署。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/devops/build-deploy-rollback.md"
+    ]
+  },
+  {
+    "id": "devops.rollout",
+    "domain": "devops",
+    "name": "Rolling / Blue-Green / Canary",
+    "aliases": [
+      "Rolling",
+      "Blue-Green",
+      "Canary"
+    ],
+    "definition": "不同发布替换和流量迁移策略。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/devops/build-deploy-rollback.md"
+    ]
+  },
+  {
+    "id": "devops.flags",
+    "domain": "devops",
+    "name": "Feature Flag",
+    "aliases": [
+      "Feature Flag"
+    ],
+    "definition": "按条件启用行为并管理开关生命周期。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/devops/build-deploy-rollback.md"
+    ]
+  },
+  {
+    "id": "devops.immutable",
+    "domain": "devops",
+    "name": "Immutable Infrastructure",
+    "aliases": [
+      "Immutable Infrastructure"
+    ],
+    "definition": "通过替换实例交付新配置。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.autoscaling",
+    "domain": "devops",
+    "name": "Autoscaling / HPA",
+    "aliases": [
+      "Autoscaling",
+      "HPA"
+    ],
+    "definition": "基于观测信号调整资源或副本数。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "devops.regions",
+    "domain": "devops",
+    "name": "Multi-AZ / Multi-Region",
+    "aliases": [
+      "Multi-AZ",
+      "Multi-Region"
+    ],
+    "definition": "跨可用区与跨地域部署。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "reliability.signals",
+    "domain": "reliability",
+    "name": "Logs / Metrics / Traces",
+    "aliases": [
+      "Logs",
+      "Metrics",
+      "Traces"
+    ],
+    "definition": "离散事件、聚合数值与请求因果链。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.otel",
+    "domain": "reliability",
+    "name": "OpenTelemetry",
+    "aliases": [
+      "OpenTelemetry"
+    ],
+    "definition": "可观测性 API、SDK、协议及采集生态。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.trace",
+    "domain": "reliability",
+    "name": "Trace ID / Span / Correlation ID",
+    "aliases": [
+      "Trace ID",
+      "Span",
+      "Correlation ID"
+    ],
+    "definition": "链路标识、执行片段和业务关联。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.methods",
+    "domain": "reliability",
+    "name": "RED / USE",
+    "aliases": [
+      "RED",
+      "USE"
+    ],
+    "definition": "请求速率错误延迟与资源使用率饱和错误。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.slos",
+    "domain": "reliability",
+    "name": "SLI / SLO / SLA",
+    "aliases": [
+      "SLI",
+      "SLO",
+      "SLA"
+    ],
+    "definition": "指标、目标和对外服务约定。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.budget",
+    "domain": "reliability",
+    "name": "Error Budget",
+    "aliases": [
+      "Error Budget"
+    ],
+    "definition": "由可靠性目标推导的可接受失败额度。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.availability",
+    "domain": "reliability",
+    "name": "Availability / Reliability",
+    "aliases": [
+      "Availability",
+      "Reliability"
+    ],
+    "definition": "可提供服务的程度与持续正确工作的能力。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.recovery",
+    "domain": "reliability",
+    "name": "RTO / RPO",
+    "aliases": [
+      "RTO",
+      "RPO"
+    ],
+    "definition": "恢复耗时目标和可接受数据丢失范围。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.isolation",
+    "domain": "reliability",
+    "name": "Circuit Breaker / Bulkhead",
+    "aliases": [
+      "Circuit Breaker",
+      "Bulkhead"
+    ],
+    "definition": "熔断失败依赖与隔离资源池。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.retry-budget",
+    "domain": "reliability",
+    "name": "Timeout / Deadline / Retry Budget",
+    "aliases": [
+      "Timeout",
+      "Deadline",
+      "Retry Budget"
+    ],
+    "definition": "限制等待时间、传播截止时间并约束重试消耗。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/reliability/timeouts-and-retry-budgets.md"
+    ]
+  },
+  {
+    "id": "reliability.probes",
+    "domain": "reliability",
+    "name": "Readiness / Liveness",
+    "aliases": [
+      "Readiness",
+      "Liveness"
+    ],
+    "definition": "是否接收流量与是否需要重启的探测。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.dr",
+    "domain": "reliability",
+    "name": "Disaster Recovery / Failover",
+    "aliases": [
+      "Disaster Recovery",
+      "Failover"
+    ],
+    "definition": "灾难恢复计划与服务切换。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.incidents",
+    "domain": "reliability",
+    "name": "Incident Response / Postmortem",
+    "aliases": [
+      "Incident Response",
+      "Postmortem"
+    ],
+    "definition": "止损、诊断、恢复与复盘。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "reliability.chaos",
+    "domain": "reliability",
+    "name": "Chaos Engineering",
+    "aliases": [
+      "Chaos Engineering"
+    ],
+    "definition": "通过受控故障验证系统假设。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.tests",
+    "domain": "engineering",
+    "name": "Unit / Integration / E2E Test",
+    "aliases": [
+      "Unit",
+      "Integration",
+      "E2E Test"
+    ],
+    "definition": "按验证边界划分的测试。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/engineering/test-scopes-and-doubles.md"
+    ]
+  },
+  {
+    "id": "engineering.contracts",
+    "domain": "engineering",
+    "name": "Contract Testing",
+    "aliases": [
+      "Contract Testing"
+    ],
+    "definition": "验证交互契约的兼容性。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/engineering/test-scopes-and-doubles.md"
+    ]
+  },
+  {
+    "id": "engineering.doubles",
+    "domain": "engineering",
+    "name": "Mock / Stub / Fake",
+    "aliases": [
+      "Mock",
+      "Stub",
+      "Fake"
+    ],
+    "definition": "交互验证、固定行为和简化实现等测试替身。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/engineering/test-scopes-and-doubles.md"
+    ]
+  },
+  {
+    "id": "engineering.tdd",
+    "domain": "engineering",
+    "name": "TDD / BDD",
+    "aliases": [
+      "TDD",
+      "BDD"
+    ],
+    "definition": "以测试或可讨论的行为规格推动开发。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.generative",
+    "domain": "engineering",
+    "name": "Property-based / Fuzz Testing",
+    "aliases": [
+      "Property-based",
+      "Fuzz Testing"
+    ],
+    "definition": "自动生成输入验证性质或探测异常。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.regression",
+    "domain": "engineering",
+    "name": "Regression Testing",
+    "aliases": [
+      "Regression Testing"
+    ],
+    "definition": "验证原有行为未被意外破坏。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.pyramid",
+    "domain": "engineering",
+    "name": "Test Pyramid",
+    "aliases": [
+      "Test Pyramid"
+    ],
+    "definition": "关于不同测试层次成本与数量的经验模型。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.analysis",
+    "domain": "engineering",
+    "name": "Static Analysis / Lint",
+    "aliases": [
+      "Static Analysis",
+      "Lint"
+    ],
+    "definition": "静态推断缺陷与检查约定。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.review",
+    "domain": "engineering",
+    "name": "Code Review",
+    "aliases": [
+      "Code Review"
+    ],
+    "definition": "共同检查变更并传播上下文。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.trunk",
+    "domain": "engineering",
+    "name": "Trunk-based Development",
+    "aliases": [
+      "Trunk-based Development"
+    ],
+    "definition": "短生命周期分支和频繁集成。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.semver",
+    "domain": "engineering",
+    "name": "Semantic Versioning",
+    "aliases": [
+      "Semantic Versioning"
+    ],
+    "definition": "通过版本号表达兼容性意图。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.supply-chain",
+    "domain": "engineering",
+    "name": "Dependency Management / SBOM",
+    "aliases": [
+      "Dependency Management",
+      "SBOM"
+    ],
+    "definition": "依赖解析、维护与组件清单。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.design-docs",
+    "domain": "engineering",
+    "name": "ADR / RFC / Design Doc",
+    "aliases": [
+      "ADR",
+      "RFC",
+      "Design Doc"
+    ],
+    "definition": "决策记录、提案和设计说明。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.sdd",
+    "domain": "engineering",
+    "name": "Spec-Driven Development",
+    "aliases": [
+      "Spec-Driven Development"
+    ],
+    "definition": "以可验证规格约束实现和验收。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "engineering.dx",
+    "domain": "engineering",
+    "name": "Golden Path / Developer Experience",
+    "aliases": [
+      "Golden Path",
+      "Developer Experience"
+    ],
+    "definition": "标准交付路径和研发使用体验。",
+    "priority": "P0",
+    "articles": []
+  },
+  {
+    "id": "ai.context",
+    "domain": "ai",
+    "name": "Token / Context Window",
+    "aliases": [
+      "Token",
+      "Context Window"
+    ],
+    "definition": "模型处理单元及单次可处理的上下文范围。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.instructions",
+    "domain": "ai",
+    "name": "Prompt / System Instruction",
+    "aliases": [
+      "Prompt",
+      "System Instruction"
+    ],
+    "definition": "任务输入、约束和应用定义的指令边界。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.sampling",
+    "domain": "ai",
+    "name": "Temperature / Sampling",
+    "aliases": [
+      "Temperature",
+      "Sampling"
+    ],
+    "definition": "生成时的分布变换和采样方法。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.structured",
+    "domain": "ai",
+    "name": "Structured Output / JSON Schema",
+    "aliases": [
+      "Structured Output",
+      "JSON Schema"
+    ],
+    "definition": "按结构约束生成并校验结果。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.tools",
+    "domain": "ai",
+    "name": "Tool Calling / Function Calling",
+    "aliases": [
+      "Tool Calling",
+      "Function Calling"
+    ],
+    "definition": "模型提出工具请求，由宿主校验和执行。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.embeddings",
+    "domain": "ai",
+    "name": "Embedding / Vector Store",
+    "aliases": [
+      "Embedding",
+      "Vector Store"
+    ],
+    "definition": "内容向量化与相应检索存储。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.rag",
+    "domain": "ai",
+    "name": "RAG / Retrieval Pipeline",
+    "aliases": [
+      "RAG",
+      "Retrieval Pipeline"
+    ],
+    "definition": "获取相关证据并供生成使用的流程。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.grounding",
+    "domain": "ai",
+    "name": "Chunking / Reranking / Grounding",
+    "aliases": [
+      "Chunking",
+      "Reranking",
+      "Grounding"
+    ],
+    "definition": "文档切分、候选重排和答案证据约束。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.loop",
+    "domain": "ai",
+    "name": "Agent Loop",
+    "aliases": [
+      "Agent Loop"
+    ],
+    "definition": "决策、行动、观察与停止控制循环。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/ai/recoverable-runtime.md"
+    ]
+  },
+  {
+    "id": "ai.planning",
+    "domain": "ai",
+    "name": "Planning / Routing / Handoff",
+    "aliases": [
+      "Planning",
+      "Routing",
+      "Handoff"
+    ],
+    "definition": "任务分解、处理路径选择和控制权移交。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.harness",
+    "domain": "ai",
+    "name": "Harness / Orchestration",
+    "aliases": [
+      "Harness",
+      "Orchestration"
+    ],
+    "definition": "围绕模型的执行、工具、状态和控制体系。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.mcp",
+    "domain": "ai",
+    "name": "MCP",
+    "aliases": [
+      "MCP"
+    ],
+    "definition": "模型应用连接工具和上下文的协议体系。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.state",
+    "domain": "ai",
+    "name": "Agent State / Checkpoint",
+    "aliases": [
+      "Agent State",
+      "Checkpoint"
+    ],
+    "definition": "执行状态及可用于恢复的持久化进度。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/ai/recoverable-runtime.md"
+    ]
+  },
+  {
+    "id": "ai.memory",
+    "domain": "ai",
+    "name": "Short-term / Long-term Memory",
+    "aliases": [
+      "Short-term",
+      "Long-term Memory"
+    ],
+    "definition": "当前任务上下文和跨任务持久信息。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.memory-types",
+    "domain": "ai",
+    "name": "Semantic / Episodic Memory",
+    "aliases": [
+      "Semantic",
+      "Episodic Memory"
+    ],
+    "definition": "可复用事实知识和情境经历记录。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.human",
+    "domain": "ai",
+    "name": "Human-in-the-loop",
+    "aliases": [
+      "Human-in-the-loop"
+    ],
+    "definition": "在特定决策或执行点引入人工参与。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.injection",
+    "domain": "ai",
+    "name": "Prompt Injection / Tool Security",
+    "aliases": [
+      "Prompt Injection",
+      "Tool Security"
+    ],
+    "definition": "外部内容诱导越权与工具访问控制。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.evals",
+    "domain": "ai",
+    "name": "Evals / Golden Dataset",
+    "aliases": [
+      "Evals",
+      "Golden Dataset"
+    ],
+    "definition": "系统化评测任务、数据、指标和判定。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.cost",
+    "domain": "ai",
+    "name": "Tracing / Token Cost / Latency",
+    "aliases": [
+      "Tracing",
+      "Token Cost",
+      "Latency"
+    ],
+    "definition": "执行可观测性和费用、时延预算。",
+    "priority": "P1",
+    "articles": []
+  },
+  {
+    "id": "ai.training",
+    "domain": "ai",
+    "name": "Fine-tuning / Distillation",
+    "aliases": [
+      "Fine-tuning",
+      "Distillation"
+    ],
+    "definition": "参数适配和用教师信号训练学生模型。",
+    "priority": "P1",
+    "articles": []
+  }
+]

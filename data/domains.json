@@ -1,0 +1,121 @@
+[
+  {
+    "id": "systems",
+    "title": "计算机系统与操作系统",
+    "priority": "P0",
+    "goal": "解释进程、内存、同步与 I/O，定位资源等待。",
+    "question": "一个服务为何 CPU 不高，却不再处理请求？"
+  },
+  {
+    "id": "networking",
+    "title": "计算机网络与协议",
+    "priority": "P0",
+    "goal": "从域名解析到应用响应，分层解释连接和传输。",
+    "question": "为什么客户端超时不能证明后端执行失败？"
+  },
+  {
+    "id": "algorithms",
+    "title": "数据结构与算法",
+    "priority": "P0",
+    "goal": "通过访问模式和复杂度选择数据结构。",
+    "question": "为什么数据库索引常用 B+ 树，向量检索常讨论图索引？"
+  },
+  {
+    "id": "runtime",
+    "title": "编程语言与 Runtime",
+    "priority": "P0",
+    "goal": "解释语言抽象如何映射到任务、内存与错误。",
+    "question": "为什么给 CPU 密集函数加 async 后仍会阻塞？"
+  },
+  {
+    "id": "frontend",
+    "title": "前端与浏览器",
+    "priority": "P1",
+    "goal": "具备端到端交付能力，理解渲染、状态和网络边界。",
+    "question": "首屏已出现却不能交互，可能卡在哪个阶段？"
+  },
+  {
+    "id": "api",
+    "title": "后端 API 与服务",
+    "priority": "P0",
+    "goal": "定义契约、失败语义、幂等和资源边界。",
+    "question": "请求成功但响应丢失，客户端如何安全重试？"
+  },
+  {
+    "id": "architecture",
+    "title": "软件架构与设计",
+    "priority": "P0",
+    "goal": "定义模块边界并记录复杂度和演进取舍。",
+    "question": "何时模块化单体已不足以解决组织和扩展问题？"
+  },
+  {
+    "id": "security",
+    "title": "身份、安全与权限",
+    "priority": "P0",
+    "goal": "以信任边界、身份和最小权限设计系统。",
+    "question": "已登录用户为何仍不能直接访问任意租户数据？"
+  },
+  {
+    "id": "database",
+    "title": "数据库与存储",
+    "priority": "P0",
+    "goal": "围绕数据约束、访问路径和恢复理解数据库。",
+    "question": "同一业务约束在并发下为何可能被两个成功事务破坏？"
+  },
+  {
+    "id": "cache-search",
+    "title": "缓存、检索与对象存储",
+    "priority": "P0",
+    "goal": "设计快速读取、失效、相关性与大对象访问。",
+    "question": "缓存失效时，如何避免回源请求压垮数据库？"
+  },
+  {
+    "id": "messaging",
+    "title": "消息队列与事件驱动",
+    "priority": "P1",
+    "goal": "把投递、消费、业务效果和顺序分开设计。",
+    "question": "消息已确认投递，为什么仍可能重复执行业务？"
+  },
+  {
+    "id": "distributed",
+    "title": "分布式系统",
+    "priority": "P1",
+    "goal": "明确故障模型、一致性范围与协调成本。",
+    "question": "租约过期的旧持有者恢复后，如何避免继续写入？"
+  },
+  {
+    "id": "performance",
+    "title": "性能与容量",
+    "priority": "P0",
+    "goal": "建立负载、等待、资源和尾延迟的证据链。",
+    "question": "吞吐不再增长时，继续增加并发为什么可能更慢？"
+  },
+  {
+    "id": "devops",
+    "title": "Linux、云与交付",
+    "priority": "P1",
+    "goal": "让环境、构建、发布与恢复可重复。",
+    "question": "发布回滚了应用，为什么数据库仍可能不兼容？"
+  },
+  {
+    "id": "reliability",
+    "title": "可观测性与可靠性",
+    "priority": "P0",
+    "goal": "建立用户目标、故障证据与可执行恢复流程。",
+    "question": "告警很多却不知道用户是否受影响，缺了什么？"
+  },
+  {
+    "id": "engineering",
+    "title": "软件质量与研发",
+    "priority": "P0",
+    "goal": "用规格、验证和协作方法减少变更风险。",
+    "question": "实现符合自己的理解，却不满足需求，如何提前发现？"
+  },
+  {
+    "id": "ai",
+    "title": "LLM、RAG 与 Agent 工程",
+    "priority": "P1",
+    "goal": "把模型能力接入有状态、有权限、可评测的业务系统。",
+    "question": "工具已成功执行但 Runtime 未记录，重启后怎么办？"
+  }
+]
