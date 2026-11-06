@@ -6,21 +6,21 @@ domain: "networking"
 status: "evolving"
 summary: "把解析、连接、安全传输、HTTP、服务端处理与页面呈现分层，建立请求排查的共同语言。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-22"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-systems-execution-units", "kb-reliability-retry-budgets", "kb-security-object-authorization", "kb-frontend-long-tasks"]
+related: ["kb-systems-execution-units", "kb-reliability-retry-budgets", "kb-security-object-authorization", "kb-frontend-long-tasks", "kb-frontend-rendering-hydration", "kb-security-sessions-tokens", "kb-api-contracts-pagination", "kb-networking-dns-caching", "kb-networking-connection-states", "kb-networking-http-pools", "kb-networking-connections-lab", "kb-networking-ip-routing", "kb-networking-nat-proxy-lb"]
 tags: ["networking", "http", "latency"]
 ---
 
 # HTTPS 请求链路：从地址输入到响应可用经历了什么
 
-学习入口：用户说“页面打不开”，失败到底在解析、连接、服务还是浏览器？前置知识：客户端、服务端与 URL 的基本概念。本文提供概念分层；连接复用、缓存、代理与协议版本都会改变实际路径，不能把示意顺序当作每次都发生的完整过程。
+学习入口：用户说“页面打不开”，失败到底在解析、连接、服务还是浏览器？前置知识：客户端、服务端与 URL 的基本概念。本文提供概念分层；[连接复用](../../glossary/networking.md#networking.keepalive)、缓存、代理与协议版本都会改变实际路径，不能把示意顺序当作每次都发生的完整过程。
 
 ## 先区分协议职责与页面可用
 
-HTTP 定义请求与响应的应用语义；HTTPS 在安全传输之上使用 HTTP。域名解析负责寻找服务地址，传输协议负责承载数据，TLS 等安全机制处理受保护通信，应用负责解释请求和授权。某一层成功不能代替其他层的保证。
+HTTP 定义请求与响应的应用语义；[HTTPS](../../glossary/networking.md#networking.tls) 在安全传输之上使用 HTTP。[域名解析](../../glossary/networking.md#networking.dns)负责寻找服务地址，传输协议负责承载数据，TLS 等安全机制处理受保护通信，应用负责解释请求和[授权](../../glossary/security.md#security.identity)。某一层成功不能代替其他层的保证。
 
 拿到响应字节也不等于页面已可交互。HTML、脚本、样式和后续 API 请求可能继续触发加载、执行与渲染。
 
@@ -32,10 +32,10 @@ HTTP 定义请求与响应的应用语义；HTTPS 在安全传输之上使用 HT
 | 域名解析 | 域名对应哪些候选地址 | 得到地址不代表可连接或应用健康 |
 | 连接与安全协商 | 使用什么传输、如何验证对端并保护数据 | TLS 成功不代表用户具有对象访问权限 |
 | HTTP 请求与路由 | 方法、目标、头与内容如何被代理和应用处理 | 接入节点收到请求不代表业务已执行 |
-| 业务执行与响应 | 校验、排队、存储和外部调用是否完成 | 客户端没收到响应不代表服务器没提交 |
+| 业务执行与响应 | 校验、[排队](../../glossary/performance.md#performance.queueing)、存储和外部调用是否完成 | 客户端没收到响应不代表服务器没提交 |
 | 内容使用 | 客户端怎样读取、解析和显示内容 | 响应结束不等于脚本、事件绑定与绘制全部结束 |
 
-HTTP/1.1 与 HTTP/2 的常见 HTTPS 路径使用 TCP 与 TLS；[HTTP/3](https://www.rfc-editor.org/rfc/rfc9114.html)使用 QUIC，不能套用“所有 HTTPS 都先 TCP 三次握手”的说法。连接与 DNS 结果可能被复用，HTTP 缓存或 Service Worker 也可能改变网络访问路径。
+[HTTP/1.1](../../glossary/networking.md#networking.http-versions) 与 HTTP/2 的常见 HTTPS 路径使用 [TCP](../../glossary/networking.md#networking.transport) 与 TLS；[HTTP/3](https://www.rfc-editor.org/rfc/rfc9114.html)使用 [QUIC](../../glossary/networking.md#networking.quic)，不能套用“所有 HTTPS 都先 TCP [三次握手](../../glossary/networking.md#networking.tcp-handshake)”的说法。连接与 DNS 结果可能被复用，HTTP 缓存或 [Service Worker](../../glossary/frontend.md#frontend.offline) 也可能改变网络访问路径。
 
 [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)用于定义 HTTP 语义；[MDN 导航与资源计时](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Navigation_and_resource_timings)提供客户端阶段的观察框架。它们与应用内部追踪负责不同边界。
 
@@ -56,9 +56,9 @@ HTTP/1.1 与 HTTP/2 的常见 HTTPS 路径使用 TCP 与 TLS；[HTTP/3](https://
 
 ## 复用、缓存与代理改变了什么
 
-连接复用可以避免每次从头建立连接，但长连接的生命周期、服务切换和并发限制需要管理。缓存减少重复传输，却带来有效期与内容更新规则。代理与 CDN 能分担流量，也会增加一层路由、缓存和故障定位边界。
+连接复用可以避免每次从头建立连接，但长连接的生命周期、服务切换和[并发](../../glossary/systems.md#systems.concurrency)限制需要管理。缓存减少重复传输，却带来有效期与内容更新规则。代理与 [CDN](../../glossary/networking.md#networking.cdn-waf) 能分担流量，也会增加一层路由、缓存和故障定位边界。
 
-TLS 保护其连接两端之间的通信；若在代理终止 TLS，代理到应用的下一段链路需单独说明。端到端用户权限仍由应用检查。本文只概述这些责任，不展开密码学、拥塞控制和具体缓存指令。
+TLS 保护其连接两端之间的通信；若在代理终止 TLS，代理到应用的下一段链路需单独说明。端到端用户权限仍由应用检查。本文只概述这些责任，不展开密码学、[拥塞控制](../../glossary/networking.md#networking.transport-control)和具体缓存指令。
 
 ## 从已确认的阶段定位失败
 
@@ -66,19 +66,30 @@ TLS 保护其连接两端之间的通信；若在代理终止 TLS，代理到应
 
 - **把首字节等待全算成数据库执行**：其中可能包含网络往返、代理、排队和应用处理；需要服务端阶段证据。
 - **看到 DNS 或连接阶段接近零就认定无成本**：可能发生缓存、连接复用或计时限制；先确认观测语义。
-- **服务端返回成功但客户端超时**：结果处于调用方未知状态，按查询与幂等协议恢复。
+- **服务端返回成功但客户端[超时](../../glossary/api.md#api.retries)**：结果处于调用方未知状态，按查询与[幂等](../../glossary/api.md#api.idempotency)协议恢复。
 - **收到内容却不能点击**：检查事件处理、状态、脚本与绘制，不能只继续调大接口超时。
-- **跨源资源缺少详细计时**：可能受浏览器暴露规则限制，不能把缺失值当作真实阶段耗时。
+- **[跨源](../../glossary/security.md#security.origin)资源缺少详细计时**：可能受浏览器暴露规则限制，不能把缺失值当作真实阶段耗时。
 
 ## 链路推演与自检
 
 教学推演：同一文档第一次访问需要建连，第二次可能复用连接，第三次可能由缓存返回。因此“三次访问各阶段完全相同”不是合理预期；只有先确认读取路径，比较阶段耗时才有意义。
 
-概念练习：画出一次读取文档的路径，在 DNS 失败、连接失败、应用拒绝、事务已提交但响应丢失、响应已到但主线程忙五个位置分别标记客户端能知道什么、还缺什么证据。为每种情况写出下一步应查的日志或计时，而不是统一归为“网络慢”。
+概念练习：画出一次读取文档的路径，在 DNS 失败、连接失败、应用拒绝、事务已提交但响应丢失、响应已到但主[线程](../../glossary/systems.md#systems.execution-units)忙五个位置分别标记客户端能知道什么、还缺什么证据。为每种情况写出下一步应查的日志或计时，而不是统一归为“网络慢”。
 
 本文只核查机制并提供纸面推演，未抓包、录制导航计时或运行跨协议对照。验收重点是分层解释与证据边界；实际计时需注明浏览器、缓存、协议、复用与代理条件。
 
+地址与逐跳转发继续见[网络分层、IP 与路由](network-layers-ip-subnets-and-routing.md)，入口后的地址改写与连接边界见[NAT、代理与负载均衡](nat-proxies-and-l4-l7-load-balancing.md)。两篇为来源核查与纸面推演，不扩展本文验证范围。
+
 ## 关联阅读
+
+- [DNS 缓存与地址选择](dns-caching-and-address-selection.md)：TTL 与现有连接为何不能作为同一个切流时钟。
+- [TCP 与 TLS 连接状态](tcp-tls-and-connection-states.md)：区分建立、安全身份与传输关闭。
+- [HTTP 复用与连接池](http-reuse-pools-and-timeouts.md)：区分流、池等待、正文消费与超时范围。
+- [连接生命周期实验](connection-lifecycle-lab.md)：已有回环 HTTP/1.1 局部证据，仍未抓包或执行跨协议对照。
+
+- [渲染与 Hydration](../frontend/rendering-and-hydration.md)：收到 HTML 后，仍需区分呈现与客户端接管。
+- [认证、会话与令牌](../security/authentication-sessions-and-tokens.md)：HTTPS 与应用登录状态承担不同职责。
+- [HTTP 契约与分页](../api/contracts-and-pagination.md)：继续限定方法、输入输出与列表遍历的保证。
 
 - [进程、线程与协程](../systems/process-thread-coroutine.md)：请求在应用内由谁推进，等待是否占用执行资源。
 - [超时与重试预算](../reliability/timeouts-and-retry-budgets.md)：不同等待阶段共同消耗端到端时间。

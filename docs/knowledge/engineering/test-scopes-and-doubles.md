@@ -6,17 +6,19 @@ domain: "engineering"
 status: "evolving"
 summary: "按真实依赖与系统边界区分单元、集成和端到端测试，避免把替身行为当成生产保证。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-27"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-api-idempotency-lab", "kb-reliability-retry-budgets", "kb-security-object-authorization", "kb-devops-delivery-lifecycle"]
+related: ["kb-api-idempotency-lab", "kb-reliability-retry-budgets", "kb-security-object-authorization", "kb-devops-delivery-lifecycle", "kb-architecture-module-boundaries", "kb-api-contracts-pagination", "kb-ai-evals", "kb-engineering-contract-compatibility", "kb-engineering-property-state-models", "kb-architecture-refactoring-debt", "kb-engineering-static-analysis", "kb-engineering-code-review", "kb-engineering-test-stability", "kb-engineering-tdd-bdd", "kb-engineering-test-portfolio", "kb-engineering-specification-traceability"]
 tags: ["testing", "contracts", "evidence"]
 ---
 
 # 测试层次与替身：一项测试究竟证明了什么
 
 学习入口：本地测试都通过，为什么真实数据库、登录或网络行为仍然出错？前置知识：函数、接口与断言。本文建立测试范围的语言，不新增实验工程；现有示例仅用于说明已验证与未验证的边界。
+
+从测试范围继续看[TDD与BDD](tdd-bdd-examples-and-feedback-loops.md)的反馈、[测试金字塔与证据组合](test-pyramids-risk-portfolios-and-coverage.md)的风险分配与[规格驱动与验收追溯](specifications-contracts-traceability-and-acceptance.md)的目标来源；执行检查、覆盖代码和满足需求提供不同证据。
 
 ## 先声明测试要证明的范围
 
@@ -26,17 +28,17 @@ tags: ["testing", "contracts", "evidence"]
 
 | 层次 | 本文使用的含义 | 主要证据与边界 |
 | --- | --- | --- |
-| 单元测试 | 检查范围较小、职责明确的逻辑 | 容易控制输入与失败；不能单独证明真实外部协议 |
-| 集成测试 | 检查选定组件与真实依赖边界的配合 | 能暴露序列化、SQL、事务等问题；范围仍需明确 |
+| [单元测试](../../glossary/engineering.md#engineering.tests) | 检查范围较小、职责明确的逻辑 | 容易控制输入与失败；不能单独证明真实外部协议 |
+| 集成测试 | 检查选定组件与真实依赖边界的配合 | 能暴露[序列化](../../glossary/runtime.md#runtime.serialization)、SQL、事务等问题；范围仍需明确 |
 | 端到端测试 | 从声明的业务入口走到业务结果 | 检查被覆盖的系统路径；环境与故障定位成本较高 |
 
 [Unit Test](https://martinfowler.com/bliki/UnitTest.html)与[测试金字塔讨论](https://martinfowler.com/articles/practical-test-pyramid.html)都指出这些术语的范围需要约定。单元可以涉及协作对象，集成可以只针对一个数据库边界；端到端也不必总从浏览器 UI 开始。
 
 ## 测试替身的作用与契约
 
-测试替身用于控制依赖：Stub 提供预设应答，Mock 常用于检查交互期待，Fake 是简化但可工作的替代实现。这些是角色，某个库对象可能承担不止一种角色。[Python unittest.mock](https://docs.python.org/3.13/library/unittest.mock.html)提供替换与交互断言工具，但不会自动使替身与真实系统语义一致。
+[测试替身](../../glossary/engineering.md#engineering.doubles)用于控制依赖：Stub 提供预设应答，Mock 常用于检查交互期待，Fake 是简化但可工作的替代实现。这些是角色，某个库对象可能承担不止一种角色。[Python unittest.mock](https://docs.python.org/3.13/library/unittest.mock.html)提供替换与交互断言工具，但不会自动使替身与真实系统语义一致。
 
-契约测试可检查选定接口的请求、响应与交互约定，减少双方各自实现却不兼容的问题；它不能自动证明数据库并发、对象权限或完整业务状态正确。替身也需要对照真实契约维护。
+[契约测试](../../glossary/engineering.md#engineering.contracts)可检查选定接口的请求、响应与交互约定，减少双方各自实现却不兼容的问题；它不能自动证明数据库[并发](../../glossary/systems.md#systems.concurrency)、对象权限或完整业务状态正确。替身也需要对照真实契约维护。
 
 ## 用仓库现有实验划定证据
 
@@ -44,9 +46,9 @@ tags: ["testing", "contracts", "evidence"]
 
 | 示例 | 真实部分与替身 | 可以支持什么 | 尚不能支持什么 |
 | --- | --- | --- | --- |
-| 重试预算 | 真实策略函数，假时钟与调用替身 | 时间预算与重试决策 | 网络计时器、取消传播、SDK 重试 |
-| 幂等性实验 | 真实 SQLite、连接和本地并发 | 本地事务及已覆盖的去重断言 | PostgreSQL 隔离、外部支付与多地域行为 |
-| 对象授权 | 真实 SQLite 查询，身份为可信测试替身 | 示例策略的租户、归属和动作规则 | 登录、JWT 校验、HTTP 与并发撤销 |
+| [重试预算](../../glossary/reliability.md#reliability.retry-budget) | 真实策略函数，假时钟与调用替身 | 时间预算与[重试](../../glossary/api.md#api.retries)决策 | 网络计时器、取消传播、SDK 重试 |
+| [幂等性](../../glossary/api.md#api.idempotency)实验 | 真实 SQLite、连接和本地并发 | 本地事务及已覆盖的去重断言 | PostgreSQL 隔离、外部支付与[多地域](../../glossary/devops.md#devops.regions)行为 |
+| 对象[授权](../../glossary/security.md#security.identity) | 真实 SQLite 查询，身份为可信测试替身 | 示例策略的租户、归属和动作规则 | 登录、[JWT](../../glossary/security.md#security.tokens) 校验、HTTP 与并发撤销 |
 
 ## 按风险和成本组合测试
 
@@ -57,7 +59,7 @@ tags: ["testing", "contracts", "evidence"]
 ### 容易高估或丢失证据的做法
 
 - **用内存替身证明真实数据库隔离**：替身没有相同锁与事务行为；在对应边界补充真实依赖证据。
-- **测试复制实现代码的分支**：实现和预期可能共享同一个错误；从需求、不变量和反例组织断言。
+- **测试复制实现代码的分支**：实现和预期可能共享同一个错误；从需求、[不变量](../../glossary/systems.md#systems.atomicity)和反例组织断言。
 - **只验证 Mock 被调用**：调用发生不代表业务写入或权限正确；检查可观察结果和拒绝后的状态。
 - **让替身总是正常返回**：遗漏超时、部分成功与权限撤销；按契约构造关键失败。
 - **共享测试数据或依赖执行顺序**：单独运行通过、组合运行失败；明确资源与数据生命周期。
@@ -73,9 +75,19 @@ tags: ["testing", "contracts", "evidence"]
 
 本页引用已有实验说明与验证范围，不新增执行记录。所有概念练习均为纸面设计。验收是能用一句话说明“此测试在这些条件下证明了哪条断言，仍没有覆盖哪条边界”。
 
+测试结果本身是否稳定，见[测试稳定性与隔离](flaky-tests-isolation-and-evidence.md)；首轮失败、重试和真正修复应分别记录。
+
 ## 关联阅读
 
-- [幂等性实验](../api/idempotency-lab.md)：本地数据库事务与并发断言的具体证据。
+维护配套读[技术债与重构](../architecture/technical-debt-refactoring-and-behavior.md)、[静态分析与告警](static-analysis-rules-and-findings.md)及[代码评审](code-review-context-and-change-boundaries.md)。现状记录、规则结果、人工判断与实际行为测试分别说明边界；新关联没有重跑或扩大本文示例证据。
+
+- [Evals 与失败分析](../ai/evals-and-failure-analysis.md)：模型评分、程序断言与真实工具效果各有验证边界。
+
+- [HTTP 契约与分页](../api/contracts-and-pagination.md)：Schema 校验与并发遍历行为需要不同验证，不能互相替代。
+
+- [模块边界与依赖](../architecture/module-boundaries-and-dependencies.md)：区分核心端口、替身与真实适配器的验证责任。
+
+- [幂等性实验](../api/idempotency-lab.md)：本地[数据库事务](../../glossary/database.md#database.isolation)与并发断言的具体证据。
 - [重试预算](../reliability/timeouts-and-retry-budgets.md)：假时钟用于控制决策条件，而不代替真实计时器。
 - [对象级授权](../security/object-level-authorization.md)：可信身份替身与真实认证是不同的测试边界。
 - [构建、部署与回滚](../devops/build-deploy-rollback.md)：不同阶段需要相应的兼容与业务证据。
@@ -87,3 +99,5 @@ tags: ["testing", "contracts", "evidence"]
 - [Martin Fowler：Unit Test](https://martinfowler.com/bliki/UnitTest.html)
 - [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
 - [Python 3.13：unittest.mock](https://docs.python.org/3.13/library/unittest.mock.html)
+
+[契约测试与版本兼容](contract-testing-and-compatibility.md)展开真实消费代码、模拟提供方和提供方验证的分工；[属性测试与状态模型](property-testing-and-state-models.md)展开生成输入、性质、oracle、收缩及顺序模型。它们与单元/集成/端到端是不同观察维度，仍须声明真实依赖；两篇均未执行相应工具实验。

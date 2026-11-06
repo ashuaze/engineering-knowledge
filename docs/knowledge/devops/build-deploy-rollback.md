@@ -6,36 +6,38 @@ domain: "devops"
 status: "evolving"
 summary: "区分制品、配置、数据契约与流量状态，理解持续交付和可回滚的条件。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-26"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-engineering-test-scopes", "kb-database-concurrent-inventory", "kb-security-object-authorization"]
+related: ["kb-engineering-test-scopes", "kb-database-concurrent-inventory", "kb-security-object-authorization", "kb-database-schema-migrations", "kb-database-backups-pitr", "kb-database-recovery-lab", "kb-devops-container-boundaries", "kb-devops-declarative-health", "kb-reliability-fault-domains-recovery", "kb-engineering-code-review", "kb-engineering-dependency-governance", "kb-engineering-trunk-flags", "kb-devops-iac-state", "kb-reliability-incident-response", "kb-api-graceful-shutdown", "kb-devops-trusted-progressive-delivery"]
 tags: ["delivery", "compatibility", "rollback"]
 ---
 
 # 构建、部署与回滚：为什么换回旧程序还不够
 
-学习入口：新版本出问题后已恢复旧镜像，业务为什么仍然异常？前置知识：源代码、运行配置与持久化数据。本文面向开发、测试、运维和平台人员，解释交付概念与兼容边界，不执行任何部署。
+学习入口：新版本出问题后已恢复旧[镜像](../../glossary/devops.md#devops.containers)，业务为什么仍然异常？前置知识：源代码、运行配置与持久化数据。本文面向开发、测试、运维和平台人员，解释交付概念与兼容边界，不执行任何部署。
+
+在途请求的期限与结果见[优雅关闭与请求排空](../api/graceful-shutdown-draining-and-inflight-outcomes.md)；内容身份、来源核验和渐进暴露见[可信制品与渐进发布](artifact-provenance-verification-and-progressive-delivery.md)。
 
 ## 先区分构建、部署、发布与回退
 
-构建把指定输入转换为可分发制品；部署把制品和配置放到目标运行环境；发布常指让某项能力对用户生效，可能通过流量或功能开关独立控制。回滚则需要说明恢复哪部分状态，以及恢复后是否仍能处理当前数据与请求。
+构建把指定输入转换为可分发制品；部署把制品和配置放到目标运行环境；发布常指让某项能力对用户生效，可能通过流量或[功能开关](../../glossary/devops.md#devops.flags)独立控制。回滚则需要说明恢复哪部分状态，以及恢复后是否仍能处理当前数据与请求。
 
-CI 强调频繁集成后的自动反馈。CD 可能指持续交付，也可能指持续部署：前者强调变更保持可发布状态，后者进一步自动推进到生产；团队需明确自己的审批与自动化边界。流水线跑完不自动等于用户侧目标已达成。
+[CI](../../glossary/devops.md#devops.cicd) 强调频繁集成后的自动反馈。CD 可能指持续交付，也可能指持续部署：前者强调变更保持可发布状态，后者进一步自动推进到生产；团队需明确自己的审批与自动化边界。流水线跑完不自动等于用户侧目标已达成。
 
 ## 回滚涉及的四类状态
 
 | 状态维度 | 应记录什么 | 回退时要问什么 |
 | --- | --- | --- |
-| 制品 | 源码版本、依赖、构建环境、制品摘要 | 取回的是不是原先验证过的那份字节 |
+| 制品 | 源码版本、依赖、构建环境、[制品摘要](../../glossary/devops.md#devops.provenance) | 取回的是不是原先验证过的那份字节 |
 | 配置 | 配置版本、开关、环境差异 | 旧程序是否支持当前配置与依赖 |
-| 数据与协议 | 表结构、序列化格式、API/事件契约 | 旧版本是否能读取新版本已写入的数据 |
+| 数据与协议 | 表结构、[序列化](../../glossary/runtime.md#runtime.serialization)格式、API/[事件契约](../../glossary/messaging.md#messaging.event-contract) | 旧版本是否能读取新版本已写入的数据 |
 | 流量与实例 | 新旧版本分布、路由、后台任务 | 混合运行期间是否互相兼容 |
 
 [Reproducible Builds 定义](https://reproducible-builds.org/docs/definition/)要求在声明的源码、环境与指令条件下重建相同制品字节。固定依赖或“同一提交再次构建”本身并不能证明可复现。保留已验证制品并在环境间推进，可以避免临时重建引入新的变化。
 
-混合版本是滚动部署时需要考虑的状态。[Kubernetes Deployment 文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)明确其回滚只回退 Deployment 的 Pod 模板；数据库和外部系统状态不因此恢复。
+混合版本是滚动部署时需要考虑的状态。[Kubernetes Deployment 文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)明确其回滚只回退 [Deployment](../../glossary/devops.md#devops.k8s) 的 Pod 模板；数据库和外部系统状态不因此恢复。
 
 ## 交付链路与停止条件
 
@@ -48,7 +50,7 @@ CI 强调频繁集成后的自动反馈。CD 可能指持续交付，也可能�
 → 达到停止条件时暂停、回退或向前修复
 ```
 
-每次变更记录制品、配置、数据契约和流量阶段。摘要用于标识制品内容，不单独证明来源可信或构建正确。停止条件除进程存活外，还应覆盖关键业务结果与错误；返回健康不等于业务兼容。
+每次变更记录制品、配置、数据契约和流量阶段。摘要用于标识制品内容，不单独证明来源可信或构建正确。停止条件除[进程](../../glossary/systems.md#systems.execution-units)存活外，还应覆盖关键业务结果与错误；返回健康不等于业务兼容。
 
 ## 兼容矩阵决定能退到哪个版本
 
@@ -68,9 +70,9 @@ v3 写入 B 以后，回退到能读取 B 的 v2 与回退到只读 A 的 v1，�
 
 ## 发布策略的取舍与常见失败
 
-- 滚动发布能逐步替换实例，需要新旧版本共存；具体容量和故障行为取决于策略与环境。
+- [滚动发布](../../glossary/devops.md#devops.rollout)能逐步替换实例，需要新旧版本共存；具体容量和故障行为取决于策略与环境。
 - 蓝绿或流量分阶段切换便于控制暴露面，但需要额外环境、路由与兼容管理；切回流量也不会撤销已完成的写入。
-- 功能开关可把功能启用与部署解耦，但开关状态本身也需要版本、授权和清理策略。
+- 功能开关可把功能启用与部署解耦，但开关状态本身也需要版本、[授权](../../glossary/security.md#security.identity)和清理策略。
 - 自动回滚可缩短某些故障处理时间，但前提是信号可靠、回退路径有效，且旧版本仍与当前状态兼容。
 
 回滚、恢复备份、补偿业务与向前修复处理的对象不同。是否可以逆转，必须由数据与业务语义决定，不能统一归为“回滚代码”。
@@ -83,7 +85,14 @@ v3 写入 B 以后，回退到能读取 B 的 v2 与回退到只读 A 的 v1，�
 | 删除旧字段后才演练回滚 | 旧程序缺少必需数据 | 分阶段演进并明确不可逆点 |
 | 只看进程存活 | 静默业务错误未触发停止 | 同时观察关键业务结果与用户影响 |
 
+后续可连读[主干开发与功能开关](../engineering/trunk-based-development-and-feature-flags.md)、[事故响应与复盘](../reliability/incident-response-recovery-and-postmortems.md)及[IaC 与状态漂移](iac-state-drift-and-change-plans.md)，核对开放、止损和资源声明的不同责任。
+
 ## 关联阅读
+
+评审与组件记录分别见[代码评审与小步变更](../engineering/code-review-context-and-change-boundaries.md)、[依赖锁定与 SBOM](../engineering/dependency-resolution-lockfiles-and-sbom.md)。最终源码批准、锁定解析、制品清单和可信构建身份是不同证据，不能互相替代；新文没有新增构建来源验证或真实部署实验。
+
+- [数据库迁移兼容](../database/schema-migrations-and-compatibility.md)：从权威字段、[并发](../../glossary/systems.md#systems.concurrency)回填与读写版本安排迁移。
+- [备份与时间点恢复](../database/backups-and-point-in-time-recovery.md)：区分回退应用与恢复历史数据库；[配套恢复实验](../database/backup-recovery-lab.md)已有命名恢复点的局部证据。
 
 - [测试层次与替身](../engineering/test-scopes-and-doubles.md)：用不同范围的证据检查逻辑、协议与关键流程。
 - [库存并发](../database/concurrent-inventory.md)：数据约束和事务行为不随应用版本回退而自动恢复。
@@ -96,3 +105,5 @@ v3 写入 B 以后，回退到能读取 B 的 v2 与回退到只读 A 的 v1，�
 - [Reproducible Builds：Definitions](https://reproducible-builds.org/docs/definition/)
 - [Kubernetes：Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [AWS：Ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
+
+继续阅读[镜像、容器与资源隔离](images-containers-and-resource-isolation.md)、[声明式部署与健康探针](declarative-deployments-and-health-probes.md)与[故障域、冗余和恢复目标](../reliability/failure-domains-redundancy-and-recovery.md)，分别展开运行输入、控制循环、流量就绪与业务恢复范围。三篇为来源核查和教学推演，不扩展为本篇已执行部署或容灾实验。

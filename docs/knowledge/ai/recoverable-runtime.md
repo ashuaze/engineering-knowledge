@@ -6,21 +6,21 @@ domain: "ai"
 status: "evolving"
 summary: "围绕工具副作用的故障窗口设计状态、恢复和人工介入。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-20"
 last_verified: null
 verification: "design-proposal"
 prerequisites: ["kb-api-idempotency"]
-related: ["kb-api-idempotency", "kb-messaging-outbox", "kb-reliability-retry-budgets", "kb-security-object-authorization"]
+related: ["kb-api-idempotency", "kb-messaging-outbox", "kb-reliability-retry-budgets", "kb-security-object-authorization", "kb-ai-context", "kb-ai-rag", "kb-ai-evals", "kb-ai-tool-contracts", "kb-ai-structured-output", "kb-ai-tool-security", "kb-ai-tools-lab", "kb-ai-workflow-routing", "kb-ai-workflow-state", "kb-ai-workflow-budgets"]
 tags: ["agent", "state", "reliability"]
 ---
 
 # 可恢复 Agent Runtime：从工具结果未知开始设计
 
-学习入口：Agent 重启后，如何判断工具是否已经产生业务效果？前置知识：[API 幂等性](../api/idempotency.md)、持久化状态与工具调用。下文是待结合实际工具验证的架构设计提案。
+学习入口：Agent 重启后，如何判断工具是否已经产生业务效果？前置知识：[API 幂等性](../api/idempotency.md)、持久化状态与[工具调用](../../glossary/ai.md#ai.tools)。下文是待结合实际工具验证的架构[设计提案](../../glossary/engineering.md#engineering.design-docs)。
 
 ## 故障起点：工具成功但结果未保存
 
-可恢复 Agent Runtime 通过持久化动作意图、可核实结果与恢复策略，让中断后的执行能继续、停止或转人工，并明确外部效果无法确认的情况。
+可恢复 Agent [Runtime](../../glossary/runtime.md#runtime.virtual-machine) 通过持久化动作意图、可核实结果与恢复策略，让中断后的执行能继续、停止或转人工，并明确外部效果无法确认的情况。
 
 Agent 调用了“创建工单”，工具已成功写入业务系统，Runtime 在保存结果前崩溃。重启后仅看到“工具待执行”。再次执行可能创建重复工单；直接当作成功又缺少结果。
 
@@ -38,22 +38,22 @@ Agent 调用了“创建工单”，工具已成功写入业务系统，Runtime 
 | unknown | 无法确定外部效果 | 查询、对账或人工介入 |
 | terminal | 已完成、取消或明确失败 | 停止调度，保留审计 |
 
-这些是本文的示意状态名，实际系统可能还需要 queued、running、waiting-approval 和 compensated。状态机保证首先来自合法流转、持久化和恢复策略，名称本身不产生可靠性。
+这些是本文的示意状态名，实际系统可能还需要 queued、running、waiting-approval 和 compensated。状态机保证首先来自合法流转、持久化和恢复策略，名称本身不产生[可靠性](../../glossary/reliability.md#reliability.availability)。
 
 ### 恢复决策
 
 | 工具特征 | 恢复策略 |
 | --- | --- |
 | 只读且重复调用可接受 | 在预算内重新读取，承认结果可能变化 |
-| 支持业务幂等键 | 复用 operation_id 调用或查询原结果 |
+| 支持业务[幂等](../../glossary/api.md#api.idempotency)键 | 复用 operation_id 调用或查询原结果 |
 | 可按业务键查询 | 先核对结果，再决定是否执行 |
 | 不可查询且有不可逆副作用 | 进入 unknown，交由对账或人工判断 |
 
-将动作意图写入 checkpoint，只能证明系统记录了意图。它不能自动让外部执行和本地状态记录形成同一个事务。
+将动作意图写入 [checkpoint](../../glossary/ai.md#ai.state)，只能证明系统记录了意图。它不能自动让外部执行和本地状态记录形成同一个事务。
 
 ## 执行链路与持久化记录
 
-以下为架构设计，尚无配套 Runtime 实现。执行链路为：模型提出动作 → Runtime 校验 → 持久化意图 → 调用工具 → 核实并保存结果 → 继续调度；超时或中断后按恢复决策处理。
+以下是完整 Runtime 的架构设计；新增[本地工具边界实验](tool-execution-boundaries-lab.md)已实现固定候选下的局部校验、[授权](../../glossary/security.md#security.identity)与查询恢复，未实现模型调度和真实远程工具集成。执行链路为：模型提出动作 → Runtime 校验 → 持久化意图 → 调用工具 → 核实并保存结果 → 继续调度；[超时](../../glossary/api.md#api.retries)或中断后按恢复决策处理。
 
 ### 建议的执行记录
 
@@ -82,19 +82,27 @@ Agent 调用了“创建工单”，工具已成功写入业务系统，Runtime 
 
 ## 待执行的恢复验证
 
-以下为待执行的最小验证清单：
+以下为完整验证目标，局部已测范围在清单后单独说明：
 
 1. 在动作意图保存前、保存后、工具执行后、结果保存后分别注入中断。
-2. 为“工具超时但已成功”设计返回未知的测试替身。
+2. 为“工具超时但已成功”设计返回未知的[测试替身](../../glossary/engineering.md#engineering.doubles)。
 3. 验证同一 operation_id 不重复产生受控副作用。
 4. 验证权限撤销后无法继续执行旧动作。
 5. 验证重复恢复、循环恢复和预算耗尽都能终止或转人工。
 
-既有 API 幂等性、重试预算与对象授权实验各自验证局部规则；它们尚未组成 Agent Runtime，也不构成上述恢复与故障注入的证据。上述设计必须结合实际工具契约继续验证。
+新增[工具执行边界实验](tool-execution-boundaries-lab.md)使用固定候选、两份 SQLite 文件与受控工具，验证稳定动作重放、结果丢失查询、撤权和一处提交后受控异常窗口。异常后关闭并重开连接，不是实际[进程](../../glossary/systems.md#systems.execution-units)强杀或 SDK Checkpoint 故障注入；步骤预算也没有跨恢复持久化。其他窗口、[并发](../../glossary/systems.md#systems.concurrency)、模型调度与真实工具集成仍待验证；本文继续保持 design-proposal，不将局部实验扩成整套 Runtime 已验证。
 
 自检：给一个有外部副作用的工具写出“可确认成功、可确认失败、结果未知”的判断依据，并为每种情况选择查询、重试或人工处理。
 
+[编排](../../glossary/ai.md#ai.harness)问题已另补[路由与交接契约](workflow-routing-and-handoff-contracts.md)、[状态与检查点](workflow-state-and-checkpoints.md)及[持久化预算](durable-budgets-and-failure-convergence.md)三篇来源核查概念。它们细化责任和边界，没有新增本提案的完整实现或集成验证。
+
 ## 关联概念
+
+- [工具调用契约](tool-calling-and-execution-contracts.md)、[结构化校验](structured-outputs-and-validation.md)与[工具授权](tool-authorization-and-untrusted-results.md)：先理解执行前后各自的责任，再设计恢复。
+
+- [Token、上下文与记忆](tokens-context-and-memory.md)：当前输入与摘要不能代替权威执行状态。
+- [RAG 与依据](rag-retrieval-and-grounding.md)：恢复时取回的资料仍需当前访问范围、版本和来源支持。
+- [Evals 与失败分析](evals-and-failure-analysis.md)：把结果未知、误判成功和评分器误判分别纳入检查。
 
 - [API 幂等性](../api/idempotency.md)：稳定操作标识和结果复用。
 - [Transactional Outbox](../messaging/transactional-outbox.md)：本地事务与外部执行的边界。

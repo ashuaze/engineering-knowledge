@@ -1,0 +1,21 @@
+{
+  "recorded_date": "2026-10-19",
+  "files": {
+    "examples/overload_control/lab.py": {
+      "bytes": 9883,
+      "sha256": "c10629269d719141da7ecdd060b4b49c398cd36b2dc2f113035a72387823c8ae"
+    },
+    "examples/overload_control/test_lab.py": {
+      "bytes": 1861,
+      "sha256": "70ab9745f3a2253613c8e3a3373f56b5cd1d1110c071b87e99b16a4307c45525"
+    },
+    "examples/overload_control/results/results.json": {
+      "bytes": 1157868,
+      "sha256": "9046fbe79ace450842dba49ae37b380a624696aff90bf4a264c7c669fa452134"
+    },
+    "examples/overload_control/results/tests.txt": {
+      "bytes": 1020,
+      "sha256": "7e89d1bf87e98ecd6c063a5f83b53a3d1ae999d815ffa5437c29962c46e58d0e"
+    }
+  }
+}

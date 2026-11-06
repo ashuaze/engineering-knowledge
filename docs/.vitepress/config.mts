@@ -3,10 +3,11 @@ import {
   getSiteSettings, getDomains, getDomainNavigation,
   repositoryLinks, supportingSources, copySupportingSources
 } from './site.mjs';
-import { tokenize } from './search.mjs';
+import { readLibrary, libraryOverview, knowledgeSearchPlugin, articleMetadata } from './library.mjs';
 
 const settings = getSiteSettings();
 const domains = getDomains();
+const library = readLibrary();
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -18,12 +19,13 @@ export default defineConfig({
   srcExclude: ['changelog.md', 'handbook/editorial.md', 'handbook/topics.md', 'handbook/design.md'],
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${settings.base}favicon.svg` }],
-    ['meta', { name: 'theme-color', content: '#176b75' }]
+    ['meta', { name: 'theme-color', content: '#ffffff' }]
   ],
   markdown: {
-    config(md) { md.use(repositoryLinks(settings)); }
+    headers: { level: [2, 3] },
+    config(md) { md.use(repositoryLinks(settings)); md.use(articleMetadata); }
   },
-  vite: { plugins: [supportingSources(settings)] },
+  vite: { plugins: [supportingSources(settings), knowledgeSearchPlugin(settings.base)] },
   buildEnd(config) { copySupportingSources(config.outDir); },
   transformPageData(page) {
     if (page.frontmatter.summary) page.description = page.frontmatter.summary;
@@ -50,6 +52,7 @@ export default defineConfig({
     }
   } : {}),
   themeConfig: {
+    fieldnotes: libraryOverview(library),
     siteTitle: '工程知识库',
     nav: [
       { text: '问题导航', link: '/problems.html' },
@@ -58,7 +61,9 @@ export default defineConfig({
       { text: '文章', link: '/articles.html' },
       { text: '更多', items: [
         { text: '术语索引', link: '/glossary.html' },
+        { text: '分类词汇表', link: '/glossary/' },
         { text: '概念路线图', link: '/handbook/concept-roadmap.html' },
+        { text: '阅读更新', link: '/updates.html' },
         { text: '使用与转载条件', link: '/rights.html' },
         ...(settings.repositoryUrl ? [{ text: 'GitHub 仓库', link: settings.repositoryUrl }] : [])
       ] }
@@ -70,8 +75,12 @@ export default defineConfig({
         { text: '学习路径', link: '/paths/' },
         { text: '知识地图', link: '/map.html' },
         { text: '术语索引', link: '/glossary.html' },
+        { text: '分类词汇表', link: '/glossary/' },
         { text: '全部文章', link: '/articles.html' }
       ] },
+      { text: '分类词汇表', collapsed: true, items: domains.map(domain => ({
+        text: domain.title, link: `/glossary/${domain.id}.html`
+      })) },
       ...domains.map(getDomainNavigation)
     ],
     ...(settings.repositoryUrl ? {
@@ -97,32 +106,6 @@ export default defineConfig({
     footer: {
       message: `<a href="${settings.base}rights.html">正文 CC BY 4.0 · 代码 MIT · 使用与转载条件</a>`,
       copyright: 'Engineering Fieldnotes · 持续维护的工程笔记'
-    },
-    search: {
-      provider: 'local',
-      options: {
-        miniSearch: {
-          options: { tokenize },
-          searchOptions: { combineWith: 'AND', prefix: true, fuzzy: false }
-        },
-        translations: {
-          button: { buttonText: '搜索知识库', buttonAriaLabel: '搜索知识库' },
-          modal: {
-            displayDetails: '显示摘要',
-            resetButtonTitle: '清空搜索',
-            backButtonTitle: '关闭搜索',
-            noResultsText: '没有找到相关内容，试试中文术语或英文名称。',
-            footer: {
-              selectText: '选择', navigateText: '切换', closeText: '关闭'
-            }
-          }
-        },
-        _render(src, env, md) {
-          const html = md.render(src, env);
-          if (env.frontmatter?.search === false || env.relativePath.startsWith('handbook/') || ['rights.md', 'changelog.md'].includes(env.relativePath)) return '';
-          return html;
-        }
-      }
     }
   }
 });

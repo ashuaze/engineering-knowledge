@@ -1,0 +1,22 @@
+PASS 1 reuse: 6 checks, 3 requests, 1 TCP connections
+PASS 1 close_each: 6 checks, 3 requests, 3 TCP connections
+PASS 1 pool_wait: 8 checks, 2 requests, 1 TCP connections
+PASS 1 unread_body: 8 checks, 2 requests, 1 TCP connections
+PASS 1 idle_close: 7 checks, 2 requests, 2 TCP connections
+PASS 1 timeout_notice: 7 checks, 1 requests, 1 TCP connections
+PASS 1 timeout_destroy: 6 checks, 1 requests, 1 TCP connections
+PASS 2 reuse: 6 checks, 3 requests, 1 TCP connections
+PASS 2 close_each: 6 checks, 3 requests, 3 TCP connections
+PASS 2 pool_wait: 8 checks, 2 requests, 1 TCP connections
+PASS 2 unread_body: 8 checks, 2 requests, 1 TCP connections
+PASS 2 idle_close: 7 checks, 2 requests, 2 TCP connections
+PASS 2 timeout_notice: 7 checks, 1 requests, 1 TCP connections
+PASS 2 timeout_destroy: 6 checks, 1 requests, 1 TCP connections
+PASS 3 reuse: 6 checks, 3 requests, 1 TCP connections
+PASS 3 close_each: 6 checks, 3 requests, 3 TCP connections
+PASS 3 pool_wait: 8 checks, 2 requests, 1 TCP connections
+PASS 3 unread_body: 8 checks, 2 requests, 1 TCP connections
+PASS 3 idle_close: 7 checks, 2 requests, 2 TCP connections
+PASS 3 timeout_notice: 7 checks, 1 requests, 1 TCP connections
+PASS 3 timeout_destroy: 6 checks, 1 requests, 1 TCP connections
+PASS: 21 scenarios; 144 check results.

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>长任务与响应对照</title>
+<style>
+  body { max-width: 780px; margin: 48px auto; padding: 0 24px; color: #17303b; background: #f7f9f8; font: 17px/1.7 system-ui, sans-serif; }
+  h1 { font-size: 30px; line-height: 1.35; }
+  button, select { font: inherit; padding: 10px 14px; margin: 8px 8px 8px 0; border: 1px solid #7a969d; border-radius: 4px; background: white; color: inherit; }
+  button { cursor: pointer; }
+  #probe { background: #0c6265; color: white; }
+  progress { display: block; width: 100%; height: 22px; margin: 24px 0; }
+  pre { padding: 20px; background: #e9efec; overflow: auto; font-size: 14px; }
+  .note { color: #4c6268; }
+</style>
+<h1>相同计算，比较主线程让出的机会</h1>
+<p>运行后点击“测试响应”。观察反馈是在计算期间出现，还是等全部计算结束才出现。</p>
+<label>对照方式 <select id="mode">
+  <option value="sync">一次执行</option>
+  <option value="microtask">只让出微任务</option>
+  <option value="yield">分批让出任务</option>
+  <option value="timer">定时器回退</option>
+  <option value="heavy">一个重任务</option>
+</select></label>
+<button id="start">运行当前对照</button>
+<button id="probe">测试响应</button>
+<p id="feedback" role="status">尚未运行。</p>
+<progress id="progress" value="0" max="80"></progress>
+<pre id="result">每次使用相同输入和计算。结果只代表当前设备与浏览器。</pre>
+<p class="note">分批让出采用约 8 毫秒检查预算；单个任务执行期间无法被这个检查强制中断。此页面用于机制实验，所记事件等待不等同于正式 INP 指标。</p>
+<script>
+const modes = ['sync', 'microtask', 'yield', 'timer', 'heavy'];
+let state = null;
+let calibration = null;
+let observer = null;
+const progress = document.querySelector('#progress');
+const feedback = document.querySelector('#feedback');
+const result = document.querySelector('#result');
+
+function calculate(accumulator, start, count) {
+  let value = accumulator;
+  for (let i = start; i < start + count; i++) {
+    value = (Math.imul(value ^ i, 1664525) + 1013904223) >>> 0;
+  }
+  return value;
+}
+
+function calibrate() {
+  calculate(1, 0, 1_000_000);
+  const measurements = [];
+  for (let i = 0; i < 3; i++) {
+    const started = performance.now();
+    window.calibrationChecksum = calculate(1, 0, 1_000_000);
+    measurements.push(performance.now() - started);
+  }
+  const median = [...measurements].sort((a, b) => a - b)[1];
+  const iterationsPerJob = Math.max(1_000_000, Math.min(5_000_000, Math.round(1_000_000 * 4 / Math.max(median, 0.1))));
+  calibration = { measurementsMs: measurements, iterationsPerJob, jobs: 80, sliceBudgetMs: 8 };
+  return calibration;
+}
+
+function addLongTasks(entries) {
+  if (!state) return;
+  for (const entry of entries) {
+    if (entry.startTime + entry.duration >= state.startedAt) {
+      state.longTasks.push({ startTime: entry.startTime, duration: entry.duration, name: entry.name });
+    }
+  }
+}
+
+document.querySelector('#probe').addEventListener('pointerdown', event => {
+  if (!state) return;
+  const now = performance.now();
+  state.probes.push({ handledAt: now, eventTime: event.timeStamp,
+    pointerdownToHandlerMs: now - event.timeStamp, trusted: event.isTrusted,
+    duringWork: state.phase === 'running' });
+  feedback.textContent = `已处理响应测试：${state.phase === 'running' ? '计算期间' : '计算结束后'}。`;
+  requestAnimationFrame(timestamp => state.feedbackFrames.push({ timestamp, callbackAt: performance.now(),
+    duringWork: state.phase === 'running' }));
+});
+
+async function run(mode, runId = 'manual') {
+  if (!modes.includes(mode)) throw new Error('Unknown mode');
+  if (state?.phase === 'running') throw new Error('A run is already active');
+  if (!calibration) calibrate();
+  if (mode === 'yield' && typeof globalThis.scheduler?.yield !== 'function') {
+    throw new Error('scheduler.yield is unavailable; use timer mode');
+  }
+  observer?.disconnect();
+  state = { runId, mode, phase: 'running', startedAt: performance.now(), finishedAt: null,
+    checksum: null, longTasks: [], probes: [], feedbackFrames: [], jobDurationsMs: [],
+    timerAt: null, frameAt: null, yields: 0 };
+  progress.value = 0;
+  feedback.textContent = '计算中，请测试响应。';
+  if (PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+    observer = new PerformanceObserver(list => addLongTasks(list.getEntries()));
+    observer.observe({ type: 'longtask', buffered: false });
+  }
+  setTimeout(() => { state.timerAt = performance.now(); }, 0);
+  requestAnimationFrame(timestamp => { state.frameAt = performance.now(); state.frameTimestamp = timestamp; });
+  performance.mark(`lab:${runId}:start`);
+  // Do not await this host notification: doing so would introduce an extra task boundary.
+  window.notifyLabStarted?.({ runId, startedAt: state.startedAt });
+  let accumulator = 1;
+  let next = 0;
+  let sliceStarted = performance.now();
+  const jobs = mode === 'heavy' ? 1 : calibration.jobs;
+  const perJob = mode === 'heavy' ? calibration.iterationsPerJob * calibration.jobs : calibration.iterationsPerJob;
+  for (let job = 0; job < jobs; job++) {
+    const started = performance.now();
+    accumulator = calculate(accumulator, next, perJob);
+    next += perJob;
+    state.jobDurationsMs.push(performance.now() - started);
+    progress.value = mode === 'heavy' ? calibration.jobs : job + 1;
+    if (mode === 'microtask') await Promise.resolve();
+    if (['yield', 'timer', 'heavy'].includes(mode) && performance.now() - sliceStarted >= calibration.sliceBudgetMs) {
+      // The final job needs no further scheduling opportunity for remaining computation.
+      if (job + 1 < jobs) {
+        state.yields++;
+        if (mode === 'timer' || typeof globalThis.scheduler?.yield !== 'function') {
+          await new Promise(resolve => setTimeout(resolve, 0));
+        } else {
+          await globalThis.scheduler.yield();
+        }
+        sliceStarted = performance.now();
+      }
+    }
+  }
+  state.checksum = accumulator;
+  state.finishedAt = performance.now();
+  state.phase = 'finished';
+  performance.mark(`lab:${runId}:finish`);
+  result.textContent = JSON.stringify({ mode, checksum: accumulator,
+    workElapsedMs: state.finishedAt - state.startedAt, yields: state.yields }, null, 2);
+  return { checksum: accumulator, finishedAt: state.finishedAt };
+}
+
+window.lab = {
+  calibrate, run,
+  capabilities: () => ({ longTasks: PerformanceObserver.supportedEntryTypes.includes('longtask'),
+    schedulerYield: typeof globalThis.scheduler?.yield === 'function' }),
+  snapshot: () => { if (observer) addLongTasks(observer.takeRecords()); return structuredClone(state); }
+};
+document.querySelector('#start').addEventListener('click', () => {
+  document.querySelector('#start').disabled = true;
+  run(document.querySelector('#mode').value, window.labRunId || 'manual').catch(error => { feedback.textContent = error.message; })
+    .finally(() => { document.querySelector('#start').disabled = false; });
+});
+</script>
+</html>

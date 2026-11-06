@@ -1,0 +1,10 @@
+test_await_put_transfers_pressure_to_producer (test_lab.AdmissionContracts.test_await_put_transfers_pressure_to_producer) ... ok
+test_client_timeout_can_leave_work_running (test_lab.AdmissionContracts.test_client_timeout_can_leave_work_running) ... ok
+test_cooperative_cancellation_releases_slot (test_lab.AdmissionContracts.test_cooperative_cancellation_releases_slot) ... ok
+test_overload_preserves_work_and_bounds (test_lab.AdmissionContracts.test_overload_preserves_work_and_bounds) ... Executing <Task pending name='Task-23' coro=<run_scenario.<locals>.consume() running at D:\dev\engineering-knowledge\examples\overload_control\lab.py:56> wait_for=<Future pending cb=[Task.task_wakeup()] created at C:\Users\jincheng\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py:459> created at C:\Users\jincheng\AppData\Local\Programs\Python\Python313\Lib\asyncio\tasks.py:410> took 0.111 seconds
+ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.778s
+
+OK

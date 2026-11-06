@@ -1,0 +1,17 @@
+{
+  "recorded_date": "2026-10-19",
+  "files": {
+    "examples/ai_tool_boundaries/lab.py": {
+      "bytes": 22363,
+      "sha256": "2035463c1dca7c1dedb9a64e325d82c7ffb3af51b306a7e01187f0996d1604de"
+    },
+    "examples/ai_tool_boundaries/results/results.json": {
+      "bytes": 39832,
+      "sha256": "9a15affa0a6b62932b516b3b9c87d8c9724a41e967d2caa5e926cc548d4a5665"
+    },
+    "examples/ai_tool_boundaries/results/run.txt": {
+      "bytes": 774,
+      "sha256": "09b7af7a7f2a07588f35db1e8660024bb1f71ddcbbd4494f3f04e0a8fb823dfd"
+    }
+  }
+}

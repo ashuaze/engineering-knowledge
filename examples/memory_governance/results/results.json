@@ -1,0 +1,4582 @@
+{
+  "recorded_at": "2026-10-20T01:14:14.386179+00:00",
+  "runtime": {
+    "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "sqlite": "3.50.4",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "scope": "Local SQL records and substring index substitute, logical clock, controlled schedules; no model, vector engine, Redis, parallel threads or secure erasure.",
+  "runs": [
+    {
+      "name": "user_preference",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "exact_value_and_provenance": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tool_observation",
+      "checks": {
+        "confirmed_tool_source_accepted": true,
+        "observation_published": true,
+        "exact_observation_source": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:verified",
+              "kind": "observation",
+              "source_id": "stc",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:verified",
+                "kind": "observation",
+                "source_id": "stc",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:verified",
+                "kind": "observation",
+                "source_id": "stc",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "stc",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "tool",
+                "revision": 1,
+                "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:verified",
+            "kind": "observation",
+            "source_id": "stc",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:verified"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:verified\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "model_hypothesis",
+      "checks": {
+        "retained_as_candidate": true,
+        "not_published": true,
+        "not_retrieved_as_fact": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:inferred",
+            "kind": "hypothesis",
+            "source_id": "sm",
+            "source_revision": 1,
+            "status": "candidate",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "candidate"
+        },
+        {
+          "sequence": 2,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        }
+      ]
+    },
+    {
+      "name": "promotion_rejected",
+      "checks": {
+        "admission_rejected": true,
+        "no_record_created": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "write_outcome": "needs_evidence"
+        }
+      ],
+      "read_evidence": [],
+      "snapshot": {
+        "memories": [],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": []
+      },
+      "events": []
+    },
+    {
+      "name": "unconfirmed_tool",
+      "checks": {
+        "admission_rejected": true,
+        "no_record_created": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "write_outcome": "needs_evidence"
+        }
+      ],
+      "read_evidence": [],
+      "snapshot": {
+        "memories": [],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": []
+      },
+      "events": []
+    },
+    {
+      "name": "source_mismatch",
+      "checks": {
+        "admission_rejected": true,
+        "no_record_created": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "write_outcome": "source_mismatch"
+        }
+      ],
+      "read_evidence": [],
+      "snapshot": {
+        "memories": [],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": []
+      },
+      "events": []
+    },
+    {
+      "name": "invalid_input",
+      "checks": {
+        "invalid_inputs_rejected": true,
+        "admission_rejected": true,
+        "no_record_created": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "write_outcome": "invalid"
+        }
+      ],
+      "read_evidence": [],
+      "snapshot": {
+        "memories": [],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": []
+      },
+      "events": []
+    },
+    {
+      "name": "cas_conflict",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "two_connections_read_same_version": true,
+        "stale_writer_conflicts": true,
+        "new_value_preserved": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "first": "active",
+          "second": "conflict"
+        }
+      ],
+      "read_evidence": [],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": "language:en",
+            "kind": "preference",
+            "source_id": "s2",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": []
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 2,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "name": "stale_projections",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "updated": true,
+        "stale_cache_excluded": true,
+        "stale_index_excluded": true,
+        "new_projection": true,
+        "new_version_returned": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 2,
+              "value": "language:en",
+              "kind": "preference",
+              "source_id": "s2",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s2",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s2",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s2",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": "language:en",
+            "kind": "preference",
+            "source_id": "s2",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 2,
+            "value": "language:en"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 2, \"value\": \"language:en\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 2,
+          "status": "active"
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 2
+        },
+        {
+          "sequence": 8,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "late_update_projection",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "updated": true,
+        "old_worker_rejected": true,
+        "stale_cache_excluded": true,
+        "stale_index_excluded": true,
+        "new_projection": true,
+        "new_version_returned": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 2,
+              "value": "language:en",
+              "kind": "preference",
+              "source_id": "s2",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s2",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s2",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s2",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": "language:en",
+            "kind": "preference",
+            "source_id": "s2",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 2,
+            "value": "language:en"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 2, \"value\": \"language:en\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 2,
+          "status": "active"
+        },
+        {
+          "sequence": 5,
+          "event": "projection_rejected"
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 8,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 2
+        },
+        {
+          "sequence": 9,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "expiry_boundary",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "before_deadline_visible": true,
+        "at_deadline_hidden": true,
+        "expired_copy_still_physically_present": true,
+        "expired_worker_rejected": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 119,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 120,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 120,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "projection_rejected"
+        }
+      ]
+    },
+    {
+      "name": "grant_revocation",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "collaborator_initially_allowed": true,
+        "revoked_cached_and_index_reads_hidden": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u2"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": true
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u2"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u2"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          },
+          {
+            "tenant": "t1",
+            "subject": "u2",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u2",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u2",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u2",
+          "returned": []
+        }
+      ]
+    },
+    {
+      "name": "tenant_boundary",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "tenant_denies_even_with_grant": true,
+        "foreign_candidate_in_subject_cache_denied": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t2",
+            "u3"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t2",
+            "u3"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          },
+          {
+            "tenant": "t2",
+            "subject": "u3",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"owner\": \"u1\", \"slot\": \"language\", \"version\": 1, \"value\": \"language:zh\", \"kind\": \"preference\", \"source_id\": \"s1\", \"source_revision\": 1, \"status\": \"active\", \"expires_at\": 120}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u3",
+          "returned": []
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u3",
+          "returned": []
+        }
+      ]
+    },
+    {
+      "name": "member_revocation",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "inactive_member_blocked": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "denied",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "denied",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "delete_late_fill",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "tombstoned": true,
+        "stale_copies_not_returned": true,
+        "late_worker_rejected": true,
+        "same_id_not_recreated": true,
+        "tombstone_not_updated": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": null,
+            "kind": "preference",
+            "source_id": null,
+            "source_revision": null,
+            "status": "tombstone",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "delete_requested",
+          "id": "m1",
+          "applied": true
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "projection_rejected"
+        }
+      ]
+    },
+    {
+      "name": "logical_purge_backup",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "tombstoned": true,
+        "stale_copies_not_returned": true,
+        "late_worker_rejected": true,
+        "same_id_not_recreated": true,
+        "tombstone_not_updated": true,
+        "active_rows_and_derived_content_cleared": true,
+        "backup_not_erased_by_active_delete": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "backup_retains_value": "language:zh"
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": null,
+            "kind": "preference",
+            "source_id": null,
+            "source_revision": null,
+            "status": "tombstone",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [],
+        "cache": []
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "delete_requested",
+          "id": "m1",
+          "applied": true
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "projection_rejected"
+        },
+        {
+          "sequence": 8,
+          "event": "derived_rows_purged",
+          "id": "m1"
+        }
+      ]
+    },
+    {
+      "name": "reopen_tombstone",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "tombstoned": true,
+        "stale_copies_not_returned": true,
+        "late_worker_rejected": true,
+        "same_id_not_recreated": true,
+        "tombstone_not_updated": true,
+        "tombstone_survives_reopen": true,
+        "late_worker_rejected_after_reopen": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": null,
+            "kind": "preference",
+            "source_id": null,
+            "source_revision": null,
+            "status": "tombstone",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "delete_requested",
+          "id": "m1",
+          "applied": true
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 7,
+          "event": "projection_rejected"
+        },
+        {
+          "sequence": 8,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 9,
+          "event": "projection_rejected"
+        }
+      ]
+    },
+    {
+      "name": "source_withdrawal",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "revoked_confirmation_blocks_reads": true,
+        "revoked_confirmation_blocks_worker": true,
+        "changed_source_kind_blocks_reads": true,
+        "changed_source_kind_blocks_worker": true,
+        "withdrawn_source_blocks_copies": true,
+        "withdrawn_source_blocks_worker": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 2,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 0
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "projection_rejected"
+        },
+        {
+          "sequence": 7,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 8,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 9,
+          "event": "projection_rejected"
+        },
+        {
+          "sequence": 10,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 11,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 12,
+          "event": "projection_rejected"
+        }
+      ]
+    },
+    {
+      "name": "authority_unavailable",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "no_cached_fallback": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "unavailable",
+          "items": []
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "unavailable",
+            "items": []
+          },
+          "authority_rows": []
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:zh"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 1, \"value\": \"language:zh\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "authority_unavailable"
+        }
+      ]
+    },
+    {
+      "name": "derived_corruption",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "cached_body_not_trusted": true,
+        "index_body_not_trusted": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 1,
+            "value": "language:zh",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 1,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 1,
+            "value": "language:forged"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"version\": 1, \"value\": \"language:forged\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "source_revision",
+      "checks": {
+        "created_active": true,
+        "initial_projection": true,
+        "warm_cache": true,
+        "old_source_revision_hidden": true,
+        "stale_source_write_rejected": true,
+        "fresh_source_version_admitted": true,
+        "fresh_source_projection": true,
+        "source_and_memory_versions_distinct": true,
+        "returned_items_match_current_authority_and_access": true,
+        "temporary_files_removed": true
+      },
+      "observations": [
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 1,
+              "value": "language:zh",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": []
+        },
+        {
+          "status": "ok",
+          "items": [
+            {
+              "id": "m1",
+              "version": 2,
+              "value": "language:en",
+              "kind": "preference",
+              "source_id": "s1",
+              "source_revision": 2
+            }
+          ]
+        }
+      ],
+      "read_evidence": [
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 1,
+                "value": "language:zh",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 1,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 1,
+                "value_hash": "21065ff424fd330c53e2894777182f241b54947af02d1cfcfafad0cd005c2fce",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": []
+          },
+          "authority_rows": []
+        },
+        {
+          "clock": 100,
+          "context": [
+            "t1",
+            "u1"
+          ],
+          "result": {
+            "status": "ok",
+            "items": [
+              {
+                "id": "m1",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 2
+              }
+            ]
+          },
+          "authority_rows": [
+            {
+              "memory": {
+                "id": "m1",
+                "tenant": "t1",
+                "owner": "u1",
+                "slot": "language",
+                "version": 2,
+                "value": "language:en",
+                "kind": "preference",
+                "source_id": "s1",
+                "source_revision": 2,
+                "status": "active",
+                "expires_at": 120
+              },
+              "source": {
+                "id": "s1",
+                "tenant": "t1",
+                "owner": "u1",
+                "kind": "user",
+                "revision": 2,
+                "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+                "confirmed": 1,
+                "active": 1
+              },
+              "member_active": true,
+              "grant_active": false
+            }
+          ]
+        }
+      ],
+      "snapshot": {
+        "memories": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "owner": "u1",
+            "slot": "language",
+            "version": 2,
+            "value": "language:en",
+            "kind": "preference",
+            "source_id": "s1",
+            "source_revision": 2,
+            "status": "active",
+            "expires_at": 120
+          }
+        ],
+        "sources": [
+          {
+            "id": "s1",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 2,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "s2",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "user",
+            "revision": 1,
+            "value_hash": "30f305d67221ed73cb044fa8f931a42f00806d4a206ba1d468bb85eaaf564613",
+            "confirmed": 1,
+            "active": 1
+          },
+          {
+            "id": "sm",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "model",
+            "revision": 1,
+            "value_hash": "2095ffbae5ba0e3a87c5bfe4cf5b3456b10f8448f6a917549eec586d16951eae",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "st",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "36c52b5ee18c6a107ed4861bd0ee2079b602e8feb4863eb368a1ea7cbcf34708",
+            "confirmed": 0,
+            "active": 1
+          },
+          {
+            "id": "stc",
+            "tenant": "t1",
+            "owner": "u1",
+            "kind": "tool",
+            "revision": 1,
+            "value_hash": "819923eb3eb5070bc6d2f4a27841273b2b43cf420953b804bb9e7e0ee6fad032",
+            "confirmed": 1,
+            "active": 1
+          }
+        ],
+        "index": [
+          {
+            "id": "m1",
+            "tenant": "t1",
+            "version": 2,
+            "value": "language:en"
+          }
+        ],
+        "cache": [
+          {
+            "tenant": "t1",
+            "subject": "u1",
+            "query": "language",
+            "payload": "[{\"id\": \"m1\", \"tenant\": \"t1\", \"version\": 2, \"value\": \"language:en\"}]"
+          }
+        ]
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 1,
+          "status": "active"
+        },
+        {
+          "sequence": 2,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 1
+        },
+        {
+          "sequence": 3,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "event": "retrieved",
+          "path": "cache",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 5,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": []
+        },
+        {
+          "sequence": 6,
+          "event": "authority_written",
+          "id": "m1",
+          "version": 2,
+          "status": "active"
+        },
+        {
+          "sequence": 7,
+          "event": "projection_published",
+          "id": "m1",
+          "version": 2
+        },
+        {
+          "sequence": 8,
+          "event": "retrieved",
+          "path": "index",
+          "subject": "u1",
+          "returned": [
+            "m1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1392 @@
+{
+  "systems": [
+    {
+      "title": "Linux 内核：虚拟内存与页",
+      "url": "https://docs.kernel.org/admin-guide/mm/concepts.html"
+    },
+    {
+      "title": "Linux man-pages：信号递送、待决与中断",
+      "url": "https://man7.org/linux/man-pages/man7/signal.7.html"
+    },
+    {
+      "title": "Linux man-pages：异步信号安全",
+      "url": "https://man7.org/linux/man-pages/man7/signal-safety.7.html"
+    },
+    {
+      "title": "Linux man-pages：同步接收信号",
+      "url": "https://man7.org/linux/man-pages/man3/sigwait.3.html"
+    },
+    {
+      "title": "Linux man-pages：管道与 EOF/写入边界",
+      "url": "https://man7.org/linux/man-pages/man7/pipe.7.html"
+    },
+    {
+      "title": "Linux man-pages：Unix 域 socket",
+      "url": "https://man7.org/linux/man-pages/man7/unix.7.html"
+    },
+    {
+      "title": "Linux man-pages：POSIX 共享内存",
+      "url": "https://man7.org/linux/man-pages/man7/shm_overview.7.html"
+    },
+    {
+      "title": "C++20 公开草案 N4861：固定版本原子库源文件",
+      "url": "https://github.com/cplusplus/draft/blob/n4861/source/atomics.tex"
+    }
+  ],
+  "networking": [
+    {
+      "title": "RFC 9110：HTTP 语义",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+    },
+    {
+      "title": "MDN：HTTP 概览",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+    },
+    {
+      "title": "RFC 9293：TCP 接收窗口与零窗探测",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+    },
+    {
+      "title": "RFC 5681：TCP 拥塞控制",
+      "url": "https://www.rfc-editor.org/rfc/rfc5681.html"
+    },
+    {
+      "title": "RFC 6298：重传计时器",
+      "url": "https://www.rfc-editor.org/rfc/rfc6298.html"
+    },
+    {
+      "title": "RFC 4632：CIDR 前缀与最长匹配",
+      "url": "https://www.rfc-editor.org/rfc/rfc4632.html"
+    },
+    {
+      "title": "RFC 1812：IPv4 路由器与逐跳转发",
+      "url": "https://www.rfc-editor.org/rfc/rfc1812.html"
+    },
+    {
+      "title": "RFC 4861 与 IPv6 邻居发现",
+      "url": "https://www.rfc-editor.org/rfc/rfc4861.html"
+    },
+    {
+      "title": "RFC 5942：IPv6 地址前缀与 on-link 的区别",
+      "url": "https://www.rfc-editor.org/rfc/rfc5942.html"
+    },
+    {
+      "title": "RFC 3022：传统 NAT 与地址端口转换",
+      "url": "https://www.rfc-editor.org/rfc/rfc3022.html"
+    },
+    {
+      "title": "RFC 9110：HTTP 代理、网关与隧道",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-3.7"
+    },
+    {
+      "title": "RFC 7239：Forwarded 来源链与完整性",
+      "url": "https://www.rfc-editor.org/rfc/rfc7239.html"
+    },
+    {
+      "title": "HAProxy 3.2：TCP/HTTP 模式及服务器状态",
+      "url": "https://docs.haproxy.org/3.2/configuration.html"
+    },
+    {
+      "title": "NGINX：HTTP 负载分配与会话保持",
+      "url": "https://nginx.org/en/docs/http/load_balancing.html"
+    },
+    {
+      "title": "RFC 8446：TLS 1.3 证书认证、客户端证书请求与恢复边界",
+      "url": "https://www.rfc-editor.org/rfc/rfc8446.html"
+    },
+    {
+      "title": "RFC 9111: HTTP Caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+    },
+    {
+      "title": "CloudFront cache keys",
+      "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html"
+    },
+    {
+      "title": "CloudFront cache policy settings",
+      "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cache-key-understand-cache-policy.html"
+    },
+    {
+      "title": "CloudFront invalidation and versioning",
+      "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html"
+    },
+    {
+      "title": "CloudFront origin access restriction",
+      "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html"
+    },
+    {
+      "title": "AWS WAF oversize components",
+      "url": "https://docs.aws.amazon.com/waf/latest/developerguide/waf-oversize-request-components.html"
+    },
+    {
+      "title": "RFC 768: User Datagram Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc768.html"
+    },
+    {
+      "title": "RFC 8085: UDP Usage Guidelines",
+      "url": "https://www.rfc-editor.org/rfc/rfc8085.html"
+    },
+    {
+      "title": "RFC 9000: QUIC v1",
+      "url": "https://www.rfc-editor.org/rfc/rfc9000.html"
+    },
+    {
+      "title": "RFC 9001: Using TLS to Secure QUIC",
+      "url": "https://www.rfc-editor.org/rfc/rfc9001.html"
+    },
+    {
+      "title": "RFC 9002: QUIC Loss Detection and Congestion Control",
+      "url": "https://www.rfc-editor.org/rfc/rfc9002.html"
+    },
+    {
+      "title": "RFC 9114: HTTP/3",
+      "url": "https://www.rfc-editor.org/rfc/rfc9114.html"
+    },
+    {
+      "title": "RFC 9221: QUIC DATAGRAM extension",
+      "url": "https://www.rfc-editor.org/rfc/rfc9221.html"
+    },
+    {
+      "title": "RFC 4291: IPv6 Addressing Architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc4291.html"
+    },
+    {
+      "title": "RFC 4007: IPv6 Scoped Address Architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc4007.html"
+    },
+    {
+      "title": "RFC 4862: IPv6 Stateless Address Autoconfiguration",
+      "url": "https://www.rfc-editor.org/rfc/rfc4862.html"
+    },
+    {
+      "title": "RFC 8415: DHCP for IPv6",
+      "url": "https://www.rfc-editor.org/rfc/rfc8415.html"
+    },
+    {
+      "title": "RFC 8201: IPv6 Path MTU Discovery",
+      "url": "https://www.rfc-editor.org/rfc/rfc8201.html"
+    },
+    {
+      "title": "RFC 3849: IPv6 Address Prefix Reserved for Documentation",
+      "url": "https://www.rfc-editor.org/rfc/rfc3849.html"
+    },
+    {
+      "title": "Linux ip-rule：策略查询与优先级",
+      "url": "https://man7.org/linux/man-pages/man8/ip-rule.8.html"
+    },
+    {
+      "title": "RFC 4271：BGP 路由信息与本地选择",
+      "url": "https://www.rfc-editor.org/rfc/rfc4271.html"
+    },
+    {
+      "title": "RFC 8899：数据报分组化层 MTU 发现",
+      "url": "https://www.rfc-editor.org/rfc/rfc8899.html"
+    },
+    {
+      "title": "RFC 9438：CUBIC",
+      "url": "https://www.rfc-editor.org/rfc/rfc9438.html"
+    },
+    {
+      "title": "RFC 7567：主动队列管理",
+      "url": "https://www.rfc-editor.org/rfc/rfc7567.html"
+    },
+    {
+      "title": "RFC 6724：IPv6 默认地址选择",
+      "url": "https://www.rfc-editor.org/rfc/rfc6724.html"
+    },
+    {
+      "title": "RFC 8981：IPv6 临时地址",
+      "url": "https://www.rfc-editor.org/rfc/rfc8981.html"
+    },
+    {
+      "title": "RFC 7113：RA Guard 实现建议",
+      "url": "https://www.rfc-editor.org/rfc/rfc7113.html"
+    }
+  ],
+  "algorithms": [
+    {
+      "title": "Open Data Structures：数据结构与分析",
+      "url": "https://opendatastructures.org/"
+    },
+    {
+      "title": "MIT 6.006 Spring 2020 Lecture 3: Sorting",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/6d1ae5278d02bbecb5c4428928b24194_MIT6_006S20_lec3.pdf"
+    },
+    {
+      "title": "Jeff Erickson Algorithms: Recursion",
+      "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/01-recursion.pdf"
+    },
+    {
+      "title": "Jeff Erickson Algorithms: Backtracking",
+      "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/02-backtracking.pdf"
+    },
+    {
+      "title": "Stanford CS106B Spring 2020: Backtracking 1",
+      "url": "https://web.stanford.edu/class/archive/cs/cs106b/cs106b.1206/lectures/backtracking1/"
+    },
+    {
+      "title": "Stanford EE364b: Branch and Bound Methods",
+      "url": "https://web.stanford.edu/class/ee364b/lectures/bb_slides.pdf"
+    },
+    {
+      "title": "Misra: Knuth-Morris-Pratt Algorithm (2017-06-05)",
+      "url": "https://www.cs.utexas.edu/~misra/Notes.dir/KMP.pdf"
+    },
+    {
+      "title": "algs4 authors: KMP.java (master snapshot)",
+      "url": "https://raw.githubusercontent.com/kevin-wayne/algs4/master/src/main/java/edu/princeton/cs/algs4/KMP.java"
+    },
+    {
+      "title": "algs4 authors: RabinKarp.java (master snapshot)",
+      "url": "https://raw.githubusercontent.com/kevin-wayne/algs4/master/src/main/java/edu/princeton/cs/algs4/RabinKarp.java"
+    },
+    {
+      "title": "Unicode 17.0.0 Core Specification, Chapter 3",
+      "url": "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/"
+    },
+    {
+      "title": "Unicode 17.0.0 UAX #15 rev57",
+      "url": "https://www.unicode.org/reports/tr15/tr15-57.html"
+    },
+    {
+      "title": "Unicode 17.0.0 UAX #29 rev47",
+      "url": "https://www.unicode.org/reports/tr29/tr29-47.html"
+    },
+    {
+      "title": "Unicode 17.0.0 CaseFolding data",
+      "url": "https://www.unicode.org/Public/17.0.0/ucd/CaseFolding.txt"
+    }
+  ],
+  "runtime": [
+    {
+      "title": "MDN：JavaScript 语言机制",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"
+    }
+  ],
+  "frontend": [
+    {
+      "title": "web.dev：Core Web Vitals",
+      "url": "https://web.dev/articles/vitals"
+    },
+    {
+      "title": "React：组件状态保留与重置",
+      "url": "https://react.dev/learn/preserving-and-resetting-state"
+    },
+    {
+      "title": "Vue：列表状态与key",
+      "url": "https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key"
+    },
+    {
+      "title": "WHATWG：浏览器WebSocket",
+      "url": "https://websockets.spec.whatwg.org/"
+    },
+    {
+      "title": "HTML：服务器发送事件与恢复标识",
+      "url": "https://html.spec.whatwg.org/multipage/server-sent-events.html"
+    },
+    {
+      "title": "Service Workers：2026-09-17候选推荐草案",
+      "url": "https://www.w3.org/TR/2026/CRD-service-workers-20260917/"
+    },
+    {
+      "title": "Next.js：未启用Cache Components的ISR",
+      "url": "https://nextjs.org/docs/app/guides/incremental-static-regeneration"
+    },
+    {
+      "title": "Sam Newman 的 BFF 模式",
+      "url": "https://samnewman.io/patterns/architectural/bff/"
+    },
+    {
+      "title": "Azure BFF",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends"
+    },
+    {
+      "title": "Azure Gateway Aggregation",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation"
+    }
+  ],
+  "api": [
+    {
+      "title": "RFC 9110：HTTP 方法、状态码与条件请求",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+    },
+    {
+      "title": "GitHub：Webhook 验签",
+      "url": "https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries"
+    },
+    {
+      "title": "Stripe：Webhook 签名、重投与事件处理",
+      "url": "https://docs.stripe.com/webhooks"
+    },
+    {
+      "title": "RFC 9421：HTTP 消息签名",
+      "url": "https://www.rfc-editor.org/rfc/rfc9421.html"
+    },
+    {
+      "title": "Fielding Dissertation, Chapter 5: Representational State Transfer (REST)",
+      "url": "https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm"
+    },
+    {
+      "title": "gRPC Core concepts, architecture and lifecycle",
+      "url": "https://grpc.io/docs/what-is-grpc/core-concepts/"
+    },
+    {
+      "title": "GraphQL September 2025 Edition",
+      "url": "https://spec.graphql.org/September2025/"
+    },
+    {
+      "title": "GraphQL Authorization",
+      "url": "https://graphql.org/learn/authorization/"
+    },
+    {
+      "title": "Envoy Router",
+      "url": "https://www.envoyproxy.io/docs/envoy/v1.35.0/configuration/http/http_filters/router_filter"
+    },
+    {
+      "title": "AIP-121",
+      "url": "https://google.aip.dev/121"
+    },
+    {
+      "title": "AIP-151",
+      "url": "https://google.aip.dev/151"
+    },
+    {
+      "title": "OWASP Input Validation",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+    },
+    {
+      "title": "OWASP Mass Assignment",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html"
+    },
+    {
+      "title": "普通 Pod 终止流程",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination"
+    },
+    {
+      "title": "GOAWAY，RFC 9113 §6.8",
+      "url": "https://www.rfc-editor.org/rfc/rfc9113.html#section-6.8"
+    },
+    {
+      "title": "gRPC 的优雅关闭",
+      "url": "https://grpc.io/docs/guides/server-graceful-stop/"
+    }
+  ],
+  "architecture": [
+    {
+      "title": "Martin Fowler：架构与设计资料",
+      "url": "https://martinfowler.com/architecture/"
+    },
+    {
+      "title": "Fowler：重构定义与方法",
+      "url": "https://refactoring.com/"
+    },
+    {
+      "title": "Fowler：技术债象限",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html"
+    },
+    {
+      "title": "Lewis/Fowler：微服务风格",
+      "url": "https://martinfowler.com/articles/microservices.html"
+    },
+    {
+      "title": "Robert C. Martin：SOLID Relevance",
+      "url": "https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html"
+    },
+    {
+      "title": "Liskov/Wing：行为子类型原论文",
+      "url": "https://www.cs.cmu.edu/~wing/publications/LiskovWing94.pdf"
+    },
+    {
+      "title": "GoF原书：Adapter节选",
+      "url": "https://www.informit.com/articles/article.aspx?p=1398600"
+    },
+    {
+      "title": "Fowler：Strangler Fig",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html"
+    },
+    {
+      "title": "CMU：软件架构与质量场景",
+      "url": "https://www.cs.cmu.edu/~schmerl/courses/15-413/02-software-architecture.pdf"
+    },
+    {
+      "title": "SEI：ATAM原报告",
+      "url": "https://sei.cmu.edu/documents/629/2000_005_001_13706.pdf"
+    },
+    {
+      "title": "Nygard：Documenting Architecture Decisions",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
+    }
+  ],
+  "security": [
+    {
+      "title": "OWASP Cheat Sheet Series：Web 安全边界与防护",
+      "url": "https://cheatsheetseries.owasp.org/"
+    },
+    {
+      "title": "OWASP：密码存储与 pepper",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+    },
+    {
+      "title": "OWASP：忘记密码与重置流程",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
+    },
+    {
+      "title": "NIST SP 800-63B-4：认证器事件与账号恢复",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b/events/"
+    },
+    {
+      "title": "RFC 2104：共享密钥消息认证",
+      "url": "https://www.rfc-editor.org/rfc/rfc2104.html"
+    },
+    {
+      "title": "OWASP：XSS 上下文编码与 HTML 净化",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "title": "W3C：Trusted Types 机制与策略边界",
+      "url": "https://www.w3.org/TR/trusted-types/"
+    },
+    {
+      "title": "OWASP：SSRF 目的地与网络出口防护",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "title": "OWASP：SQL 注入、参数化与允许映射",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "title": "Psycopg3：值参数与查询结构",
+      "url": "https://www.psycopg.org/psycopg3/docs/basic/params.html"
+    },
+    {
+      "title": "PostgreSQL18：动态 SQL 与 USING",
+      "url": "https://www.postgresql.org/docs/18/plpgsql-statements.html#PLPGSQL-STATEMENTS-EXECUTING-DYN"
+    },
+    {
+      "title": "OWASP：Secrets Management Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+    },
+    {
+      "title": "NIST SP 800-57 Part 1 Rev. 5：Key Management",
+      "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final"
+    },
+    {
+      "title": "AWS Encryption SDK：Envelope Encryption Concepts",
+      "url": "https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/concepts.html"
+    },
+    {
+      "title": "AWS KMS：Rotate Keys",
+      "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html"
+    },
+    {
+      "title": "Vault：Database Secrets Engine",
+      "url": "https://developer.hashicorp.com/vault/docs/secrets/databases"
+    },
+    {
+      "title": "AWS IAM：Temporary Security Credentials",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html"
+    },
+    {
+      "title": "RFC 5280：证书路径、用途约束与撤销",
+      "url": "https://www.rfc-editor.org/rfc/rfc5280.html"
+    },
+    {
+      "title": "RFC 9525：TLS 服务端参考身份与名称匹配",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9525"
+    },
+    {
+      "title": "RFC 8705：OAuth mTLS 客户端认证与证书绑定令牌",
+      "url": "https://www.rfc-editor.org/rfc/rfc8705.html"
+    },
+    {
+      "title": "RFC 9440：Client-Cert 转发字段与代理可信路径",
+      "url": "https://www.rfc-editor.org/rfc/rfc9440.html"
+    },
+    {
+      "title": "SPIFFE Identity：身份命名空间、信任域与 SVID",
+      "url": "https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md"
+    },
+    {
+      "title": "SPIFFE X.509-SVID：URI SAN、约束与验证",
+      "url": "https://github.com/spiffe/spiffe/blob/main/standards/X509-SVID.md"
+    },
+    {
+      "title": "SPIFFE Workload API：调用方识别、信任材料与流式更新",
+      "url": "https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE_Workload_API.md"
+    },
+    {
+      "title": "NIST RBAC archived project",
+      "url": "https://csrc.nist.gov/Projects/Role-Based-Access-Control"
+    },
+    {
+      "title": "NIST SP 800-162: Guide to ABAC",
+      "url": "https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-162.pdf"
+    },
+    {
+      "title": "OpenFGA Authorization Concepts",
+      "url": "https://openfga.dev/docs/authorization-concepts"
+    },
+    {
+      "title": "OPA Philosophy",
+      "url": "https://www.openpolicyagent.org/docs/philosophy"
+    },
+    {
+      "title": "OPA Bundles",
+      "url": "https://www.openpolicyagent.org/docs/management-bundles"
+    },
+    {
+      "title": "OWASP Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    },
+    {
+      "title": "OWASP Authorization Policy and Data Distribution",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Policy_And_Data_Distribution_Cheat_Sheet.html"
+    },
+    {
+      "title": "Zanzibar: Google’s Consistent, Global Authorization System",
+      "url": "https://www.usenix.org/system/files/atc19-pang.pdf"
+    },
+    {
+      "title": "NIST SP 800-63B-4",
+      "url": "https://pages.nist.gov/800-63-4/sp800-63b.html"
+    },
+    {
+      "title": "RFC 6238: TOTP",
+      "url": "https://www.rfc-editor.org/rfc/rfc6238.html"
+    },
+    {
+      "title": "WebAuthn Level 2 Recommendation, 2021-04-08",
+      "url": "https://www.w3.org/TR/2021/REC-webauthn-2-20210408/"
+    },
+    {
+      "title": "FIDO Alliance Passkeys",
+      "url": "https://fidoalliance.org/passkeys/"
+    },
+    {
+      "title": "OWASP Multifactor Authentication",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html"
+    },
+    {
+      "title": "OWASP Session Management",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+    },
+    {
+      "title": "RFC 6749: OAuth2 Client Credentials",
+      "url": "https://www.rfc-editor.org/rfc/rfc6749.html"
+    },
+    {
+      "title": "RFC 8693: Token Exchange",
+      "url": "https://www.rfc-editor.org/rfc/rfc8693.html"
+    },
+    {
+      "title": "RFC 8707: Resource Indicators",
+      "url": "https://www.rfc-editor.org/rfc/rfc8707.html"
+    },
+    {
+      "title": "RFC 9068: JWT Access Token Profile",
+      "url": "https://www.rfc-editor.org/rfc/rfc9068.html"
+    },
+    {
+      "title": "RFC 9700: OAuth Security BCP",
+      "url": "https://www.rfc-editor.org/rfc/rfc9700.html"
+    },
+    {
+      "title": "RFC 9449: OAuth DPoP",
+      "url": "https://www.rfc-editor.org/rfc/rfc9449.html"
+    },
+    {
+      "title": "OpenID Connect Core 1.0 errata set 2",
+      "url": "https://openid.net/specs/openid-connect-core-1_0.html"
+    },
+    {
+      "title": "NIST SP 800-207",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf"
+    },
+    {
+      "title": "OWASP Threat Modeling",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html"
+    }
+  ],
+  "database": [
+    {
+      "title": "PostgreSQL：并发控制",
+      "url": "https://www.postgresql.org/docs/18/mvcc.html"
+    },
+    {
+      "title": "PostgreSQL：备份与恢复",
+      "url": "https://www.postgresql.org/docs/18/backup.html"
+    },
+    {
+      "title": "PostgreSQL18：PREPARE 与通用/定制计划",
+      "url": "https://www.postgresql.org/docs/18/sql-prepare.html"
+    },
+    {
+      "title": "Database System Concepts 第7版：函数依赖、键与规范化",
+      "url": "https://www.db-book.com/slides-dir/PDF-dir/ch7.pdf"
+    },
+    {
+      "title": "PostgreSQL18：主键、唯一约束、外键与检查范围",
+      "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+    },
+    {
+      "title": "MongoDB8.0：嵌入、引用与重复数据含义",
+      "url": "https://www.mongodb.com/docs/v8.0/data-modeling/best-practices/"
+    },
+    {
+      "title": "DynamoDB：先列访问模式再设计键",
+      "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-modeling-nosql.html"
+    },
+    {
+      "title": "DuckDB2.0：工作负载与执行目标",
+      "url": "https://duckdb.org/docs/2.0/guides/performance/how_to_tune_workloads"
+    },
+    {
+      "title": "PostgreSQL 18：Table Partitioning",
+      "url": "https://www.postgresql.org/docs/18/ddl-partitioning.html"
+    },
+    {
+      "title": "MongoDB 8.0：Choose a Shard Key",
+      "url": "https://www.mongodb.com/docs/v8.0/core/sharding-choose-a-shard-key/"
+    },
+    {
+      "title": "MongoDB 8.0：Routing with mongos",
+      "url": "https://www.mongodb.com/docs/v8.0/core/sharded-cluster-query-router/"
+    },
+    {
+      "title": "MongoDB 8.0：Shard Keys and Unique Indexes",
+      "url": "https://www.mongodb.com/docs/v8.0/core/sharding-shard-key/"
+    },
+    {
+      "title": "MongoDB 8.0：Transactions",
+      "url": "https://www.mongodb.com/docs/v8.0/core/transactions/"
+    },
+    {
+      "title": "MongoDB 8.0：Sharded Cluster Balancer",
+      "url": "https://www.mongodb.com/docs/v8.0/core/sharding-balancer-administration/"
+    },
+    {
+      "title": "PostgreSQL18：Logical Decoding Concepts",
+      "url": "https://www.postgresql.org/docs/18/logicaldecoding-explanation.html"
+    },
+    {
+      "title": "PostgreSQL18：Streaming Replication Protocol",
+      "url": "https://www.postgresql.org/docs/18/protocol-replication.html"
+    },
+    {
+      "title": "PostgreSQL18：SET TRANSACTION SNAPSHOT",
+      "url": "https://www.postgresql.org/docs/18/sql-set-transaction.html"
+    },
+    {
+      "title": "PostgreSQL18：Logical Decoding Output Plugins",
+      "url": "https://www.postgresql.org/docs/18/logicaldecoding-output-plugin.html"
+    },
+    {
+      "title": "PostgreSQL18：Logical Replication Restrictions",
+      "url": "https://www.postgresql.org/docs/18/logical-replication-restrictions.html"
+    },
+    {
+      "title": "PostgreSQL18：pg_replication_slots",
+      "url": "https://www.postgresql.org/docs/18/view-pg-replication-slots.html"
+    },
+    {
+      "title": "Debezium3.3 PostgreSQL：快照、事件、事务与恢复",
+      "url": "https://debezium.io/documentation/reference/3.3/connectors/postgresql.html"
+    },
+    {
+      "title": "Jepsen 的线性一致性定义",
+      "url": "https://jepsen.io/consistency/models/linearizable"
+    },
+    {
+      "title": "PostgreSQL 18 复制文档",
+      "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+    },
+    {
+      "title": "DynamoDB 读取一致性说明",
+      "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+    },
+    {
+      "title": "PostgreSQL18 Hot Standby",
+      "url": "https://www.postgresql.org/docs/18/hot-standby.html"
+    }
+  ],
+  "cache-search": [
+    {
+      "title": "Redis：数据结构",
+      "url": "https://redis.io/docs/latest/develop/data-types/"
+    },
+    {
+      "title": "Introduction to Information Retrieval：倒排索引与检索",
+      "url": "https://nlp.stanford.edu/IR-book/"
+    },
+    {
+      "title": "PostgreSQL 18：逻辑解码、快照与变更流",
+      "url": "https://www.postgresql.org/docs/18/logicaldecoding-explanation.html"
+    },
+    {
+      "title": "Elasticsearch：Reindex 复制范围",
+      "url": "https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex"
+    },
+    {
+      "title": "Elasticsearch：别名与多动作结果",
+      "url": "https://www.elastic.co/docs/manage-data/data-store/aliases"
+    },
+    {
+      "title": "Go singleflight package documentation",
+      "url": "https://pkg.go.dev/golang.org/x/sync/singleflight"
+    },
+    {
+      "title": "RFC 9111: HTTP Caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+    },
+    {
+      "title": "AWS Caching challenges and strategies",
+      "url": "https://aws.amazon.com/builders-library/caching-challenges-and-strategies/"
+    },
+    {
+      "title": "Cloudflare Sometimes I cache: implementing lock-free probabilistic caching",
+      "url": "https://blog.cloudflare.com/sometimes-i-cache/"
+    },
+    {
+      "title": "Hazelcast 5.6: Building a Cache with MapStore",
+      "url": "https://docs.hazelcast.com/hazelcast/5.6/mapstore/working-with-external-data"
+    },
+    {
+      "title": "Hazelcast 5.6: Configuring a MapStore",
+      "url": "https://docs.hazelcast.com/hazelcast/5.6/mapstore/configuration-guide"
+    },
+    {
+      "title": "Hazelcast 5.6: Implementing a Custom MapStore",
+      "url": "https://docs.hazelcast.com/hazelcast/5.6/mapstore/implement-a-mapstore"
+    },
+    {
+      "title": "Ehcache 3.11: Cache Usage Patterns",
+      "url": "https://www.ehcache.org/documentation/3.11/caching-patterns.html"
+    },
+    {
+      "title": "Ehcache 3.11: Cache Loaders and Writers",
+      "url": "https://www.ehcache.org/documentation/3.11/writers.html"
+    },
+    {
+      "title": "Redis ZRANGE",
+      "url": "https://redis.io/docs/latest/commands/zrange/"
+    },
+    {
+      "title": "Redis HGETALL",
+      "url": "https://redis.io/docs/latest/commands/hgetall/"
+    },
+    {
+      "title": "Redis Transactions",
+      "url": "https://redis.io/docs/latest/develop/using-commands/transactions/"
+    },
+    {
+      "title": "Redis Lua scripting",
+      "url": "https://redis.io/docs/latest/develop/programmability/eval-intro/"
+    },
+    {
+      "title": "Redis EXPIRE",
+      "url": "https://redis.io/docs/latest/commands/expire/"
+    },
+    {
+      "title": "Redis HEXPIRE",
+      "url": "https://redis.io/docs/latest/commands/hexpire/"
+    },
+    {
+      "title": "Redis Cluster specification",
+      "url": "https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/"
+    },
+    {
+      "title": "Redis SCAN",
+      "url": "https://redis.io/docs/latest/commands/scan/"
+    },
+    {
+      "title": "Redis Persistence",
+      "url": "https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/"
+    },
+    {
+      "title": "Redis XACK",
+      "url": "https://redis.io/docs/latest/commands/xack/"
+    },
+    {
+      "title": "S3 object keys",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html"
+    },
+    {
+      "title": "S3 copying and moving objects",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/copy-object.html"
+    },
+    {
+      "title": "S3 consistency model",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+    },
+    {
+      "title": "S3 conditional writes",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-writes.html"
+    },
+    {
+      "title": "S3 upload integrity",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity-upload.html"
+    },
+    {
+      "title": "S3 multipart upload overview",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html"
+    },
+    {
+      "title": "S3 CompleteMultipartUpload API",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html"
+    },
+    {
+      "title": "S3 presigned URLs",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+    },
+    {
+      "title": "S3 Versioning",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+    },
+    {
+      "title": "etcd 3.6 并发 API",
+      "url": "https://etcd.io/docs/v3.6/dev-guide/api_concurrency_reference_v3/"
+    },
+    {
+      "title": "Kleppmann 对分布式锁的原始分析",
+      "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+    },
+    {
+      "title": "Chubby 原论文",
+      "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/4444.pdf"
+    },
+    {
+      "title": "Redis锁模式说明",
+      "url": "https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/"
+    }
+  ],
+  "messaging": [
+    {
+      "title": "Apache Kafka：分区、复制与投递设计",
+      "url": "https://kafka.apache.org/41/design/design/"
+    },
+    {
+      "title": "CloudEvents v1.0.2 specification",
+      "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md"
+    },
+    {
+      "title": "Apache Avro 1.12.0 Specification",
+      "url": "https://avro.apache.org/docs/1.12.0/specification/"
+    },
+    {
+      "title": "Protocol Buffers proto3 Language Guide",
+      "url": "https://protobuf.dev/programming-guides/proto3/"
+    },
+    {
+      "title": "Confluent Schema Evolution and Compatibility",
+      "url": "https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html"
+    },
+    {
+      "title": "Confluent SerDes and subject name strategy",
+      "url": "https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/index.html"
+    },
+    {
+      "title": "Axon Event Versioning",
+      "url": "https://docs.axoniq.io/axon-framework-reference/4.12/events/event-versioning/"
+    },
+    {
+      "title": "Debezium3.3 PostgreSQL：事件与事务元数据",
+      "url": "https://debezium.io/documentation/reference/3.3/connectors/postgresql.html"
+    },
+    {
+      "title": "RabbitMQ Work Queues",
+      "url": "https://www.rabbitmq.com/tutorials/tutorial-two-python"
+    },
+    {
+      "title": "Publish/Subscribe",
+      "url": "https://www.rabbitmq.com/tutorials/tutorial-three-python"
+    }
+  ],
+  "distributed": [
+    {
+      "title": "Raft：共识与复制日志",
+      "url": "https://raft.github.io/"
+    },
+    {
+      "title": "Jepsen：一致性模型",
+      "url": "https://jepsen.io/consistency"
+    },
+    {
+      "title": "Gray / Lamport：Consensus on Transaction Commit",
+      "url": "https://arxiv.org/pdf/cs/0408036"
+    },
+    {
+      "title": "Microsoft：Saga 分布式事务模式",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga"
+    },
+    {
+      "title": "Microsoft：补偿事务模式",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction"
+    },
+    {
+      "title": "Lamport：Time, Clocks, and the Ordering of Events in a Distributed System",
+      "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/Time-Clocks-and-the-Ordering-of-Events-in-a-Distributed-System.pdf"
+    },
+    {
+      "title": "Mattern：On the Relativistic Structure of Logical Time in Distributed Systems",
+      "url": "https://vs.inf.ethz.ch/publ/papers/relativistic_time.pdf"
+    },
+    {
+      "title": "Karger 等：Consistent Hashing and Random Trees",
+      "url": "https://people.csail.mit.edu/karger/Papers/web.pdf"
+    },
+    {
+      "title": "Dynamo：Amazon's Highly Available Key-value Store",
+      "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+    },
+    {
+      "title": "Apache Cassandra：Dynamo 架构与放置策略",
+      "url": "https://cassandra.apache.org/doc/latest/cassandra/architecture/dynamo.html"
+    },
+    {
+      "title": "Gilbert/Lynch：CAP 形式定义、定理与证明（2002，作者副本）",
+      "url": "https://www.comp.nus.edu.sg/~gilbert/pubs/BrewersConjecture-SigAct.pdf"
+    },
+    {
+      "title": "Abadi：Consistency Tradeoffs 与 PACELC（2012，作者副本）",
+      "url": "https://cs.umd.edu/~abadi/papers/abadi-pacelc.pdf"
+    },
+    {
+      "title": "Herlihy/Wing：线性一致性的历史定义与其他条件比较（1990）",
+      "url": "https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf"
+    },
+    {
+      "title": "Attiya：ABD 原作者解释读回写与先新后旧（2010）",
+      "url": "https://hagit.net.technion.ac.il/files/2015/09/EATCScolumn.pdf"
+    },
+    {
+      "title": "RFC9562：Universally Unique IDentifiers",
+      "url": "https://www.rfc-editor.org/rfc/rfc9562.html"
+    },
+    {
+      "title": "ULID：作者规范",
+      "url": "https://github.com/ulid/spec"
+    },
+    {
+      "title": "Twitter Snowflake：snowflake-2010历史IdWorker实现",
+      "url": "https://github.com/twitter-archive/snowflake/blob/snowflake-2010/src/main/scala/com/twitter/service/snowflake/IdWorker.scala"
+    },
+    {
+      "title": "PostgreSQL18：Sequence Manipulation Functions",
+      "url": "https://www.postgresql.org/docs/18/functions-sequence.html"
+    },
+    {
+      "title": "Python3.13：secrets安全随机源",
+      "url": "https://docs.python.org/3.13/library/secrets.html"
+    },
+    {
+      "title": "Ongaro、Ousterhout：Raft Extended Version（2014-05-20）",
+      "url": "https://raft.github.io/raft.pdf"
+    },
+    {
+      "title": "etcd-io/raft v3.6.0：配置生效、持久化与节点身份",
+      "url": "https://github.com/etcd-io/raft/blob/v3.6.0/README.md"
+    },
+    {
+      "title": "etcd v3.6：Runtime reconfiguration",
+      "url": "https://etcd.io/docs/v3.6/op-guide/runtime-configuration/"
+    },
+    {
+      "title": "etcd v3.6：Learner design",
+      "url": "https://etcd.io/docs/v3.6/learning/design-learner/"
+    },
+    {
+      "title": "etcd v3.6：Failure modes",
+      "url": "https://etcd.io/docs/v3.6/op-guide/failures/"
+    },
+    {
+      "title": "etcd v3.6：API guarantees",
+      "url": "https://etcd.io/docs/v3.6/learning/api_guarantees/"
+    },
+    {
+      "title": "etcd v3.6：Disaster recovery",
+      "url": "https://etcd.io/docs/v3.6/op-guide/recovery/"
+    },
+    {
+      "title": "Kulkarni等：Logical Physical Clocks 技术报告2014-04",
+      "url": "https://cse.buffalo.edu/tech-reports/2014-04.pdf"
+    },
+    {
+      "title": "CockroachDB stable：HLC、时钟偏差与Closed timestamps",
+      "url": "https://www.cockroachlabs.com/docs/stable/architecture/transaction-layer.html"
+    },
+    {
+      "title": "Preguiça/Baquero/Shapiro：Conflict-free Replicated Data Types（2018）",
+      "url": "https://arxiv.org/pdf/1805.06358"
+    },
+    {
+      "title": "Bieniusa等：An Optimized Conflict-free Replicated Set（2012）",
+      "url": "https://arxiv.org/pdf/1210.3368"
+    },
+    {
+      "title": "Akka Distributed Data：类型、持久化与清理边界",
+      "url": "https://doc.akka.io/libraries/akka-core/current/typed/distributed-data.html"
+    },
+    {
+      "title": "Jepsen 的线性一致性定义",
+      "url": "https://jepsen.io/consistency/models/linearizable"
+    },
+    {
+      "title": "PostgreSQL 18 复制文档",
+      "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+    },
+    {
+      "title": "DynamoDB 读取一致性说明",
+      "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+    },
+    {
+      "title": "PostgreSQL18 Hot Standby",
+      "url": "https://www.postgresql.org/docs/18/hot-standby.html"
+    },
+    {
+      "title": "etcd 3.6 并发 API",
+      "url": "https://etcd.io/docs/v3.6/dev-guide/api_concurrency_reference_v3/"
+    },
+    {
+      "title": "Kleppmann 对分布式锁的原始分析",
+      "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+    },
+    {
+      "title": "Chubby 原论文",
+      "url": "https://storage.googleapis.com/gweb-research2023-media/pubtools/4444.pdf"
+    },
+    {
+      "title": "Redis锁模式说明",
+      "url": "https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/"
+    }
+  ],
+  "performance": [
+    {
+      "title": "Google SRE：容量、过载与性能工程",
+      "url": "https://sre.google/sre-book/table-of-contents/"
+    },
+    {
+      "title": "Redis pipelining",
+      "url": "https://redis.io/docs/latest/develop/using-commands/pipelining/"
+    },
+    {
+      "title": "PostgreSQL 18 pipeline mode",
+      "url": "https://www.postgresql.org/docs/18/libpq-pipeline-mode.html"
+    },
+    {
+      "title": "Google SRE Handling Overload",
+      "url": "https://sre.google/sre-book/handling-overload/"
+    },
+    {
+      "title": "USE Method",
+      "url": "https://www.brendangregg.com/usemethod.html"
+    },
+    {
+      "title": "Linux lockstat",
+      "url": "https://docs.kernel.org/locking/lockstat.html"
+    },
+    {
+      "title": "Linux False Sharing",
+      "url": "https://docs.kernel.org/kernel-hacking/false-sharing.html"
+    },
+    {
+      "title": "Kubernetes v1.36 HPA",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/"
+    },
+    {
+      "title": "Pod 生命周期",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/"
+    }
+  ],
+  "devops": [
+    {
+      "title": "Kubernetes：工作负载、网络与控制器概念",
+      "url": "https://kubernetes.io/docs/concepts/"
+    },
+    {
+      "title": "OpenFeature：开关评价与默认值",
+      "url": "https://openfeature.dev/specification/sections/flag-evaluation/"
+    },
+    {
+      "title": "HashiCorp：Terraform 状态与绑定",
+      "url": "https://developer.hashicorp.com/terraform/language/state"
+    },
+    {
+      "title": "Kubernetes v1.36 DNS",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/services-networking/dns-pod-service/"
+    },
+    {
+      "title": "Service",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/services-networking/service/"
+    },
+    {
+      "title": "Gateway API Overview",
+      "url": "https://gateway-api.sigs.k8s.io/docs/concepts/api-overview/"
+    },
+    {
+      "title": "Gateway API Security",
+      "url": "https://gateway-api.sigs.k8s.io/docs/concepts/security/"
+    },
+    {
+      "title": "Amazon VPC",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+    },
+    {
+      "title": "路由表",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html"
+    },
+    {
+      "title": "安全组",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+    },
+    {
+      "title": "网络 ACL",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+    },
+    {
+      "title": "SLSA v1.2 Build 验证",
+      "url": "https://slsa.dev/spec/v1.2/verifying-artifacts"
+    },
+    {
+      "title": "Sigstore 验签说明",
+      "url": "https://docs.sigstore.dev/cosign/verifying/verify/"
+    },
+    {
+      "title": "SLSA 的 provenance 定义",
+      "url": "https://slsa.dev/spec/v1.2/provenance"
+    },
+    {
+      "title": "Kubernetes v1.36 Deployment",
+      "url": "https://v1-36.docs.kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+    },
+    {
+      "title": "Argo Rollouts 金丝雀说明",
+      "url": "https://argo-rollouts.readthedocs.io/en/stable/features/canary/"
+    },
+    {
+      "title": "AWS：子网与路由分类",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html"
+    }
+  ],
+  "reliability": [
+    {
+      "title": "Google SRE：服务目标与故障管理",
+      "url": "https://sre.google/sre-book/table-of-contents/"
+    },
+    {
+      "title": "OpenTelemetry：遥测信号",
+      "url": "https://opentelemetry.io/docs/concepts/signals/"
+    },
+    {
+      "title": "Google SRE：事故管理",
+      "url": "https://sre.google/sre-book/managing-incidents/"
+    },
+    {
+      "title": "Google SRE：无责复盘",
+      "url": "https://sre.google/sre-book/postmortem-culture/"
+    },
+    {
+      "title": "Grafana 对 Tom Wilkie RED 方法的介绍",
+      "url": "https://grafana.com/blog/the-red-method-how-to-instrument-your-services/"
+    },
+    {
+      "title": "Brendan Gregg 的 USE",
+      "url": "https://www.brendangregg.com/usemethod.html"
+    },
+    {
+      "title": "Prometheus 的直方图与摘要说明",
+      "url": "https://prometheus.io/docs/practices/histograms/"
+    },
+    {
+      "title": "NIST reliability 词条",
+      "url": "https://csrc.nist.gov/glossary/term/reliability"
+    },
+    {
+      "title": "Google SRE Embracing Risk",
+      "url": "https://sre.google/sre-book/embracing-risk/"
+    },
+    {
+      "title": "NIST 的 survival function",
+      "url": "https://www.itl.nist.gov/div898/handbook/apr/section1/apr122.htm"
+    },
+    {
+      "title": "Principles of Chaos Engineering",
+      "url": "https://principlesofchaos.org/"
+    },
+    {
+      "title": "AWS FIS stop conditions",
+      "url": "https://docs.aws.amazon.com/fis/latest/userguide/stop-conditions.html"
+    },
+    {
+      "title": "Google SRE Testing for Reliability",
+      "url": "https://sre.google/sre-book/testing-reliability/"
+    }
+  ],
+  "engineering": [
+    {
+      "title": "Hypothesis：性质与状态模型测试",
+      "url": "https://hypothesis.readthedocs.io/en/latest/"
+    },
+    {
+      "title": "Semantic Versioning 2.0.0：兼容性与版本",
+      "url": "https://semver.org/"
+    },
+    {
+      "title": "Google：代码评审标准",
+      "url": "https://google.github.io/eng-practices/review/reviewer/standard.html"
+    },
+    {
+      "title": "ESLint：规则与核心概念",
+      "url": "https://eslint.org/docs/latest/use/core-concepts/"
+    },
+    {
+      "title": "npm 11：锁文件",
+      "url": "https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json/"
+    },
+    {
+      "title": "CycloneDX：SBOM",
+      "url": "https://cyclonedx.org/capabilities/sbom/"
+    },
+    {
+      "title": "pytest：间歇失败与状态隔离",
+      "url": "https://docs.pytest.org/en/stable/explanation/flaky.html"
+    },
+    {
+      "title": "DORA：主干开发",
+      "url": "https://dora.dev/capabilities/trunk-based-development/"
+    },
+    {
+      "title": "Kent Beck 的 Canon TDD",
+      "url": "https://newsletter.kentbeck.com/p/canon-tdd"
+    },
+    {
+      "title": "Cucumber 的 BDD 说明",
+      "url": "https://cucumber.io/docs/bdd/"
+    },
+    {
+      "title": "Example Mapping",
+      "url": "https://cucumber.io/docs/bdd/example-mapping/"
+    },
+    {
+      "title": "The Practical Test Pyramid",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+    },
+    {
+      "title": "Coverage.py 7.11.0",
+      "url": "https://coverage.readthedocs.io/en/7.11.0/branch.html"
+    },
+    {
+      "title": "PIT 的机制说明",
+      "url": "https://pitest.org/"
+    },
+    {
+      "title": "Malte Ubl 的 Design Docs at Google",
+      "url": "https://www.industrialempathy.com/posts/design-docs-at-google/"
+    },
+    {
+      "title": "Rust RFC 流程",
+      "url": "https://rust-lang.github.io/rfcs/"
+    },
+    {
+      "title": "Nygard 的 ADR 方法",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
+    },
+    {
+      "title": "NASA 的需求管理说明",
+      "url": "https://www.nasa.gov/reference/6-2-requirements-management/"
+    },
+    {
+      "title": "NASA SWE-055",
+      "url": "https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695440/SWE-055%2B-%2BRequirements%2BValidation"
+    },
+    {
+      "title": "Cucumber 的可执行规格说明",
+      "url": "https://cucumber.io/docs/"
+    },
+    {
+      "title": "CNCF Platforms White Paper",
+      "url": "https://tag-app-delivery.cncf.io/whitepapers/platforms/"
+    },
+    {
+      "title": "Backstage Software Templates",
+      "url": "https://backstage.io/docs/features/software-templates/"
+    },
+    {
+      "title": "GitHub 的 DevEx 研究报告",
+      "url": "https://github.blog/news-insights/research/good-devex-increases-productivity/"
+    }
+  ],
+  "ai": [
+    {
+      "title": "Model Context Protocol：工具与上下文协议",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25"
+    },
+    {
+      "title": "Retrieval-Augmented Generation：原始论文",
+      "url": "https://arxiv.org/abs/2005.11401"
+    },
+    {
+      "title": "OpenAI Prompt engineering",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-engineering"
+    },
+    {
+      "title": "OWASP Prompt Injection Prevention",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "title": "OpenAI reasoning best practices",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning-best-practices"
+    },
+    {
+      "title": "Transformers生成工具",
+      "url": "https://huggingface.co/docs/transformers/main/en/internal/generation_utils"
+    },
+    {
+      "title": "Holtzman等人的原论文",
+      "url": "https://arxiv.org/abs/1904.09751"
+    },
+    {
+      "title": "PyTorch可复现性说明",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/randomness.html"
+    },
+    {
+      "title": "MCP Architecture",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/architecture"
+    },
+    {
+      "title": "Lifecycle",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle"
+    },
+    {
+      "title": "Tools",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+    },
+    {
+      "title": "Resources",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources"
+    },
+    {
+      "title": "Prompts",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/prompts"
+    },
+    {
+      "title": "Authorization",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization"
+    },
+    {
+      "title": "Transformers Fine-tuning",
+      "url": "https://huggingface.co/docs/transformers/main/en/training"
+    },
+    {
+      "title": "PEFT LoRA说明",
+      "url": "https://huggingface.co/docs/peft/main/en/conceptual_guides/lora"
+    },
+    {
+      "title": "Hinton、Vinyals与Dean原论文",
+      "url": "https://arxiv.org/pdf/1503.02531"
+    },
+    {
+      "title": "Kim与Rush的序列级蒸馏研究",
+      "url": "https://arxiv.org/abs/1606.07947"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "recorded_date": "2026-10-19",
+  "files": {
+    "examples/connection_lifecycle/lab.mjs": {
+      "bytes": 15233,
+      "sha256": "b91fb864407b2e028b121f25804d30f8d0d17909c2b32f5866aad16b05e8e2a0"
+    },
+    "examples/connection_lifecycle/results/results.json": {
+      "bytes": 125216,
+      "sha256": "fef2215cbe7c8157c5990d4a4d0bd7ce772daf3ab4d2d536ae447c0e3d3380f2"
+    },
+    "examples/connection_lifecycle/results/run.txt": {
+      "bytes": 1312,
+      "sha256": "d29ec0f4e99c5b3bd44dc1b83c1f09d8d7d501e90958855eca258055e9bf65a8"
+    }
+  }
+}

@@ -6,15 +6,17 @@ domain: "architecture"
 status: "evolving"
 summary: "记录这套知识库选择、备选方案、代价和重评条件。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-26"
 last_verified: null
 verification: "design-proposal"
 prerequisites: []
-related: []
+related: ["kb-architecture-module-boundaries", "kb-architecture-quality-decisions"]
 tags: ["knowledge-management", "architecture"]
 ---
 
 # ADR-0001：用 Markdown 单一内容源组织工程知识
+
+[ADR](../../glossary/architecture.md#architecture.adr) 的一般用途、状态与验证边界见[质量属性与架构决策](quality-attribute-scenarios-tradeoffs-and-adrs.md)。本篇继续保留为本知识库的具体决策记录。
 
 ## 状态与范围
 
@@ -51,6 +53,8 @@ tags: ["knowledge-management", "architecture"]
 任意正文能直接阅读；所有文章 ID 与关联有效；生成索引可重建；实验可运行；公开内容与个人记录边界明确。
 
 ## 关联
+
+- [模块边界与依赖](module-boundaries-and-dependencies.md)：从[信息隐藏](../../glossary/architecture.md#architecture.information-hiding)与变更影响分析设计边界。
 
 - [知识地图](../../map.md)
 - [发布方案](../../handbook/publishing.md)

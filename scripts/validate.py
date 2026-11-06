@@ -84,15 +84,34 @@ def main():
     if len(term_ids)!=len(set(term_ids)):
         errors.append('Duplicate term ids')
     for t in terms:
-        if t['domain'] not in domain_ids or not t['id'].startswith(t['domain']+'.'):
+        if (t['domain'] not in domain_ids or not t['id'].startswith(t['domain']+'.')
+                or not re.fullmatch(r'[a-z0-9-]+\.[a-z0-9-]+', t['id'])):
             errors.append(f"{t['id']}: invalid term domain")
         if not t['name'] or not t['definition'] or not t['aliases']:
             errors.append(f"{t['id']}: missing term text")
+        for field in ('explanation', 'example'):
+            if not isinstance(t.get(field), str) or not t[field].strip():
+                errors.append(f"{t['id']}: missing glossary {field}")
+        glossary = ROOT / 'docs' / 'glossary' / f"{t['domain']}.md"
+        if not glossary.is_file() or t['id'] not in anchors(glossary.read_text(encoding='utf-8')):
+            errors.append(f"{t['id']}: missing glossary definition/anchor")
         if t['priority'] not in {'P0','P1','P2'}:
             errors.append(f"{t['id']}: invalid priority")
         for target in t['articles']:
             if target not in article_paths:
                 errors.append(f"{t['id']}: missing article {target}")
+
+    references = load_json('glossary-references.json')
+    if set(references) != set(domain_ids):
+        errors.append('Glossary references must cover exactly the known domains')
+    for domain, refs in references.items():
+        if not isinstance(refs, list) or not refs:
+            errors.append(f'{domain}: missing glossary references')
+            continue
+        for ref in refs:
+            url = urlsplit(ref.get('url', ''))
+            if not ref.get('title') or url.scheme != 'https' or not url.netloc:
+                errors.append(f'{domain}: invalid glossary reference')
 
     markdown=list((ROOT/'docs').rglob('*.md'))+list((ROOT/'templates').glob('*.md'))+list(ROOT.glob('*.md'))
     links_checked=0

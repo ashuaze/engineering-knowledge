@@ -6,13 +6,21 @@
     "aliases": [
       "Process",
       "Thread",
-      "Coroutine"
+      "Coroutine",
+      "进程",
+      "线程",
+      "协程"
     ],
     "definition": "进程、线程与协程，资源、执行和调度边界。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/systems/process-thread-coroutine.md"
-    ]
+      "docs/knowledge/systems/process-thread-coroutine.md",
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "进程通常拥有独立地址空间和资源边界；线程是操作系统调度的执行流；协程由语言或库保存执行状态并调度。协程数量多不代表能同时使用更多 CPU 核心。",
+    "example": "一个服务进程可有多个线程，每个线程又运行多个等待网络的协程。"
   },
   {
     "id": "systems.concurrency",
@@ -20,13 +28,17 @@
     "name": "Concurrency / Parallelism",
     "aliases": [
       "Concurrency",
-      "Parallelism"
+      "Parallelism",
+      "并发",
+      "并行"
     ],
     "definition": "并发推进与并行执行，关注调度和硬件资源。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/systems/process-thread-coroutine.md"
-    ]
+    ],
+    "explanation": "并发描述多个任务在同一时间段内交错推进；并行描述多个任务在同一时刻实际执行。是否并行取决于可用执行资源和调度，不能只看任务数量。",
+    "example": "单核上交替执行两个任务可以并发，两个核心同时执行才是并行。"
   },
   {
     "id": "systems.blocking",
@@ -34,24 +46,34 @@
     "name": "Blocking / Non-blocking",
     "aliases": [
       "Blocking",
-      "Non-blocking"
+      "Non-blocking",
+      "阻塞",
+      "非阻塞"
     ],
     "definition": "指定操作会不会让当前执行线程等待。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/runtime/async-and-blocking.md"
-    ]
+      "docs/knowledge/runtime/async-and-blocking.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "阻塞调用会在条件未满足时挂起当前线程；非阻塞调用通常立即返回结果或暂不可用状态。同步与异步描述结果交付方式，是另一条判断轴。",
+    "example": "非阻塞 socket 读取暂时无数据时返回暂不可用，应用稍后再试。"
   },
   {
     "id": "systems.context-switch",
     "domain": "systems",
     "name": "Context Switch",
     "aliases": [
-      "Context Switch"
+      "Context Switch",
+      "上下文切换"
     ],
     "definition": "保存和恢复执行上下文及其开销。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/context-switches-run-queues-and-scheduling-delay.md"
+    ],
+    "explanation": "调度器切换执行任务时保存寄存器等上下文，再恢复另一任务。开销还可能来自缓存和地址翻译状态变化；一次系统调用不必然引起任务切换。",
+    "example": "线程等待锁后被挂起，调度器让另一个就绪线程继续执行。"
   },
   {
     "id": "systems.privilege",
@@ -60,11 +82,21 @@
     "aliases": [
       "User Mode",
       "Kernel Mode",
-      "Syscall"
+      "Syscall",
+      "系统调用",
+      "用户态",
+      "内核态",
+      "ABI",
+      "vDSO",
+      "特权级"
     ],
-    "definition": "权限边界、系统调用和内核服务。",
+    "definition": "用户态与内核态的受控入口、调用约定与返回契约，区别于线程调度。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/syscalls-privilege-and-return-contracts.md"
+    ],
+    "explanation": "用户态代码通过受控入口请求内核服务，调用约定规定参数、返回值和错误表达。特权级切换与调度到另一个线程是不同事件。",
+    "example": "读取文件进入内核检查描述符并读取数据，成功后回到原线程。"
   },
   {
     "id": "systems.memory-layout",
@@ -72,11 +104,17 @@
     "name": "Stack / Heap",
     "aliases": [
       "Stack",
-      "Heap"
+      "Heap",
+      "调用栈",
+      "动态分配"
     ],
     "definition": "调用栈、动态分配和对象生命周期。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/process-memory-layout-stacks-heaps-and-lifetimes.md"
+    ],
+    "explanation": "调用栈保存函数调用相关状态，堆用于动态分配；具体对象放在哪里由语言和实现决定。这里的堆是内存管理区域，与优先队列的堆结构不同。",
+    "example": "递归过深可能耗尽调用栈；长期持有堆对象可能增加内存占用。"
   },
   {
     "id": "systems.virtual-memory",
@@ -84,11 +122,23 @@
     "name": "Virtual Memory / Paging",
     "aliases": [
       "Virtual Memory",
-      "Paging"
+      "Paging",
+      "虚拟内存",
+      "分页",
+      "缺页",
+      "Page Fault",
+      "TLB",
+      "Copy-on-Write",
+      "写时复制"
     ],
-    "definition": "地址映射、分页和缺页处理。",
+    "definition": "虚拟地址到物理页的映射、按需分页、缺页与驻留边界。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/virtual-memory-pages-and-faults.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "虚拟内存用页表将进程地址映射到物理页并实施访问保护；缺页由内核按原因处理。TLB 缓存地址翻译，缺页、TLB 未命中和数据缓存未命中需分别分析。",
+    "example": "首次访问按需分配的页面可能触发缺页，即使系统并未读取交换区。"
   },
   {
     "id": "systems.synchronization",
@@ -97,11 +147,22 @@
     "aliases": [
       "Mutex",
       "Semaphore",
-      "CAS"
+      "CAS",
+      "互斥锁",
+      "信号量",
+      "比较交换"
     ],
     "definition": "互斥、资源计数与原子比较交换。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/locks-and-synchronization.md",
+      "docs/knowledge/systems/races-and-atomicity.md",
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "Mutex 保护互斥临界区；Semaphore 维护可获取的许可数量；CAS 按预期旧值执行原子更新。单个 CAS 成功不自动保证多字段业务不变量。",
+    "example": "用信号量限制最多十个并发任务，用互斥锁保护共享映射更新。"
   },
   {
     "id": "systems.race-deadlock",
@@ -109,11 +170,18 @@
     "name": "Race Condition / Deadlock",
     "aliases": [
       "Race Condition",
-      "Deadlock"
+      "Deadlock",
+      "竞态条件",
+      "死锁"
     ],
     "definition": "时序依赖错误与循环等待。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/races-and-atomicity.md",
+      "docs/knowledge/systems/deadlocks-and-recovery.md"
+    ],
+    "explanation": "竞态条件使结果依赖未受约束的执行时序；死锁使参与者互相等待无法推进。修复要围绕状态转换、锁顺序和失败恢复，而非只增加锁数量。",
+    "example": "两个线程以相反顺序持有两把锁，可能形成循环等待。"
   },
   {
     "id": "systems.fd-socket",
@@ -121,11 +189,23 @@
     "name": "File Descriptor / Socket",
     "aliases": [
       "File Descriptor",
-      "Socket"
+      "Socket",
+      "文件描述符",
+      "打开文件描述",
+      "Open File Description",
+      "dup",
+      "CLOEXEC",
+      "套接字"
     ],
-    "definition": "操作系统资源句柄与通信端点。",
+    "definition": "描述符编号引用打开状态及底层对象，需区分偏移共享、关闭与编号复用；Socket 为通信端点。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/file-descriptors-and-open-file-descriptions.md",
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "文件描述符是进程表中的编号，经打开文件描述引用底层对象；复制的描述符可能共享文件偏移。Socket 是通信端点，关闭编号不代表所有引用或远端工作已结束。",
+    "example": "dup 得到的新描述符可与原描述符共享文件读取偏移。"
   },
   {
     "id": "systems.io-multiplexing",
@@ -133,23 +213,88 @@
     "name": "I/O Multiplexing / epoll",
     "aliases": [
       "I/O Multiplexing",
-      "epoll"
+      "epoll",
+      "I/O 多路复用",
+      "就绪通知",
+      "Readiness",
+      "select",
+      "poll",
+      "LT",
+      "ET",
+      "IO 多路复用"
     ],
-    "definition": "监视多个 I/O 就绪事件，减少逐连接阻塞等待。",
+    "definition": "监视多个 I/O 就绪条件，应用仍需非阻塞操作、状态保存及公平推进。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/io-multiplexing-readiness-and-event-loops.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "多路复用接口报告哪些端点满足就绪条件；就绪不等于完整业务消息已经到达。应用仍需处理部分读写、暂不可用、连接状态和公平调度。",
+    "example": "epoll 通知可读后，服务端仍需解析长度并等待尚未到达的消息体。"
   },
   {
     "id": "systems.memory-order",
     "domain": "systems",
-    "name": "Memory Model / Happens-before",
+    "name": "Memory Model / Memory Order / Happens-before",
     "aliases": [
       "Memory Model",
-      "Happens-before"
+      "Happens-before",
+      "内存模型",
+      "Memory Order",
+      "内存顺序"
     ],
-    "definition": "跨执行单元的可见性、顺序与同步关系。",
+    "definition": "语言内存模型规定并发访问的合法性、可见性和排序，发布必须满足对应同步关系。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/races-and-atomicity.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md",
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "不同语言分别定义数据竞争与同步。原子访问保护指定操作，较弱顺序不自动发布其他字段；release/acquire 等规则还取决于读取来自哪次写入。时间先后、休眠和硬件缓存一致性不能替代语言同步。",
+    "example": "C++20 的一次性发布中，先写普通载荷再 release 写就绪标志；消费者 acquire 读自该发布后再读载荷，并保证载荷不再被改写且对象仍存活。"
+  },
+  {
+    "id": "systems.lock-free-progress",
+    "domain": "systems",
+    "name": "Lock-free / Wait-free / Obstruction-free",
+    "aliases": [
+      "Lock-free",
+      "Wait-free",
+      "Obstruction-free",
+      "无锁算法",
+      "无等待算法"
+    ],
+    "definition": "按独占执行、整体完成与单次自身步骤区分并发算法进度，并与正确性和墙钟时限分别判断。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/lock-free-algorithms-linearization-and-progress.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "Obstruction-free 要求足够独占步骤下完成，lock-free 关注整体持续完成，wait-free 要求每次操作在有限自身步骤内完成。原子类型属性不覆盖分配、回调与回收，算法进度也不保证线程及时获得 CPU。",
+    "example": "两个参与者反复竞争 CAS，一个持续成功而另一个一直重试，可能符合整体进度，却不能据此证明单个调用不饥饿。"
+  },
+  {
+    "id": "systems.memory-reclamation",
+    "domain": "systems",
+    "name": "Safe Memory Reclamation / Hazard Pointer / EBR / RCU",
+    "aliases": [
+      "Safe Memory Reclamation",
+      "Hazard Pointer",
+      "Epoch-based Reclamation",
+      "EBR",
+      "RCU",
+      "ABA",
+      "安全内存回收",
+      "危险指针"
+    ],
+    "definition": "移除后延迟回收，直到读者保护、静止点或宽限期协议证明旧对象不会再被使用。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/safe-memory-reclamation-aba-hazards-and-epochs.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "Hazard Pointer 登记并验证对象保护，EBR 依赖参与者时代与静止条件，RCU 按相应读取临界区与宽限期协调。地址复用、逻辑 ABA、对象寿命和结构正确性分别证明；基础 EBR 的停滞可能保留大量退役对象。",
+    "example": "根从 A 换成 B 后，旧读者仍握着 A；先退役再等待协议允许回收，不能只凭根已更新立即释放。"
   },
   {
     "id": "networking.network-model",
@@ -157,11 +302,17 @@
     "name": "OSI / TCP-IP Model",
     "aliases": [
       "OSI",
-      "TCP-IP Model"
+      "TCP-IP Model",
+      "网络分层",
+      "封装"
     ],
     "definition": "网络职责分层和封装。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md"
+    ],
+    "explanation": "OSI 是七层参考模型，TCP/IP 模型按互联网协议族组织职责。分层帮助定位封装和接口边界，实际协议与设备并不总能严格一一对应。",
+    "example": "HTTP 消息经 TLS 保护后由 TCP 承载，再由 IP 路由到目标主机。"
   },
   {
     "id": "networking.transport",
@@ -170,11 +321,21 @@
     "aliases": [
       "IP",
       "TCP",
-      "UDP"
+      "UDP",
+      "数据报",
+      "字节流"
     ],
     "definition": "寻址、字节流可靠传输和数据报。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/tcp-tls-and-connection-states.md",
+      "docs/knowledge/networking/tcp-flow-control-and-congestion.md",
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md",
+      "docs/knowledge/networking/udp-quic-streams-and-delivery-boundaries.md",
+      "docs/knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md"
+    ],
+    "explanation": "IP 提供分组寻址和路由；TCP 在连接内提供可靠、有序字节流；UDP 提供数据报传输。TCP 不保留应用消息边界，UDP 也不替应用保证送达。",
+    "example": "一次 TCP 读取可能只得到半条业务消息，需要应用自行分帧。"
   },
   {
     "id": "networking.dns",
@@ -182,24 +343,35 @@
     "name": "DNS / TTL",
     "aliases": [
       "DNS",
-      "TTL"
+      "TTL",
+      "域名解析"
     ],
     "definition": "域名解析与记录缓存有效期。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/networking/https-request-lifecycle.md"
-    ]
+      "docs/knowledge/networking/https-request-lifecycle.md",
+      "docs/knowledge/networking/dns-caching-and-address-selection.md",
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md"
+    ],
+    "explanation": "DNS 将名称查询解析到记录；TTL 限定记录缓存期限。递归解析、应用缓存和连接复用形成不同层次，DNS 变化不等于既有连接立即改向。",
+    "example": "域名记录更新后，旧连接仍可继续向原地址发送请求。"
   },
   {
     "id": "networking.tcp-handshake",
     "domain": "networking",
     "name": "TCP Handshake",
     "aliases": [
-      "TCP Handshake"
+      "TCP Handshake",
+      "三次握手",
+      "TCP 握手"
     ],
     "definition": "连接建立及连接状态。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/tcp-tls-and-connection-states.md"
+    ],
+    "explanation": "TCP 建连通过 SYN、SYN-ACK、ACK 协调序列号及连接状态。连接建立只说明传输层准备就绪，不能证明 TLS 身份校验或业务认证成功。",
+    "example": "TCP 已连通而 TLS 握手失败时，问题不应归为 DNS 解析失败。"
   },
   {
     "id": "networking.transport-control",
@@ -207,11 +379,18 @@
     "name": "Flow Control / Congestion Control",
     "aliases": [
       "Flow Control",
-      "Congestion Control"
+      "Congestion Control",
+      "流量控制",
+      "拥塞控制"
     ],
     "definition": "接收方能力约束与网络拥塞调节。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/tcp-flow-control-and-congestion.md",
+      "docs/knowledge/networking/congestion-algorithms-aqm-and-ecn.md"
+    ],
+    "explanation": "流量控制围绕接收方缓冲和处理能力，拥塞控制围绕路径容量与拥塞信号。两者都可能限制发送速率，但观察对象和调节机制不同。",
+    "example": "接收窗口收缩可能源于应用读得慢，丢包后的拥塞窗口下降则针对网络路径。"
   },
   {
     "id": "networking.tls",
@@ -220,13 +399,19 @@
     "aliases": [
       "TLS",
       "HTTPS",
-      "PKI"
+      "PKI",
+      "传输加密",
+      "证书信任"
     ],
     "definition": "传输加密、身份校验与证书信任。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/networking/https-request-lifecycle.md"
-    ]
+      "docs/knowledge/networking/https-request-lifecycle.md",
+      "docs/knowledge/networking/tcp-tls-and-connection-states.md",
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md"
+    ],
+    "explanation": "TLS 为连接提供机密性、完整性和对端身份校验机制；HTTPS 是在 TLS 上使用 HTTP；PKI 用证书链表达公钥与身份的信任关系。仍需校验名称、用途与有效性。",
+    "example": "证书链可信但主机名不匹配时，客户端仍应拒绝该 HTTPS 连接。"
   },
   {
     "id": "networking.http-versions",
@@ -235,24 +420,35 @@
     "aliases": [
       "HTTP/1.1",
       "HTTP/2",
-      "HTTP/3"
+      "HTTP/3",
+      "HTTP 多路复用"
     ],
     "definition": "HTTP 传输机制和多路复用差异。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/networking/https-request-lifecycle.md"
-    ]
+      "docs/knowledge/networking/https-request-lifecycle.md",
+      "docs/knowledge/networking/http-reuse-pools-and-timeouts.md",
+      "docs/knowledge/networking/udp-quic-streams-and-delivery-boundaries.md"
+    ],
+    "explanation": "HTTP/1.1 通常通过多个连接扩展并发；HTTP/2 在一条 TCP 连接中复用流；HTTP/3 使用 QUIC。复用减少连接开销，但不消除连接级资源竞争。",
+    "example": "HTTP/2 的多个流仍共享 TCP 丢包恢复带来的传输等待。"
   },
   {
     "id": "networking.quic",
     "domain": "networking",
     "name": "QUIC",
     "aliases": [
-      "QUIC"
+      "QUIC",
+      "QUIC v1"
     ],
-    "definition": "基于 UDP、集成安全机制的传输协议。",
+    "definition": "在UDP上建立安全连接、可靠多流与丢失/资源控制的传输协议。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/http-reuse-pools-and-timeouts.md",
+      "docs/knowledge/networking/udp-quic-streams-and-delivery-boundaries.md"
+    ],
+    "explanation": "QUIC将包传输与各流字节交付分开，减少跨流的传输队头等待，但流仍共享连接额度、拥塞和端点资源。TLS握手、0-RTT重放、路径验证及连接状态各有条件；HTTP/3是上层映射，可选DATAGRAM又有不可靠交付边界。传输确认不等于业务提交。",
+    "example": "A流缺少中间字节时，独立B流可交付已连续的数据；若连接额度或网络容量耗尽，B仍需等待。"
   },
   {
     "id": "networking.keepalive",
@@ -260,13 +456,20 @@
     "name": "Keep-Alive / Connection Reuse",
     "aliases": [
       "Keep-Alive",
-      "Connection Reuse"
+      "Connection Reuse",
+      "连接复用",
+      "长连接"
     ],
     "definition": "连接复用、空闲管理和连接成本。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/networking/https-request-lifecycle.md"
-    ]
+      "docs/knowledge/networking/https-request-lifecycle.md",
+      "docs/knowledge/networking/tcp-tls-and-connection-states.md",
+      "docs/knowledge/networking/http-reuse-pools-and-timeouts.md",
+      "docs/knowledge/networking/connection-lifecycle-lab.md"
+    ],
+    "explanation": "连接复用让多次请求共享已建立连接，减少建连和握手成本。HTTP 持久连接、TCP keepalive 探活及连接池空闲策略是不同机制。",
+    "example": "服务端先关闭空闲连接时，连接池需识别失效并在允许范围内重新建连。"
   },
   {
     "id": "networking.proxy",
@@ -274,13 +477,18 @@
     "name": "Proxy / Reverse Proxy",
     "aliases": [
       "Proxy",
-      "Reverse Proxy"
+      "Reverse Proxy",
+      "正向代理",
+      "反向代理"
     ],
     "definition": "代理客户端或服务端接收请求。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/networking/https-request-lifecycle.md"
-    ]
+      "docs/knowledge/networking/https-request-lifecycle.md",
+      "docs/knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md"
+    ],
+    "explanation": "正向代理代表客户端访问目标，反向代理代表服务端接收并转发请求。代理可能终止 TLS、缓存或重试，因此会改变可见连接和失败边界。",
+    "example": "浏览器经企业代理访问外网；网站经反向代理把请求转到应用实例。"
   },
   {
     "id": "networking.load-balancer",
@@ -289,11 +497,16 @@
     "aliases": [
       "Load Balancer",
       "L4",
-      "L7"
+      "L7",
+      "负载均衡"
     ],
     "definition": "按传输层或应用层信息分发流量。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md"
+    ],
+    "explanation": "L4 负载均衡主要根据传输层连接信息分流，L7 可解析 HTTP 等应用协议。分流算法、健康状态和会话保持共同决定流量去向。",
+    "example": "L7 入口可按 URL 路径选择服务，再按实例健康状态分配请求。"
   },
   {
     "id": "networking.cdn-waf",
@@ -301,11 +514,113 @@
     "name": "CDN / WAF",
     "aliases": [
       "CDN",
-      "WAF"
+      "WAF",
+      "内容分发网络",
+      "Web 应用防火墙"
     ],
-    "definition": "内容边缘分发与应用层请求防护。",
+    "definition": "在边缘分发并按范围复用响应，以及按应用请求规则执行防护的两类机制。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/networking/cdn-edge-caches-and-waf-boundaries.md"
+    ],
+    "explanation": "CDN 的分发与缓存需要正确的键、身份共享范围、新鲜度及撤回策略；WAF 只依据可见内容和实际执行的规则作出防护动作。命中不证明源站刚执行了权限检查，规则放行也不证明业务访问合法。还要约束源站绕过路径和代理信任，产品覆盖与检查窗口按配置核验。",
+    "example": "账户响应只按URL共享可能把甲的数据交给乙；WAF规则未命中不补足对象权限，源站也须限制未经过防护的入口。"
+  },
+  {
+    "id": "networking.ip-prefix",
+    "domain": "networking",
+    "name": "CIDR / IP Prefix / Subnet Mask",
+    "aliases": [
+      "CIDR",
+      "IP Prefix",
+      "IP 前缀",
+      "IP前缀",
+      "IPv4 前缀",
+      "地址前缀",
+      "子网掩码",
+      "Subnet Mask"
+    ],
+    "definition": "用地址前部的有效位及长度表示地址集合；IPv4 掩码可用于提取这一前缀。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md",
+      "docs/knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md",
+      "docs/knowledge/networking/policy-routing-control-planes-and-convergence.md",
+      "docs/knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md"
+    ],
+    "explanation": "CIDR /n 表示最前面 n 个有效位，必须结合地址和长度判断范围。用于路由匹配的前缀不是物理位置或安全边界，IPv6 地址配置也不能自动当成 on-link 信息；云子网和安全组另有平台资源与访问策略。",
+    "example": "192.0.2.10/26 的掩码为 255.255.255.192，所属前缀 192.0.2.0/26 共含 64 个地址；192.0.2.70 位于另一个 /26 范围。"
+  },
+  {
+    "id": "networking.routing",
+    "domain": "networking",
+    "name": "IP Routing / Next Hop / Longest Prefix Match",
+    "aliases": [
+      "IP Routing",
+      "Routing",
+      "IP 路由",
+      "IP路由",
+      "路由",
+      "路由表",
+      "下一跳",
+      "Next Hop",
+      "最长前缀匹配",
+      "Longest Prefix Match"
+    ],
+    "definition": "根据转发信息为目的地址选择出接口与下一跳，在已选定表中优先采用更具体的匹配前缀。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md",
+      "docs/knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md",
+      "docs/knowledge/networking/policy-routing-control-planes-and-convergence.md",
+      "docs/knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md"
+    ],
+    "explanation": "下一跳是当前这一步要交付的邻居，可以是目标本身或另一路由器。最长前缀匹配的前提是已确定所用转发表；策略路由、同前缀候选和多路径另需处理。存在正向路由不证明下一跳可达、返回可达或业务获准访问。",
+    "example": "同一张表内，203.0.113.70 同时匹配 203.0.113.64/26、203.0.113.0/24 与默认 /0 时，采用 /26 的下一跳。"
+  },
+  {
+    "id": "networking.neighbor-discovery",
+    "domain": "networking",
+    "name": "ARP / IPv6 Neighbor Discovery",
+    "aliases": [
+      "ARP",
+      "Address Resolution Protocol",
+      "Neighbor Discovery",
+      "IPv6 ND",
+      "邻居发现",
+      "邻居地址解析"
+    ],
+    "definition": "在当前链路上取得邻居的链路地址等信息，IPv4 以太网常用 ARP，IPv6 使用 Neighbor Discovery。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/network-layers-ip-subnets-and-routing.md",
+      "docs/knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md",
+      "docs/knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md"
+    ],
+    "explanation": "先由转发信息确定下一跳，再解析当前链路邻居。IPv6 ND还负责路由器/前缀发现与NUD；SLAAC地址形成、PIO的on-link依据和默认路由器寿命需分别判断。地址分配或收到ND消息不能隐式补出on-link前缀，邻居映射/可达也不代替身份认证或全程业务健康。",
+    "example": "主机收到A=1、L=0且Router Lifetime=0的RA，可以按条件形成地址，却未由它取得on-link前缀或默认下一跳；STALE邻居也不等于已经判死。"
+  },
+  {
+    "id": "networking.nat",
+    "domain": "networking",
+    "name": "NAT / SNAT / DNAT / NAPT",
+    "aliases": [
+      "NAT",
+      "SNAT",
+      "DNAT",
+      "NAPT",
+      "网络地址转换",
+      "源地址转换",
+      "目的地址转换",
+      "网络地址端口转换"
+    ],
+    "definition": "在地址域之间改写 IP 地址及适用端口的机制；源/目的转换方向与是否转换端口是不同维度。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md"
+    ],
+    "explanation": "传统 IPv4 NAT 通过转换关联处理往返流量；SNAT 改源字段、DNAT 改目的字段，NAPT 还使用传输端口区分映射。有状态转换的返回路径、映射生命周期和故障切换需协调。NAT 不自动把通信变为两条由代理终止的 TCP 连接，也不证明用户身份或访问许可。",
+    "example": "10.0.0.8:51000 与 10.0.0.9:51000 访问同一远端时，纸面 NAPT 分别映射到同一外部 IP 的 40001 与 40002；返回端口决定恢复到哪台内部主机。"
   },
   {
     "id": "algorithms.complexity",
@@ -313,13 +628,19 @@
     "name": "Time / Space Complexity",
     "aliases": [
       "Time",
-      "Space Complexity"
+      "Space Complexity",
+      "时间复杂度",
+      "空间复杂度"
     ],
     "definition": "时间、空间随输入规模增长的趋势。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/algorithms/complexity-and-data-structures.md"
-    ]
+      "docs/knowledge/algorithms/complexity-and-data-structures.md",
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md",
+      "docs/knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md"
+    ],
+    "explanation": "复杂度描述资源消耗随输入规模的增长，需注明最坏、平均或摊还等口径。渐近阶忽略常数和硬件因素，适合比较扩展趋势。",
+    "example": "线性扫描为 O(n)，但小数组上可能比维护复杂索引更便宜。"
   },
   {
     "id": "algorithms.sequences",
@@ -327,13 +648,20 @@
     "name": "Array / Linked List",
     "aliases": [
       "Array",
-      "Linked List"
+      "Linked List",
+      "数组",
+      "动态数组",
+      "链表",
+      "Dynamic Array"
     ],
-    "definition": "连续或链式存储及访问和修改成本。",
+    "definition": "连续槽位或链式节点的访问和修改，完整成本包含定位与维护。",
     "priority": "P0",
     "articles": [
+      "docs/knowledge/algorithms/sequences-stacks-queues-and-deques.md",
       "docs/knowledge/algorithms/complexity-and-data-structures.md"
-    ]
+    ],
+    "explanation": "数组支持按位置直接访问，插入中间通常要移动元素；链表通过节点链接，已知位置后的修改便宜但定位和分配有成本。复杂度需包含寻找位置的过程。",
+    "example": "在链表尾插前若每次都从头寻找尾节点，总体成本仍可能很高。"
   },
   {
     "id": "algorithms.hash-table",
@@ -341,13 +669,21 @@
     "name": "Hash Table / Hash Function",
     "aliases": [
       "Hash Table",
-      "Hash Function"
+      "Hash Function",
+      "哈希表",
+      "哈希函数",
+      "碰撞",
+      "负载因子",
+      "Load Factor"
     ],
-    "definition": "键映射、碰撞处理和负载因子。",
+    "definition": "按哈希缩小候选并依键相等定位，涉及碰撞、负载及扩容前提。",
     "priority": "P0",
     "articles": [
+      "docs/knowledge/algorithms/hash-tables-collisions-and-key-contracts.md",
       "docs/knowledge/algorithms/complexity-and-data-structures.md"
-    ]
+    ],
+    "explanation": "哈希函数把键映射到候选位置，哈希表再用键相等规则处理冲突。装载因子、扩容与哈希分布影响性能；哈希相等不代表键相等。",
+    "example": "两个键落入同一桶时，还必须比较键内容来找到目标记录。"
   },
   {
     "id": "algorithms.queues",
@@ -356,11 +692,21 @@
     "aliases": [
       "Stack",
       "Queue",
-      "Deque"
+      "Deque",
+      "栈",
+      "队列",
+      "双端队列",
+      "FIFO",
+      "LIFO",
+      "deque"
     ],
-    "definition": "后进先出、先进先出与双端操作。",
+    "definition": "后进先出、先进先出与双端接口，需另外约定容量和共享操作语义。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/algorithms/sequences-stacks-queues-and-deques.md"
+    ],
+    "explanation": "栈提供后进先出，队列提供先进先出，双端队列允许两端操作。这些是接口语义，底层可用数组或链表实现；容量与并发安全需另行约定。",
+    "example": "撤销历史可用栈，按到达顺序处理任务可用队列。"
   },
   {
     "id": "algorithms.trees",
@@ -369,11 +715,29 @@
     "aliases": [
       "Tree",
       "Heap",
-      "Trie"
+      "Trie",
+      "二叉搜索树",
+      "BST",
+      "优先队列",
+      "Priority Queue",
+      "Top-K",
+      "二叉堆",
+      "前缀树",
+      "前缀检索",
+      "Radix Tree",
+      "Longest Prefix Match",
+      "树",
+      "堆",
+      "字典树"
     ],
-    "definition": "层级关系、优先级和前缀索引。",
+    "definition": "树形、搜索顺序、堆优先关系与 Trie 前缀分支各有不变量及更新责任。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/algorithms/trees-heaps-and-priority-queues.md",
+      "docs/knowledge/algorithms/tries-prefix-search-and-key-encoding.md"
+    ],
+    "explanation": "树是层次结构；搜索树维护键序；堆维护父子优先关系；Trie 按键的符号前缀分支。堆适合取极值，不能据此推断任意元素都有全局排序。",
+    "example": "优先队列可用堆选择下一任务，前缀补全可用 Trie 缩小候选。"
   },
   {
     "id": "algorithms.b-tree",
@@ -381,11 +745,20 @@
     "name": "B-Tree / B+Tree",
     "aliases": [
       "B-Tree",
-      "B+Tree"
+      "B+Tree",
+      "B 树",
+      "B+ 树",
+      "页索引",
+      "扇出",
+      "Fanout"
     ],
-    "definition": "面向页访问的多路平衡树及索引组织。",
+    "definition": "面向页访问的多路平衡树，区分分隔键、叶载荷、范围扫描和维护成本。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/algorithms/b-trees-bplus-trees-and-page-indexes.md"
+    ],
+    "explanation": "B 树和 B+ 树以多路平衡结构降低页访问层数；B+ 树通常把记录或记录引用放在叶层并支持顺序访问。具体页布局和并发维护由存储引擎决定。",
+    "example": "范围查询先定位起点叶页，再按叶层顺序读取后续记录。"
   },
   {
     "id": "algorithms.sorting-search",
@@ -393,11 +766,21 @@
     "name": "Sorting / Binary Search",
     "aliases": [
       "Sorting",
-      "Binary Search"
+      "Binary Search",
+      "排序",
+      "二分查找",
+      "Lower Bound",
+      "Upper Bound",
+      "稳定排序"
     ],
-    "definition": "排序与有序区间上的查找。",
+    "definition": "排序契约与有序区间边界，区分存在性、重复范围及有序维护。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/algorithms/sorting-binary-search-and-boundaries.md",
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "排序需约定比较关系、稳定性和原地性；二分查找依赖已排序区间或单调判定。查某值、找首个不小于值及找重复范围的边界不同。",
+    "example": "找插入位置可求 lower bound，而不是命中任意一个相等元素就停止。"
   },
   {
     "id": "algorithms.graph-traversal",
@@ -406,22 +789,41 @@
     "aliases": [
       "Graph",
       "BFS",
-      "DFS"
+      "DFS",
+      "图",
+      "广度优先",
+      "深度优先",
+      "拓扑排序",
+      "Topological Sort",
+      "DAG"
     ],
-    "definition": "关系建模与图遍历。",
+    "definition": "图表示与遍历，区分可达性、无权距离、环和依赖顺序。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/algorithms/graphs-traversal-and-dependency-order.md",
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "BFS 按层扩展，适用于无权图最少边数；DFS 沿路径深入，常用于环检测和结构分析。拓扑排序要求有向无环，不能直接套用于含环依赖。",
+    "example": "依赖图出现环时，应报告循环依赖，而非输出一个声称有效的构建顺序。"
   },
   {
     "id": "algorithms.bloom",
     "domain": "algorithms",
     "name": "Bloom Filter",
     "aliases": [
-      "Bloom Filter"
+      "Bloom Filter",
+      "布隆过滤器",
+      "误报",
+      "假阳性",
+      "False Positive"
     ],
-    "definition": "允许误报的集合成员近似判断。",
+    "definition": "用共享位判断集合成员；阳性可能误报，阴性依赖完整插入、位状态与同步覆盖。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/bloom-filters-membership-and-synchronization.md"
+    ],
+    "explanation": "Bloom Filter 用多个哈希设置共享位，允许误报。只有在插入完整、位状态未损坏且同步范围正确时，阴性才能排除集合成员；普通结构不能随意清位删除。",
+    "example": "过滤器说可能存在时仍查主存储；说不存在前须确认新写入已同步。"
   },
   {
     "id": "algorithms.eviction",
@@ -429,35 +831,57 @@
     "name": "LRU / LFU",
     "aliases": [
       "LRU",
-      "LFU"
+      "LFU",
+      "缓存淘汰",
+      "容量淘汰",
+      "LRU Cache",
+      "LFU Cache",
+      "最近最少使用"
     ],
-    "definition": "按访问新近程度或频率淘汰缓存。",
+    "definition": "依据新近或频次分配有限缓存容量，区分精确/近似、接纳、过期和失效。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/lru-lfu-and-capacity-eviction.md"
+    ],
+    "explanation": "LRU 优先淘汰较久未访问项，LFU 优先淘汰低频项。实际系统可能采用近似计数或采样；容量淘汰、数据过期、接纳和主动失效是不同决策。",
+    "example": "一次性全表扫描可能冲掉 LRU 中常用数据，需要结合负载评估策略。"
   },
   {
     "id": "algorithms.amortized",
     "domain": "algorithms",
     "name": "Amortized Analysis",
     "aliases": [
-      "Amortized Analysis"
+      "Amortized Analysis",
+      "摊还分析",
+      "扩容"
     ],
-    "definition": "在一系列操作上分摊成本。",
+    "definition": "把一系列操作的总成本分摊，不保证每次操作的最坏延迟。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/algorithms/complexity-and-data-structures.md"
-    ]
+      "docs/knowledge/algorithms/sequences-stacks-queues-and-deques.md",
+      "docs/knowledge/algorithms/complexity-and-data-structures.md",
+      "docs/knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md"
+    ],
+    "explanation": "摊还分析把一段操作序列的总成本分配到每次操作，不要求输入服从随机分布。摊还常数时间不代表单次操作没有扩容或搬迁尖峰。",
+    "example": "动态数组多次尾部追加的平均分摊成本低，但一次扩容仍需搬移很多元素。"
   },
   {
     "id": "algorithms.probabilistic",
     "domain": "algorithms",
     "name": "Probabilistic Data Structure",
     "aliases": [
-      "Probabilistic Data Structure"
+      "Probabilistic Data Structure",
+      "概率数据结构",
+      "近似成员判断",
+      "Approximate Membership"
     ],
-    "definition": "用可控误差换取空间或时间效率。",
+    "definition": "以 Bloom 为例用概率误报换取空间或工作量，其他概率结构仍待深入。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/bloom-filters-membership-and-synchronization.md"
+    ],
+    "explanation": "概率数据结构以误差概率换取空间或计算节省，必须说明误差方向和参数前提。成员判断、基数估计和频率估计的保证不能互相套用。",
+    "example": "Bloom Filter 的阳性可能误报，不能直接据此拒绝用户创建唯一名称。"
   },
   {
     "id": "runtime.compilation",
@@ -466,11 +890,18 @@
     "aliases": [
       "Compiler",
       "Interpreter",
-      "JIT"
+      "JIT",
+      "编译器",
+      "解释器",
+      "即时编译"
     ],
-    "definition": "编译、解释与运行期间的编译优化。",
+    "definition": "程序表示转换、解释执行与运行期间编译。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/compilation-interpretation-jit-and-deoptimization.md"
+    ],
+    "explanation": "编译器转换程序表示，解释器执行程序表示；AOT/JIT 区分目标运行前与运行中编译，不等同是否优化。分层实现可利用反馈、守卫和状态映射退优化，同一语言可有多种执行策略。",
+    "example": "虚拟机先解释执行，再对热点函数编译并在假设失效时回退。"
   },
   {
     "id": "runtime.virtual-machine",
@@ -478,25 +909,35 @@
     "name": "Runtime / VM",
     "aliases": [
       "Runtime",
-      "VM"
+      "VM",
+      "运行时",
+      "虚拟机"
     ],
     "definition": "执行语言所需的调度、内存和宿主能力。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/virtual-machines-bytecode-hosts-and-isolation.md"
+    ],
+    "explanation": "运行时提供执行程序所需的内存、调度、异常和宿主接口等能力；语言 VM 执行特定中间表示。这里的 VM 与运行完整客体操作系统的系统虚拟机不同。",
+    "example": "同一段字节码依赖 VM 的对象模型和宿主接口才能运行。"
   },
   {
     "id": "runtime.event-loop",
     "domain": "runtime",
     "name": "Event Loop",
     "aliases": [
-      "Event Loop"
+      "Event Loop",
+      "事件循环"
     ],
     "definition": "协调任务、I/O 完成事件和回调执行。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/runtime/async-and-blocking.md",
-      "docs/knowledge/frontend/long-tasks-and-responsiveness.md"
-    ]
+      "docs/knowledge/frontend/long-tasks-and-responsiveness.md",
+      "docs/knowledge/runtime/event-loop-and-microtasks.md"
+    ],
+    "explanation": "事件循环根据宿主规则选取任务并推进回调、I/O 及相关队列。单线程回调若长时间执行，会推迟其他任务；事件循环本身不让计算自动并行。",
+    "example": "回调连续计算一秒，期间已到达的网络事件也可能等待处理。"
   },
   {
     "id": "runtime.async",
@@ -506,13 +947,18 @@
       "Sync",
       "Async",
       "Promise",
-      "Async-Await"
+      "Async-Await",
+      "同步",
+      "异步"
     ],
     "definition": "调用结果的交付与异步控制流。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/runtime/async-and-blocking.md"
-    ]
+      "docs/knowledge/runtime/async-and-blocking.md",
+      "docs/knowledge/runtime/event-loop-and-microtasks.md"
+    ],
+    "explanation": "同步调用在返回前交付约定结果；异步调用通过稍后的完成信号交付结果。Promise 表示完成状态，async/await 组织控制流，不保证计算或底层调用不会阻塞。",
+    "example": "await 网络请求可让出执行机会，await 之前的大循环仍会占用线程。"
   },
   {
     "id": "runtime.microtasks",
@@ -520,11 +966,16 @@
     "name": "Task / Microtask",
     "aliases": [
       "Task",
-      "Microtask"
+      "Microtask",
+      "微任务"
     ],
     "definition": "宿主调度任务和微任务，具体规则依 Runtime 而异。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/event-loop-and-microtasks.md"
+    ],
+    "explanation": "Task 与 Microtask 是宿主定义的调度单元；浏览器会在规定检查点排空微任务队列。递归追加微任务可推迟后续任务和渲染，其他运行时规则需单独核对。",
+    "example": "反复链式执行 Promise 回调并不能保证浏览器获得绘制机会。"
   },
   {
     "id": "runtime.closure",
@@ -532,11 +983,18 @@
     "name": "Closure / Scope",
     "aliases": [
       "Closure",
-      "Scope"
+      "Scope",
+      "闭包",
+      "作用域"
     ],
     "definition": "词法作用域和对外部绑定的访问。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/reachability-and-garbage-collection.md",
+      "docs/knowledge/runtime/closures-and-lexical-bindings.md"
+    ],
+    "explanation": "闭包让函数继续访问定义位置的词法绑定；捕获绑定不一定是复制当时的值。外部引用还可能延长相关对象生命周期。",
+    "example": "循环中注册回调时，要分清多个回调共享一个绑定还是各自持有独立绑定。"
   },
   {
     "id": "runtime.gc",
@@ -544,11 +1002,17 @@
     "name": "GC / Reference Counting",
     "aliases": [
       "GC",
-      "Reference Counting"
+      "Reference Counting",
+      "垃圾回收",
+      "引用计数"
     ],
     "definition": "自动内存回收策略及其代价。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/reachability-and-garbage-collection.md"
+    ],
+    "explanation": "垃圾回收按运行时规则回收不可继续使用的内存；追踪式回收通常基于可达性，引用计数基于引用数量。循环、暂停和资源终结行为取决于具体实现。",
+    "example": "对象仍被全局集合引用时，即使业务不再需要，也通常不会被回收。"
   },
   {
     "id": "runtime.type-system",
@@ -556,11 +1020,23 @@
     "name": "Type System / Type Inference",
     "aliases": [
       "Type System",
-      "Type Inference"
+      "Type Inference",
+      "Type Assertion",
+      "Type Guard",
+      "unknown",
+      "any",
+      "类型断言",
+      "运行时校验",
+      "类型系统",
+      "类型推导"
     ],
     "definition": "类型约束和自动类型推导。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/type-systems-and-runtime-validation.md"
+    ],
+    "explanation": "类型系统表达并检查程序约束，类型推导从上下文确定类型。编译期通过不证明网络输入满足约定；类型断言通常也不执行运行时验证。",
+    "example": "把 JSON 断言为订单类型前，仍应检查必填字段、取值和业务条件。"
   },
   {
     "id": "runtime.generics",
@@ -568,11 +1044,17 @@
     "name": "Generics / Structural Typing",
     "aliases": [
       "Generics",
-      "Structural Typing"
+      "Structural Typing",
+      "泛型",
+      "结构类型"
     ],
     "definition": "参数化类型与按结构兼容的类型关系。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/type-systems-and-runtime-validation.md"
+    ],
+    "explanation": "泛型用类型参数复用算法和容器，结构类型按成员结构判断兼容性。泛型约束表达可用操作，不意味着运行时保留全部类型信息或自动验证输入。",
+    "example": "接收带 id 成员的对象，可以无需共享继承父类；外部数据仍需校验。"
   },
   {
     "id": "runtime.serialization",
@@ -580,11 +1062,17 @@
     "name": "Serialization / Deserialization",
     "aliases": [
       "Serialization",
-      "Deserialization"
+      "Deserialization",
+      "序列化",
+      "反序列化"
     ],
     "definition": "在运行时对象和交换格式间转换。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/serialization-representations-schemas-and-identity.md"
+    ],
+    "explanation": "序列化把对象或状态编码成可传输表示，反序列化重建约定结构。格式需处理版本、数值范围、身份与循环引用；不可信数据不应触发任意代码构造。",
+    "example": "日期经 JSON 变成字符串后，需要明确时区与解析规则才能还原语义。"
   },
   {
     "id": "runtime.errors",
@@ -592,11 +1080,17 @@
     "name": "Exception / Error Propagation",
     "aliases": [
       "Exception",
-      "Error Propagation"
+      "Error Propagation",
+      "异常",
+      "错误传播"
     ],
     "definition": "失败信号、传播边界与资源清理。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/exceptions-unwinding-cleanup-and-async-boundaries.md"
+    ],
+    "explanation": "异常或错误返回值把失败传到有能力处理的边界。传播时要保存原因并执行资源清理，重试前还需判断副作用是否已发生。",
+    "example": "捕获写入超时后，先查询提交状态，不能把所有错误都视作未执行。"
   },
   {
     "id": "runtime.modules",
@@ -604,11 +1098,22 @@
     "name": "Module System / Dependency",
     "aliases": [
       "Module System",
-      "Dependency"
+      "Dependency",
+      "ESM",
+      "CommonJS",
+      "Live Binding",
+      "Circular Dependency",
+      "活绑定",
+      "循环依赖",
+      "模块系统"
     ],
     "definition": "模块加载、依赖解析和初始化。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/modules-bindings-and-circular-dependencies.md"
+    ],
+    "explanation": "模块系统定义名称导出、依赖解析和初始化。ESM 的实时绑定与 CommonJS 的导出行为不同；循环依赖可能暴露尚未初始化或尚未完成的状态。",
+    "example": "A 初始化时读取 B，而 B 又提前读取 A 的导出，可能遇到初始化顺序问题。"
   },
   {
     "id": "runtime.ffi-wasm",
@@ -616,11 +1121,35 @@
     "name": "FFI / WebAssembly",
     "aliases": [
       "FFI",
-      "WebAssembly"
+      "WebAssembly",
+      "外部函数接口"
     ],
     "definition": "语言边界调用与可移植字节码执行。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/runtime/ffi-abi-ownership-and-runtime-boundaries.md",
+      "docs/knowledge/runtime/virtual-machines-bytecode-hosts-and-isolation.md"
+    ],
+    "explanation": "FFI 连接不同语言的调用约定和数据表示；WebAssembly 定义可移植执行格式及受约束的宿主交互。跨边界仍需处理内存所有权、错误和权限。",
+    "example": "把字符串传给原生库时，必须约定编码、长度以及由谁释放缓冲区。"
+  },
+  {
+    "id": "runtime.reachability",
+    "domain": "runtime",
+    "name": "Reachability / Retention",
+    "aliases": [
+      "Reachability",
+      "Retention",
+      "可达性",
+      "引用持有"
+    ],
+    "definition": "从根沿引用路径能否到达对象，以及哪些持有关系延长其生命周期。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/runtime/reachability-and-garbage-collection.md"
+    ],
+    "explanation": "可达性表示从根沿引用能否到达对象；保留关系解释哪个所有者延长其生命。内存高不必然是回收器故障，常需追查仍存活的引用路径。",
+    "example": "未移除的事件监听器经闭包持有大对象，导致页面离开后仍不能回收。"
   },
   {
     "id": "frontend.render-tree",
@@ -629,11 +1158,16 @@
     "aliases": [
       "DOM",
       "CSSOM",
-      "Render Tree"
+      "Render Tree",
+      "渲染树"
     ],
     "definition": "文档、样式和渲染结构。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/rendering-and-hydration.md"
+    ],
+    "explanation": "DOM 表示文档结构，CSSOM 表示样式规则，渲染结构结合可见内容与计算样式。三者不一一对应，隐藏节点和伪元素等会产生差异。",
+    "example": "修改 DOM 或样式后，浏览器可能需要更新渲染结构与布局。"
   },
   {
     "id": "frontend.render-pipeline",
@@ -642,11 +1176,18 @@
     "aliases": [
       "Layout",
       "Paint",
-      "Compositing"
+      "Compositing",
+      "布局",
+      "绘制",
+      "合成"
     ],
     "definition": "布局计算、绘制与图层合成。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/rendering-and-hydration.md"
+    ],
+    "explanation": "Layout 计算几何位置，Paint 生成绘制内容，Compositing 组合图层输出画面。一次修改触发哪些阶段取决于属性、图层和实现，不能假定所有动画都只需合成。",
+    "example": "改变宽度可能重新布局；变换动画是否避开绘制需用实际轨迹检查。"
   },
   {
     "id": "frontend.rendering-strategies",
@@ -656,22 +1197,36 @@
       "CSR",
       "SSR",
       "SSG",
-      "ISR"
+      "ISR",
+      "客户端渲染",
+      "服务端渲染",
+      "静态生成",
+      "增量再生成"
     ],
     "definition": "客户端渲染、服务端渲染、预生成与增量再生成。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/rendering-and-hydration.md",
+      "docs/knowledge/frontend/incremental-regeneration-revalidation-and-freshness.md"
+    ],
+    "explanation": "CSR 在客户端生成主要界面，SSR 按请求在服务端生成 HTML，SSG 在构建时预生成，ISR 按框架规则更新预生成结果。首屏内容、交互代码和数据新鲜度需分别设计。",
+    "example": "商品介绍可预生成，用户购物车仍需根据身份获取实时状态。"
   },
   {
     "id": "frontend.hydration",
     "domain": "frontend",
     "name": "Hydration",
     "aliases": [
-      "Hydration"
+      "Hydration",
+      "水合"
     ],
     "definition": "让服务端输出的页面连接客户端交互逻辑。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/rendering-and-hydration.md"
+    ],
+    "explanation": "Hydration 在已有服务端 DOM 上连接客户端组件状态和交互。页面能显示不代表事件已就绪，服务端与客户端初始输出还需满足框架的对应要求。",
+    "example": "按钮已经可见，但相关脚本尚未水合时，点击不一定立即得到预期响应。"
   },
   {
     "id": "frontend.spa",
@@ -679,11 +1234,17 @@
     "name": "SPA / Client-side Routing",
     "aliases": [
       "SPA",
-      "Client-side Routing"
+      "Client-side Routing",
+      "单页应用",
+      "客户端路由"
     ],
     "definition": "单页导航与客户端路由状态。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/routing-state-and-cache-lifecycles.md"
+    ],
+    "explanation": "SPA 在同一文档内更新界面，客户端路由把 URL、页面组件和导航状态联系起来。仍要处理刷新回源、历史记录、权限和页面数据生命周期。",
+    "example": "浏览器后退时，应恢复正确路由与状态，而非仅替换地址栏字符串。"
   },
   {
     "id": "frontend.state",
@@ -691,11 +1252,18 @@
     "name": "Reactivity / State Management",
     "aliases": [
       "Reactivity",
-      "State Management"
+      "State Management",
+      "响应式",
+      "状态管理"
     ],
     "definition": "数据变化、界面更新及状态所有权。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/reactive-state-and-update-scheduling.md",
+      "docs/knowledge/frontend/routing-state-and-cache-lifecycles.md"
+    ],
+    "explanation": "响应式系统跟踪依赖并在数据变化时安排更新；状态管理明确数据所有者和修改入口。内存赋值、组件更新与屏幕绘制可能发生在不同时点。",
+    "example": "更新搜索条件后，旧请求迟到的结果不能覆盖当前条件对应的列表。"
   },
   {
     "id": "frontend.vdom",
@@ -703,11 +1271,17 @@
     "name": "Virtual DOM / Reconciliation",
     "aliases": [
       "Virtual DOM",
-      "Reconciliation"
+      "Reconciliation",
+      "虚拟 DOM",
+      "协调更新"
     ],
     "definition": "UI 描述与更新协调策略。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/reconciliation-keys-and-component-identity.md"
+    ],
+    "explanation": "Virtual DOM描述预期UI，Reconciliation决定对应与变更。公开身份语义依框架而异；React中的父级位置、类型与key影响状态保留，Vue有自身就地修补及有key列表机制。不能从有虚拟结构推出固定差分算法或性能。",
+    "example": "列表用稳定业务 key，能减少排序后把旧组件状态误配给另一行的风险。"
   },
   {
     "id": "frontend.bundling",
@@ -715,11 +1289,21 @@
     "name": "Bundling / Tree Shaking",
     "aliases": [
       "Bundling",
-      "Tree Shaking"
+      "Tree Shaking",
+      "Code Splitting",
+      "Chunk",
+      "代码分割",
+      "按需加载",
+      "打包",
+      "摇树优化"
     ],
-    "definition": "模块打包与可证明无用代码的移除。",
+    "definition": "依据模块使用与副作用等信息组织、移除和拆分输出代码；资源粒度、传输成本与运行时执行需分别分析。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/bundling-tree-shaking-and-code-splitting.md"
+    ],
+    "explanation": "Bundling 组织模块为输出资源，Tree Shaking 依据静态使用和副作用信息移除无用代码，Code Splitting 调整按需加载边界。包变小不等于用户等待一定更短。",
+    "example": "路由拆包减少初始下载，但跳转时需观察新增请求和代码执行时间。"
   },
   {
     "id": "frontend.offline",
@@ -727,11 +1311,18 @@
     "name": "Browser Cache / Service Worker",
     "aliases": [
       "Browser Cache",
-      "Service Worker"
+      "Service Worker",
+      "浏览器缓存",
+      "离线缓存"
     ],
     "definition": "响应复用、请求代理和离线能力。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/routing-state-and-cache-lifecycles.md",
+      "docs/knowledge/frontend/service-workers-offline-caches-and-update-lifecycles.md"
+    ],
+    "explanation": "浏览器 HTTP 缓存按响应规则复用内容；Service Worker 可代理请求并管理 Cache Storage。两层缓存的键、更新和失效规则不同，离线写入还需同步与冲突处理。",
+    "example": "发布新版页面后，旧 Service Worker 缓存可能继续提供旧资源。"
   },
   {
     "id": "frontend.realtime",
@@ -739,33 +1330,51 @@
     "name": "WebSocket / SSE",
     "aliases": [
       "WebSocket",
-      "SSE"
+      "SSE",
+      "服务器推送"
     ],
     "definition": "双向连接通信与服务器事件推送。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/websocket-sse-reconnection-and-replay.md"
+    ],
+    "explanation": "WebSocket提供双向消息，SSE提供服务器到浏览器的事件流。连接建立、发送缓冲归零和业务完成各有边界；EventSource标识由解析维护，不是异步业务提交游标。补读、去重、历史缺口和权限由应用协议处理。",
+    "example": "已收到102但连续处理只到100时，不能仅按最大已见编号从103继续；还需处理101的缺口与重复效果。"
   },
   {
     "id": "frontend.web-vitals",
     "domain": "frontend",
     "name": "Core Web Vitals",
     "aliases": [
-      "Core Web Vitals"
+      "Core Web Vitals",
+      "核心网页指标",
+      "LCP",
+      "INP",
+      "CLS"
     ],
     "definition": "衡量加载、交互和布局稳定性的指标集合。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/core-web-vitals-field-data-and-diagnostic-boundaries.md"
+    ],
+    "explanation": "本次核查以 LCP、INP、CLS 分别观察主要内容呈现、交互到下一次画面与布局稳定性。推荐按设备分组看真实访问的p75；单次实验室结果不代表用户分布，无交互样本不能补为零，阈值与采集规则需随版本核对。",
+    "example": "纸面两段偏移窗口分别累计0.10和0.08，CLS取最大0.10；不是全程相加0.18，也不是本站实测。"
   },
   {
     "id": "frontend.bff",
     "domain": "frontend",
     "name": "BFF",
     "aliases": [
-      "BFF"
+      "BFF",
+      "前端后端适配层"
     ],
     "definition": "为特定客户端提供聚合和适配的后端。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/frontend/backends-for-frontends-projections-and-service-boundaries.md"
+    ],
+    "explanation": "BFF按客户端需要组织字段投影、聚合和交互契约，与通用网关及领域业务规则分工。减少外部请求不自动产生一致快照，也不替代对象授权、预算及个性化缓存失效。",
+    "example": "移动端 BFF 把多个服务的数据组合成一次页面请求所需的结果。"
   },
   {
     "id": "frontend.long-tasks",
@@ -781,8 +1390,27 @@
     "definition": "识别持续占用主线程的任务，分批执行并让出调度机会。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/frontend/long-tasks-and-responsiveness.md"
-    ]
+      "docs/knowledge/frontend/long-tasks-and-responsiveness.md",
+      "docs/knowledge/frontend/long-tasks-lab.md"
+    ],
+    "explanation": "浏览器长任务持续占用主线程，推迟输入和渲染；让出主线程需要产生宿主可调度的边界。仅把循环包装成 async 或连续微任务并不保证响应改善。",
+    "example": "将大批数据分段处理，并在段间让出执行机会，再观察输入延迟。"
+  },
+  {
+    "id": "frontend.hydration-mismatch",
+    "domain": "frontend",
+    "name": "Hydration Mismatch",
+    "aliases": [
+      "Hydration Mismatch",
+      "水合不匹配"
+    ],
+    "definition": "预生成 DOM 与客户端首次预期输出不对应，需检查初始数据、结构与环境差异。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/frontend/rendering-and-hydration.md"
+    ],
+    "explanation": "水合不匹配表示预生成 DOM 与客户端首次预期输出不对应。常见原因包括时间、随机值、不同初始数据及无效 HTML；恢复策略依框架而异。",
+    "example": "服务端按一个时区输出日期，客户端按另一时区首次渲染，可能出现文本不匹配。"
   },
   {
     "id": "api.styles",
@@ -792,22 +1420,32 @@
       "REST",
       "RPC",
       "GraphQL",
-      "gRPC"
+      "gRPC",
+      "接口风格"
     ],
-    "definition": "API 风格、查询模型与调用协议。",
+    "definition": "API 架构约束、调用模型、查询规范与框架的对照组。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/api-styles-contracts-and-gateway-boundaries.md"
+    ],
+    "explanation": "REST 是包含统一接口等约束的架构风格；RPC 将交互建模为远程操作；GraphQL 规定类型、查询和执行；gRPC 提供围绕服务定义的 RPC 框架及协议生态。四者处于不同抽象层，可以组合，不能用 JSON、HTTP/2 或 Protobuf 分别代替其定义。",
+    "example": "订单读取可使用资源式 HTTP，聚合页面可增加受控的 GraphQL 查询层，内部命令可采用 gRPC；每层仍需契约、授权和成本边界。"
   },
   {
     "id": "api.resource-model",
     "domain": "api",
     "name": "Resource Modeling",
     "aliases": [
-      "Resource Modeling"
+      "Resource Modeling",
+      "资源建模"
     ],
     "definition": "资源标识、状态变化与操作语义。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/resource-models-input-validation-and-write-boundaries.md"
+    ],
+    "explanation": "资源建模给业务对象稳定身份，并约定其表示、状态转换和操作语义。URL 形式只是外观，还需明确权限、并发条件和生命周期。",
+    "example": "订单取消应检查当前状态和调用者权限，不能只把任意记录状态改成 cancelled。"
   },
   {
     "id": "api.http-semantics",
@@ -815,25 +1453,37 @@
     "name": "HTTP Method / Status Code",
     "aliases": [
       "HTTP Method",
-      "Status Code"
+      "Status Code",
+      "状态码",
+      "HTTP 方法"
     ],
     "definition": "方法意图和响应结果的协议表达。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/contracts-and-pagination.md",
+      "docs/knowledge/api/conditional-requests-and-cache-validation.md"
+    ],
+    "explanation": "HTTP 方法表达请求意图，状态码表达协议层结果。安全性、幂等性和缓存语义各有定义，业务错误还需稳定的机器可读契约。",
+    "example": "GET 不应被设计成扣款操作；创建成功可返回相应状态与资源定位信息。"
   },
   {
     "id": "api.idempotency",
     "domain": "api",
     "name": "Idempotency",
     "aliases": [
-      "Idempotency"
+      "Idempotency",
+      "幂等性",
+      "幂等"
     ],
     "definition": "同一操作重复执行时约束业务效果。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/api/idempotency.md",
-      "docs/knowledge/api/idempotency-lab.md"
-    ]
+      "docs/knowledge/api/idempotency-lab.md",
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md"
+    ],
+    "explanation": "幂等性要求同一操作重复执行时保持约定的业务效果。工程实现需定义动作标识、输入一致性、作用域、保留期和原子提交边界，响应内容未必每次相同。",
+    "example": "订单已提交但响应丢失后，用原幂等键重试并查询已有结果。"
   },
   {
     "id": "api.pagination",
@@ -841,11 +1491,17 @@
     "name": "Pagination / Cursor",
     "aliases": [
       "Pagination",
-      "Cursor"
+      "Cursor",
+      "游标分页",
+      "偏移分页"
     ],
     "definition": "按偏移或位置边界分页。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/contracts-and-pagination.md"
+    ],
+    "explanation": "偏移分页按跳过数量定位，游标分页按排序边界继续读取。稳定排序通常需要唯一的决胜字段；游标不自动提供固定快照或授权保证。",
+    "example": "按创建时间和 ID 共同排序，避免同一时间戳的记录跨页重复或遗漏。"
   },
   {
     "id": "api.versioning",
@@ -853,11 +1509,17 @@
     "name": "API Versioning / Compatibility",
     "aliases": [
       "API Versioning",
-      "Compatibility"
+      "Compatibility",
+      "API 版本",
+      "兼容性"
     ],
     "definition": "契约演进与调用方兼容。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/contracts-and-pagination.md"
+    ],
+    "explanation": "兼容性要从调用方观察的字段、默认行为、错误和时序判断。版本号只是标识，演进还需弃用计划、迁移窗口和消费者验证。",
+    "example": "把可选字段变成必填，即使 URL 未变化，也可能破坏已有调用方。"
   },
   {
     "id": "api.contracts",
@@ -866,11 +1528,17 @@
     "aliases": [
       "OpenAPI",
       "Protobuf",
-      "JSON Schema"
+      "JSON Schema",
+      "接口契约"
     ],
     "definition": "接口描述与结构约束。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/contracts-and-pagination.md",
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md"
+    ],
+    "explanation": "OpenAPI 描述 HTTP API，Protobuf 定义消息和服务，JSON Schema 约束 JSON 结构。结构合法不等于权限、业务状态或跨字段规则都成立。",
+    "example": "请求通过 Schema 后，还需确认订单属于当前租户且状态允许修改。"
   },
   {
     "id": "api.validation",
@@ -878,11 +1546,17 @@
     "name": "Validation / Sanitization",
     "aliases": [
       "Validation",
-      "Sanitization"
+      "Sanitization",
+      "输入校验",
+      "净化"
     ],
     "definition": "校验输入及按上下文处理危险内容。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/resource-models-input-validation-and-write-boundaries.md"
+    ],
+    "explanation": "校验检查结构、类型、取值和语义；净化按明确规则处理允许的内容。两者不替代字段授权、SQL参数绑定或对应输出上下文的编码，也不自动解决并发保存。",
+    "example": "SQL 参数绑定保护值边界；HTML 文本输出仍需使用对应转义规则。"
   },
   {
     "id": "api.retries",
@@ -892,13 +1566,20 @@
       "Timeout",
       "Retry",
       "Backoff",
-      "Jitter"
+      "Jitter",
+      "超时",
+      "重试",
+      "退避",
+      "抖动"
     ],
     "definition": "截止时间、重试和随机退避。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/reliability/timeouts-and-retry-budgets.md"
-    ]
+      "docs/knowledge/reliability/timeouts-and-retry-budgets.md",
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md"
+    ],
+    "explanation": "超时限制一次等待，退避拉开重试间隔，抖动分散集中重试。是否可重试取决于错误和副作用状态，总次数与总时间还应受共同预算限制。",
+    "example": "大量客户端遇到 503 时使用带抖动的退避，避免同步重试形成下一轮尖峰。"
   },
   {
     "id": "api.limits",
@@ -906,22 +1587,33 @@
     "name": "Rate Limiting / Quota",
     "aliases": [
       "Rate Limiting",
-      "Quota"
+      "Quota",
+      "限流",
+      "配额"
     ],
     "definition": "速率约束与时间窗口内的用量额度。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/rate-limits-concurrency-and-quotas.md"
+    ],
+    "explanation": "限流约束进入速率，配额约束某主体在周期内的用量；并发上限约束同时占用的工作量。键、窗口、突发容量和拒绝反馈都应成为契约。",
+    "example": "每分钟请求配额未耗尽，也可能因并发连接已满而被拒绝。"
   },
   {
     "id": "api.gateway",
     "domain": "api",
     "name": "API Gateway",
     "aliases": [
-      "API Gateway"
+      "API Gateway",
+      "API 网关"
     ],
-    "definition": "统一流量入口和横切治理。",
+    "definition": "在边界统一承接路由、凭证验证和流量治理的入口层。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/api-styles-contracts-and-gateway-boundaries.md"
+    ],
+    "explanation": "API Gateway 可按具体实现承担路由、TLS 或令牌验证、边界配额及协议适配。执行服务仍需保护对象与字段权限、业务接纳、幂等提交和数据库不变量；身份转发、错误映射、总预算和多层重试必须显式约定。",
+    "example": "网关验证订单调用的令牌并限制入口流量，订单服务继续核对当前对象权限、是否允许取消以及重复提交结果。"
   },
   {
     "id": "api.webhook",
@@ -932,31 +1624,60 @@
     ],
     "definition": "基于 HTTP 回调的异步事件通知。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md"
+    ],
+    "explanation": "Webhook 由事件提供方主动发起 HTTP 回调通知。接收方需验证签名、防重放并记录处理状态，双方需约定重试、重复、乱序和补偿查询。",
+    "example": "同一支付事件可能重复到达，接收端按事件 ID 去重并核对业务状态。"
   },
   {
     "id": "api.pool",
     "domain": "api",
     "name": "Connection Pool",
     "aliases": [
-      "Connection Pool"
+      "Connection Pool",
+      "连接池"
     ],
     "definition": "复用有限连接并控制等待。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/performance/slow-api-investigation.md"
-    ]
+    ],
+    "explanation": "连接池复用有限连接，并在池满时安排等待或拒绝。容量、获取超时、连接健康与释放规则共同决定行为；连接数过大也可能压垮下游。",
+    "example": "请求总超时中应计入等待数据库连接的时间，而不仅是 SQL 执行时间。"
   },
   {
     "id": "api.shutdown",
     "domain": "api",
     "name": "Graceful Shutdown",
     "aliases": [
-      "Graceful Shutdown"
+      "Graceful Shutdown",
+      "优雅关闭"
     ],
     "definition": "停止接流、处理在途任务和释放资源。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/api/graceful-shutdown-draining-and-inflight-outcomes.md"
+    ],
+    "explanation": "优雅关闭协调发现/就绪传播、本地停止接纳、连接排空与业务结果；传播有延迟，旧连接可能继续送来新请求。预停与清理需共享期限，断开不证明业务回滚，超期需明确恢复策略。",
+    "example": "部署替换实例时先退出就绪状态，再等待已接受请求完成。"
+  },
+  {
+    "id": "api.problem-details",
+    "domain": "api",
+    "name": "Problem Details",
+    "aliases": [
+      "Problem Details",
+      "RFC 9457",
+      "问题详情"
+    ],
+    "definition": "HTTP API 的结构化问题详情表示，以稳定的问题类型关联机器处理与人类说明。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/api/contracts-and-pagination.md"
+    ],
+    "explanation": "Problem Details 用标准化问题文档表达 HTTP API 错误，稳定的问题类型可关联处理规则和文档。响应应避免泄露内部堆栈、密钥或不应暴露的对象信息。",
+    "example": "客户端依据问题类型识别额度不足，界面再显示适合用户的说明。"
   },
   {
     "id": "architecture.principles",
@@ -966,11 +1687,16 @@
       "SOLID",
       "KISS",
       "DRY",
-      "YAGNI"
+      "YAGNI",
+      "设计原则"
     ],
     "definition": "设计原则和复杂度约束，须结合上下文使用。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/design-principles-contracts-and-abstraction-costs.md"
+    ],
+    "explanation": "SOLID分别讨论职责、扩展、行为替换、接口与源码依赖；KISS、DRY、YAGNI帮助约束复杂度与不必要能力。是否同一知识、契约是否稳定及抽象的现实收益，比类数或重复行数更重要。",
+    "example": "两个暂时相似但变化原因不同的流程，可以先保留独立实现。"
   },
   {
     "id": "architecture.coupling",
@@ -978,55 +1704,82 @@
     "name": "Cohesion / Coupling",
     "aliases": [
       "Cohesion",
-      "Coupling"
+      "Coupling",
+      "内聚",
+      "耦合"
     ],
     "definition": "职责聚合程度与组件间依赖。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md",
+      "docs/knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md"
+    ],
+    "explanation": "内聚关注一个模块中的职责是否围绕共同目的，耦合关注模块间需要知道多少彼此细节。边界质量应按变更传播和不变量所有权评估，不能只数类和接口。",
+    "example": "支付提供商更换时，只修改支付适配模块，比修改多个业务模块更易维护。"
   },
   {
     "id": "architecture.concerns",
     "domain": "architecture",
     "name": "Separation of Concerns",
     "aliases": [
-      "Separation of Concerns"
+      "Separation of Concerns",
+      "关注点分离"
     ],
     "definition": "按职责隔离不同变化来源。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "关注点分离按不同变化来源组织代码，使领域规则、存储、传输和展示可以分别推理。边界仍需清晰协作契约，物理拆目录本身不建立隔离。",
+    "example": "把运费规则与 HTTP 参数解析分开，能独立讨论业务与输入协议。"
   },
   {
     "id": "architecture.layering",
     "domain": "architecture",
     "name": "Layered Architecture",
     "aliases": [
-      "Layered Architecture"
+      "Layered Architecture",
+      "分层架构"
     ],
     "definition": "职责分层和依赖方向。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "分层把职责放入不同抽象层，并约束依赖方向。运行时调用路径不等于源码依赖方向；跨层捷径和共享数据库仍可能破坏边界。",
+    "example": "应用层调用仓储接口，数据库适配层实现该接口并处理存储细节。"
   },
   {
     "id": "architecture.modular-monolith",
     "domain": "architecture",
     "name": "Modular Monolith",
     "aliases": [
-      "Modular Monolith"
+      "Modular Monolith",
+      "模块化单体"
     ],
     "definition": "在同一部署单元内保持模块边界。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md"
+    ],
+    "explanation": "模块化单体在同一部署单元中保持清楚的业务模块及接口。可减少分布式协调成本，但需通过代码与数据访问规则防止模块直接侵入彼此内部。",
+    "example": "订单和库存同进程部署，各自拥有规则并通过约定接口协作。"
   },
   {
     "id": "architecture.microservices",
     "domain": "architecture",
     "name": "Microservices",
     "aliases": [
-      "Microservices"
+      "Microservices",
+      "微服务"
     ],
     "definition": "独立演进和部署的服务及其协调成本。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md"
+    ],
+    "explanation": "微服务把部分业务能力放入可独立部署的服务，并承担网络调用、状态一致性和运行治理成本。拆分价值应来自独立演进需求，而非只追求服务数量。",
+    "example": "高峰扩容支付服务时无需重新发布商品服务，但跨服务流程需处理部分失败。"
   },
   {
     "id": "architecture.ddd",
@@ -1034,11 +1787,19 @@
     "name": "DDD / Bounded Context",
     "aliases": [
       "DDD",
-      "Bounded Context"
+      "Bounded Context",
+      "领域驱动设计",
+      "限界上下文"
     ],
     "definition": "领域建模与模型适用范围。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md",
+      "docs/knowledge/architecture/domain-models-aggregates-and-invariants.md",
+      "docs/knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md"
+    ],
+    "explanation": "DDD 围绕业务语言建立模型；限界上下文划定术语和规则成立的范围。相同名称跨上下文可以有不同含义，集成时需要明确翻译与契约。",
+    "example": "销售中的客户与风控中的客户具有不同属性和规则，不必共享同一模型类。"
   },
   {
     "id": "architecture.domain-model",
@@ -1047,11 +1808,22 @@
     "aliases": [
       "Entity",
       "Value Object",
-      "Aggregate"
+      "Aggregate",
+      "Aggregate Root",
+      "聚合",
+      "业务不变量",
+      "数据所有权",
+      "实体",
+      "值对象",
+      "聚合根"
     ],
     "definition": "标识、值语义与一致性边界。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/domain-models-aggregates-and-invariants.md"
+    ],
+    "explanation": "实体按身份保持连续性，值对象按值表达语义，聚合以根对象维护一组一致性规则。聚合边界不是对象关系图大小，而是需要一起保护的不变量范围。",
+    "example": "订单聚合维护订单项与总价规则，外部通过订单根执行修改。"
   },
   {
     "id": "architecture.ports-adapters",
@@ -1059,11 +1831,17 @@
     "name": "Clean / Hexagonal Architecture",
     "aliases": [
       "Clean",
-      "Hexagonal Architecture"
+      "Hexagonal Architecture",
+      "六边形架构",
+      "整洁架构"
     ],
     "definition": "通过依赖方向和端口隔离核心业务。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "端口表达核心需要或提供的能力，适配器连接数据库、网络等外部机制。依赖朝核心约定组织，使业务不必理解具体框架；抽象仍应服务实际变化点。",
+    "example": "同一个库存端口可由真实数据库适配器和测试替身分别实现。"
   },
   {
     "id": "architecture.di",
@@ -1071,33 +1849,49 @@
     "name": "Dependency Injection / IoC",
     "aliases": [
       "Dependency Injection",
-      "IoC"
+      "IoC",
+      "依赖注入",
+      "控制反转"
     ],
     "definition": "外部提供依赖与控制关系反转。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "依赖注入由外部组装并传入依赖，是控制反转的一种方式。它改变对象获取依赖的方式；是否依赖抽象仍需从接口归属和源码依赖判断。",
+    "example": "构造服务时传入时钟接口，测试可提供固定时间而无需修改全局时钟。"
   },
   {
     "id": "architecture.cqrs",
     "domain": "architecture",
     "name": "CQRS",
     "aliases": [
-      "CQRS"
+      "CQRS",
+      "命令查询职责分离"
     ],
     "definition": "分离修改状态与读取状态的模型。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/cqrs-read-write-models-and-projection-lag.md"
+    ],
+    "explanation": "CQRS 为修改状态与读取状态采用不同模型或接口，不强制使用不同数据库或事件溯源。读模型异步更新时需要处理延迟与重建。",
+    "example": "提交订单使用业务命令，订单列表由面向查询的投影提供。"
   },
   {
     "id": "architecture.event-sourcing",
     "domain": "architecture",
     "name": "Event Sourcing",
     "aliases": [
-      "Event Sourcing"
+      "Event Sourcing",
+      "事件溯源"
     ],
     "definition": "以事件序列记录状态演进。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/event-sourcing-streams-snapshots-and-projections.md"
+    ],
+    "explanation": "事件溯源以事件序列作为状态演进的记录，通过回放或投影得到状态。事件版本、顺序、幂等投影和历史数据修订都需设计。",
+    "example": "账户余额由入账和出账事件累计得到，重建时不能再次触发真实付款。"
   },
   {
     "id": "architecture.patterns",
@@ -1105,24 +1899,34 @@
     "name": "Design Pattern / Anti-pattern",
     "aliases": [
       "Design Pattern",
-      "Anti-pattern"
+      "Anti-pattern",
+      "设计模式",
+      "反模式"
     ],
     "definition": "可复用设计经验及常见不良结构。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/design-patterns-collaboration-and-semantic-boundaries.md"
+    ],
+    "explanation": "模式按问题和约束描述协作意图；本批分别解释策略、适配器、装饰器和观察者，不穷举目录。语义翻译、组合顺序、错误和资源寿命仍需约定；有模式名不自动获得持久性、事务或性能保证。",
+    "example": "纸面折扣D(x)=floor(0.9x)、费用F(x)=x+100；输入1000时F(D(x))=1000，D(F(x))=990，包装顺序会改变结果。"
   },
   {
     "id": "architecture.adr",
     "domain": "architecture",
     "name": "ADR",
     "aliases": [
-      "ADR"
+      "ADR",
+      "架构决策记录"
     ],
     "definition": "记录特定上下文中的决策、备选方案及后果。",
     "priority": "P0",
     "articles": [
+      "docs/knowledge/architecture/quality-attribute-scenarios-tradeoffs-and-adrs.md",
       "docs/knowledge/architecture/knowledge-base-adr.md"
-    ]
+    ],
+    "explanation": "ADR保存特定上下文中的重要决定、备选、理由、状态与正负后果；后续记录替代旧决定时保留历史和重评条件。accepted表示决定被接受，不等于实现已经完成或质量目标已验证。",
+    "example": "记录为何选单数据库事务，以及跨地域写入需求出现时的重评条件。"
   },
   {
     "id": "architecture.debt",
@@ -1130,22 +1934,69 @@
     "name": "Technical Debt / Refactoring",
     "aliases": [
       "Technical Debt",
-      "Refactoring"
+      "Refactoring",
+      "技术债",
+      "重构",
+      "技术负债",
+      "特征测试",
+      "Characterization Test"
     ],
-    "definition": "演进成本与保持行为的结构调整。",
+    "definition": "用后续变更的额外成本讨论技术债，通过保持约定行为的结构调整改善维护；现状记录不自动等于正确规格。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/technical-debt-refactoring-and-behavior.md"
+    ],
+    "explanation": "技术债是设计取舍与后续演进成本的比喻，也可能随新知识显现。重构调整内部结构而保持约定的可观察行为；有意修复缺陷需另列验收，特征测试只记录选定范围的当前行为。",
+    "example": "先补关键回归检查，再拆分职责混杂的模块以降低下次修改成本。"
   },
   {
     "id": "architecture.strangler",
     "domain": "architecture",
     "name": "Strangler Fig Pattern",
     "aliases": [
-      "Strangler Fig Pattern"
+      "Strangler Fig Pattern",
+      "绞杀者模式"
     ],
     "definition": "渐进替换旧系统的迁移方法。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/architecture/strangler-fig-migration-write-authority-and-rollback.md"
+    ],
+    "explanation": "渐进替换逐步转移业务能力，同时管理入口、模型翻译、数据连续性与权威写入。新数据接受写入后，旧系统若未追平或不兼容，单纯切回路由不能安全回退；终点也不必是微服务。",
+    "example": "先把只读商品查询切到新服务，确认结果与容量后再迁移写路径。"
+  },
+  {
+    "id": "architecture.information-hiding",
+    "domain": "architecture",
+    "name": "Information Hiding",
+    "aliases": [
+      "Information Hiding",
+      "信息隐藏"
+    ],
+    "definition": "把容易变化的设计决定封装在模块内部，以必要接口限制知识传播与变更影响。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "信息隐藏把容易变化的实现决定收在模块内部，只公开必要承诺。封装字段并不充分；若调用方仍依赖存储结构和时序，变化仍会扩散。",
+    "example": "仓储接口返回领域结果，而非让业务层操作数据库游标与表结构。"
+  },
+  {
+    "id": "architecture.dependency-inversion",
+    "domain": "architecture",
+    "name": "Dependency Inversion Principle / DIP",
+    "aliases": [
+      "Dependency Inversion Principle",
+      "DIP",
+      "依赖反转"
+    ],
+    "definition": "围绕核心约定组织源码依赖，使具体适配实现依赖该约定；与运行调用方向及依赖注入分别分析。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/architecture/module-boundaries-and-dependencies.md"
+    ],
+    "explanation": "依赖反转让高层规则和底层机制依赖核心抽象，具体实现适配核心约定。接口放在哪里、由谁定义，比是否用了依赖注入容器更关键。",
+    "example": "订单业务定义支付能力接口，第三方支付 SDK 适配器依赖并实现它。"
   },
   {
     "id": "security.identity",
@@ -1153,13 +2004,20 @@
     "name": "Authentication / Authorization",
     "aliases": [
       "Authentication",
-      "Authorization"
+      "Authorization",
+      "认证",
+      "授权"
     ],
     "definition": "证明身份与判断访问权。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/security/object-level-authorization.md"
-    ]
+      "docs/knowledge/security/object-level-authorization.md",
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md",
+      "docs/knowledge/security/multi-factor-authentication-passkeys-and-recovery.md"
+    ],
+    "explanation": "认证建立主体身份，授权判断该主体在当前条件下能执行哪些动作。身份有效不代表拥有任意对象权限；每个执行入口都需实施相应授权。",
+    "example": "用户登录成功后，仍不能凭其他人的订单 ID 查看详情。"
   },
   {
     "id": "security.sessions",
@@ -1167,11 +2025,19 @@
     "name": "Session / Cookie",
     "aliases": [
       "Session",
-      "Cookie"
+      "Cookie",
+      "会话"
     ],
     "definition": "会话状态和浏览器保存、发送的数据。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/password-storage-and-account-recovery.md",
+      "docs/knowledge/security/xss-contexts-sinks-and-browser-defenses.md",
+      "docs/knowledge/security/multi-factor-authentication-passkeys-and-recovery.md"
+    ],
+    "explanation": "Session 保存或关联登录状态，Cookie 是浏览器按规则存储并随请求发送数据的机制。Cookie 可保存会话标识，但不是会话本身；作用域与安全属性需单独配置。",
+    "example": "服务端撤销会话记录后，旧 Cookie 仍在浏览器中也不应继续获得访问权。"
   },
   {
     "id": "security.oauth",
@@ -1179,11 +2045,24 @@
     "name": "OAuth 2.0 / OpenID Connect",
     "aliases": [
       "OAuth 2.0",
-      "OpenID Connect"
+      "OpenID Connect",
+      "OAuth",
+      "OIDC",
+      "PKCE",
+      "Authorization Code",
+      "code_verifier",
+      "nonce",
+      "委托授权"
     ],
     "definition": "委托授权框架与其上的身份层。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/oauth-oidc-and-pkce.md",
+      "docs/knowledge/security/service-delegation-token-exchange-and-audience.md"
+    ],
+    "explanation": "OAuth 规定客户端如何获得访问资源的授权，OIDC 在其上提供身份层。PKCE 绑定授权码交易中的验证材料；仍需校验回调、状态、发行方及适用的令牌声明。",
+    "example": "登录客户端校验 ID Token，调用 API 则使用面向该 API 的 Access Token。"
   },
   {
     "id": "security.tokens",
@@ -1192,11 +2071,17 @@
     "aliases": [
       "JWT",
       "JWS",
-      "JWK"
+      "JWK",
+      "签名令牌"
     ],
     "definition": "声明容器、签名格式和密钥表示。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/service-delegation-token-exchange-and-audience.md"
+    ],
+    "explanation": "JWT 是声明表示，JWS 是签名封装，JWK 是密钥表示。签名保护完整性而非保密；验证还需限制算法并核对发行方、受众、时间与密钥用途。",
+    "example": "可解码 JWT 载荷不代表令牌可信，也不应把敏感秘密放进未加密载荷。"
   },
   {
     "id": "security.access-control",
@@ -1204,13 +2089,18 @@
     "name": "RBAC / ABAC",
     "aliases": [
       "RBAC",
-      "ABAC"
+      "ABAC",
+      "角色权限",
+      "属性权限"
     ],
-    "definition": "按角色或属性判断权限。",
+    "definition": "通过角色分配或主体、对象、动作与环境属性表达访问规则。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/security/object-level-authorization.md"
-    ]
+      "docs/knowledge/security/object-level-authorization.md",
+      "docs/knowledge/security/authorization-models-policy-distribution-and-revocation.md"
+    ],
+    "explanation": "RBAC把权限关联到角色并可使用层级与约束；ABAC对可信属性按规则求值。实际系统可组合角色、属性和对象关系，但模型不替代租户边界、冲突语义、事实来源、新鲜度与执行处检查。",
+    "example": "复核员角色允许一种动作，仍需核对其有效租户、目标对象和职责分离；只更新策略版本不代表成员关系已同步。"
   },
   {
     "id": "security.token-lifecycle",
@@ -1218,11 +2108,18 @@
     "name": "Access Token / Refresh Token",
     "aliases": [
       "Access Token",
-      "Refresh Token"
+      "Refresh Token",
+      "访问令牌",
+      "刷新令牌"
     ],
     "definition": "访问凭据和更新访问凭据的机制。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md"
+    ],
+    "explanation": "Access Token 面向资源访问，Refresh Token 用于向授权服务换取新的访问凭据。两者的受众、存储、期限与撤销规则不同，刷新流程也需防重放。",
+    "example": "刷新令牌撤销后，已签发访问令牌是否立即失效取决于资源端验证机制。"
   },
   {
     "id": "security.origin",
@@ -1230,11 +2127,17 @@
     "name": "CORS / Same-Origin Policy",
     "aliases": [
       "CORS",
-      "Same-Origin Policy"
+      "Same-Origin Policy",
+      "同源策略",
+      "跨源"
     ],
     "definition": "浏览器同源边界与跨源响应访问机制。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/origins-cors-and-csrf.md"
+    ],
+    "explanation": "同源策略限制浏览器脚本跨源读取或交互；CORS 由服务端声明可被哪些源读取的跨源响应。它不阻止所有请求发出，也不替代服务端认证授权。",
+    "example": "浏览器拒绝脚本读取跨源响应，不代表服务端从未收到该请求。"
   },
   {
     "id": "security.web-attacks",
@@ -1243,11 +2146,20 @@
     "aliases": [
       "XSS",
       "CSRF",
-      "SSRF"
+      "SSRF",
+      "跨站脚本",
+      "跨站请求伪造",
+      "服务端请求伪造"
     ],
     "definition": "脚本注入、跨站请求伪造和服务端请求伪造。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/origins-cors-and-csrf.md",
+      "docs/knowledge/security/xss-contexts-sinks-and-browser-defenses.md",
+      "docs/knowledge/security/ssrf-url-resolution-and-egress-boundaries.md"
+    ],
+    "explanation": "XSS 让攻击脚本进入可信页面，CSRF 借浏览器自动携带的凭据触发请求，SSRF 诱导服务端访问非预期目标。三者的信任边界和防护手段不同。",
+    "example": "服务端抓取用户 URL 时，需限制目标与重定向，避免访问内部管理接口。"
   },
   {
     "id": "security.sql-injection",
@@ -1255,11 +2167,17 @@
     "name": "SQL Injection / Parameterized Query",
     "aliases": [
       "SQL Injection",
-      "Parameterized Query"
+      "Parameterized Query",
+      "SQL 注入",
+      "参数化查询"
     ],
     "definition": "查询结构注入与参数绑定防护。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/sql-injection-parameters-and-query-structure.md"
+    ],
+    "explanation": "SQL 注入把输入混入查询结构；参数绑定使值与语句结构分离。表名、排序方向等结构项通常不能作为普通值参数，应采用受控映射。",
+    "example": "查询用户时绑定用户名参数，排序列则从允许列表选择。"
   },
   {
     "id": "security.passwords",
@@ -1268,11 +2186,17 @@
     "aliases": [
       "Hash",
       "Salt",
-      "KDF"
+      "KDF",
+      "口令哈希",
+      "随机盐"
     ],
     "definition": "哈希、随机盐和适合口令的派生机制。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/password-storage-and-account-recovery.md"
+    ],
+    "explanation": "口令存储应使用适合口令的派生算法、独立随机盐和合适成本参数。普通快速哈希不适合抵御离线猜测，盐也不承担保密作用。",
+    "example": "两名用户使用同一口令，独立盐应使其存储结果不同。"
   },
   {
     "id": "security.mtls",
@@ -1280,22 +2204,36 @@
     "name": "mTLS / Certificate",
     "aliases": [
       "mTLS",
-      "Certificate"
+      "Certificate",
+      "双向 TLS"
     ],
-    "definition": "连接两端的证书身份校验。",
+    "definition": "TLS 连接双方按约定使用证书及对应私钥证明建立对端身份。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md"
+    ],
+    "explanation": "mTLS 需要双方完成证书认证及握手证明。在 CA 证书身份配置中，还要检查信任路径、期限、用途与预期身份；证书链可信不等于业务授权。预注册自签名或证书绑定令牌采用各自协议的接受依据，不能推广为普通服务免检。代理终止 TLS 后须重新划定身份边界，并管理轮换、现存连接和撤销传播。",
+    "example": "服务 A 的证书可信并持有对应私钥，仍不能删除租户 T2 的订单；代理 P 终止入站 TLS 后，后端首先认证的是 P 的连接身份。"
   },
   {
     "id": "security.secrets",
     "domain": "security",
     "name": "Secrets Management",
     "aliases": [
-      "Secrets Management"
+      "Secrets Management",
+      "密钥管理",
+      "秘密管理"
     ],
     "definition": "敏感凭据的保存、分发与轮换。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/password-storage-and-account-recovery.md",
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md",
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md",
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md"
+    ],
+    "explanation": "秘密管理覆盖凭据存储、发放、最小访问、轮换与审计。应减少明文传播和日志暴露，优先使用期限与权限受限的凭据。",
+    "example": "数据库口令轮换需协调新旧连接与服务更新，不能只改配置中心的值。"
   },
   {
     "id": "security.trust",
@@ -1303,11 +2241,17 @@
     "name": "Least Privilege / Zero Trust",
     "aliases": [
       "Least Privilege",
-      "Zero Trust"
+      "Zero Trust",
+      "最小权限",
+      "零信任"
     ],
     "definition": "最小授权和持续验证访问条件。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/trust-boundaries-least-privilege-and-threat-modeling.md"
+    ],
+    "explanation": "最小权限只授予完成任务必要的能力；零信任不把网络位置本身当成充分信任依据。访问仍需基于身份、资源和上下文验证，并持续管理凭据。",
+    "example": "来自内网的请求也要校验服务身份与具体操作权限。"
   },
   {
     "id": "security.threats",
@@ -1315,11 +2259,16 @@
     "name": "Threat Modeling / OWASP",
     "aliases": [
       "Threat Modeling",
-      "OWASP"
+      "OWASP",
+      "威胁建模"
     ],
     "definition": "识别攻击面并参考应用安全研究与规范。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/trust-boundaries-least-privilege-and-threat-modeling.md"
+    ],
+    "explanation": "威胁建模从资产、入口、信任边界和攻击路径分析风险，并把缓解措施连接到可检查证据；OWASP提供指南与研究，本文不穷举其全部项目。清单不能替代具体业务分析和有效性验证。",
+    "example": "上传功能除文件类型外，还需考虑解析器、存储权限和后续访问路径。"
   },
   {
     "id": "security.tenant-isolation",
@@ -1327,13 +2276,242 @@
     "name": "Tenant Isolation / Object-level Authorization",
     "aliases": [
       "Tenant Isolation",
-      "Object-level Authorization"
+      "Object-level Authorization",
+      "租户隔离",
+      "对象级授权"
     ],
     "definition": "租户边界与逐对象访问检查。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/security/object-level-authorization.md"
-    ]
+      "docs/knowledge/security/object-level-authorization.md",
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md",
+      "docs/knowledge/security/authorization-models-policy-distribution-and-revocation.md"
+    ],
+    "explanation": "租户隔离约束数据和操作不能跨租户越界；对象级授权判断当前主体是否有权访问目标对象。身份与租户应来自可信上下文，缓存和后台任务也要保持边界。",
+    "example": "查询订单时同时约束对象 ID 与当前主体允许访问的租户范围。"
+  },
+  {
+    "id": "security.revocation",
+    "domain": "security",
+    "name": "Session / Token Revocation",
+    "aliases": [
+      "Token Revocation",
+      "Session Revocation",
+      "会话撤销",
+      "令牌撤销"
+    ],
+    "definition": "主动终止会话或令牌的继续使用，真实生效范围取决于验证状态与传播策略。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/authentication-sessions-and-tokens.md",
+      "docs/knowledge/security/password-storage-and-account-recovery.md",
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md",
+      "docs/knowledge/security/authorization-models-policy-distribution-and-revocation.md",
+      "docs/knowledge/cache-search/object-storage-versions-uploads-and-presigned-access.md",
+      "docs/knowledge/security/service-delegation-token-exchange-and-audience.md"
+    ],
+    "explanation": "撤销通过改变验证状态使已有凭据停止被接受。生效时间取决于验证缓存、会话存储或令牌自包含策略，删除客户端副本不等于服务端已撤销。",
+    "example": "用户退出全部设备后，要核对旧访问令牌在各资源服务上的实际接受期限。"
+  },
+  {
+    "id": "security.account-recovery",
+    "domain": "security",
+    "name": "Account Recovery",
+    "aliases": [
+      "Account Recovery",
+      "账号恢复",
+      "账户恢复"
+    ],
+    "definition": "丢失所需认证能力后，凭约定证据重新取得账号控制的过程。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/password-storage-and-account-recovery.md",
+      "docs/knowledge/security/multi-factor-authentication-passkeys-and-recovery.md"
+    ],
+    "explanation": "账号恢复需要独立判断请求者能否替换认证器，约束恢复材料的用途、有效期与单次消费，并审查被接管的恢复渠道和旧访问能力。知道账号名或完成密码写入，都不等于已经恢复全部控制权。",
+    "example": "用户用事先保存的恢复材料重新建立认证能力后，还要撤销攻击者会话并检查被修改的恢复邮箱与 MFA。"
+  },
+  {
+    "id": "security.pepper",
+    "domain": "security",
+    "name": "Pepper",
+    "aliases": [
+      "Pepper",
+      "口令 pepper"
+    ],
+    "definition": "与密码库分离保存、参与密码校验保护的额外秘密。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/password-storage-and-account-recovery.md",
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md"
+    ],
+    "explanation": "pepper 通过保密材料增加对仅泄露密码库场景的保护；它不同于通常公开并逐记录独立的盐。秘密的可用性、访问隔离、版本、轮换与泄露处置均需单独设计，不能替代密码 KDF。",
+    "example": "攻击者只复制密码校验表时尚未获得秘密服务中的 pepper；若应用及秘密访问权限也被接管，就不能继续依赖这项隔离。"
+  },
+  {
+    "id": "security.hmac",
+    "domain": "security",
+    "name": "HMAC",
+    "aliases": [
+      "HMAC",
+      "基于哈希的消息认证码"
+    ],
+    "definition": "使用共享秘密与密码学哈希认证指定消息内容的机制。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md",
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md"
+    ],
+    "explanation": "HMAC 验证方按同一秘密和协议规定的字节计算认证值并安全比较，以检查消息完整性及共享秘密持有关系。它不加密载荷、不自动限制重放，也不能让共享秘密的接收方证明只有发送方可能生成消息。",
+    "example": "Webhook 对原始请求体计算 HMAC-SHA-256；把体解析后重新序列化再计算，可能因为字节改变而验证失败。"
+  },
+  {
+    "id": "security.replay",
+    "domain": "security",
+    "name": "Replay Attack",
+    "aliases": [
+      "Replay Attack",
+      "重放攻击"
+    ],
+    "definition": "重新提交先前有效的消息或凭证，试图再次获得访问或业务效果。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md"
+    ],
+    "explanation": "签名有效只证明被覆盖内容与密钥关系，不证明本次是首次使用。受认证时间可以限制接受期限，nonce 或稳定事件身份需要结合持久消费状态；合法重试与补发仍须按协议得到可恢复且幂等的处理。",
+    "example": "攻击者在有效窗口内重复提交同一带签名事件，时间和 MAC 都可能通过，但持久事件键与业务约束应避免再次产生同一效果。"
+  },
+  {
+    "id": "security.output-encoding",
+    "domain": "security",
+    "name": "Contextual Output Encoding",
+    "aliases": [
+      "Contextual Output Encoding",
+      "上下文输出编码"
+    ],
+    "definition": "按数据最终进入的 HTML、属性、URL 或脚本语法位置编码，使数据不被误解释成该位置的代码。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/xss-contexts-sinks-and-browser-defenses.md"
+    ],
+    "explanation": "上下文输出编码在输出位置执行，与业务输入校验和 HTML 净化职责不同。同一字符串在不同解析器与嵌套上下文中需要不同处理，URL 组件编码也不能替代允许方案与目标检查。优先使用框架文本绑定或不会解析 HTML 的展示 API。",
+    "example": "简介需要显示尖括号原文时使用普通展示节点的 textContent；不能把入口处做过一次 HTML 编码的值任意拼入 JavaScript 或 URL。"
+  },
+  {
+    "id": "security.trusted-types",
+    "domain": "security",
+    "name": "Trusted Types",
+    "aliases": [
+      "Trusted Types",
+      "可信类型策略"
+    ],
+    "definition": "通过集中策略产生特定可信类型，并按 CSP 约束受管控的 DOM 注入汇接受这些值的浏览器机制。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/xss-contexts-sinks-and-browser-defenses.md"
+    ],
+    "explanation": "Trusted Types 把字符串到主动内容的转换集中到可审查策略；它本身不替策略完成净化，原样返回不可信输入会破坏保护。受控汇、策略创建和浏览器支持需按部署核对，不能据此宣称服务端模板或主动恶意第一方代码已被隔离。",
+    "example": "应用让受控富文本策略完成净化后产生 TrustedHTML，并检查直接把普通字符串传给相应 DOM 汇的路径。"
+  },
+  {
+    "id": "security.envelope-encryption",
+    "domain": "security",
+    "name": "Envelope Encryption",
+    "aliases": [
+      "Envelope Encryption",
+      "信封加密"
+    ],
+    "definition": "用数据密钥保护数据，再用包装密钥保护数据密钥，并保存可恢复的密文与版本关系。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md"
+    ],
+    "explanation": "信封加密把数据加密与数据密钥的受控保护分层，常用 DEK 表示保护数据的密钥、KEK 表示包装其他密钥的密钥。恢复需要密文、被包装的数据密钥、正确密钥引用和协议元数据。KEK 材料轮换、重新包装 DEK 与用新 DEK 重加密数据是不同动作；已泄露旧材料与副本不能靠改变默认版本追回。具体库还可能包含内部派生和算法套件。",
+    "example": "C1 由 DEK1 保护，W1 是用 KEK1 包装的 DEK1；只改默认 KEK2，不会自动使 C1 或 W1 的字节改变。"
+  },
+  {
+    "id": "security.dynamic-credentials",
+    "domain": "security",
+    "name": "Dynamic Credentials",
+    "aliases": [
+      "Dynamic Credentials",
+      "动态凭据",
+      "动态数据库凭据"
+    ],
+    "definition": "按已授权角色按需生成、期限和权限受限的凭据，并通过目标系统接口完成续期与撤销。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/secrets-credentials-rotation-and-revocation.md"
+    ],
+    "explanation": "动态凭据减少长期共享秘密的分发，独立身份有助于关联调用者，但仍依赖初始身份、发放权限和后端操作能力。凭据租约到期、撤销请求完成及已有会话结束不是天然同一状态；续期必须检查返回期限，控制面不可达也不能无限延长缓存。普通 KV 秘密不自动具有动态凭据的 lease 语义。",
+    "example": "Vault 按数据库角色生成独立用户名后，应用仍需管理连接池；不能只见 lease 已到期就宣布所有旧数据库会话已经断开。"
+  },
+  {
+    "id": "security.workload-identity",
+    "domain": "security",
+    "name": "Workload Identity",
+    "aliases": [
+      "Workload Identity",
+      "工作负载身份"
+    ],
+    "definition": "标识运行中服务或进程主体、供通信认证与策略映射使用的身份。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/mtls-service-identities-and-trust-boundaries.md",
+      "docs/knowledge/security/service-delegation-token-exchange-and-audience.md"
+    ],
+    "explanation": "身份发放需将工作负载的受控识别证据绑定到可领取的标识，不能由请求者自报身份决定。SPIFFE 是一种具体体系，以信任域及路径构成 SPIFFE ID；X.509-SVID 可在 URI SAN 中承载该 ID，结合信任材料和私钥证明用于认证。工作负载身份、SPIFFE、SVID、SAN 与 PKI 不是同义词，身份到租户、动作和资源的权限映射仍由应用策略执行。",
+    "example": "服务端验证 spiffe://prod.example/orders/reader 后，策略只允许它读取 T1 的订单，不能因路径名含 reader 就自动授予所有租户的读权限。"
+  },
+  {
+    "id": "security.rebac",
+    "domain": "security",
+    "name": "Relationship-Based Access Control",
+    "aliases": [
+      "ReBAC",
+      "Relationship-Based Access Control",
+      "基于关系的访问控制"
+    ],
+    "definition": "按主体与对象、对象与对象之间的关系及组合规则推导访问资格。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/authorization-models-policy-distribution-and-revocation.md"
+    ],
+    "explanation": "关系模型可表达直接分享、团队成员与父对象继承，并与角色、属性和强制租户限制组合。图上有路径不自动授予权限，实际关系规则、遍历成本与事实新鲜度需分别约定；它不是RBAC角色层级、OpenFGA或PDP的同义词。",
+    "example": "团队成员经有读取资格的父文件夹访问文档，仍需满足租户与对象状态；撤销成员关系后，旧事实和允许缓存可能继续影响判断。"
+  },
+  {
+    "id": "security.mfa",
+    "domain": "security",
+    "name": "Multi-Factor Authentication",
+    "aliases": [
+      "MFA",
+      "Multi-Factor Authentication",
+      "多因子认证"
+    ],
+    "definition": "组合不同类别的认证因子，并保持挑战、绑定、会话及恢复路径的保证。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/multi-factor-authentication-passkeys-and-recovery.md"
+    ],
+    "explanation": "MFA不按设备数或页面步骤计数，密码加安全问题仍通常属于同类因子。OTP短时/单次、WebAuthn的RP和挑战绑定、UP/UV、凭据注册/替换及合格认证的新鲜度需分别检查；MFA完成不代表交易同意或当前对象授权。",
+    "example": "12:00完成认证，12:06执行要求300秒内证明的动作，360秒已超范围；换发令牌不会自动重新完成因子认证。"
+  },
+  {
+    "id": "security.service-delegation",
+    "domain": "security",
+    "name": "Service Delegation",
+    "aliases": [
+      "Service Delegation",
+      "跨服务委托"
+    ],
+    "definition": "让当前执行者在明确主体、目标资源与权限范围内代为执行操作。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/security/service-delegation-token-exchange-and-audience.md"
+    ],
+    "explanation": "委托需分清subject、当前actor、受众、签发者与对象动作。Token Exchange是一种取得下一跳凭据的协议，不自动赋予权限收窄或撤销联动；ID Token、mTLS、DPoP和客户端自身权限各有不同用途。先前actor历史不等于当前授权，换发时间也不代表新的用户认证。",
+    "example": "B收到只面向B的用户凭据后，不能直接拿给C；需要取得适合C的能力并由C独立验证当前主体、执行者和对象权限。"
   },
   {
     "id": "database.db-models",
@@ -1341,11 +2519,17 @@
     "name": "RDBMS / NoSQL",
     "aliases": [
       "RDBMS",
-      "NoSQL"
+      "NoSQL",
+      "关系数据库",
+      "非关系数据库"
     ],
     "definition": "关系模型及多种非关系数据模型。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "RDBMS 围绕关系、约束和查询组织数据；NoSQL 是键值、文档、图等多种模型的统称。是否支持事务、索引或分布式能力应按具体产品和配置判断。",
+    "example": "文档数据库适合某种聚合读取，并不意味着无需模式或数据约束。"
   },
   {
     "id": "database.workloads",
@@ -1353,22 +2537,33 @@
     "name": "OLTP / OLAP",
     "aliases": [
       "OLTP",
-      "OLAP"
+      "OLAP",
+      "在线事务",
+      "在线分析"
     ],
     "definition": "在线事务与分析型访问模式。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "OLTP 侧重较短、较频繁的事务操作，OLAP 侧重跨大量数据的分析。二者是负载特征，可在同一业务中并存，需按扫描、更新和时效需求设计。",
+    "example": "下单属于事务路径，按月汇总销售趋势属于分析路径。"
   },
   {
     "id": "database.acid",
     "domain": "database",
     "name": "ACID",
     "aliases": [
-      "ACID"
+      "ACID",
+      "事务特性"
     ],
     "definition": "事务原子性、约束一致性、隔离性和持久性。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/isolation-and-mvcc.md"
+    ],
+    "explanation": "ACID 分别指原子性、一致性、隔离性和持久性。一致性依赖已表达的业务约束，隔离级别和持久化配置决定具体保证，不表示自动解决全部分布式一致性。",
+    "example": "事务整体提交仍可能遗漏未编码的跨记录业务规则。"
   },
   {
     "id": "database.isolation",
@@ -1376,13 +2571,21 @@
     "name": "Transaction / Isolation Level",
     "aliases": [
       "Transaction",
-      "Isolation Level"
+      "Isolation Level",
+      "事务隔离",
+      "隔离级别",
+      "数据库事务"
     ],
     "definition": "事务边界及并发可见性保证。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/database/concurrent-inventory.md"
-    ]
+      "docs/knowledge/database/concurrent-inventory.md",
+      "docs/knowledge/database/isolation-and-mvcc.md",
+      "docs/knowledge/database/inventory-concurrency-lab.md",
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "事务定义一组操作的提交边界，隔离级别限定与并发事务的可见性及异常。级别名称相同也应核对数据库实现、快照时点和冲突处理。",
+    "example": "同一事务两次查询能否看到新提交记录，要按实际隔离级别判断。"
   },
   {
     "id": "database.anomalies",
@@ -1391,22 +2594,35 @@
     "aliases": [
       "Dirty",
       "Non-repeatable",
-      "Phantom Read"
+      "Phantom Read",
+      "脏读",
+      "不可重复读",
+      "幻读"
     ],
     "definition": "读取未提交数据、重复读取变化和结果集变化。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/isolation-and-mvcc.md"
+    ],
+    "explanation": "脏读读取尚未提交的数据，不可重复读指同一记录重读变化，幻读涉及条件查询结果集变化。避免这些命名异常仍不一定满足所有业务串行化要求。",
+    "example": "两次按条件查询出现新增行，应结合隔离实现分析，而非仅看行锁数量。"
   },
   {
     "id": "database.mvcc",
     "domain": "database",
     "name": "MVCC",
     "aliases": [
-      "MVCC"
+      "MVCC",
+      "多版本并发控制"
     ],
     "definition": "用数据版本协调读写并发。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/isolation-and-mvcc.md",
+      "docs/knowledge/database/cdc-snapshots-log-positions-and-replay.md"
+    ],
+    "explanation": "MVCC 为数据维护多个可见版本，读者按快照规则选择版本。它减少部分读写阻塞，但仍有写写冲突、版本回收成本与隔离边界。",
+    "example": "长事务持有旧快照，可能使旧版本迟迟不能清理。"
   },
   {
     "id": "database.locking",
@@ -1414,13 +2630,20 @@
     "name": "Optimistic / Pessimistic Lock",
     "aliases": [
       "Optimistic",
-      "Pessimistic Lock"
+      "Pessimistic Lock",
+      "乐观锁",
+      "悲观锁"
     ],
     "definition": "检测冲突后处理与提前限制竞争。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/database/concurrent-inventory.md"
-    ]
+      "docs/knowledge/database/concurrent-inventory.md",
+      "docs/knowledge/systems/locks-and-synchronization.md",
+      "docs/knowledge/systems/deadlocks-and-recovery.md",
+      "docs/knowledge/database/inventory-concurrency-lab.md"
+    ],
+    "explanation": "乐观策略在提交更新时检验版本等冲突条件，悲观策略提前获取锁以约束竞争。两者都需处理失败与重试，锁范围也必须覆盖业务不变量。",
+    "example": "库存更新带版本条件，未更新到行时重新读取或报告冲突。"
   },
   {
     "id": "database.indexes",
@@ -1428,11 +2651,19 @@
     "name": "Index / Covering Index",
     "aliases": [
       "Index",
-      "Covering Index"
+      "Covering Index",
+      "覆盖索引",
+      "数据库索引"
     ],
     "definition": "缩小访问范围及从索引满足查询。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/indexes-and-query-plans.md",
+      "docs/knowledge/database/query-plans-lab.md",
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "索引用额外结构加快某些访问，覆盖索引包含查询所需信息。是否能避免回表还受可见性和引擎机制影响；索引也增加写入、空间和维护成本。",
+    "example": "联合索引列序影响可用查询范围，不能只看查询字段都在索引里。"
   },
   {
     "id": "database.plans",
@@ -1440,11 +2671,18 @@
     "name": "Query Plan / EXPLAIN",
     "aliases": [
       "Query Plan",
-      "EXPLAIN"
+      "EXPLAIN",
+      "查询计划",
+      "执行计划"
     ],
     "definition": "数据库执行路径、估算与实际执行信息。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/indexes-and-query-plans.md",
+      "docs/knowledge/database/query-plans-lab.md"
+    ],
+    "explanation": "执行计划描述扫描、连接、排序等算子及估算；实际分析可补充行数与耗时。带执行的分析会真正运行语句，读取计划时需区分累计、自身和循环次数。",
+    "example": "估算只返回十行却实际返回百万行时，先检查数据分布和统计信息。"
   },
   {
     "id": "database.recovery-log",
@@ -1453,11 +2691,41 @@
     "aliases": [
       "WAL",
       "Redo",
-      "Undo"
+      "Undo",
+      "预写日志"
     ],
     "definition": "预写、重放与回滚相关日志机制，细节因引擎而异。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/wal-and-crash-recovery.md",
+      "docs/knowledge/database/backups-and-point-in-time-recovery.md",
+      "docs/knowledge/database/backup-recovery-lab.md",
+      "docs/knowledge/cache-search/write-through-write-behind-and-durability.md"
+    ],
+    "explanation": "WAL 要求相关日志先于对应数据页持久化；Redo 用于重放，Undo 用于回滚或旧版本管理，具体机制依引擎而异。提交成功不意味着全部数据页已写回。",
+    "example": "进程在提交后崩溃，恢复可根据持久日志重建尚未刷出的已提交变更。"
+  },
+  {
+    "id": "database.lsm",
+    "domain": "database",
+    "name": "LSM / SSTable / Compaction",
+    "aliases": [
+      "LSM",
+      "LSM Tree",
+      "Log-Structured Merge",
+      "SSTable",
+      "MemTable",
+      "Compaction",
+      "压缩合并",
+      "写放大"
+    ],
+    "definition": "以内存积累、有序文件与后台合并组织键值更新，区分版本、删除及读写空间放大。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/lsm-sstables-and-compaction.md"
+    ],
+    "explanation": "LSM 在内存中积累写入，刷成有序文件并通过合并整理版本。读放大、写放大和空间放大互相影响；删除标记需等安全条件满足后才可移除。",
+    "example": "后台合并跟不上写入时，文件层数和读放大可能上升，最终触发写入停顿。"
   },
   {
     "id": "database.normalization",
@@ -1465,11 +2733,17 @@
     "name": "Normalization / Denormalization",
     "aliases": [
       "Normalization",
-      "Denormalization"
+      "Denormalization",
+      "范式",
+      "反范式"
     ],
     "definition": "减少冗余与按访问需求引入冗余。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "规范化围绕依赖关系减少冗余和更新异常；反规范化为访问需求保留派生或重复数据。引入冗余后要明确唯一事实来源、更新方式与修复路径。",
+    "example": "在订单中保存成交时商品名是历史快照需求，不能简单随商品现名覆盖。"
   },
   {
     "id": "database.replication",
@@ -1477,11 +2751,17 @@
     "name": "Replication / Read Replica",
     "aliases": [
       "Replication",
-      "Read Replica"
+      "Read Replica",
+      "数据库复制",
+      "只读副本"
     ],
     "definition": "复制状态并提供副本读取。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/consistency-and-replication.md"
+    ],
+    "explanation": "复制传播状态，只读副本可承担查询；接收、落盘、回放和查询快照是不同阶段。同步确认仅覆盖约定副本和阶段，旧快照不自动更新，复制也不替代独立历史备份及安全切主。",
+    "example": "用户刚写入主库就读落后副本，可能暂时看不到刚提交的记录。"
   },
   {
     "id": "database.partitioning",
@@ -1489,22 +2769,33 @@
     "name": "Partitioning / Sharding",
     "aliases": [
       "Partitioning",
-      "Sharding"
+      "Sharding",
+      "分区",
+      "分片"
     ],
     "definition": "在逻辑或节点间拆分数据。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/partitioning-sharding-and-data-routing.md"
+    ],
+    "explanation": "分区把数据按规则拆成片段，分片通常还涉及跨节点分布。路由键影响热点、跨片查询、唯一约束及迁移成本；拆分不自动解决容量倾斜。",
+    "example": "按租户分片便于租户内访问，但超大租户仍可能成为单片热点。"
   },
   {
     "id": "database.prepared",
     "domain": "database",
     "name": "Prepared Statement",
     "aliases": [
-      "Prepared Statement"
+      "Prepared Statement",
+      "预处理语句"
     ],
     "definition": "参数化执行与可能的计划复用，依驱动和数据库而异。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/security/sql-injection-parameters-and-query-structure.md"
+    ],
+    "explanation": "预处理语句把语句准备与参数执行分开，可能复用解析或计划。服务端准备、驱动模拟及计划选择依实现而异，参数化也不自动保证最优计划。",
+    "example": "同一查询模板对极少见值与热门值执行时，合适的访问路径可能不同。"
   },
   {
     "id": "database.migration",
@@ -1512,11 +2803,19 @@
     "name": "Schema Migration / CDC",
     "aliases": [
       "Schema Migration",
-      "CDC"
+      "CDC",
+      "模式迁移",
+      "变更数据捕获"
     ],
     "definition": "结构演进与数据变更捕获。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/schema-migrations-and-compatibility.md",
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md",
+      "docs/knowledge/database/cdc-snapshots-log-positions-and-replay.md"
+    ],
+    "explanation": "Schema Migration 修改结构与约束；CDC 捕获数据变化，常用于同步或迁移。在线演进需兼容同时存在的新旧应用，回填完成也需验证增量追平。",
+    "example": "先添加兼容字段，再迁移读写，最后在旧版本退出后删除旧字段。"
   },
   {
     "id": "database.constraints",
@@ -1524,14 +2823,55 @@
     "name": "Unique Constraint / Foreign Key",
     "aliases": [
       "Unique Constraint",
-      "Foreign Key"
+      "Foreign Key",
+      "唯一约束",
+      "外键"
     ],
     "definition": "由数据库维护唯一性和引用关系。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/api/idempotency.md",
-      "docs/knowledge/database/concurrent-inventory.md"
-    ]
+      "docs/knowledge/database/concurrent-inventory.md",
+      "docs/knowledge/database/inventory-concurrency-lab.md",
+      "docs/knowledge/api/webhook-signatures-replay-and-delivery.md",
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "唯一约束在数据库中防止重复键值，外键维护引用关系。NULL、延迟检查及跨分区支持依实现而异；应用先查再写不能替代并发下的约束。",
+    "example": "创建订单号时使用唯一约束，并把并发冲突转换为明确业务结果。"
+  },
+  {
+    "id": "database.write-skew",
+    "domain": "database",
+    "name": "Write Skew",
+    "aliases": [
+      "Write Skew",
+      "写偏斜"
+    ],
+    "definition": "并发事务依据各自快照做出相关判断、更新不同记录，合并结果可能违反跨记录约束的异常。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/isolation-and-mvcc.md"
+    ],
+    "explanation": "写偏斜中，事务依据相同或相关快照判断后分别更新不同记录，合并结果破坏共同规则。单行更新原子或避免写同一行并不足以防止这种异常。",
+    "example": "两名值班医生分别看到对方在岗并同时离岗，最终无人值班。"
+  },
+  {
+    "id": "database.selectivity",
+    "domain": "database",
+    "name": "Selectivity / Row Estimate",
+    "aliases": [
+      "Selectivity",
+      "Row Estimate",
+      "选择率",
+      "行数估计"
+    ],
+    "definition": "条件匹配比例与计划节点预计输出行数，用于分析访问路径和估计误差。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/indexes-and-query-plans.md"
+    ],
+    "explanation": "选择性描述条件匹配的数据比例，行数估计预测算子输出规模。数据倾斜、列相关性和统计过期可造成误差，进而影响连接顺序和访问路径。",
+    "example": "城市与邮编高度相关时，独立估计可能低估组合条件的匹配行数。"
   },
   {
     "id": "cache-search.cache-read",
@@ -1539,13 +2879,19 @@
     "name": "Cache Aside / Read Through",
     "aliases": [
       "Cache Aside",
-      "Read Through"
+      "Read Through",
+      "旁路缓存",
+      "读穿"
     ],
     "definition": "应用管理缓存或由缓存层加载数据。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
-    ]
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md",
+      "docs/knowledge/cache-search/cache-load-coalescing-and-stampedes.md",
+      "docs/knowledge/cache-search/write-through-write-behind-and-durability.md"
+    ],
+    "explanation": "Cache Aside 由应用查缓存、未命中后查主存储并回填；Read Through 由缓存层代为加载。二者都需约定键、加载失败、并发回填与一致性窗口。",
+    "example": "旧查询迟到回填时，可能把已更新值覆盖成旧缓存，需要版本或失效协调。"
   },
   {
     "id": "cache-search.cache-write",
@@ -1553,11 +2899,17 @@
     "name": "Write Through / Write Behind",
     "aliases": [
       "Write Through",
-      "Write Behind"
+      "Write Behind",
+      "写穿",
+      "异步写回"
     ],
-    "definition": "写入同步持久化或延后异步写回。",
+    "definition": "由缓存写路径同步推进后端，或先接纳待写状态再延后推进后端的两种组织方式。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/write-through-write-behind-and-durability.md"
+    ],
+    "explanation": "Write Through把writer后端写入纳入同步调用路径；Write Behind先接纳状态和待写责任，再由后台推进。成功覆盖内存、可恢复接纳还是后端提交需按实际组件与配置判断，两者都不自动形成缓存/数据库共同事务。异步写回需管理状态合并、版本与删除顺序、重复重试、容量和恢复，不能仅凭写延迟声明持久性或RPO。",
+    "example": "缓存接受v2后数据库仍为v1；未耐久待写记录丢失会让重载回到v1。按键只保留最新设置可以减少写入，却不能丢掉独立付款事件。"
   },
   {
     "id": "cache-search.invalidation",
@@ -1565,13 +2917,22 @@
     "name": "Cache Invalidation / TTL",
     "aliases": [
       "Cache Invalidation",
-      "TTL"
+      "TTL",
+      "缓存失效",
+      "过期时间"
     ],
     "definition": "主动失效与按时过期。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
-    ]
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md",
+      "docs/knowledge/networking/cdn-edge-caches-and-waf-boundaries.md",
+      "docs/knowledge/cache-search/cache-load-coalescing-and-stampedes.md",
+      "docs/knowledge/cache-search/write-through-write-behind-and-durability.md",
+      "docs/knowledge/security/authorization-models-policy-distribution-and-revocation.md",
+      "docs/knowledge/cache-search/redis-data-types-operations-and-atomicity.md"
+    ],
+    "explanation": "主动失效移除或更新已知旧内容，TTL 限定缓存项的存活期限。TTL 限制陈旧窗口但不提供强一致，失效消息也可能丢失或乱序。",
+    "example": "更新数据库并删除缓存后，先前发出的旧读取仍可能迟到回填。"
   },
   {
     "id": "cache-search.cache-failures",
@@ -1580,35 +2941,52 @@
     "aliases": [
       "Penetration",
       "Breakdown",
-      "Avalanche"
+      "Avalanche",
+      "缓存穿透",
+      "缓存击穿",
+      "缓存雪崩"
     ],
-    "definition": "不存在键回源、热点失效和批量失效问题。",
+    "definition": "不存在键回源、热点失效和大量键或节点失效造成的负载问题。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/cache-load-coalescing-and-stampedes.md"
+    ],
+    "explanation": "穿透、击穿和雪崩是常见工程称呼，口径可能不同，应先描述真实键分布、未命中与回源路径。负缓存要限定错误类别、身份及有效期；同键合并不能阻止随机不同键或缓存故障将依赖压满。",
+    "example": "热门键过期可合并加载；随机不存在ID仍需输入限制、受控负缓存或完整同步前提下的过滤，以及回源接纳。"
   },
   {
     "id": "cache-search.stampede",
     "domain": "cache-search",
     "name": "Cache Stampede",
     "aliases": [
-      "Cache Stampede"
+      "Cache Stampede",
+      "缓存踩踏",
+      "同键加载"
     ],
-    "definition": "并发未命中引发重复加载与回源放大。",
+    "definition": "并发未命中或刷新引发同一结果的重复加载与回源放大。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/cache-search/cache-aside-and-invalidation.md"
-    ]
+      "docs/knowledge/cache-search/cache-aside-and-invalidation.md",
+      "docs/knowledge/cache-search/cache-load-coalescing-and-stampedes.md"
+    ],
+    "explanation": "热点过期、冷启动或刷新可能让同一可复用结果被重复加载。同键合并减少所覆盖范围内的重复工作，但跨实例、不同键、错误重试和缓存故障仍需独立的容量与时间限制；TTL抖动、早刷新和旧值复用各有前提。",
+    "example": "三个实例各合并本地同键请求，一波请求仍可能触发三份回源；单键合并不能限制大量不同键的总加载。"
   },
   {
     "id": "cache-search.redis-types",
     "domain": "cache-search",
     "name": "Redis Data Structures",
     "aliases": [
-      "Redis Data Structures"
+      "Redis Data Structures",
+      "Redis 数据结构"
     ],
-    "definition": "按访问语义选择字符串、哈希、集合、有序集合和流。",
+    "definition": "按整值、字段、成员、排名或消费位置组织服务器操作的 Redis 逻辑类型。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/redis-data-types-operations-and-atomicity.md"
+    ],
+    "explanation": "String、Hash、List、Set、Sorted Set和Stream表达不同访问语义；类型不等于内部编码、持久化或端到端业务协议。需同时限定响应/成员容量、命令与事务错误、过期粒度及集群槽位。单命令原子、脚本或消费确认都不能替代外部副作用幂等和恢复证据。",
+    "example": "排行榜同分按字节顺序处理而非先达先得；Hash字段更新通常不续键TTL，字段过期还要核对7.4.0起的命令能力。"
   },
   {
     "id": "cache-search.lock-lease",
@@ -1616,22 +2994,37 @@
     "name": "Distributed Lock / Lease",
     "aliases": [
       "Distributed Lock",
-      "Lease"
+      "Lease",
+      "分布式锁"
     ],
     "definition": "跨节点互斥及有期限的持有权。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/leases-heartbeats-and-fencing.md"
+    ],
+    "explanation": "分布式锁/租约限定某段时间的资格，不能使暂停进程或在途写入消失。随机持有标识支持条件释放，严格递增代次支持资源端新旧判断；缓存回填还需业务版本或失效资格检查。",
+    "example": "客户端长暂停后恢复，不能只凭自己曾拿到锁就继续写入共享资源。"
   },
   {
     "id": "cache-search.inverted",
     "domain": "cache-search",
     "name": "Inverted Index",
     "aliases": [
-      "Inverted Index"
+      "Inverted Index",
+      "倒排索引",
+      "Postings List",
+      "倒排表",
+      "位置索引",
+      "Tokenization"
     ],
-    "definition": "从词项定位包含它的文档。",
+    "definition": "从词项定位文档及可选位置，分析规则、布尔条件与短语匹配分别决定结果。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/inverted-indexes-analysis-and-relevance.md",
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md"
+    ],
+    "explanation": "倒排索引把词项映射到包含它的文档，位置记录可支持短语等条件。分词、正规化和索引更新范围决定可匹配的内容，命中不等于业务相关。",
+    "example": "中文分词规则变化后，旧索引需按兼容策略重建或迁移。"
   },
   {
     "id": "cache-search.bm25",
@@ -1639,11 +3032,20 @@
     "name": "BM25 / Full-text Search",
     "aliases": [
       "BM25",
-      "Full-text Search"
+      "Full-text Search",
+      "全文检索",
+      "词频",
+      "文档频率",
+      "TF",
+      "DF"
     ],
-    "definition": "基于词项统计的相关性排序与全文检索。",
+    "definition": "全文匹配与相关性排序分别负责候选和次序；正文概述 BM25 的词频、集合及长度因素，不提供完整评分实现。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/inverted-indexes-analysis-and-relevance.md"
+    ],
+    "explanation": "全文检索先确定匹配候选，再用 BM25 等方法评分。BM25 综合词频、文档频率与长度因素，分数不是可信度概率，跨查询或索引的原始分数也不能随意比较。",
+    "example": "某词在一篇文档出现很多次，得分提升通常会饱和而非无限线性增长。"
   },
   {
     "id": "cache-search.vectors",
@@ -1651,11 +3053,23 @@
     "name": "Embedding / Similarity Search",
     "aliases": [
       "Embedding",
-      "Similarity Search"
+      "Similarity Search",
+      "向量索引",
+      "余弦相似度",
+      "Cosine Similarity",
+      "Inner Product",
+      "L2 Distance",
+      "嵌入向量",
+      "相似度检索"
     ],
-    "definition": "向量表示与距离或相似性查找。",
+    "definition": "用兼容空间中的距离或相似度比较向量，区分编码质量、归一化与精确搜索基线。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/rag-retrieval-and-grounding.md",
+      "docs/knowledge/cache-search/vector-indexes-metrics-and-approximate-search.md"
+    ],
+    "explanation": "Embedding 把内容映射到向量空间，检索按指定度量比较向量。模型、预处理、维度和归一化必须兼容，向量接近不保证事实支持或权限合格。",
+    "example": "余弦相似度与内积在归一化条件下才有可对应的排序关系。"
   },
   {
     "id": "cache-search.ann",
@@ -1663,11 +3077,24 @@
     "name": "ANN / HNSW",
     "aliases": [
       "ANN",
-      "HNSW"
+      "HNSW",
+      "近似近邻",
+      "近似检索",
+      "Approximate Nearest Neighbor",
+      "IVF",
+      "Product Quantization",
+      "PQ",
+      "近邻召回率",
+      "efSearch",
+      "nprobe"
     ],
-    "definition": "近似近邻搜索及分层图索引。",
+    "definition": "通过图探索、分区或量化交换查询/空间成本与近邻覆盖；过滤和精确基线有各自前提。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/vector-indexes-metrics-and-approximate-search.md"
+    ],
+    "explanation": "ANN 用近似搜索换取速度或空间收益；HNSW 用图探索，IVF 用分区，量化压缩表示。需要用同一语料与度量下的精确基线测量召回和资源成本。",
+    "example": "提高 efSearch 可能改善近邻覆盖，同时增加查询工作量与延迟。"
   },
   {
     "id": "cache-search.hybrid",
@@ -1675,11 +3102,24 @@
     "name": "Hybrid Search / Reranking",
     "aliases": [
       "Hybrid Search",
-      "Reranking"
+      "Reranking",
+      "混合召回",
+      "混合检索",
+      "重排",
+      "RRF",
+      "Reciprocal Rank Fusion",
+      "Cross-Encoder",
+      "Bi-Encoder",
+      "候选窗口"
     ],
-    "definition": "组合多种召回并重新评分排序。",
+    "definition": "对齐多路候选身份后融合排名或校准分数，再对有限输入重排；截断、相关性与来源支持分别检查。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/rag-retrieval-and-grounding.md",
+      "docs/knowledge/cache-search/hybrid-retrieval-fusion-and-reranking.md"
+    ],
+    "explanation": "混合检索合并关键词与向量等候选，RRF 可按排名融合，重排模型再对有限候选评分。要统一文档身份和权限，候选被截断后重排无法找回它们。",
+    "example": "先联合词项与向量候选并去重，再重排并核对最终片段是否支持答案。"
   },
   {
     "id": "cache-search.objects",
@@ -1687,11 +3127,54 @@
     "name": "Object Storage / Presigned URL",
     "aliases": [
       "Object Storage",
-      "Presigned URL"
+      "Presigned URL",
+      "对象存储",
+      "预签名 URL"
     ],
-    "definition": "按对象保存数据与限时签名访问。",
+    "definition": "按键和可选版本保存对象，通过有范围与期限的签名请求能力访问。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/object-storage-versions-uploads-and-presigned-access.md"
+    ],
+    "explanation": "对象键、版本ID、ETag、checksum与业务归属各有用途。以S3通用桶为参照，单键一致性不构成跨键/数据库共同发布，分段上传须核对最终完成结果。预签名URL可重复使用且受请求范围、凭据和当前存储策略约束；到期或业务撤销不自动终止在途下载，也不追回已有字节。",
+    "example": "URL写明12:10到期，但临时凭据12:06到期，则示例中的新请求期限受12:06约束；已接受的下载与业务数据库撤销需另行判断。"
+  },
+  {
+    "id": "cache-search.index-cutover",
+    "domain": "cache-search",
+    "name": "Index Rebuild / Index Cutover",
+    "aliases": [
+      "Index Rebuild",
+      "Index Cutover",
+      "索引重建",
+      "索引切换"
+    ],
+    "definition": "以快照与增量覆盖明确源状态边界，再发布新的索引代次，并安排在途请求、回退和旧代次回收。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md"
+    ],
+    "explanation": "重建需让全量视图与持续变更无缺口衔接；应用水位表示此前应处理变化均已完成，多分区进度不能取最大值代替。版本规则与删除保留避免旧回填覆盖新状态，别名或代次指针只负责相应范围的发布。",
+    "example": "G2 从与变更流配对的快照加载，重放之后的新增、更新和删除；达到发布边界且可搜索后切换读别名，并在回退窗口继续维护 G1。"
+  },
+  {
+    "id": "cache-search.coalescing",
+    "domain": "cache-search",
+    "name": "Request Coalescing / Singleflight",
+    "aliases": [
+      "Request Coalescing",
+      "Request Collapsing",
+      "Singleflight",
+      "同键加载合并",
+      "缓存加载合并"
+    ],
+    "definition": "让可复用结果的同键重叠请求共享一项在途工作。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/cache-search/cache-load-coalescing-and-stampedes.md"
+    ],
+    "explanation": "请求合并是抑制重复在途加载的策略；Go singleflight 是以 Group 和键划定范围的具体机制，不保存历史缓存，也不自动协调跨进程或管理应用取消、容量与回填资格。合并键须表达参数和权限下的结果等价，普通缓存踩踏、批量请求和分布式锁不是它的同义词。",
+    "example": "同一实例的多个获准读者共享公开商品数据加载，各自按期限等待；结果不同的租户价格查询使用不同键。"
   },
   {
     "id": "messaging.models",
@@ -1700,11 +3183,18 @@
     "aliases": [
       "MQ",
       "Pub-Sub",
-      "Event Streaming"
+      "Event Streaming",
+      "消息队列",
+      "发布订阅",
+      "事件流"
     ],
     "definition": "队列分发、广播订阅和可重放事件流。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/queues-pubsub-event-streams-and-retention.md"
+    ],
+    "explanation": "工作队列在同一工作池分担，发布订阅提供独立接收范围，事件日志保存位置与历史；这些维度可以组合。断线补读受保留/压缩及进度约束，确认和重放不自动保证外部效果恰好一次。",
+    "example": "任务队列让一个工作者处理任务，事件流可让多个独立消费组各自读取。"
   },
   {
     "id": "messaging.roles",
@@ -1713,11 +3203,18 @@
     "aliases": [
       "Producer",
       "Consumer",
-      "Broker"
+      "Broker",
+      "生产者",
+      "消费者",
+      "消息代理"
     ],
     "definition": "消息写入、处理与服务端存储分发角色。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md"
+    ],
+    "explanation": "Producer 写入消息，Broker 接收、存储与分发，Consumer 读取并执行业务处理。每一阶段都有独立确认边界，写入确认不证明消费者已完成业务。",
+    "example": "生产者收到 Broker 确认后，通知短信仍可能尚未发送。"
   },
   {
     "id": "messaging.positions",
@@ -1726,22 +3223,34 @@
     "aliases": [
       "Topic",
       "Partition",
-      "Offset"
+      "Offset",
+      "消息主题",
+      "偏移量"
     ],
     "definition": "主题、分区和分区内位置。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/partitions-consumer-groups-and-offsets.md",
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md"
+    ],
+    "explanation": "Topic 是消息的逻辑集合，Partition 是其中有序的日志分片，Offset 标识分片内位置。偏移只在对应分区中有意义，不能直接比较不同分区的全局业务顺序。",
+    "example": "同一业务键路由到同一分区，才能在该分区提供的顺序上进一步处理。"
   },
   {
     "id": "messaging.groups",
     "domain": "messaging",
     "name": "Consumer Group",
     "aliases": [
-      "Consumer Group"
+      "Consumer Group",
+      "消费组"
     ],
     "definition": "多个消费者协作分担读取。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/partitions-consumer-groups-and-offsets.md"
+    ],
+    "explanation": "消费组让多个消费者协作处理分区；具体分配与重平衡规则由 Broker 和客户端协议决定。成员变化可能造成处理重叠，业务完成与提交位置需协调。",
+    "example": "一个消费者完成处理但提交前退出，分区转移后消息可能再次被处理。"
   },
   {
     "id": "messaging.delivery",
@@ -1749,35 +3258,53 @@
     "name": "At-most-once / At-least-once",
     "aliases": [
       "At-most-once",
-      "At-least-once"
+      "At-least-once",
+      "至多一次",
+      "至少一次"
     ],
     "definition": "可能丢失不重投与可能重复的投递保证。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md"
+    ],
+    "explanation": "至多一次允许失败时丢失而不重投，至少一次通过重投降低丢失风险但允许重复。保证应说明起止边界、持久化和确认条件。",
+    "example": "先确认再执行业务可能丢工作，业务后确认则可能因确认丢失而重复。"
   },
   {
     "id": "messaging.exactly-once",
     "domain": "messaging",
     "name": "Exactly-once Semantics",
     "aliases": [
-      "Exactly-once Semantics"
+      "Exactly-once Semantics",
+      "恰好一次"
     ],
     "definition": "在明确组件和事务范围内限制重复处理效果。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/messaging/transactional-outbox.md"
-    ]
+      "docs/knowledge/messaging/transactional-outbox.md",
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md",
+      "docs/knowledge/messaging/partitions-consumer-groups-and-offsets.md"
+    ],
+    "explanation": "Exactly-once 仅在明确的组件、状态和事务范围内有意义。消息系统内的事务不自动覆盖外部数据库、支付或邮件，需要额外协调可观察的业务效果。",
+    "example": "日志读写在 Broker 事务内完成，不代表外部扣款也被同一事务保护。"
   },
   {
     "id": "messaging.consumer-idempotency",
     "domain": "messaging",
     "name": "Idempotent Consumer",
     "aliases": [
-      "Idempotent Consumer"
+      "Idempotent Consumer",
+      "幂等消费者"
     ],
     "definition": "重复消费仍保持受约束的业务效果。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md",
+      "docs/knowledge/messaging/partitions-consumer-groups-and-offsets.md",
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md"
+    ],
+    "explanation": "幂等消费者将消息身份与业务修改关联，使重复投递保持约定效果。去重标识的作用域、保留期和与业务写入的原子关系决定保证。",
+    "example": "把事件 ID 去重记录和余额修改放在同一数据库事务中。"
   },
   {
     "id": "messaging.ordering",
@@ -1785,11 +3312,19 @@
     "name": "Ordering / Partition Key",
     "aliases": [
       "Ordering",
-      "Partition Key"
+      "Partition Key",
+      "分区键",
+      "消息顺序"
     ],
     "definition": "在指定范围内维持顺序。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md",
+      "docs/knowledge/messaging/partitions-consumer-groups-and-offsets.md",
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md"
+    ],
+    "explanation": "消息顺序需点名业务键、分区或消费执行范围。Broker 有序交付后，应用并行处理、失败重试和跨分区合并仍可能打乱完成顺序。",
+    "example": "同一订单的取消不应在创建前生效，可按订单键路由并验证业务版本。"
   },
   {
     "id": "messaging.retry-dlq",
@@ -1797,35 +3332,54 @@
     "name": "Dead Letter Queue / Retry Queue",
     "aliases": [
       "Dead Letter Queue",
-      "Retry Queue"
+      "Retry Queue",
+      "死信队列",
+      "重试队列"
     ],
     "definition": "隔离持续失败消息与安排重试。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md",
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md"
+    ],
+    "explanation": "重试队列安排暂时失败后的再次处理，死信队列隔离持续失败或无法处理的消息。需保留原因、次数与回放方式，并限制重试放大。",
+    "example": "修复消息格式后回放死信，仍要防止已成功的副作用再次执行。"
   },
   {
     "id": "messaging.backpressure",
     "domain": "messaging",
     "name": "Backpressure",
     "aliases": [
-      "Backpressure"
+      "Backpressure",
+      "消息背压"
     ],
     "definition": "下游将容量压力传回上游。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md",
+      "docs/knowledge/messaging/delivery-acknowledgements-and-idempotency.md",
+      "docs/knowledge/performance/backpressure-and-bounded-queues.md"
+    ],
+    "explanation": "消息背压把下游处理能力反馈给生产或拉取端，限制在途与缓存。仅把积压移到 Broker 不代表容量问题消失，仍需检查保留与磁盘上限。",
+    "example": "消费者降低拉取并发后，监控积压增长和预计保留窗口。"
   },
   {
     "id": "messaging.outbox",
     "domain": "messaging",
     "name": "Transactional Outbox",
     "aliases": [
-      "Transactional Outbox"
+      "Transactional Outbox",
+      "事务发件箱",
+      "Outbox"
     ],
     "definition": "同一事务记录业务变化和待发布事件。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/messaging/transactional-outbox.md"
-    ]
+      "docs/knowledge/messaging/transactional-outbox.md",
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md"
+    ],
+    "explanation": "Outbox 在同一数据库事务中写入业务状态和待发布事件，再由独立发布者发送。它解决提交与记录发送意图的原子性，发布和消费仍可能重复。",
+    "example": "订单提交后服务崩溃，发布者恢复后可继续读取 Outbox 并发送事件。"
   },
   {
     "id": "messaging.cdc",
@@ -1833,11 +3387,93 @@
     "name": "CDC / Asynchronous Processing",
     "aliases": [
       "CDC",
-      "Asynchronous Processing"
+      "Asynchronous Processing",
+      "异步处理"
     ],
     "definition": "捕获数据变化并解耦后续处理。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md",
+      "docs/knowledge/database/cdc-snapshots-log-positions-and-replay.md"
+    ],
+    "explanation": "CDC 从日志或变更接口捕获已提交变化，用于异步下游处理。需管理位置、重放、模式变化和断点，变更记录也不一定等于完整业务事件。",
+    "example": "同步行更新到搜索索引时，需要保证删除、重放和版本更新不会互相覆盖。"
+  },
+  {
+    "id": "messaging.event-contract",
+    "domain": "messaging",
+    "name": "Event Contract / Event Schema Evolution",
+    "aliases": [
+      "Event Contract",
+      "Event Schema Evolution",
+      "事件契约",
+      "事件格式演进"
+    ],
+    "definition": "约定事件身份、载荷结构与事实含义，保护新旧读写及历史回放的兼容范围。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/event-contracts-schema-evolution-and-replay.md",
+      "docs/knowledge/architecture/event-sourcing-streams-snapshots-and-projections.md",
+      "docs/knowledge/messaging/event-time-watermarks-windows-and-late-data.md"
+    ],
+    "explanation": "事件契约分别定义信封身份、业务对象、格式定位和语义；兼容检查要说明writer/reader方向及历史集合。CloudEvents信封、Avro/Protobuf编码与Schema Registry检查不是同义机制。结构可解析不证明默认值、金额单位、权限与副作用正确，历史适配和双发回放需保留来源及业务去重边界。",
+    "example": "新增币种默认CNY只有在历史金额确实按人民币记录时才保留含义；相邻版本通过也不证明新读者能读取全部历史。"
+  },
+  {
+    "id": "messaging.event-time",
+    "domain": "messaging",
+    "name": "Event Time / Event-time Watermark",
+    "aliases": [
+      "Event Time",
+      "Event-time Watermark",
+      "事件时间",
+      "事件时间水位线"
+    ],
+    "definition": "用记录携带的发生时间归类，并用水位线表达事件时间进度；处理时间则来自实际执行时钟。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/event-time-watermarks-windows-and-late-data.md"
+    ],
+    "explanation": "事件时间描述业务事实发生的时间，处理时间描述算子实际处理记录的时间；水位线是系统对事件时间进度的声明或估计。水位线越快结果越早但迟到可能越多，越慢则状态和输出延迟增加。它不证明生产者时钟正确，也不等于消息偏移或墙钟截止时间。",
+    "example": "10:02发生的交易在10:06到达，事件时间窗口仍可把它归入10:00到10:05；是否接受修订由水位线和迟到策略决定。"
+  },
+  {
+    "id": "messaging.windows",
+    "domain": "messaging",
+    "name": "Window / Trigger / Pane",
+    "aliases": [
+      "Event-time Window",
+      "Window Trigger",
+      "Result Pane",
+      "事件时间窗口",
+      "窗口触发",
+      "结果分片"
+    ],
+    "definition": "窗口决定数据分组范围，触发器决定何时输出，pane 是一次触发产生的结果。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/event-time-watermarks-windows-and-late-data.md"
+    ],
+    "explanation": "滚动、滑动和会话窗口定义元素属于哪些有限分组；触发器可按水位、处理时间或数据条件提前、按时或迟到输出。多次 pane 还需约定累积、丢弃或撤回语义，下游才能判断是覆盖旧值还是应用增量。",
+    "example": "同一五分钟窗口先输出累计和10，迟到事件到达后输出13；累积语义下应覆盖为13，不能再相加得到23。"
+  },
+  {
+    "id": "messaging.late-data",
+    "domain": "messaging",
+    "name": "Late Data / Allowed Lateness",
+    "aliases": [
+      "Late Data",
+      "Allowed Lateness",
+      "迟到数据",
+      "允许迟到"
+    ],
+    "definition": "水位线越过事件所属窗口后到达的数据，以及系统继续保留状态并接受修订的期限。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/messaging/event-time-watermarks-windows-and-late-data.md"
+    ],
+    "explanation": "迟到是相对于水位线与窗口边界定义的，不只看墙钟延迟。Allowed lateness 让窗口在首次按时输出后继续保留到指定的事件时间/水位边界，需要保存状态并明确下游更新协议；它不是首次输出后等待相同墙钟时长。超过边界的数据仍需丢弃、旁路或离线更正策略。",
+    "example": "水位线越过10:05后，10:02的事件在允许迟到期内可把窗口结果从10修订为13；状态清理后再到达则进入旁路。"
   },
   {
     "id": "distributed.cap",
@@ -1847,9 +3483,13 @@
       "CAP",
       "PACELC"
     ],
-    "definition": "分区下的取舍及正常情况下延迟和一致性的权衡。",
+    "definition": "CAP 限定分区模型下线性一致性与请求最终完成无法同时保证；PACELC 还分析正常通信时延迟与一致性的设计取舍。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/cap-pacelc-and-operation-guarantees.md"
+    ],
+    "explanation": "这是两个相关但不同的分析对象，不能作为同一定理或任意三选二使用。CAP 的 A 是非故障节点请求最终按操作规范完成，不是固定延迟或可用率；PACELC 的 Else 分支要求明确读写路径、配置和一致性目标，不给整个产品永久分类。",
+    "example": "两个副本失联，甲已成功写1后乙才开始读；让两侧都完成请求无法同时保持线性一致。无分区时，等待哪些复制确认、从哪里读取仍会影响延迟和保证。"
   },
   {
     "id": "distributed.consistency",
@@ -1857,13 +3497,19 @@
     "name": "Strong / Eventual Consistency",
     "aliases": [
       "Strong",
-      "Eventual Consistency"
+      "Eventual Consistency",
+      "最终一致性",
+      "强一致性"
     ],
     "definition": "不同可见性保证，强一致须进一步说明具体模型。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/distributed/consistency-and-replication.md"
-    ]
+      "docs/knowledge/distributed/consistency-and-replication.md",
+      "docs/knowledge/distributed/cap-pacelc-and-operation-guarantees.md",
+      "docs/knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md"
+    ],
+    "explanation": "一致性模型约定读写可观察的关系；强一致需要继续指明是否线性一致等具体保证。最终一致描述在相应条件下趋于收敛，并不承诺每次立即读到最新值。",
+    "example": "购物车更新后读到旧副本，需检查是否满足产品承诺的读己之写。"
   },
   {
     "id": "distributed.linear-serial",
@@ -1871,13 +3517,18 @@
     "name": "Linearizability / Serializability",
     "aliases": [
       "Linearizability",
-      "Serializability"
+      "Serializability",
+      "线性一致性",
+      "可串行化"
     ],
     "definition": "实时单操作顺序与事务可串行执行的等价性。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/distributed/consistency-and-replication.md"
-    ]
+      "docs/knowledge/distributed/consistency-and-replication.md",
+      "docs/knowledge/distributed/cap-pacelc-and-operation-guarantees.md"
+    ],
+    "explanation": "线性一致性要求单操作可按尊重实时先后的顺序解释；可串行化要求并发事务结果等价于某个串行次序。两者作用范围和实时条件不同。",
+    "example": "事务可串行化并不单独承诺跨服务读写都按现实时间先后可见。"
   },
   {
     "id": "distributed.consensus",
@@ -1885,11 +3536,17 @@
     "name": "Consensus / Raft",
     "aliases": [
       "Consensus",
-      "Raft"
+      "Raft",
+      "共识"
     ],
     "definition": "在故障模型下就日志或状态达成一致。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/consensus-leaders-and-quorums.md",
+      "docs/knowledge/distributed/membership-changes-and-partition-recovery.md"
+    ],
+    "explanation": "共识算法在指定故障模型下让参与者就值或日志达成一致；Raft 通过任期、选主和复制日志维护安全性。获得领导者身份不等于任意写入都已提交。",
+    "example": "领导者先复制日志到满足协议条件的多数节点，再确认相应提交。"
   },
   {
     "id": "distributed.leadership",
@@ -1897,11 +3554,19 @@
     "name": "Leader Election / Quorum",
     "aliases": [
       "Leader Election",
-      "Quorum"
+      "Quorum",
+      "选主",
+      "法定人数"
     ],
     "definition": "选主与按法定集合达成读写条件。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/consensus-leaders-and-quorums.md",
+      "docs/knowledge/distributed/cap-pacelc-and-operation-guarantees.md",
+      "docs/knowledge/distributed/membership-changes-and-partition-recovery.md"
+    ],
+    "explanation": "选主决定协调角色，Quorum 是满足协议条件的节点集合。安全性依赖集合交叠、成员变化与协议规则，不能脱离复制和故障模型只套多数公式。",
+    "example": "旧任期的多数信息不能被随意当作当前任期提交的充分证据。"
   },
   {
     "id": "distributed.fencing",
@@ -1910,48 +3575,73 @@
     "aliases": [
       "Heartbeat",
       "Lease",
-      "Fencing Token"
+      "Fencing Token",
+      "心跳",
+      "租约",
+      "栅栏令牌"
     ],
     "definition": "存活检测、限时持有与拒绝过期执行者。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/leases-heartbeats-and-fencing.md",
+      "docs/knowledge/distributed/membership-changes-and-partition-recovery.md"
+    ],
+    "explanation": "心跳是故障怀疑信号，租约给持有权期限，Fencing Token 由资源端比较代次拒绝旧持有者。网络延迟与进程暂停使本地存活判断不能直接代表排他权。",
+    "example": "旧持有者暂停后恢复，资源端依据更高代次拒绝其迟到写入。"
   },
   {
     "id": "distributed.lag",
     "domain": "distributed",
     "name": "Replication Lag",
     "aliases": [
-      "Replication Lag"
+      "Replication Lag",
+      "复制延迟"
     ],
     "definition": "副本应用变更落后于上游。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/distributed/consistency-and-replication.md"
-    ]
+      "docs/knowledge/distributed/consistency-and-replication.md",
+      "docs/knowledge/cache-search/index-rebuild-watermarks-and-cutover.md",
+      "docs/knowledge/distributed/membership-changes-and-partition-recovery.md",
+      "docs/knowledge/database/cdc-snapshots-log-positions-and-replay.md"
+    ],
+    "explanation": "复制延迟可按日志位置、时间或应用进度描述，不同口径不能直接互换。落后副本影响新鲜度、故障切换损失和读一致性。",
+    "example": "副本已接收日志但尚未应用时，读取仍可能缺少最新变更。"
   },
   {
     "id": "distributed.split-brain",
     "domain": "distributed",
     "name": "Split Brain",
     "aliases": [
-      "Split Brain"
+      "Split Brain",
+      "脑裂"
     ],
     "definition": "多个节点同时认为自己拥有权威。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/consensus-leaders-and-quorums.md",
+      "docs/knowledge/distributed/leases-heartbeats-and-fencing.md"
+    ],
+    "explanation": "脑裂指多个节点同时认为自己拥有权威，可能源于分区、错误切换或旧领导者继续执行。恢复通信并不自动修复冲突，需用协议和资源端约束预防。",
+    "example": "两个主节点都接受修改后，必须明确冲突处理与业务修复策略。"
   },
   {
     "id": "distributed.partition",
     "domain": "distributed",
     "name": "Network Partition",
     "aliases": [
-      "Network Partition"
+      "Network Partition",
+      "网络分区"
     ],
     "definition": "节点间通信被切断或严重不可达。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/distributed/consistency-and-replication.md"
-    ]
+      "docs/knowledge/distributed/consistency-and-replication.md",
+      "docs/knowledge/distributed/consensus-leaders-and-quorums.md",
+      "docs/knowledge/distributed/cap-pacelc-and-operation-guarantees.md"
+    ],
+    "explanation": "网络分区使部分节点之间不能可靠通信，可能是单向、局部或间歇性的。超时只能表明没及时收到响应，不能据此证明远端已停止工作。",
+    "example": "请求超时后远端仍可能提交写入，客户端需核对结果而非盲目重做。"
   },
   {
     "id": "distributed.2pc",
@@ -1959,11 +3649,17 @@
     "name": "Distributed Transaction / 2PC",
     "aliases": [
       "Distributed Transaction",
-      "2PC"
+      "2PC",
+      "两阶段提交",
+      "分布式事务"
     ],
     "definition": "跨参与者协调提交及其阻塞等成本。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/two-phase-commit-sagas-and-recovery.md"
+    ],
+    "explanation": "2PC 先准备再由协调者决定提交或回滚，参与者需持久化决议相关状态。经典协议在某些故障下会阻塞，跨参与者锁与恢复增加可用性成本。",
+    "example": "参与者已准备后与协调者失联，不能仅凭本地超时就任意提交。"
   },
   {
     "id": "distributed.saga",
@@ -1971,22 +3667,32 @@
     "name": "Saga / Compensation",
     "aliases": [
       "Saga",
-      "Compensation"
+      "Compensation",
+      "补偿事务"
     ],
     "definition": "多步业务通过补偿应对部分成功。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/two-phase-commit-sagas-and-recovery.md"
+    ],
+    "explanation": "Saga 把长业务拆成本地事务，用后续动作或补偿处理部分成功。补偿是业务操作，未必精确逆转历史，也可能失败并需要人工处理。",
+    "example": "机票预订成功但酒店失败时，取消机票可能受手续费与取消时限约束。"
   },
   {
     "id": "distributed.hashing",
     "domain": "distributed",
     "name": "Consistent Hashing",
     "aliases": [
-      "Consistent Hashing"
+      "Consistent Hashing",
+      "一致性哈希"
     ],
     "definition": "减少节点变化时键重新分布的范围。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/consistent-hashing-placement-and-rebalancing.md"
+    ],
+    "explanation": "一致性哈希将键和节点映射到共同空间，减少成员变化时需迁移的键范围。虚拟节点有助于分布，热点键、容量差异和复制仍需另行处理。",
+    "example": "增加缓存节点时只迁移部分键，但单个超热键不会因此自动均摊。"
   },
   {
     "id": "distributed.clocks",
@@ -1994,11 +3700,18 @@
     "name": "Logical Clock / Clock Skew",
     "aliases": [
       "Logical Clock",
-      "Clock Skew"
+      "Clock Skew",
+      "逻辑时钟",
+      "时钟偏差"
     ],
     "definition": "因果顺序表示与物理时钟偏差。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/logical-clocks-causality-and-concurrency.md",
+      "docs/knowledge/distributed/hybrid-logical-clocks-and-timestamp-boundaries.md"
+    ],
+    "explanation": "逻辑时钟描述事件顺序或因果关系，物理时钟会有偏差和回拨。Lamport 时间先后不能反向证明因果；墙钟时间不应未经假设就用于跨节点排他判断。",
+    "example": "按时间戳比较两个写入前，先明确是否允许时钟偏差导致次序变化。"
   },
   {
     "id": "distributed.ids",
@@ -2006,11 +3719,107 @@
     "name": "Snowflake ID / ULID",
     "aliases": [
       "Snowflake ID",
-      "ULID"
+      "ULID",
+      "分布式 ID"
     ],
-    "definition": "不同的分布式或可排序标识生成方案。",
+    "definition": "对照基于节点与序列的Snowflake类ID和基于时间与随机部分的ULID，按各自条件判断唯一性与排序。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/distributed/distributed-identifiers-time-and-uniqueness.md"
+    ],
+    "explanation": "Snowflake与ULID是不同结构的对照组，不是同义格式。经典Twitter布局组合毫秒时间、数据中心/工作者身份和序列；ULID使用48位Unix毫秒时间和80位随机部分，单调工厂另有局部状态。节点复用、回拨、重启、随机质量和编码均影响保证，时间顺序不等于全局因果或提交顺序。",
+    "example": "同一Snowflake节点身份在同一时间片重启并清零序列可能重复；一个ULID单调工厂的递增也不会自动协调其他进程。"
+  },
+  {
+    "id": "distributed.vector-clocks",
+    "domain": "distributed",
+    "name": "Vector Clock",
+    "aliases": [
+      "Vector Clock",
+      "Vector Clocks",
+      "向量时钟"
+    ],
+    "definition": "以参与者计数向量表达因果包含，逐维比较区分后继与并发；精确性依赖身份、更新和上下文传播规则。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/logical-clocks-causality-and-concurrency.md",
+      "docs/knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md"
+    ],
+    "explanation": "在固定参与者并完整传播上下文的逐事件模型中，本地事件递增自身维度，接收消息合并逐维最大值并递增本维；一个向量逐维不大于另一个且至少一维更小时，表示因果在先。互不可比较表示因果并发，不能据此替代业务合并、提交确认或新鲜度保证。动态成员和裁剪还需单独协议。",
+    "example": "(2,0,1) 与 (1,3,1) 分别在不同维度更大，互不可比较；将它们按字典序排好仍不会产生因果关系。"
+  },
+  {
+    "id": "distributed.uuid",
+    "domain": "distributed",
+    "name": "UUIDv4 / UUIDv7",
+    "aliases": [
+      "UUID",
+      "UUIDv4",
+      "UUIDv7",
+      "Universally Unique Identifier"
+    ],
+    "definition": "RFC9562中的128位标识格式；v4采用122位随机数据，v7组合时间前缀与随机或可选单调构造，保证仍依赖版本和实现。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/distributed-identifiers-time-and-uniqueness.md"
+    ],
+    "explanation": "UUIDv4与UUIDv7是不同版本。v7高48位为Unix毫秒时间，版本与变体占6位，剩余74位可为随机数据，或按规范组合可选子毫秒片段、适当初始化计数器及剩余随机。纯随机尾部不保证同毫秒生成顺序；随机源、fork/恢复状态及碰撞处置需核查，UUID不替代幂等协议或对象授权。",
+    "example": "一个v7库在同毫秒随机填充rand_a/rand_b时，后生成值可能更小；不能仅因名称是v7就假定本进程内严格递增。"
+  },
+  {
+    "id": "distributed.membership",
+    "domain": "distributed",
+    "name": "Membership Reconfiguration",
+    "aliases": [
+      "Membership Reconfiguration",
+      "Membership Change",
+      "成员变更",
+      "成员重配置"
+    ],
+    "definition": "按协议改变复制组的投票资格与法定集合，保护新旧配置之间的决定关系。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/membership-changes-and-partition-recovery.md"
+    ],
+    "explanation": "成员重配置改变谁能参与选举或提交，不等于健康检测或键放置。Raft 论文的联合配置同时要求旧、新两侧多数；具体增量路径还约束单次变化、串行化和生效点。Learner 先接收日志而不投票，提升需检查条件；已有多数永久丢失时，不能靠添加节点继续原协议，另建逻辑集群也需隔离旧权威并明确恢复数据边界。",
+    "example": "旧配置 ABC 的 AB 多数与新配置 ABCDE 的 CDE 多数不相交；直接让两套名单各自决定会留下冲突窗口。"
+  },
+  {
+    "id": "distributed.hlc",
+    "domain": "distributed",
+    "name": "Hybrid Logical Clock",
+    "aliases": [
+      "HLC",
+      "Hybrid Logical Clock",
+      "Hybrid Logical Clocks",
+      "混合逻辑时钟"
+    ],
+    "definition": "结合已知物理分量与逻辑计数，让已编码的因果边对应严格递增时间戳。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/hybrid-logical-clocks-and-timestamp-boundaries.md"
+    ],
+    "explanation": "HLC以(l,c)字典序比较，发送/本地事件及接收事件按协议更新；因果在先推出较小，较小不能反推因果，相等也可能来自不同节点。物理接近性依赖时钟假设，持续时间、全局唯一、提交、完整读取和排他执行需各自协议。",
+    "example": "A发送(100,0)，B原为(95,0)，在物理读数96接收得到(100,1)；A本地仍为(100,0)、物理读数99，收到(100,2)时得到(100,3)。计数差不是经过毫秒。"
+  },
+  {
+    "id": "distributed.crdt",
+    "domain": "distributed",
+    "name": "Conflict-free Replicated Data Type",
+    "aliases": [
+      "CRDT",
+      "CRDTs",
+      "Conflict-free Replicated Data Type",
+      "Conflict-free Replicated Data Types",
+      "无冲突复制数据类型"
+    ],
+    "definition": "把允许更新、并发语义与合并规则共同设计，在传播前提成立时使同一对象的副本收敛。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md"
+    ],
+    "explanation": "状态型用单调内部状态与join合并，操作型还须满足其可靠交付、顺序和重复处理要求。收敛不等于即时最新、业务约束、持久化或外部动作幂等；添加/删除、元数据清理和身份恢复都属于类型契约。",
+    "example": "贡献状态(3,0)与(0,4)逐分量max得到(3,4)，读数7；不是总数取max得到4。PN计数仍可让余额1在两次并发减少后收敛到−1。"
   },
   {
     "id": "performance.latency-throughput",
@@ -2018,11 +3827,17 @@
     "name": "Latency / Throughput",
     "aliases": [
       "Latency",
-      "Throughput"
+      "Throughput",
+      "延迟",
+      "吞吐量"
     ],
     "definition": "完成一次操作的时间与单位时间处理量。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md"
+    ],
+    "explanation": "延迟是一次工作从规定起点到终点的耗时，吞吐量是单位时间完成的数量。边界、负载与成功口径必须一致，高吞吐不意味着尾延迟低。",
+    "example": "并发增加后每秒完成量不再增长，而排队延迟仍可能持续上升。"
   },
   {
     "id": "performance.rates",
@@ -2031,11 +3846,17 @@
     "aliases": [
       "QPS",
       "RPS",
-      "TPS"
+      "TPS",
+      "请求速率",
+      "事务速率"
     ],
     "definition": "查询、请求和事务速率，须写清计数口径。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md"
+    ],
+    "explanation": "QPS、RPS、TPS 分别常用于查询、请求、事务的每秒速率，但各团队定义可能不同。一次请求可含多次查询或事务，比较前需统一计数对象。",
+    "example": "每秒一千个 API 请求若各查三次数据库，不能直接当作一千数据库 QPS。"
   },
   {
     "id": "performance.percentiles",
@@ -2044,11 +3865,17 @@
     "aliases": [
       "P50",
       "P95",
-      "P99"
+      "P99",
+      "分位数",
+      "尾延迟"
     ],
     "definition": "观测窗口内延迟分布的分位数。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md"
+    ],
+    "explanation": "P95 表示样本中约 95% 不超过该值，其他分位数类似。窗口、样本和聚合方式决定意义，各实例分位数不能简单求平均得到全局分位数。",
+    "example": "平均延迟不变时，少数请求恶化仍可能使 P99 明显上升。"
   },
   {
     "id": "performance.bound",
@@ -2056,22 +3883,33 @@
     "name": "CPU-bound / I/O-bound",
     "aliases": [
       "CPU-bound",
-      "I/O-bound"
+      "I/O-bound",
+      "计算密集",
+      "I/O 密集"
     ],
-    "definition": "瓶颈主要在计算还是 I/O 等待。",
+    "definition": "描述当前主要受计算或 I/O 等资源约束的工作，需结合运行与等待证据，不能靠固定利用率阈值分类。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/cpu-time-utilization-load-and-quotas.md"
+    ],
+    "explanation": "CPU-bound 和 I/O-bound 描述当前负载的主要限制因素，需用执行时间、等待和资源证据判断。约束会随输入、并发和资源配额变化。",
+    "example": "线程等磁盘时利用率可能低；受 CPU 配额限制时也可能出现长调度等待。"
   },
   {
     "id": "performance.little",
     "domain": "performance",
     "name": "Little’s Law",
     "aliases": [
-      "Little’s Law"
+      "Little’s Law",
+      "利特尔定律"
     ],
     "definition": "稳定系统中平均在途量、到达率和停留时间的关系。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md"
+    ],
+    "explanation": "Little 定律用 L = λW 关联稳定系统内平均在途量、平均有效到达率与平均停留时间。三者必须采用同一边界与群体，持续增长的积压不能直接当稳态估计。",
+    "example": "平均每秒进入 100 个请求、停留 0.2 秒，满足前提时平均在途约 20 个。"
   },
   {
     "id": "performance.profiling",
@@ -2079,11 +3917,21 @@
     "name": "Profiling / Flame Graph",
     "aliases": [
       "Profiling",
-      "Flame Graph"
+      "Flame Graph",
+      "性能剖析",
+      "火焰图",
+      "on-CPU",
+      "off-CPU",
+      "Inclusive Time",
+      "Self Time"
     ],
-    "definition": "采样或插桩分析与堆栈聚合展示。",
+    "definition": "把所选事件和资源权重归到代码或调用栈，区分聚合宽度、执行时间线、累计/自身及运行/等待范围。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/profiling-stacks-and-flame-graphs.md"
+    ],
+    "explanation": "Profiling 把采样事件或计量权重归到代码和调用栈；火焰图宽度表示选定权重的聚合量。需区分 on-CPU 与 off-CPU、自身与累计，横向位置通常不是时间线。",
+    "example": "锁等待不在 CPU 样本里显著，并不意味着它对端到端延迟无影响。"
   },
   {
     "id": "performance.load-tests",
@@ -2092,11 +3940,18 @@
     "aliases": [
       "Load",
       "Stress",
-      "Soak Test"
+      "Soak Test",
+      "负载测试",
+      "压力测试",
+      "耐久测试"
     ],
-    "definition": "目标负载、极限负载和长时间运行验证。",
+    "definition": "分别观察目标负载、超限失效和持续退化；需说明请求发起方式、正确性、尾延迟及资源边界。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/benchmarks-workloads-and-speedup.md"
+    ],
+    "explanation": "负载测试观察目标流量，压力测试探索超限行为，耐久测试观察长时间退化。要同时检查正确性、发压方式、完成率、尾延迟与资源，而非只报峰值。",
+    "example": "持续运行数小时才能暴露连接泄漏，短促峰值测试可能看不到。"
   },
   {
     "id": "performance.scaling",
@@ -2104,11 +3959,17 @@
     "name": "Horizontal / Vertical Scaling",
     "aliases": [
       "Horizontal",
-      "Vertical Scaling"
+      "Vertical Scaling",
+      "水平扩容",
+      "垂直扩容"
     ],
     "definition": "增加实例与提升单实例资源。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md"
+    ],
+    "explanation": "水平扩容增加实例，垂直扩容增加单实例资源。共享瓶颈、数据分布和协调成本限制收益；状态迁移与故障恢复也影响扩容效果。",
+    "example": "应用实例翻倍而数据库仍饱和时，请求吞吐未必翻倍。"
   },
   {
     "id": "performance.batching",
@@ -2116,11 +3977,17 @@
     "name": "Batching / Pipelining",
     "aliases": [
       "Batching",
-      "Pipelining"
+      "Pipelining",
+      "批处理",
+      "流水线"
     ],
     "definition": "合并操作和重叠多个执行阶段。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/batching-pipelining-and-amortized-waiting.md"
+    ],
+    "explanation": "Batching 合并多个操作以分摊固定成本，Pipelining 让不同操作或阶段重叠推进。二者都可能增加在途量，批大小与等待时间需共同约束。",
+    "example": "批量写入减少往返，但等待凑批会增加低流量时单请求延迟。"
   },
   {
     "id": "performance.overload",
@@ -2128,11 +3995,18 @@
     "name": "Rate Limiting / Load Shedding",
     "aliases": [
       "Rate Limiting",
-      "Load Shedding"
+      "Load Shedding",
+      "负载丢弃"
     ],
     "definition": "约束进入速率和过载时拒绝工作。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/latency-throughput-and-queues.md",
+      "docs/knowledge/api/rate-limits-concurrency-and-quotas.md",
+      "docs/knowledge/performance/overload-control-lab.md"
+    ],
+    "explanation": "限流限制进入速度，负载丢弃在容量不足时拒绝部分工作。拒绝位置应尽量靠前，并结合优先级、重试提示和总预算控制放大。",
+    "example": "队列已满时及时拒绝低优先级请求，可保留容量处理已接受工作。"
   },
   {
     "id": "performance.contention",
@@ -2140,11 +4014,17 @@
     "name": "Hotspot / Contention",
     "aliases": [
       "Hotspot",
-      "Contention"
+      "Contention",
+      "热点",
+      "资源竞争"
     ],
     "definition": "局部集中访问与共享资源竞争。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/hotspots-contention-and-serialized-service.md"
+    ],
+    "explanation": "热点是访问集中到局部键或分片，竞争是多个执行者争用有限资源。增加并发可能提高锁等待或一致性开销，需要识别串行点及其所有者。",
+    "example": "所有请求更新同一个计数行时，增加工作线程可能只增加排队。"
   },
   {
     "id": "performance.queueing",
@@ -2152,24 +4032,37 @@
     "name": "Queueing / Backpressure",
     "aliases": [
       "Queueing",
-      "Backpressure"
+      "Backpressure",
+      "排队",
+      "背压"
     ],
     "definition": "等待队列形成和压力反馈。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/performance/slow-api-investigation.md"
-    ]
+      "docs/knowledge/performance/slow-api-investigation.md",
+      "docs/knowledge/performance/latency-throughput-and-queues.md",
+      "docs/knowledge/performance/backpressure-and-bounded-queues.md",
+      "docs/knowledge/performance/overload-control-lab.md",
+      "docs/knowledge/networking/tcp-flow-control-and-congestion.md"
+    ],
+    "explanation": "排队暂存尚不能执行的工作，背压把压力传回上游。队列应限制容量和等待时间，取消还需传到执行端；无限积压会把过载转换为高延迟和内存消耗。",
+    "example": "下游变慢时限制在途请求，并让超期任务退出队列。"
   },
   {
     "id": "performance.capacity",
     "domain": "performance",
     "name": "Capacity Planning",
     "aliases": [
-      "Capacity Planning"
+      "Capacity Planning",
+      "容量规划"
     ],
     "definition": "用工作负载、资源余量和增长预估容量。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md"
+    ],
+    "explanation": "容量规划根据负载构成、增长、资源瓶颈和故障余量估算可持续服务能力。需要在目标延迟与正确性要求下测量，而非仅外推平均 CPU。",
+    "example": "规划单区故障后剩余实例仍能承载目标流量的容量。"
   },
   {
     "id": "devops.linux",
@@ -2178,11 +4071,17 @@
     "aliases": [
       "Linux Process",
       "Signal",
-      "Permission"
+      "Permission",
+      "进程信号",
+      "文件权限"
     ],
     "definition": "进程生命周期、信号与访问权限。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md"
+    ],
+    "explanation": "Linux 进程有生命周期与凭据，信号用于通知或请求控制，权限决定资源访问。信号处理有上下文限制，停止请求也不自动完成业务清理。",
+    "example": "服务收到 SIGTERM 后停止接流并排空在途工作，仍需受关闭期限约束。"
   },
   {
     "id": "devops.isolation",
@@ -2190,11 +4089,19 @@
     "name": "Namespace / cgroups",
     "aliases": [
       "Namespace",
-      "cgroups"
+      "cgroups",
+      "cgroup v2",
+      "资源隔离",
+      "命名空间",
+      "控制组"
     ],
     "definition": "资源视图隔离和用量限制。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/images-containers-and-resource-isolation.md"
+    ],
+    "explanation": "Namespace 改变进程可见的资源视图，cgroups 对资源使用实施计量与控制。二者不等价于完整安全边界，容器仍依赖内核及其他隔离机制。",
+    "example": "进程看到独立 PID 视图，并不说明它拥有独立内核或无限 CPU。"
   },
   {
     "id": "devops.containers",
@@ -2202,11 +4109,17 @@
     "name": "Image / Container",
     "aliases": [
       "Image",
-      "Container"
+      "Container",
+      "镜像",
+      "容器"
     ],
     "definition": "文件系统与配置模板及其运行实例。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/images-containers-and-resource-isolation.md"
+    ],
+    "explanation": "镜像描述分层文件系统和运行配置，容器是以其为输入的运行实例。可写层、挂载与运行参数会影响实际状态，持久数据需明确外置与备份。",
+    "example": "相同镜像在不同挂载和环境配置下，仍可能表现出不同行为。"
   },
   {
     "id": "devops.k8s",
@@ -2215,11 +4128,19 @@
     "aliases": [
       "Pod",
       "Deployment",
-      "Service"
+      "Service",
+      "Reconciliation",
+      "Desired State",
+      "声明式部署",
+      "控制循环"
     ],
     "definition": "工作单元、声明式副本管理与服务访问。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/declarative-deployments-and-health-probes.md"
+    ],
+    "explanation": "Pod 是 Kubernetes 的基本工作单元，Deployment 协调副本更新，Service 提供稳定访问抽象。控制器持续使实际状态接近期望状态，过程不是瞬时事务。",
+    "example": "更新 Deployment 后，新旧 Pod 可能在一段时间内同时运行。"
   },
   {
     "id": "devops.entry",
@@ -2227,22 +4148,32 @@
     "name": "Ingress / Gateway API",
     "aliases": [
       "Ingress",
-      "Gateway API"
+      "Gateway API",
+      "集群入口"
     ],
     "definition": "集群入口路由与流量管理接口。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/ingress-gateway-api-service-discovery-and-endpoints.md"
+    ],
+    "explanation": "Ingress与Gateway API表达入口路由意图，控制器实现转发。监听器允许Route绑定和目标拥有者允许跨命名空间引用是两道许可，均不替代业务鉴权；需核对实现、TLS与字段支持。",
+    "example": "同一条路径路由在不同控制器上的扩展配置不一定可移植。"
   },
   {
     "id": "devops.discovery",
     "domain": "devops",
     "name": "Service Discovery",
     "aliases": [
-      "Service Discovery"
+      "Service Discovery",
+      "服务发现"
     ],
-    "definition": "查找当前可用服务实例。",
+    "definition": "通过名称或逻辑身份查找服务地址或候选端点信息。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/ingress-gateway-api-service-discovery-and-endpoints.md"
+    ],
+    "explanation": "服务发现将名称或逻辑身份映射到服务地址或候选端点，可通过DNS、注册中心或平台接口实现。普通ClusterIP与headless返回的信息不同；缓存和健康传播有延迟，发现结果不保证即时可用，客户端仍需处理连接失败。",
+    "example": "实例已被摘除时，客户端缓存的旧地址可能暂时继续被尝试。"
   },
   {
     "id": "devops.cloud-network",
@@ -2251,11 +4182,18 @@
     "aliases": [
       "VPC",
       "Subnet",
-      "Security Group"
+      "Security Group",
+      "云私有网络",
+      "子网",
+      "安全组"
     ],
     "definition": "云网络边界和访问控制。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/cloud-networks-subnets-routes-and-security-groups.md"
+    ],
+    "explanation": "VPC划逻辑网络、子网划地址范围、路由选择下一跳，过滤规则另约束流量。AWS例中安全组有状态、网络ACL无状态；私网和可达性都不替代应用身份与对象权限，其他平台需分别核对。",
+    "example": "服务位于同一 VPC 不代表端口必然可达，还需检查路由与安全规则。"
   },
   {
     "id": "devops.iac",
@@ -2263,11 +4201,16 @@
     "name": "IaC / Terraform",
     "aliases": [
       "IaC",
-      "Terraform"
+      "Terraform",
+      "基础设施即代码"
     ],
     "definition": "以版本化声明管理基础设施。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/iac-state-drift-and-change-plans.md"
+    ],
+    "explanation": "IaC 以版本化声明管理基础设施，Terraform 是实现工具之一。应区分配置、状态绑定和远端观测，再审查计划、漂移归属、锁及敏感数据；刷新记录不自动改变声明或资源。",
+    "example": "修改资源名称可能被提供方解释为替换，不能只按文本差异判断影响。"
   },
   {
     "id": "devops.cicd",
@@ -2275,13 +4218,19 @@
     "name": "CI / CD",
     "aliases": [
       "CI",
-      "CD"
+      "CD",
+      "持续集成",
+      "持续交付",
+      "持续部署"
     ],
     "definition": "持续集成、交付或自动部署。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/devops/build-deploy-rollback.md"
-    ]
+      "docs/knowledge/devops/build-deploy-rollback.md",
+      "docs/knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md"
+    ],
+    "explanation": "CI 通过频繁集成和自动检查缩短反馈；CD 可指持续交付或持续部署，是否自动进入生产需明确。制品来源、环境配置和审批条件构成交付链。",
+    "example": "同一经过验证的制品逐级推广，可减少重新构建带来的差异。"
   },
   {
     "id": "devops.rollout",
@@ -2290,37 +4239,53 @@
     "aliases": [
       "Rolling",
       "Blue-Green",
-      "Canary"
+      "Canary",
+      "滚动发布",
+      "蓝绿发布",
+      "金丝雀发布"
     ],
     "definition": "不同发布替换和流量迁移策略。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/devops/build-deploy-rollback.md"
-    ]
+      "docs/knowledge/devops/build-deploy-rollback.md",
+      "docs/knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md"
+    ],
+    "explanation": "滚动逐步替换实例，蓝绿切入口，金丝雀逐步暴露部分请求/用户；需观测和停止条件。副本比例不保证精确请求比例，换回旧程序不撤销已提交数据及外部效果。",
+    "example": "先让小比例用户使用新版本，观察业务错误与尾延迟再扩大流量。"
   },
   {
     "id": "devops.flags",
     "domain": "devops",
     "name": "Feature Flag",
     "aliases": [
-      "Feature Flag"
+      "Feature Flag",
+      "特性开关",
+      "功能开关"
     ],
     "definition": "按条件启用行为并管理开关生命周期。",
     "priority": "P1",
     "articles": [
+      "docs/knowledge/engineering/trunk-based-development-and-feature-flags.md",
       "docs/knowledge/devops/build-deploy-rollback.md"
-    ]
+    ],
+    "explanation": "功能开关按配置与上下文选择已部署代码的行为。需管理默认值、权限、观测和清理；关闭开关不能自动撤销数据与外部动作，也不能代替服务端访问控制。",
+    "example": "新计价逻辑先只对测试租户启用，确认后再扩大并移除旧分支。"
   },
   {
     "id": "devops.immutable",
     "domain": "devops",
     "name": "Immutable Infrastructure",
     "aliases": [
-      "Immutable Infrastructure"
+      "Immutable Infrastructure",
+      "不可变基础设施"
     ],
     "definition": "通过替换实例交付新配置。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/declarative-deployments-and-health-probes.md"
+    ],
+    "explanation": "不可变基础设施以替换实例交付变更，减少手工修补造成的漂移。持久数据与外部状态仍需独立管理，替换过程要验证健康和兼容。",
+    "example": "修复系统依赖后构建新镜像并替换实例，而非逐台在线修改。"
   },
   {
     "id": "devops.autoscaling",
@@ -2328,11 +4293,16 @@
     "name": "Autoscaling / HPA",
     "aliases": [
       "Autoscaling",
-      "HPA"
+      "HPA",
+      "自动扩缩容"
     ],
     "definition": "基于观测信号调整资源或副本数。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md"
+    ],
+    "explanation": "HPA按观测建议副本，CPU利用百分比通常相对相应request；原始比例还受缺失指标、就绪、容忍及稳定规则影响。采样、调度和预热有延迟，期望数量不等于立即就绪能力。",
+    "example": "流量突然暴涨而新实例尚未就绪时，需要靠现有余量与拒绝策略保护服务。"
   },
   {
     "id": "devops.regions",
@@ -2340,11 +4310,17 @@
     "name": "Multi-AZ / Multi-Region",
     "aliases": [
       "Multi-AZ",
-      "Multi-Region"
+      "Multi-Region",
+      "多可用区",
+      "多地域"
     ],
     "definition": "跨可用区与跨地域部署。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/failure-domains-redundancy-and-recovery.md"
+    ],
+    "explanation": "多可用区和多地域部署针对不同故障范围，并增加复制、路由和运营成本。地域分散不自动建立独立性，仍需检查共享控制面与数据依赖。",
+    "example": "应用跨区但全部依赖单区数据库，仍可能因该区故障整体不可用。"
   },
   {
     "id": "reliability.signals",
@@ -2353,22 +4329,35 @@
     "aliases": [
       "Logs",
       "Metrics",
-      "Traces"
+      "Traces",
+      "日志",
+      "指标",
+      "链路追踪"
     ],
     "definition": "离散事件、聚合数值与请求因果链。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/slis-slos-and-error-budgets.md",
+      "docs/knowledge/reliability/logs-metrics-and-traces.md"
+    ],
+    "explanation": "日志记录离散事件，指标聚合数值，链路追踪连接一次执行中的相关片段。三者需以时间、资源和关联标识联系，采样与丢失限制证据完整性。",
+    "example": "指标发现错误率升高，再用 Trace 定位慢依赖并查对应日志细节。"
   },
   {
     "id": "reliability.otel",
     "domain": "reliability",
     "name": "OpenTelemetry",
     "aliases": [
-      "OpenTelemetry"
+      "OpenTelemetry",
+      "开放遥测"
     ],
     "definition": "可观测性 API、SDK、协议及采集生态。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/logs-metrics-and-traces.md"
+    ],
+    "explanation": "OpenTelemetry 提供生成、传播、采集和导出遥测的规范与组件。它不等同于完整存储分析后端，仍需配置采样、脱敏、保留与成本控制。",
+    "example": "应用经 SDK 生成 Span，由 Collector 处理后导出到选定后端。"
   },
   {
     "id": "reliability.trace",
@@ -2377,11 +4366,17 @@
     "aliases": [
       "Trace ID",
       "Span",
-      "Correlation ID"
+      "Correlation ID",
+      "链路标识",
+      "关联标识"
     ],
     "definition": "链路标识、执行片段和业务关联。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/logs-metrics-and-traces.md"
+    ],
+    "explanation": "Trace ID 标识一次追踪，Span 表示其中的操作片段，Correlation ID 可关联业务工作。传播必须覆盖线程、消息与服务边界，并避免把关联标识当权限凭据。",
+    "example": "异步任务带上关联信息，便于把后台处理与原请求联系起来。"
   },
   {
     "id": "reliability.methods",
@@ -2393,7 +4388,11 @@
     ],
     "definition": "请求速率错误延迟与资源使用率饱和错误。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/red-use-service-signals-and-resource-evidence.md"
+    ],
+    "explanation": "RED观察服务的请求速率、错误及耗时，USE检查相关资源的利用、饱和与错误。接纳/完成、错误速率/比例和分布聚合需明确口径；指标相关变化只是归因线索，不自动证明因果。",
+    "example": "请求耗时变高时，继续检查连接池饱和和数据库等待以定位约束。"
   },
   {
     "id": "reliability.slos",
@@ -2402,22 +4401,33 @@
     "aliases": [
       "SLI",
       "SLO",
-      "SLA"
+      "SLA",
+      "服务指标",
+      "服务目标"
     ],
     "definition": "指标、目标和对外服务约定。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/slis-slos-and-error-budgets.md"
+    ],
+    "explanation": "SLI 定义服务质量的测量方式，SLO 为其设定目标，SLA 是对外服务约定并可能含补偿条款。成功事件、窗口和排除规则必须明确。",
+    "example": "以合格请求比例定义 SLI，再规定滚动窗口内达到的目标比例。"
   },
   {
     "id": "reliability.budget",
     "domain": "reliability",
     "name": "Error Budget",
     "aliases": [
-      "Error Budget"
+      "Error Budget",
+      "错误预算"
     ],
     "definition": "由可靠性目标推导的可接受失败额度。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/slis-slos-and-error-budgets.md"
+    ],
+    "explanation": "错误预算由 SLO 推导可接受的不合格额度，用来协调可靠性与变更节奏。请求型和时间型目标预算口径不同，不能把所有预算都换算成停机分钟。",
+    "example": "请求成功率目标为 99.9% 时，对应合格口径下允许约 0.1% 不合格请求。"
   },
   {
     "id": "reliability.availability",
@@ -2425,11 +4435,17 @@
     "name": "Availability / Reliability",
     "aliases": [
       "Availability",
-      "Reliability"
+      "Reliability",
+      "可用性",
+      "可靠性"
     ],
     "definition": "可提供服务的程度与持续正确工作的能力。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/availability-reliability-and-observation-windows.md"
+    ],
+    "explanation": "可用性关注定义窗口和能力下是否可提供服务；可靠性可关注规定条件与期间的连续工作，也常作服务质量的上位概念。时间比例、请求比例和首次存活概率不相同，恢复在线仍需确认正确业务状态。",
+    "example": "服务能响应但持续返回错误价格，不能仅凭在线状态宣称可靠。"
   },
   {
     "id": "reliability.recovery",
@@ -2437,11 +4453,19 @@
     "name": "RTO / RPO",
     "aliases": [
       "RTO",
-      "RPO"
+      "RPO",
+      "恢复时间目标",
+      "恢复点目标"
     ],
     "definition": "恢复耗时目标和可接受数据丢失范围。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/database/backups-and-point-in-time-recovery.md",
+      "docs/knowledge/reliability/failure-domains-redundancy-and-recovery.md",
+      "docs/knowledge/cache-search/write-through-write-behind-and-durability.md"
+    ],
+    "explanation": "RTO 是恢复服务所允许的时间目标，RPO 是允许丢失的数据范围目标。两者是目标而非已证明能力，需把检测、切换、恢复与业务核对计入演练。",
+    "example": "每小时备份不自动保证一小时 RPO，还需确认备份可用且恢复链完整。"
   },
   {
     "id": "reliability.isolation",
@@ -2449,11 +4473,17 @@
     "name": "Circuit Breaker / Bulkhead",
     "aliases": [
       "Circuit Breaker",
-      "Bulkhead"
+      "Bulkhead",
+      "熔断",
+      "舱壁隔离"
     ],
     "definition": "熔断失败依赖与隔离资源池。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/circuit-breakers-isolation-and-degradation.md"
+    ],
+    "explanation": "熔断在失败达到条件后暂时阻止调用并安排探测，舱壁隔离限制不同依赖共享的资源。两者不自动取消已发出的工作，也不能替代总体超时和容量管理。",
+    "example": "为慢报表单设连接额度，避免其占满交易路径使用的资源池。"
   },
   {
     "id": "reliability.retry-budget",
@@ -2462,25 +4492,42 @@
     "aliases": [
       "Timeout",
       "Deadline",
-      "Retry Budget"
+      "Retry Budget",
+      "重试预算",
+      "截止时间"
     ],
     "definition": "限制等待时间、传播截止时间并约束重试消耗。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/reliability/timeouts-and-retry-budgets.md"
-    ]
+      "docs/knowledge/reliability/timeouts-and-retry-budgets.md",
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md",
+      "docs/knowledge/networking/tcp-flow-control-and-congestion.md"
+    ],
+    "explanation": "Timeout 限制局部等待，Deadline 表示整体最晚完成时刻，Retry Budget 限制重复尝试消耗。需要跨调用层传播剩余时间并处理已发生但结果未知的副作用。",
+    "example": "上游只剩 200 毫秒时，不应再发起默认等待两秒的下游调用。"
   },
   {
     "id": "reliability.probes",
     "domain": "reliability",
-    "name": "Readiness / Liveness",
+    "name": "Readiness / Liveness / Startup Probe",
     "aliases": [
       "Readiness",
-      "Liveness"
+      "Liveness",
+      "Startup Probe",
+      "Health Probe",
+      "健康探针",
+      "优雅终止",
+      "就绪探针",
+      "存活探针",
+      "启动探针"
     ],
-    "definition": "是否接收流量与是否需要重启的探测。",
+    "definition": "区分接流量、重启恢复和启动完成的探测；探针结果不等于全部用户业务目标达成。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/devops/declarative-deployments-and-health-probes.md"
+    ],
+    "explanation": "Readiness 判断是否应接流，Liveness 判断是否需重启，Startup 给启动阶段单独容忍窗口。探针应针对可恢复条件设计，过度依赖共享下游可能触发级联摘流或重启。",
+    "example": "数据库短暂变慢时，重启所有应用实例往往不能修复数据库瓶颈。"
   },
   {
     "id": "reliability.dr",
@@ -2488,11 +4535,17 @@
     "name": "Disaster Recovery / Failover",
     "aliases": [
       "Disaster Recovery",
-      "Failover"
+      "Failover",
+      "灾难恢复",
+      "故障切换"
     ],
     "definition": "灾难恢复计划与服务切换。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/failure-domains-redundancy-and-recovery.md"
+    ],
+    "explanation": "灾难恢复涵盖恢复数据和业务能力的计划，故障切换把流量或角色转到备用路径。需验证容量、依赖、数据状态与回切，而非仅观察备用实例在线。",
+    "example": "切到备用地域后，还要核对数据库可写、凭据有效及用户入口已更新。"
   },
   {
     "id": "reliability.incidents",
@@ -2500,22 +4553,68 @@
     "name": "Incident Response / Postmortem",
     "aliases": [
       "Incident Response",
-      "Postmortem"
+      "Postmortem",
+      "故障响应",
+      "事后复盘",
+      "事故响应",
+      "事故复盘"
     ],
     "definition": "止损、诊断、恢复与复盘。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/incident-response-recovery-and-postmortems.md"
+    ],
+    "explanation": "事故响应组织影响确认、协调、止损与业务恢复；复盘解释事实和促成条件，再为改进指定负责人、期限及效果验证。告警恢复、业务验收与集中响应结束可以是不同时间。",
+    "example": "回滚恢复流量后，继续检查数据是否需要修复并记录告警为何迟到。"
   },
   {
     "id": "reliability.chaos",
     "domain": "reliability",
     "name": "Chaos Engineering",
     "aliases": [
-      "Chaos Engineering"
+      "Chaos Engineering",
+      "混沌工程"
     ],
     "definition": "通过受控故障验证系统假设。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/reliability/chaos-engineering-hypotheses-stop-conditions-and-recovery.md"
+    ],
+    "explanation": "混沌工程以可反驳的稳态假设组织受控扰动，定义作用、观测、对照、影响范围及停止/恢复条件。注入成功不证明用户目标满足，停止注入也不撤销既有业务效果；一次结果只支持给定范围。",
+    "example": "隔离一个实例后，验证剩余容量和用户错误率，而非只确认实例被杀死。"
+  },
+  {
+    "id": "reliability.burn-rate",
+    "domain": "reliability",
+    "name": "Error Budget Burn Rate",
+    "aliases": [
+      "Burn Rate",
+      "Error Budget Burn Rate",
+      "燃烧率"
+    ],
+    "definition": "对事件比例型 SLO，以观察窗口的不合格比例除以预算比例，衡量相对消耗速度；不等于已消耗预算份额。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/reliability/slis-slos-and-error-budgets.md"
+    ],
+    "explanation": "燃烧率衡量错误预算相对消耗速度。事件比例型目标中，可用观察窗口不合格比例除以允许比例；数值需结合窗口和流量，不能直接当作已耗尽预算百分比。",
+    "example": "允许错误比例为 0.1%，某窗口实际 1%，对应燃烧率为 10。"
+  },
+  {
+    "id": "reliability.cardinality",
+    "domain": "reliability",
+    "name": "Label Cardinality",
+    "aliases": [
+      "Label Cardinality",
+      "标签基数"
+    ],
+    "definition": "指标标签或其组合的不同取值规模，影响时间序列数量与资源成本。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/reliability/logs-metrics-and-traces.md"
+    ],
+    "explanation": "标签基数是单标签或标签组合的不同取值规模，决定指标序列数量和成本。用户 ID、原始 URL 等高变化字段通常更适合受控日志或追踪。",
+    "example": "把订单 ID 作为指标标签可能随订单数量生成大量时间序列。"
   },
   {
     "id": "engineering.tests",
@@ -2524,26 +4623,38 @@
     "aliases": [
       "Unit",
       "Integration",
-      "E2E Test"
+      "E2E Test",
+      "单元测试",
+      "集成测试",
+      "端到端测试"
     ],
     "definition": "按验证边界划分的测试。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/engineering/test-scopes-and-doubles.md"
-    ]
+    ],
+    "explanation": "单元测试聚焦较小行为边界，集成测试检查组件或真实依赖协作，端到端测试覆盖完整用户路径。边界比工具名称更重要，各层证据互补。",
+    "example": "数据库事务回滚行为应由连接真实数据库的集成检查提供证据。"
   },
   {
     "id": "engineering.contracts",
     "domain": "engineering",
     "name": "Contract Testing",
     "aliases": [
-      "Contract Testing"
+      "Contract Testing",
+      "Consumer-driven Contract Testing",
+      "Pact",
+      "消费者驱动契约",
+      "契约测试"
     ],
     "definition": "验证交互契约的兼容性。",
     "priority": "P0",
     "articles": [
-      "docs/knowledge/engineering/test-scopes-and-doubles.md"
-    ]
+      "docs/knowledge/engineering/test-scopes-and-doubles.md",
+      "docs/knowledge/engineering/contract-testing-and-compatibility.md"
+    ],
+    "explanation": "契约测试验证提供方与消费者对消息或接口的交互约定，消费者驱动契约从实际消费需求出发。它不自动证明部署、权限、性能或完整业务流程正确。",
+    "example": "提供方改变字段类型时，契约检查可在上线前发现现有消费者不兼容。"
   },
   {
     "id": "engineering.doubles",
@@ -2552,13 +4663,16 @@
     "aliases": [
       "Mock",
       "Stub",
-      "Fake"
+      "Fake",
+      "测试替身"
     ],
     "definition": "交互验证、固定行为和简化实现等测试替身。",
     "priority": "P0",
     "articles": [
       "docs/knowledge/engineering/test-scopes-and-doubles.md"
-    ]
+    ],
+    "explanation": "Stub 提供预设响应，Mock 常用于验证预期交互，Fake 提供简化但可工作的实现。命名因工具而异，关键是说明替身与真实依赖的差异。",
+    "example": "内存 Fake 无法替代真实数据库的锁、隔离和崩溃恢复验证。"
   },
   {
     "id": "engineering.tdd",
@@ -2566,11 +4680,17 @@
     "name": "TDD / BDD",
     "aliases": [
       "TDD",
-      "BDD"
+      "BDD",
+      "测试驱动开发",
+      "行为驱动开发"
     ],
     "definition": "以测试或可讨论的行为规格推动开发。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/tdd-bdd-examples-and-feedback-loops.md"
+    ],
+    "explanation": "TDD按行为场景列表逐项形成可运行检查、实现和重构反馈；BDD通过跨角色发现、表达及自动化澄清行为。先写测试或采用Given/When/Then语法，都不自动证明需求正确、真实依赖或并发行为已验证。",
+    "example": "先明确超额购买应被拒绝及其业务结果，再实现库存扣减。"
   },
   {
     "id": "engineering.generative",
@@ -2578,33 +4698,53 @@
     "name": "Property-based / Fuzz Testing",
     "aliases": [
       "Property-based",
-      "Fuzz Testing"
+      "Fuzz Testing",
+      "Property-based Testing",
+      "PBT",
+      "Shrinking",
+      "Test Oracle",
+      "属性测试",
+      "反例收缩"
     ],
     "definition": "自动生成输入验证性质或探测异常。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/property-testing-and-state-models.md"
+    ],
+    "explanation": "性质测试生成多种输入验证通用性质，失败缩减帮助找到小反例；模糊测试探索异常输入和执行路径。两者都依赖有效的判定依据与输入范围。",
+    "example": "对编解码函数检验往返性质，同时对无效输入检查受控失败。"
   },
   {
     "id": "engineering.regression",
     "domain": "engineering",
     "name": "Regression Testing",
     "aliases": [
-      "Regression Testing"
+      "Regression Testing",
+      "回归测试"
     ],
     "definition": "验证原有行为未被意外破坏。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/property-testing-and-state-models.md"
+    ],
+    "explanation": "回归测试检查已有行为在变更后仍满足契约。有效检查应覆盖曾失败的行为及必要边界，避免只复述当前实现步骤。",
+    "example": "修复重复扣款后，保留响应丢失与重试场景来防止问题再次出现。"
   },
   {
     "id": "engineering.pyramid",
     "domain": "engineering",
     "name": "Test Pyramid",
     "aliases": [
-      "Test Pyramid"
+      "Test Pyramid",
+      "测试金字塔"
     ],
     "definition": "关于不同测试层次成本与数量的经验模型。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/test-pyramids-risk-portfolios-and-coverage.md"
+    ],
+    "explanation": "测试金字塔提示不同粒度的反馈与维护成本，数量比例不是统一规则。风险需对应真实边界；语句/分支覆盖不证明断言有效或要求完整，变异结果也受算子、等价变化和执行范围限制。",
+    "example": "保留少量关键用户路径检查，并用更聚焦的检查覆盖细节与错误分支。"
   },
   {
     "id": "engineering.analysis",
@@ -2612,44 +4752,88 @@
     "name": "Static Analysis / Lint",
     "aliases": [
       "Static Analysis",
-      "Lint"
+      "Lint",
+      "静态分析",
+      "代码检查",
+      "静态检查",
+      "告警基线"
     ],
-    "definition": "静态推断缺陷与检查约定。",
+    "definition": "基于代码表示与规则推断性质，先核对分析完成与范围，再区分真实问题、误报、漏报及报告策略。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/static-analysis-rules-and-findings.md"
+    ],
+    "explanation": "静态分析不靠逐次业务输入执行来观察目标行为，但提取代码可能涉及构建。Lint、类型与数据流模型各有范围；基线和抑制改变报告，不自动消除问题或证明安全。",
+    "example": "空值分析可提前发现部分解引用风险，但外部数据仍需运行时校验。"
   },
   {
     "id": "engineering.review",
     "domain": "engineering",
     "name": "Code Review",
     "aliases": [
-      "Code Review"
+      "Code Review",
+      "代码审查",
+      "代码评审",
+      "小步变更"
     ],
-    "definition": "共同检查变更并传播上下文。",
+    "definition": "结合意图、上下文与证据判断完整变更单元，明确意见级别、分工、最终版本及发布边界。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/code-review-context-and-change-boundaries.md"
+    ],
+    "explanation": "代码评审是有限范围内对正确性和维护性的判断。小而完整的变更便于理解，批准和检查需对应最终内容；评审通过不代替兼容、部署及业务验证。",
+    "example": "审查重试改动时，重点核对幂等边界与失败后已执行的副作用。"
+  },
+  {
+    "id": "engineering.flaky-tests",
+    "domain": "engineering",
+    "name": "Flaky Tests / Test Isolation",
+    "aliases": [
+      "Flaky Tests",
+      "Flaky Test",
+      "测试稳定性",
+      "不稳定测试",
+      "间歇失败测试"
+    ],
+    "definition": "追查间歇失败的状态依赖，明确测试隔离与重试证据。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/engineering/flaky-tests-isolation-and-evidence.md"
+    ],
+    "explanation": "间歇失败可能来自未控制的输入、共享状态、产品竞态或环境故障。隔离需覆盖实际资源；重试通过并未解释首轮失败，临时移出阻断也需保留缺失覆盖和修复责任。",
+    "example": "A 修改默认时区后，B 只在 A 之后失败；固定执行顺序会隐藏依赖，显式时区与恢复现场才能针对原因修复。"
   },
   {
     "id": "engineering.trunk",
     "domain": "engineering",
     "name": "Trunk-based Development",
     "aliases": [
-      "Trunk-based Development"
+      "Trunk-based Development",
+      "主干开发"
     ],
     "definition": "短生命周期分支和频繁集成。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/trunk-based-development-and-feature-flags.md"
+    ],
+    "explanation": "主干开发把工作拆成小批并频繁集成到共同主干，需要及时、可解释的反馈。短分支与评审可以配合，尚未开放的路径可用功能开关控制；频繁合并不自动等于立即发布。",
+    "example": "每天集成兼容的小步修改，而非数周后一次性合并大型分支。"
   },
   {
     "id": "engineering.semver",
     "domain": "engineering",
     "name": "Semantic Versioning",
     "aliases": [
-      "Semantic Versioning"
+      "Semantic Versioning",
+      "语义化版本"
     ],
     "definition": "通过版本号表达兼容性意图。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/contract-testing-and-compatibility.md"
+    ],
+    "explanation": "语义化版本用 MAJOR.MINOR.PATCH 表达公共 API 的兼容性意图；正式规则对 0.x 和预发布另有约定。实际升级仍需阅读变更与验证使用路径。",
+    "example": "1.x 中删除公共接口通常应提升主版本，新增兼容功能提升次版本。"
   },
   {
     "id": "engineering.supply-chain",
@@ -2657,11 +4841,21 @@
     "name": "Dependency Management / SBOM",
     "aliases": [
       "Dependency Management",
-      "SBOM"
+      "SBOM",
+      "依赖管理",
+      "软件物料清单",
+      "依赖锁定",
+      "锁文件",
+      "传递依赖",
+      "Lockfile"
     ],
-    "definition": "依赖解析、维护与组件清单。",
+    "definition": "区分依赖声明、解析锁定、安装与交付清单，核对组件身份、兼容性和来源证据。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/dependency-resolution-lockfiles-and-sbom.md"
+    ],
+    "explanation": "依赖管理覆盖解析、来源、更新与维护。SBOM 描述声明范围内的组件及关系；锁文件、摘要、签名、来源证明和可复现对照各有可信前提，不能单独证明内容安全。",
+    "example": "依赖升级后核对锁文件、来源和受影响行为，并更新组件清单。"
   },
   {
     "id": "engineering.design-docs",
@@ -2670,22 +4864,33 @@
     "aliases": [
       "ADR",
       "RFC",
-      "Design Doc"
+      "Design Doc",
+      "设计文档",
+      "设计提案"
     ],
     "definition": "决策记录、提案和设计说明。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/design-docs-rfcs-adrs-and-decision-lifecycles.md"
+    ],
+    "explanation": "设计文档解释目标、方案与取舍，工程RFC组织讨论，ADR保存决定理由和替代历史。批准/接受、实现和验证分别留证；当前有效约束与历史应相互链接，这里的RFC是工程提案用法，与IETF文档系列按上下文区分。",
+    "example": "先以设计提案比较迁移方案，确定取舍后留下可追溯的决策记录。"
   },
   {
     "id": "engineering.sdd",
     "domain": "engineering",
     "name": "Spec-Driven Development",
     "aliases": [
-      "Spec-Driven Development"
+      "Spec-Driven Development",
+      "规格驱动开发"
     ],
     "definition": "以可验证规格约束实现和验收。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/specifications-contracts-traceability-and-acceptance.md"
+    ],
+    "explanation": "规格驱动以可检查的行为约束实施和验收，具体工作流并无唯一标准。目标、规格、设计、实现与证据应可追溯；有链接不等于已满足，符合规格也需检查规格是否适合客户环境与目标。",
+    "example": "规定超时后返回可查询操作 ID，并用失败场景检查实现是否满足该承诺。"
   },
   {
     "id": "engineering.dx",
@@ -2693,11 +4898,17 @@
     "name": "Golden Path / Developer Experience",
     "aliases": [
       "Golden Path",
-      "Developer Experience"
+      "Developer Experience",
+      "黄金路径",
+      "开发者体验"
     ],
     "definition": "标准交付路径和研发使用体验。",
     "priority": "P0",
-    "articles": []
+    "articles": [
+      "docs/knowledge/engineering/golden-paths-developer-experience-and-platform-feedback.md"
+    ],
+    "explanation": "黄金路径为常见任务提供受支持的默认路径，包含创建、交付、运行、升级和退出。模板变更不自动修补旧服务；开发体验需结合任务等待、返工与使用者反馈，不以提交数或采用率直接评价个人生产率。",
+    "example": "新服务模板内置健康检查和观测配置，减少团队反复搭建基础能力。"
   },
   {
     "id": "ai.context",
@@ -2705,11 +4916,16 @@
     "name": "Token / Context Window",
     "aliases": [
       "Token",
-      "Context Window"
+      "Context Window",
+      "上下文窗口"
     ],
     "definition": "模型处理单元及单次可处理的上下文范围。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tokens-context-and-memory.md"
+    ],
+    "explanation": "Token 是模型分词后的处理单位，不等于一个汉字或英文单词；上下文窗口限制一次处理可容纳的信息。输入、工具结果和输出占用规则依模型接口而异。",
+    "example": "长文档与工具返回共同挤占上下文，需要先选取与当前任务相关的内容。"
   },
   {
     "id": "ai.instructions",
@@ -2717,11 +4933,17 @@
     "name": "Prompt / System Instruction",
     "aliases": [
       "Prompt",
-      "System Instruction"
+      "System Instruction",
+      "提示词",
+      "系统指令"
     ],
     "definition": "任务输入、约束和应用定义的指令边界。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/prompts-message-roles-and-instruction-boundaries.md"
+    ],
+    "explanation": "提示包含任务、参考数据和示例，角色或应用指令机制表达来源及优先关系。外部文字不能自授执行权，宿主仍需检查真实身份、权限和结果；实际角色及状态继承依模型/接口核对。",
+    "example": "检索到的网页要求泄露凭据时，应把这句话作为不可信内容处理。"
   },
   {
     "id": "ai.sampling",
@@ -2729,11 +4951,17 @@
     "name": "Temperature / Sampling",
     "aliases": [
       "Temperature",
-      "Sampling"
+      "Sampling",
+      "温度",
+      "采样"
     ],
     "definition": "生成时的分布变换和采样方法。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/temperature-sampling-and-reproducibility.md"
+    ],
+    "explanation": "温度改变下一token分布的集中程度，top-k按数量、top-p按累计概率限制候选。低随机性、贪心和固定种子分别约束选择过程，均不证明事实正确或跨版本/硬件/服务完全复现。",
+    "example": "结构稳定但事实错误的答案，不能单靠把温度降为零来修复。"
   },
   {
     "id": "ai.structured",
@@ -2741,11 +4969,16 @@
     "name": "Structured Output / JSON Schema",
     "aliases": [
       "Structured Output",
-      "JSON Schema"
+      "JSON Schema",
+      "结构化输出"
     ],
     "definition": "按结构约束生成并校验结果。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/structured-outputs-and-validation.md"
+    ],
+    "explanation": "结构化输出按约定格式约束生成，JSON Schema 可表达类型与部分结构规则。合法 JSON 或符合 Schema 仍不证明字段真实、业务可执行或用户有权限。",
+    "example": "输出金额是数字后，仍需检查币种、范围、来源与支付授权。"
   },
   {
     "id": "ai.tools",
@@ -2753,11 +4986,18 @@
     "name": "Tool Calling / Function Calling",
     "aliases": [
       "Tool Calling",
-      "Function Calling"
+      "Function Calling",
+      "工具调用",
+      "函数调用"
     ],
     "definition": "模型提出工具请求，由宿主校验和执行。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tool-calling-and-execution-contracts.md",
+      "docs/knowledge/ai/tool-execution-boundaries-lab.md"
+    ],
+    "explanation": "模型生成工具名称和参数候选，宿主负责校验、授权、执行和记录结果。提出调用不代表已执行，返回成功也需对应可核实的业务证据。",
+    "example": "模型请求删除记录后，执行器仍须检查主体权限与目标范围。"
   },
   {
     "id": "ai.embeddings",
@@ -2765,11 +5005,16 @@
     "name": "Embedding / Vector Store",
     "aliases": [
       "Embedding",
-      "Vector Store"
+      "Vector Store",
+      "向量存储"
     ],
     "definition": "内容向量化与相应检索存储。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/rag-retrieval-and-grounding.md"
+    ],
+    "explanation": "Embedding 把内容映射为向量，Vector Store 存储向量与相关元数据并支持检索。编码版本、过滤权限、更新与删除传播决定实际可用性。",
+    "example": "升级嵌入模型后通常需管理新旧索引兼容，不能直接混用不同向量空间。"
   },
   {
     "id": "ai.rag",
@@ -2777,11 +5022,16 @@
     "name": "RAG / Retrieval Pipeline",
     "aliases": [
       "RAG",
-      "Retrieval Pipeline"
+      "Retrieval Pipeline",
+      "检索增强生成"
     ],
     "definition": "获取相关证据并供生成使用的流程。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/rag-retrieval-and-grounding.md"
+    ],
+    "explanation": "RAG 在生成前检索外部材料并作为依据，流程包含解析、索引、召回、选择和答案检查。检索命中不保证答案受到支持，资料权限和时效也需保留。",
+    "example": "答案引用一段检索材料后，还要核对该段是否真正支持相应结论。"
   },
   {
     "id": "ai.grounding",
@@ -2790,24 +5040,35 @@
     "aliases": [
       "Chunking",
       "Reranking",
-      "Grounding"
+      "Grounding",
+      "文档切分",
+      "依据约束"
     ],
     "definition": "文档切分、候选重排和答案证据约束。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/rag-retrieval-and-grounding.md"
+    ],
+    "explanation": "Chunking 决定检索片段边界，Reranking 调整候选顺序，Grounding 约束答案与证据的关系。较高相关分数不自动代表充分证据，片段还应保留来源和上下文。",
+    "example": "规则被切在两个片段时，需要把条件与结论一起提供给生成步骤。"
   },
   {
     "id": "ai.loop",
     "domain": "ai",
     "name": "Agent Loop",
     "aliases": [
-      "Agent Loop"
+      "Agent Loop",
+      "智能体循环"
     ],
     "definition": "决策、行动、观察与停止控制循环。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/ai/recoverable-runtime.md"
-    ]
+      "docs/knowledge/ai/recoverable-runtime.md",
+      "docs/knowledge/ai/workflow-routing-and-handoff-contracts.md",
+      "docs/knowledge/ai/durable-budgets-and-failure-convergence.md"
+    ],
+    "explanation": "Agent Loop 反复执行决策、行动和观察，并依据完成条件或预算停止。工具错误、结果不确定和重复行动必须显式处理，不能依赖无限自我重试收敛。",
+    "example": "执行失败后先分类原因，再决定修参、查询状态、请求人工参与或终止。"
   },
   {
     "id": "ai.planning",
@@ -2816,11 +5077,18 @@
     "aliases": [
       "Planning",
       "Routing",
-      "Handoff"
+      "Handoff",
+      "任务规划",
+      "路由",
+      "交接"
     ],
     "definition": "任务分解、处理路径选择和控制权移交。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/workflow-routing-and-handoff-contracts.md"
+    ],
+    "explanation": "Planning 分解目标与依赖，Routing 选择下一处理路径，Handoff 移交控制和必要状态。交接契约需携带目标、权限、证据和剩余预算。",
+    "example": "把数据库问题交给专门处理者时，同时传入已核实事实与尚未解决的约束。"
   },
   {
     "id": "ai.harness",
@@ -2828,22 +5096,36 @@
     "name": "Harness / Orchestration",
     "aliases": [
       "Harness",
-      "Orchestration"
+      "Orchestration",
+      "编排",
+      "执行框架"
     ],
     "definition": "围绕模型的执行、工具、状态和控制体系。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tool-calling-and-execution-contracts.md",
+      "docs/knowledge/ai/workflow-routing-and-handoff-contracts.md",
+      "docs/knowledge/ai/workflow-state-and-checkpoints.md",
+      "docs/knowledge/ai/durable-budgets-and-failure-convergence.md"
+    ],
+    "explanation": "Harness 或编排层围绕模型提供工具、状态、调度、权限、恢复和观测。模型决定候选步骤，宿主仍是执行与约束的责任边界。",
+    "example": "服务重启后，编排层依据持久记录恢复未完成工作并避免重复副作用。"
   },
   {
     "id": "ai.mcp",
     "domain": "ai",
     "name": "MCP",
     "aliases": [
-      "MCP"
+      "MCP",
+      "模型上下文协议"
     ],
     "definition": "模型应用连接工具和上下文的协议体系。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/mcp-hosts-capabilities-and-execution-boundaries.md"
+    ],
+    "explanation": "MCP按版本组织宿主、客户端和服务器的能力协商，提供工具、资源和提示原语。协议连通和发现不等于本次业务授权；传输凭据、对象权限、协议/工具错误和最终业务效果分别检查。",
+    "example": "发现一个可调用工具后，仍要根据当前用户权限决定能否执行。"
   },
   {
     "id": "ai.state",
@@ -2851,13 +5133,19 @@
     "name": "Agent State / Checkpoint",
     "aliases": [
       "Agent State",
-      "Checkpoint"
+      "Checkpoint",
+      "智能体状态",
+      "检查点"
     ],
     "definition": "执行状态及可用于恢复的持久化进度。",
     "priority": "P1",
     "articles": [
-      "docs/knowledge/ai/recoverable-runtime.md"
-    ]
+      "docs/knowledge/ai/recoverable-runtime.md",
+      "docs/knowledge/ai/tool-execution-boundaries-lab.md",
+      "docs/knowledge/ai/workflow-state-and-checkpoints.md"
+    ],
+    "explanation": "Agent State 保存推进任务所需的信息，Checkpoint 记录可恢复进度。检查点与外部副作用若不在同一原子边界，就需独立操作标识和结果核对。",
+    "example": "工具执行后、检查点写入前崩溃时，恢复应先确认工具结果。"
   },
   {
     "id": "ai.memory",
@@ -2865,11 +5153,21 @@
     "name": "Short-term / Long-term Memory",
     "aliases": [
       "Short-term",
-      "Long-term Memory"
+      "Long-term Memory",
+      "短期记忆",
+      "长期记忆"
     ],
-    "definition": "当前任务上下文和跨任务持久信息。",
+    "definition": "区分当前任务上下文与跨任务保留的信息，并为长期记录约束来源、版本、权限及生命周期。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tokens-context-and-memory.md",
+      "docs/knowledge/ai/memory-writing-and-provenance.md",
+      "docs/knowledge/ai/memory-versions-conflicts-and-expiry.md",
+      "docs/knowledge/ai/memory-access-revocation-and-deletion.md",
+      "docs/knowledge/ai/memory-governance-lab.md"
+    ],
+    "explanation": "短期记忆服务当前任务，长期记忆跨任务保留信息；二者都是系统设计概念。长期记录应带来源、版本、期限和访问规则，写入不等于内容已核实。",
+    "example": "用户修改偏好后，新版本应替代旧版本，并防止迟到任务回填旧值。"
   },
   {
     "id": "ai.memory-types",
@@ -2877,22 +5175,34 @@
     "name": "Semantic / Episodic Memory",
     "aliases": [
       "Semantic",
-      "Episodic Memory"
+      "Episodic Memory",
+      "语义记忆",
+      "情景记忆"
     ],
-    "definition": "可复用事实知识和情境经历记录。",
+    "definition": "按事实知识、情境经历等用途理解记忆；用途分类不能替代来源核实或权限。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/memory-writing-and-provenance.md"
+    ],
+    "explanation": "语义记忆偏向事实与规则，情景记忆偏向特定经历和上下文。它们可采用不同表示，但用途分类不能替代证据校验、隐私与权限管理。",
+    "example": "过去一次购买记录是情境信息，不能未经确认推断成永久用户偏好。"
   },
   {
     "id": "ai.human",
     "domain": "ai",
     "name": "Human-in-the-loop",
     "aliases": [
-      "Human-in-the-loop"
+      "Human-in-the-loop",
+      "人在回路",
+      "人工参与"
     ],
     "definition": "在特定决策或执行点引入人工参与。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tool-authorization-and-untrusted-results.md"
+    ],
+    "explanation": "Human-in-the-loop 在指定决策或执行点引入人工判断。请求应给出具体动作、目标、影响和已知证据；批准应绑定明确范围，变更后重新判断有效性。",
+    "example": "人工批准向某收款方支付特定金额，不能被复用到另一金额或对象。"
   },
   {
     "id": "ai.injection",
@@ -2900,11 +5210,18 @@
     "name": "Prompt Injection / Tool Security",
     "aliases": [
       "Prompt Injection",
-      "Tool Security"
+      "Tool Security",
+      "提示注入",
+      "工具安全"
     ],
     "definition": "外部内容诱导越权与工具访问控制。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/tool-authorization-and-untrusted-results.md",
+      "docs/knowledge/ai/tool-execution-boundaries-lab.md"
+    ],
+    "explanation": "提示注入试图让外部内容改变系统行为或诱导越权；工具安全通过权限、隔离和执行校验约束影响。仅提示模型忽略恶意文字不能替代执行端防护。",
+    "example": "工具结果包含外传文件的命令时，不应把它升级为用户授权。"
   },
   {
     "id": "ai.evals",
@@ -2912,11 +5229,17 @@
     "name": "Evals / Golden Dataset",
     "aliases": [
       "Evals",
-      "Golden Dataset"
+      "Golden Dataset",
+      "评测",
+      "黄金数据集"
     ],
     "definition": "系统化评测任务、数据、指标和判定。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/evals-and-failure-analysis.md"
+    ],
+    "explanation": "Evals 用任务样本、判定规则和指标评估系统；黄金数据集提供经核对的参考。需要覆盖失败类型和运行条件，单一总分可能掩盖高风险错误。",
+    "example": "分别记录答案错误、证据不足与工具越权，避免只报告平均完成率。"
   },
   {
     "id": "ai.cost",
@@ -2925,11 +5248,17 @@
     "aliases": [
       "Tracing",
       "Token Cost",
-      "Latency"
+      "Latency",
+      "Token 成本"
     ],
     "definition": "执行可观测性和费用、时延预算。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/durable-budgets-and-failure-convergence.md",
+      "docs/knowledge/reliability/logs-metrics-and-traces.md"
+    ],
+    "explanation": "追踪把模型、检索和工具步骤关联起来，成本与延迟预算限制整体执行。费用按实际服务计价与用量记录核算，重试和后台步骤也应计入。",
+    "example": "一次用户请求触发多轮工具循环，应累计所有模型调用的消耗。"
   },
   {
     "id": "ai.training",
@@ -2937,10 +5266,650 @@
     "name": "Fine-tuning / Distillation",
     "aliases": [
       "Fine-tuning",
-      "Distillation"
+      "Distillation",
+      "微调",
+      "蒸馏"
     ],
     "definition": "参数适配和用教师信号训练学生模型。",
     "priority": "P1",
-    "articles": []
+    "articles": [
+      "docs/knowledge/ai/fine-tuning-distillation-and-evaluation-boundaries.md"
+    ],
+    "explanation": "微调以任务数据更新参数或适配结构，蒸馏用教师分布/输出等信号训练学生。提示、检索、参数适配和训练信号各有范围，效果须用防泄漏的独立数据及实际质量/成本验证，不能替代实时事实和访问控制。",
+    "example": "希望模型遵循特定输出风格可考虑微调，最新业务库存仍应查询可信数据源。"
+  },
+  {
+    "id": "ai.compaction",
+    "domain": "ai",
+    "name": "Context Compaction",
+    "aliases": [
+      "Context Compaction",
+      "上下文压缩"
+    ],
+    "definition": "用较少 Token 续接所需上下文，表示与保留规则依实现而异，不代替业务执行记录。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/ai/tokens-context-and-memory.md"
+    ],
+    "explanation": "上下文压缩用摘要或重组减少继续任务所需 Token，但可能丢失细节。需保留目标、约束、证据位置和未完成事项；压缩摘要不能替代业务执行日志。",
+    "example": "摘要记载已发起转账但无确认时，恢复不能把它当作已成功。"
+  },
+  {
+    "id": "ai.eval-rubric",
+    "domain": "ai",
+    "name": "Eval Rubric / Model Grader",
+    "aliases": [
+      "Eval Rubric",
+      "Model Grader",
+      "评分规则",
+      "模型评分器"
+    ],
+    "definition": "将任务目标转为可判定标准，并核查自动评分与参考判断是否一致。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/ai/evals-and-failure-analysis.md"
+    ],
+    "explanation": "评分规则把质量目标拆成可判断标准，模型评分器按规则辅助评估。要用参考判断核对偏差、一致性和对提示变化的敏感性。",
+    "example": "区分事实正确、证据充分和格式合法，避免格式好掩盖内容错误。"
+  },
+  {
+    "id": "ai.eval-splits",
+    "domain": "ai",
+    "name": "Development / Held-out Eval Set",
+    "aliases": [
+      "Held-out Eval Set",
+      "Development Set",
+      "评价保留集"
+    ],
+    "definition": "区分反复调试样本和相对独立检查样本，避免据熟悉题目调优后高估泛化。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/ai/evals-and-failure-analysis.md"
+    ],
+    "explanation": "开发集可反复用于调试，保留集用于较独立地检查泛化。频繁依据保留集修改系统会造成泄漏，数据还需按来源和时间等避免近重复。",
+    "example": "同一文档改写出的近似题目分别进入两组，可能高估真实泛化能力。"
+  },
+  {
+    "id": "systems.atomicity",
+    "domain": "systems",
+    "name": "Atomicity / Invariant",
+    "aliases": [
+      "Atomicity",
+      "Invariant",
+      "原子性",
+      "不变量"
+    ],
+    "definition": "点名不可分割的状态转换边界，并检验允许交错下必须保持的业务条件。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/races-and-atomicity.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "原子性必须点名操作边界：一个读改写、一个临界区或一个事务。业务不变量则描述所有允许状态都应满足的条件，局部原子步骤仍可能组合出错误。",
+    "example": "余额检查与扣款必须共同维护余额不为负，不能只让单次赋值原子化。"
+  },
+  {
+    "id": "database.backups",
+    "domain": "database",
+    "name": "Logical Backup / Physical Backup / PITR",
+    "aliases": [
+      "Logical Backup",
+      "Physical Backup",
+      "PITR",
+      "逻辑备份",
+      "物理备份",
+      "时间点恢复"
+    ],
+    "definition": "按对象或集群保存恢复材料，并用基础备份与连续日志到达所选历史边界。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/database/backups-and-point-in-time-recovery.md",
+      "docs/knowledge/database/backup-recovery-lab.md"
+    ],
+    "explanation": "逻辑备份保存对象与数据的逻辑表示，物理备份保存恢复所需的数据文件状态。PITR 依靠可用基础备份和连续日志恢复到选定边界，必须通过实际恢复验证。",
+    "example": "基础备份存在但中间 WAL 缺失时，不能保证到达目标恢复点。"
+  },
+  {
+    "id": "database.checkpoints",
+    "domain": "database",
+    "name": "Checkpoint / WAL Flush",
+    "aliases": [
+      "Checkpoint",
+      "WAL Flush",
+      "检查点",
+      "日志持久化"
+    ],
+    "definition": "区分日志持久化、数据页写回与恢复起点，不把提交确认当作所有页已同步写回。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/wal-and-crash-recovery.md"
+    ],
+    "explanation": "Checkpoint 推进恢复可从何处开始，WAL Flush 把日志推进到持久边界；数据页写回是相关但不同的动作。各系统的确认和刷盘策略需分别核对。",
+    "example": "提交日志已持久化而数据页仍在内存，并不必然违反 WAL 恢复机制。"
+  },
+  {
+    "id": "database.functional-dependency",
+    "domain": "database",
+    "name": "Functional Dependency",
+    "aliases": [
+      "Functional Dependency",
+      "函数依赖"
+    ],
+    "definition": "关系中的 X→Y 要求所有合法状态中，任意两行的 X 值相同就有相同的 Y 值。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/data-models-and-access-patterns.md"
+    ],
+    "explanation": "函数依赖表达业务语义对合法关系状态的约束，不能由少量样本碰巧满足推导成立。规范化可按依赖识别重复当前事实并设计分解；决定字段是否相同事实时还要包括时间语义。",
+    "example": "customer_id 可以决定同一状态下的客户当前地址，但不能决定所有订单各自的下单时地址快照；同一客户在不同订单中可以有不同历史快照。"
+  },
+  {
+    "id": "database.shard-key",
+    "domain": "database",
+    "name": "Shard Key",
+    "aliases": [
+      "Shard Key",
+      "分片键"
+    ],
+    "definition": "参与数据放置及目标选择的字段组合，其分布和查询使用方式影响热点、扇出与跨片约束。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/partitioning-sharding-and-data-routing.md"
+    ],
+    "explanation": "分片键通过范围、哈希或目录等放置规则关联到数据归属，路由器还需要有效的归属元数据。选键需同时检查不同值数量、重复频率、单调写入及常见查询条件。主键、索引、分片键和权限条件可使用相同字段但职责不同；拥有路由字段不能代替授权，高基数也不保证负载均匀。",
+    "example": "按 tenant_id 放置后，包含该租户条件的查询可能缩小目标，但一个占70%请求的租户仍可能集中在单片；仅带 order_id 的查询不一定知道目标片。"
+  },
+  {
+    "id": "database.partition-pruning",
+    "domain": "database",
+    "name": "Partition Pruning",
+    "aliases": [
+      "Partition Pruning",
+      "分区裁剪"
+    ],
+    "definition": "根据查询条件和分区边界，排除不可能包含匹配数据的分区，再在留下的范围内选择访问路径。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/database/partitioning-sharding-and-data-routing.md"
+    ],
+    "explanation": "分区裁剪先减少需要访问的数据单元，索引则影响剩余单元内部怎样查找。PostgreSQL 18 的声明式分区裁剪使用分区键隐含的边界约束，不依赖索引存在，且可发生在计划或执行阶段。谓词、参数可知时间和产品优化器规则影响能否裁剪；不能仅凭 WHERE 出现分区列就保证任意表达式可裁剪。",
+    "example": "P0=[0,100)、P1=[100,200)、P2=[200,300) 时，100≤k<200 只需P1；90≤k<210 则三者都不能排除。留下P1也不代表一定使用索引扫描。"
+  },
+  {
+    "id": "api.conditionals",
+    "domain": "api",
+    "name": "ETag / Conditional Request",
+    "aliases": [
+      "ETag",
+      "Conditional Request",
+      "If-Match",
+      "If-None-Match",
+      "条件请求",
+      "缓存验证"
+    ],
+    "definition": "以表示验证器表达读取或修改的前提，区分缓存验证与条件保存；不替代授权、幂等协议或跨资源不变量。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/api/conditional-requests-and-cache-validation.md",
+      "docs/knowledge/networking/cdn-edge-caches-and-waf-boundaries.md"
+    ],
+    "explanation": "条件请求用 ETag 等验证器表达前提。If-None-Match 常用于验证缓存，If-Match 可限制基于旧表示的修改；比较与写入仍需在服务端正确联结。",
+    "example": "编辑时带上读取版本的 ETag，版本已变化则拒绝覆盖并要求重新处理。"
+  },
+  {
+    "id": "reliability.fault-domains",
+    "domain": "reliability",
+    "name": "Failure Domain / Redundancy",
+    "aliases": [
+      "Failure Domain",
+      "Fault Domain",
+      "Redundancy",
+      "故障域",
+      "冗余"
+    ],
+    "definition": "按故障假设识别共同失效的范围，以独立性、剩余容量与恢复路径评价冗余，而不只统计副本数。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/reliability/failure-domains-redundancy-and-recovery.md",
+      "docs/knowledge/distributed/consistent-hashing-placement-and-rebalancing.md"
+    ],
+    "explanation": "故障域描述可能因共同原因同时失效的范围；冗余需具备相应独立性、剩余容量和可用恢复路径。副本数多但共享关键依赖，仍可能一起失效。",
+    "example": "两台实例共用同一电源或数据库，不等于已隔离对应故障。"
+  },
+  {
+    "id": "engineering.state-models",
+    "domain": "engineering",
+    "name": "Stateful Testing / Model-based Testing",
+    "aliases": [
+      "Stateful Testing",
+      "Model-based Testing",
+      "State Model",
+      "状态模型",
+      "状态机测试"
+    ],
+    "definition": "以简化模型驱动命令序列并检查状态关系，证据受模型、调度与真实依赖范围限制；顺序模型不自动证明并发正确性。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/engineering/property-testing-and-state-models.md"
+    ],
+    "explanation": "状态模型测试生成操作序列，用简化模型核对系统状态和返回结果。模型的假设、外部依赖和调度限制证据范围；顺序操作通过不证明所有并发交错正确。",
+    "example": "生成开户、存款、取款序列，并逐步核对余额与拒绝规则。"
+  },
+  {
+    "id": "systems.cpu-cache",
+    "domain": "systems",
+    "name": "CPU Cache / Cache Line / Locality / False Sharing",
+    "aliases": [
+      "CPU 缓存",
+      "缓存行",
+      "局部性",
+      "时间局部性",
+      "空间局部性",
+      "伪共享",
+      "Working Set"
+    ],
+    "definition": "用缓存行和访问模式解释层级命中与工作集，区分数据缓存、地址翻译、缺页及共享写入的一致性成本。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/systems/cpu-caches-locality-and-false-sharing.md",
+      "docs/knowledge/systems/memory-order-atomics-and-publication.md"
+    ],
+    "explanation": "CPU 缓存通常以缓存行为单位搬运数据；时间和空间局部性影响命中。不同核心写同一缓存行中的不同变量也可能引起一致性流量，称为伪共享。",
+    "example": "相邻计数器分属不同线程频繁更新，可能因共享缓存行而互相拖慢。"
+  },
+  {
+    "id": "systems.signals",
+    "domain": "systems",
+    "name": "Linux Signal / Signal Mask / Pending Signal",
+    "aliases": [
+      "Linux Signal",
+      "POSIX Signal",
+      "Linux 信号",
+      "POSIX 信号",
+      "信号掩码",
+      "待决信号"
+    ],
+    "definition": "区分进程共享的信号处置、线程独立掩码与待决状态，用受控接收把通知连接到应用停止协议。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/systems/signals-cancellation-and-shutdown.md"
+    ],
+    "explanation": "进程定向信号可递送给一个未屏蔽线程，标准信号待决期间的同类实例可能合并。处理函数受异步信号安全约束，sigwait/signalfd 可将服务停止通知接到普通执行路径；取消请求仍需安全边界、清理责任和结束确认。",
+    "example": "创建工作线程前屏蔽 SIGTERM，由控制线程同步接收后停止接纳并通知工作线程，按总期限汇总完成或结果未知的工作。"
+  },
+  {
+    "id": "systems.ipc",
+    "domain": "systems",
+    "name": "Interprocess Communication",
+    "aliases": [
+      "IPC",
+      "Interprocess Communication",
+      "Inter-process Communication",
+      "进程间通信"
+    ],
+    "definition": "在进程边界间传递字节、消息或访问共享存储，需要同时约定边界、容量、结束与所有权。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/systems/ipc-channels-shared-memory-and-ownership.md"
+    ],
+    "explanation": "管道和流 socket 需要应用分帧，消息接口保留记录但仍有大小与容量限制；共享内存将访问布局、同步、初始化、复用和崩溃恢复交给参与者协议。通知、传输结束和业务完成是不同条件。",
+    "example": "父进程读子进程管道时必须关闭自己多余的写端，否则子进程退出后仍可能等不到 EOF；改用共享槽位后还要明确发布和归还时机。"
+  },
+  {
+    "id": "performance.cpu-metrics",
+    "domain": "performance",
+    "name": "CPU Time / Utilization / Load Average",
+    "aliases": [
+      "CPU 时间",
+      "CPU 利用率",
+      "负载均值",
+      "调度等待",
+      "cpu.max",
+      "PSI",
+      "CPU Throttling"
+    ],
+    "definition": "按范围、时间窗口和分母解释执行、利用率、平滑负载、组带宽与资源停顿，不能直接换算成慢请求比例。",
+    "priority": "P0",
+    "articles": [
+      "docs/knowledge/performance/cpu-time-utilization-load-and-quotas.md"
+    ],
+    "explanation": "CPU 时间累计实际执行消耗，利用率是相对指定容量的比例，Linux Load Average 还包含特定等待任务。cgroup 配额和 PSI 分别提供带宽限制与停顿证据。",
+    "example": "容器 CPU 百分比必须说明分母是单核、宿主机还是分配配额。"
+  },
+  {
+    "id": "performance.benchmark",
+    "domain": "performance",
+    "name": "Benchmark / Speedup / Amdahl’s Law",
+    "aliases": [
+      "基准测试",
+      "微基准",
+      "预热",
+      "加速比",
+      "Amdahl",
+      "阿姆达尔定律"
+    ],
+    "definition": "固定工作契约、测量边界和负载比较成本，用明确假设下的局部时间占比解释整体收益与上限。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/performance/benchmarks-workloads-and-speedup.md"
+    ],
+    "explanation": "基准测试固定工作契约与测量条件比较成本，加速比需说明基线。Amdahl 定律在固定工作量等假设下用可优化占比限制整体收益，不能直接当实际容量预测。",
+    "example": "占总时间一半的步骤加速两倍，理想整体加速约为 1.33 倍。"
+  },
+  {
+    "id": "algorithms.shortest-path",
+    "domain": "algorithms",
+    "name": "Weighted Shortest Path / Relaxation",
+    "aliases": [
+      "加权最短路",
+      "松弛",
+      "Dijkstra",
+      "Bellman-Ford",
+      "负权环",
+      "Negative Cycle",
+      "decrease-key",
+      "加权最短路径"
+    ],
+    "definition": "在明确边权与图前提下计算最小可加路线成本，区分发现、确认、有限距离、不可达与负环影响。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/weighted-shortest-paths-and-relaxation.md"
+    ],
+    "explanation": "加权最短路寻找边权可加的最低成本路径，松弛用已知路径改善距离估计。Dijkstra 的确认规则依赖非负边权；负环影响下不一定存在有限最短值。",
+    "example": "路网允许负权时，不能未经前提检查就沿用 Dijkstra 的提前确认。"
+  },
+  {
+    "id": "algorithms.greedy",
+    "domain": "algorithms",
+    "name": "Greedy Algorithm / Exchange Argument",
+    "aliases": [
+      "贪心算法",
+      "贪心选择",
+      "交换论证",
+      "区间调度",
+      "Interval Scheduling",
+      "Greedy Choice"
+    ],
+    "definition": "按局部规则承诺选择，并用安全交换等论证连接到全局目标；可行、不能扩充与最优分别判断。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/greedy-choices-and-exchange-arguments.md",
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "贪心按局部规则做出选择，正确性需要交换论证等连接到全局最优的证明。局部可行或无法继续扩充，不等于已经最优。",
+    "example": "按最早结束选择无权区间可用交换论证支持，改成带权目标后需重新分析。"
+  },
+  {
+    "id": "algorithms.dynamic-programming",
+    "domain": "algorithms",
+    "name": "Dynamic Programming / Memoization",
+    "aliases": [
+      "动态规划",
+      "记忆化",
+      "状态转移",
+      "0/1 背包",
+      "Knapsack",
+      "滚动数组",
+      "伪多项式",
+      "Pseudopolynomial"
+    ],
+    "definition": "定义充分状态及无环依赖，复用子问题结果；初始化、更新方向、方案恢复与数值规模分别限定。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/dynamic-programming-states-and-dependency-order.md",
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "动态规划把问题分解为可复用子问题，状态必须包含后续决策所需信息。转移、初值与依赖顺序共同决定结果，压缩存储也不能改变使用的阶段。",
+    "example": "0/1 背包压缩到一维时，更新方向要避免同一物品被重复使用。"
+  },
+  {
+    "id": "algorithms.union-find",
+    "domain": "algorithms",
+    "name": "Union-Find / Disjoint Set Union",
+    "aliases": [
+      "并查集",
+      "不相交集合",
+      "DSU",
+      "路径压缩",
+      "Path Compression",
+      "Union by Rank"
+    ],
+    "definition": "通过代表维护只合并的互斥分组，按秩/大小与压缩改善序列成本；内部父指针不是原图路线。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/union-find-components-and-minimum-spanning-trees.md"
+    ],
+    "explanation": "并查集维护不相交分组，通过查代表和合并更新连通关系。路径压缩与按秩或大小合并改善序列成本；普通结构不直接支持删边或恢复原图路径。",
+    "example": "两顶点代表相同可判断已连通，父指针不一定是原图中的边。"
+  },
+  {
+    "id": "algorithms.mst",
+    "domain": "algorithms",
+    "name": "Minimum Spanning Tree / Kruskal",
+    "aliases": [
+      "最小生成树",
+      "最小生成森林",
+      "MST",
+      "Kruskal",
+      "割性质",
+      "Cut Property"
+    ],
+    "definition": "在无向图中以最小边权总和连接各分量，结合无环与安全跨割边；目标不同于单源最短路径。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/union-find-components-and-minimum-spanning-trees.md"
+    ],
+    "explanation": "最小生成树在无向连通图上以最低总边权连接全部顶点，不连通时对应最小生成森林。Kruskal 按边权考虑安全边，并用并查集避免成环。",
+    "example": "总权重最小的连通树不必提供某个源点到所有顶点的最短路径。"
+  },
+  {
+    "id": "algorithms.divide-conquer",
+    "domain": "algorithms",
+    "name": "Divide and Conquer",
+    "aliases": [
+      "Divide and Conquer",
+      "Divide-and-Conquer",
+      "分治",
+      "分治法"
+    ],
+    "definition": "把问题分成更小同类问题，再依正确的组合规则构造原答案。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "分治要说明基本情况、规模严格缩小、子问题接口与合并正确性；跨块约束不能因切分输入就消失。成本应把各分支与本地工作相加，递归深度不等于总工作量，划分失衡时也不能沿用平衡递推。",
+    "example": "n=8、内部按子问题长度计费、单元素叶计1时，四层各8共32单位；这不是实际比较次数或运行时间。"
+  },
+  {
+    "id": "algorithms.backtracking",
+    "domain": "algorithms",
+    "name": "Backtracking",
+    "aliases": [
+      "Backtracking",
+      "回溯搜索",
+      "回溯法"
+    ],
+    "definition": "逐步选择并探索部分方案，在返回时恢复选择，用有证明的条件排除无用分支。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md"
+    ],
+    "explanation": "回溯可求存在性、一个解、全部解或最优解；候选覆盖、状态恢复与输出语义需分别验证。可行性剪枝和最优界有不同证明，剪枝前提、并列最优与负数/零不能忽略；它不是DFS、动态规划或从结果恢复方案的同义词。",
+    "example": "允许负数时，取5后仍可再取−2得到目标3；因当前和超过目标就停止会漏解。枚举[3,0]目标3时，也不能在取3后省略后续零的选择。"
+  },
+  {
+    "id": "algorithms.string-matching",
+    "domain": "algorithms",
+    "name": "Exact String Matching / KMP",
+    "aliases": [
+      "Exact String Matching",
+      "精确字符串匹配",
+      "KMP",
+      "Knuth-Morris-Pratt"
+    ],
+    "definition": "按明确符号与位置契约找精确子串，用前缀函数安全复用失配前信息。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md"
+    ],
+    "explanation": "KMP是精确子串匹配的一种算法；本篇的前缀函数形式在有界符号访问/比较与位置输出模型下按O(n+m+k)分析，并保留重叠及跨块状态。完整DFA表示另有字母表成本，哈希、Trie和正则不是它的同义词。编码、规范化与大小写折叠仍决定相等和偏移映射。",
+    "example": "ababaca的pi为0,0,1,2,3,0,1；在abababacaba里失配后保留aba，报告起点2。A😀B中的B在UTF-8字节、码点、UTF-16码元中分别位于5、2、3。"
+  },
+  {
+    "id": "networking.policy-routing",
+    "domain": "networking",
+    "name": "Policy Routing / BGP / RIB / FIB",
+    "aliases": [
+      "策略路由",
+      "动态路由",
+      "控制平面",
+      "数据平面",
+      "RPDB"
+    ],
+    "definition": "按政策选择路由、传播可达性与执行转发的不同层次。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/policy-routing-control-planes-and-convergence.md"
+    ],
+    "explanation": "RPDB 按规则决定查询上下文；BGP 按本地政策从候选中选择，RIB/FIB 分别表达路由信息和用于转发的状态。候选收到、实际安装、双向业务恢复不是同一完成点。",
+    "example": "源匹配规则先在表100找到默认路由时，main中的更长前缀不会自动参与全局比较。"
+  },
+  {
+    "id": "networking.path-mtu",
+    "domain": "networking",
+    "name": "MTU / PMTU / MSS / PMTUD",
+    "aliases": [
+      "路径 MTU",
+      "链路 MTU",
+      "PLPMTUD",
+      "DPLPMTUD",
+      "Packet Too Big"
+    ],
+    "definition": "区分链路/路径分组大小、TCP 数据预算与路径大小发现。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md"
+    ],
+    "explanation": "MTU 与 PMTU 约束特定层次和路径的分组大小，MSS 约束 TCP 数据部分。封装占用预算；ICMP 反馈和分组化层探测需关联实际路径与确认，单次失败不能确定精确上限。",
+    "example": "外层1500字节、封装60字节时内层预算1440；再扣IPv6/TCP的40/20字节得到1380字节TCP数据预算。"
+  },
+  {
+    "id": "networking.congestion-algorithms",
+    "domain": "networking",
+    "name": "Reno / CUBIC / BBR",
+    "aliases": [
+      "拥塞算法",
+      "pacing",
+      "发送节奏"
+    ],
+    "definition": "以窗口、发送节奏及拥塞/交付观测调整发送的算法思路。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/congestion-algorithms-aqm-and-ecn.md"
+    ],
+    "explanation": "Reno、CUBIC 与 BBR 采用不同控制思路；cwnd约束在途量，pacing安排发送时间。算法版本、路径、接收窗口与应用供给共同影响结果，名称不代表统一性能承诺。",
+    "example": "应用没有持续供给时，低交付速率不能单独证明拥塞算法失效。"
+  },
+  {
+    "id": "networking.queue-management",
+    "domain": "networking",
+    "name": "AQM / ECN / BDP",
+    "aliases": [
+      "主动队列管理",
+      "显式拥塞通知",
+      "带宽时延积"
+    ],
+    "definition": "区分管道在途量、队列管理、调度与拥塞标记反馈。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/congestion-algorithms-aqm-and-ecn.md"
+    ],
+    "explanation": "BDP 是速率与基础往返时延的乘积；AQM 用较早丢弃或标记控制积压，调度分配服务机会，ECN 把标记交给端点响应。三者都不创造容量，也不自动保证业务公平。",
+    "example": "100Mbit/s乘40ms得到500000字节BDP；1MB排在100Mbit/s瓶颈前约需80ms服务时间，二者不能混作队列目标。"
+  },
+  {
+    "id": "networking.ipv6-source-privacy",
+    "domain": "networking",
+    "name": "IPv6 Source Address Selection / Temporary Address",
+    "aliases": [
+      "IPv6 源地址选择",
+      "稳定不透明地址",
+      "临时地址"
+    ],
+    "definition": "根据地址状态、作用范围与政策选择源，并用不同生成方式限制地址关联。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md"
+    ],
+    "explanation": "源/目的选择与路由政策有关；稳定不透明与临时地址解决不同关联问题。preferred到期表示弃用，valid到期表示失效；轮换不隐藏账号与应用特征。",
+    "example": "旧临时地址仍valid但已deprecated时，已有TCP不因弃用自动迁移，新通信可选择合适的preferred地址。"
+  },
+  {
+    "id": "networking.first-hop-protection",
+    "domain": "networking",
+    "name": "RA Guard / Source Address Validation",
+    "aliases": [
+      "接入防护",
+      "源地址验证"
+    ],
+    "definition": "约束本地链路的路由通告与源地址使用，防止部分伪造或误配。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md"
+    ],
+    "explanation": "RA Guard检查允许的通告位置与特征，源地址验证检查地址/前缀与接入绑定。需要处理IPv6解析、合法拓扑和角色变化；DAD或过滤通过都不等于应用身份已认证和授权。",
+    "example": "允许路由器端口的合规RA、阻止终端端口的RA，仍不能据此允许该终端访问所有订单。"
+  },
+  {
+    "id": "frontend.component-identity",
+    "domain": "frontend",
+    "name": "Component Identity / Stable Key",
+    "aliases": [
+      "组件身份",
+      "稳定 key",
+      "稳定业务 key"
+    ],
+    "definition": "更新前后组件或列表项的对应关系，决定局部状态保留与重置。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/frontend/reconciliation-keys-and-component-identity.md"
+    ],
+    "explanation": "稳定标识让同级记录跨插入和重排保持对应；身份还受父级和组件类型等框架规则约束。索引可能把状态留在位置，渲染时生成随机标识则丢失对应。重置实例不自动清理外部缓存和迟到请求。",
+    "example": "同级A/B分别有甲/乙草稿，头部插入X时，索引key可能把甲/乙交给X/A；稳定记录ID让草稿继续跟随A/B。"
+  },
+  {
+    "id": "architecture.quality-scenario",
+    "domain": "architecture",
+    "name": "Quality Attribute Scenario",
+    "aliases": [
+      "质量属性场景",
+      "质量属性"
+    ],
+    "definition": "用刺激源、刺激、环境、受影响对象、响应及度量限定架构目标。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/architecture/quality-attribute-scenarios-tradeoffs-and-adrs.md"
+    ],
+    "explanation": "把高性能、可用或易修改等目标连接到具体负载、变化和观察口径，才能比较取舍与组织验证。敏感点和风险分析提示需进一步检查的假设，不替代真实证据；单次预算与分布统计分开判断。",
+    "example": "同一次串行请求四段30/80/60/40ms共210ms，但四个组件各自的p95不能直接相加当作端到端p95。"
+  },
+  {
+    "id": "devops.provenance",
+    "domain": "devops",
+    "name": "Artifact Digest / Build Provenance",
+    "aliases": [
+      "Artifact Digest",
+      "Build Provenance",
+      "SLSA",
+      "制品摘要",
+      "构建来源证明"
+    ],
+    "definition": "绑定具体产物内容、受信构建者、源码来源及构建参数的验证信息。",
+    "priority": "P1",
+    "articles": [
+      "docs/knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md"
+    ],
+    "explanation": "摘要标识内容，签名与身份条件连接声明者，构建来源证明连接产物、来源和构建过程。核验须按预先受控的信任根及期望策略执行；有效签名不自动证明许可、无漏洞或线上业务正确。",
+    "example": "审批和部署关联同一摘要，并检查受信构建者、仓库、版本引用及参数；可变标签不能单独保证运行的就是已核验产物。"
   }
 ]

@@ -2,9 +2,9 @@
 
 # 术语索引
 
-当前有 238 组术语条目，覆盖 17 个领域；其中 44 组已连接正文。每组可能包含多个相关缩写，不能当作独立概念数量。
+当前有 313 组术语条目，覆盖 17 个领域；其中 313 组已连接正文。每组可能包含多个相关缩写，不能当作独立概念数量。
 
-“已收录”表示已有索引简释；“有正文”表示可继续阅读深入文章。简释用于定位，不替代机制、边界和版本说明。P0/P1/P2 为默认学习建议，可按岗位、已有基础和当前任务调整。
+每组术语均有[分类解释](glossary/index.md)，包含定义、区别与边界、示例和深入阅读入口。“有正文”表示另有专题文章。P0/P1/P2 为默认学习建议，可按岗位、已有基础和当前任务调整。
 
 术语清单作为知识索引；[实际工程问题](problems.md)作为学习入口。阅读时结合具体约束理解概念，重点积累底层原理、系统设计、故障诊断和技术权衡能力。
 
@@ -16,18 +16,24 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `systems.execution-units`<br>Process / Thread / Coroutine | 进程、线程与协程，资源、执行和调度边界。 | P0 | 有正文：[概念](knowledge/systems/process-thread-coroutine.md) |
-| `systems.concurrency`<br>Concurrency / Parallelism | 并发推进与并行执行，关注调度和硬件资源。 | P0 | 有正文：[概念](knowledge/systems/process-thread-coroutine.md) |
-| `systems.blocking`<br>Blocking / Non-blocking | 指定操作会不会让当前执行线程等待。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md) |
-| `systems.context-switch`<br>Context Switch | 保存和恢复执行上下文及其开销。 | P0 | 已收录 |
-| `systems.privilege`<br>User Mode / Kernel Mode / Syscall | 权限边界、系统调用和内核服务。 | P0 | 已收录 |
-| `systems.memory-layout`<br>Stack / Heap | 调用栈、动态分配和对象生命周期。 | P0 | 已收录 |
-| `systems.virtual-memory`<br>Virtual Memory / Paging | 地址映射、分页和缺页处理。 | P0 | 已收录 |
-| `systems.synchronization`<br>Mutex / Semaphore / CAS | 互斥、资源计数与原子比较交换。 | P0 | 已收录 |
-| `systems.race-deadlock`<br>Race Condition / Deadlock | 时序依赖错误与循环等待。 | P0 | 已收录 |
-| `systems.fd-socket`<br>File Descriptor / Socket | 操作系统资源句柄与通信端点。 | P0 | 已收录 |
-| `systems.io-multiplexing`<br>I/O Multiplexing / epoll | 监视多个 I/O 就绪事件，减少逐连接阻塞等待。 | P0 | 已收录 |
-| `systems.memory-order`<br>Memory Model / Happens-before | 跨执行单元的可见性、顺序与同步关系。 | P0 | 已收录 |
+| [`systems.execution-units`](glossary/systems.md#systems.execution-units)<br>[Process / Thread / Coroutine](glossary/systems.md#systems.execution-units) | 进程、线程与协程，资源、执行和调度边界。 | P0 | 有正文：[概念](knowledge/systems/process-thread-coroutine.md)、[概念](knowledge/systems/signals-cancellation-and-shutdown.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.concurrency`](glossary/systems.md#systems.concurrency)<br>[Concurrency / Parallelism](glossary/systems.md#systems.concurrency) | 并发推进与并行执行，关注调度和硬件资源。 | P0 | 有正文：[概念](knowledge/systems/process-thread-coroutine.md) |
+| [`systems.blocking`](glossary/systems.md#systems.blocking)<br>[Blocking / Non-blocking](glossary/systems.md#systems.blocking) | 指定操作会不会让当前执行线程等待。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
+| [`systems.context-switch`](glossary/systems.md#systems.context-switch)<br>[Context Switch](glossary/systems.md#systems.context-switch) | 保存和恢复执行上下文及其开销。 | P0 | 有正文：[概念](knowledge/systems/context-switches-run-queues-and-scheduling-delay.md) |
+| [`systems.privilege`](glossary/systems.md#systems.privilege)<br>[User Mode / Kernel Mode / Syscall](glossary/systems.md#systems.privilege) | 用户态与内核态的受控入口、调用约定与返回契约，区别于线程调度。 | P0 | 有正文：[概念](knowledge/systems/syscalls-privilege-and-return-contracts.md) |
+| [`systems.memory-layout`](glossary/systems.md#systems.memory-layout)<br>[Stack / Heap](glossary/systems.md#systems.memory-layout) | 调用栈、动态分配和对象生命周期。 | P0 | 有正文：[概念](knowledge/systems/process-memory-layout-stacks-heaps-and-lifetimes.md) |
+| [`systems.virtual-memory`](glossary/systems.md#systems.virtual-memory)<br>[Virtual Memory / Paging](glossary/systems.md#systems.virtual-memory) | 虚拟地址到物理页的映射、按需分页、缺页与驻留边界。 | P0 | 有正文：[概念](knowledge/systems/virtual-memory-pages-and-faults.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
+| [`systems.synchronization`](glossary/systems.md#systems.synchronization)<br>[Mutex / Semaphore / CAS](glossary/systems.md#systems.synchronization) | 互斥、资源计数与原子比较交换。 | P0 | 有正文：[概念](knowledge/systems/locks-and-synchronization.md)、[概念](knowledge/systems/races-and-atomicity.md)、[概念](knowledge/systems/signals-cancellation-and-shutdown.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.race-deadlock`](glossary/systems.md#systems.race-deadlock)<br>[Race Condition / Deadlock](glossary/systems.md#systems.race-deadlock) | 时序依赖错误与循环等待。 | P0 | 有正文：[概念](knowledge/systems/races-and-atomicity.md)、[概念](knowledge/systems/deadlocks-and-recovery.md) |
+| [`systems.fd-socket`](glossary/systems.md#systems.fd-socket)<br>[File Descriptor / Socket](glossary/systems.md#systems.fd-socket) | 描述符编号引用打开状态及底层对象，需区分偏移共享、关闭与编号复用；Socket 为通信端点。 | P0 | 有正文：[概念](knowledge/systems/file-descriptors-and-open-file-descriptions.md)、[概念](knowledge/systems/signals-cancellation-and-shutdown.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
+| [`systems.io-multiplexing`](glossary/systems.md#systems.io-multiplexing)<br>[I/O Multiplexing / epoll](glossary/systems.md#systems.io-multiplexing) | 监视多个 I/O 就绪条件，应用仍需非阻塞操作、状态保存及公平推进。 | P0 | 有正文：[概念](knowledge/systems/io-multiplexing-readiness-and-event-loops.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
+| [`systems.memory-order`](glossary/systems.md#systems.memory-order)<br>[Memory Model / Memory Order / Happens-before](glossary/systems.md#systems.memory-order) | 语言内存模型规定并发访问的合法性、可见性和排序，发布必须满足对应同步关系。 | P0 | 有正文：[概念](knowledge/systems/races-and-atomicity.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md)、[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
+| [`systems.lock-free-progress`](glossary/systems.md#systems.lock-free-progress)<br>[Lock-free / Wait-free / Obstruction-free](glossary/systems.md#systems.lock-free-progress) | 按独占执行、整体完成与单次自身步骤区分并发算法进度，并与正确性和墙钟时限分别判断。 | P0 | 有正文：[概念](knowledge/systems/lock-free-algorithms-linearization-and-progress.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.memory-reclamation`](glossary/systems.md#systems.memory-reclamation)<br>[Safe Memory Reclamation / Hazard Pointer / EBR / RCU](glossary/systems.md#systems.memory-reclamation) | 移除后[延迟](glossary/performance.md#performance.latency-throughput)回收，直到读者保护、静止点或宽限期协议证明旧对象不会再被使用。 | P0 | 有正文：[概念](knowledge/systems/safe-memory-reclamation-aba-hazards-and-epochs.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.atomicity`](glossary/systems.md#systems.atomicity)<br>[Atomicity / Invariant](glossary/systems.md#systems.atomicity) | 点名不可分割的状态转换边界，并检验允许交错下必须保持的业务条件。 | P0 | 有正文：[概念](knowledge/systems/races-and-atomicity.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.cpu-cache`](glossary/systems.md#systems.cpu-cache)<br>[CPU Cache / Cache Line / Locality / False Sharing](glossary/systems.md#systems.cpu-cache) | 用缓存行和访问模式解释层级命中与工作集，区分数据缓存、地址翻译、缺页及共享写入的一致性成本。 | P0 | 有正文：[概念](knowledge/systems/cpu-caches-locality-and-false-sharing.md)、[概念](knowledge/systems/memory-order-atomics-and-publication.md) |
+| [`systems.signals`](glossary/systems.md#systems.signals)<br>[Linux Signal / Signal Mask / Pending Signal](glossary/systems.md#systems.signals) | 区分进程共享的信号处置、线程独立掩码与待决状态，用受控接收把通知连接到应用停止协议。 | P1 | 有正文：[概念](knowledge/systems/signals-cancellation-and-shutdown.md) |
+| [`systems.ipc`](glossary/systems.md#systems.ipc)<br>[Interprocess Communication](glossary/systems.md#systems.ipc) | 在进程边界间传递字节、消息或访问共享存储，需要同时约定边界、容量、结束与所有权。 | P1 | 有正文：[概念](knowledge/systems/ipc-channels-shared-memory-and-ownership.md) |
 
 <a id="networking"></a>
 
@@ -35,18 +41,28 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `networking.network-model`<br>OSI / TCP-IP Model | 网络职责分层和封装。 | P0 | 已收录 |
-| `networking.transport`<br>IP / TCP / UDP | 寻址、字节流可靠传输和数据报。 | P0 | 已收录 |
-| `networking.dns`<br>DNS / TTL | 域名解析与记录缓存有效期。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md) |
-| `networking.tcp-handshake`<br>TCP Handshake | 连接建立及连接状态。 | P0 | 已收录 |
-| `networking.transport-control`<br>Flow Control / Congestion Control | 接收方能力约束与网络拥塞调节。 | P0 | 已收录 |
-| `networking.tls`<br>TLS / HTTPS / PKI | 传输加密、身份校验与证书信任。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md) |
-| `networking.http-versions`<br>HTTP/1.1 / HTTP/2 / HTTP/3 | HTTP 传输机制和多路复用差异。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md) |
-| `networking.quic`<br>QUIC | 基于 UDP、集成安全机制的传输协议。 | P0 | 已收录 |
-| `networking.keepalive`<br>Keep-Alive / Connection Reuse | 连接复用、空闲管理和连接成本。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md) |
-| `networking.proxy`<br>Proxy / Reverse Proxy | 代理客户端或服务端接收请求。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md) |
-| `networking.load-balancer`<br>Load Balancer / L4 / L7 | 按传输层或应用层信息分发流量。 | P0 | 已收录 |
-| `networking.cdn-waf`<br>CDN / WAF | 内容边缘分发与应用层请求防护。 | P0 | 已收录 |
+| [`networking.network-model`](glossary/networking.md#networking.network-model)<br>[OSI / TCP-IP Model](glossary/networking.md#networking.network-model) | 网络职责分层和封装。 | P0 | 有正文：[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md) |
+| [`networking.transport`](glossary/networking.md#networking.transport)<br>[IP / TCP / UDP](glossary/networking.md#networking.transport) | 寻址、字节流可靠传输和数据报。 | P0 | 有正文：[概念](knowledge/networking/tcp-tls-and-connection-states.md)、[概念](knowledge/networking/tcp-flow-control-and-congestion.md)、[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md)、[概念](knowledge/networking/udp-quic-streams-and-delivery-boundaries.md)、[概念](knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md) |
+| [`networking.dns`](glossary/networking.md#networking.dns)<br>[DNS / TTL](glossary/networking.md#networking.dns) | 域名解析与记录缓存有效期。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md)、[概念](knowledge/networking/dns-caching-and-address-selection.md)、[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md) |
+| [`networking.tcp-handshake`](glossary/networking.md#networking.tcp-handshake)<br>[TCP Handshake](glossary/networking.md#networking.tcp-handshake) | 连接建立及连接状态。 | P0 | 有正文：[概念](knowledge/networking/tcp-tls-and-connection-states.md) |
+| [`networking.transport-control`](glossary/networking.md#networking.transport-control)<br>[Flow Control / Congestion Control](glossary/networking.md#networking.transport-control) | 接收方能力约束与网络拥塞调节。 | P0 | 有正文：[概念](knowledge/networking/tcp-flow-control-and-congestion.md)、[概念](knowledge/networking/congestion-algorithms-aqm-and-ecn.md) |
+| [`networking.tls`](glossary/networking.md#networking.tls)<br>[TLS / HTTPS / PKI](glossary/networking.md#networking.tls) | 传输加密、身份校验与证书信任。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md)、[概念](knowledge/networking/tcp-tls-and-connection-states.md)、[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md) |
+| [`networking.http-versions`](glossary/networking.md#networking.http-versions)<br>[HTTP/1.1 / HTTP/2 / HTTP/3](glossary/networking.md#networking.http-versions) | HTTP 传输机制和多路复用差异。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md)、[概念](knowledge/networking/http-reuse-pools-and-timeouts.md)、[概念](knowledge/networking/udp-quic-streams-and-delivery-boundaries.md) |
+| [`networking.quic`](glossary/networking.md#networking.quic)<br>[QUIC](glossary/networking.md#networking.quic) | 在UDP上建立安全连接、可靠多流与丢失/资源控制的传输协议。 | P0 | 有正文：[概念](knowledge/networking/http-reuse-pools-and-timeouts.md)、[概念](knowledge/networking/udp-quic-streams-and-delivery-boundaries.md) |
+| [`networking.keepalive`](glossary/networking.md#networking.keepalive)<br>[Keep-Alive / Connection Reuse](glossary/networking.md#networking.keepalive) | 连接复用、空闲管理和连接成本。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md)、[概念](knowledge/networking/tcp-tls-and-connection-states.md)、[概念](knowledge/networking/http-reuse-pools-and-timeouts.md)、[实验](knowledge/networking/connection-lifecycle-lab.md) |
+| [`networking.proxy`](glossary/networking.md#networking.proxy)<br>[Proxy / Reverse Proxy](glossary/networking.md#networking.proxy) | 代理客户端或服务端接收请求。 | P0 | 有正文：[概念](knowledge/networking/https-request-lifecycle.md)、[概念](knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md) |
+| [`networking.load-balancer`](glossary/networking.md#networking.load-balancer)<br>[Load Balancer / L4 / L7](glossary/networking.md#networking.load-balancer) | 按传输层或应用层信息分发流量。 | P0 | 有正文：[概念](knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md) |
+| [`networking.cdn-waf`](glossary/networking.md#networking.cdn-waf)<br>[CDN / WAF](glossary/networking.md#networking.cdn-waf) | 在边缘分发并按范围复用响应，以及按应用请求规则执行防护的两类机制。 | P0 | 有正文：[概念](knowledge/networking/cdn-edge-caches-and-waf-boundaries.md) |
+| [`networking.ip-prefix`](glossary/networking.md#networking.ip-prefix)<br>[CIDR / IP Prefix / Subnet Mask](glossary/networking.md#networking.ip-prefix) | 用地址前部的有效位及长度表示地址集合；IPv4 掩码可用于提取这一前缀。 | P0 | 有正文：[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md)、[概念](knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md)、[概念](knowledge/networking/policy-routing-control-planes-and-convergence.md)、[概念](knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md) |
+| [`networking.routing`](glossary/networking.md#networking.routing)<br>[IP Routing / Next Hop / Longest Prefix Match](glossary/networking.md#networking.routing) | 根据转发信息为目的地址选择出接口与下一跳，在已选定表中优先采用更具体的匹配前缀。 | P0 | 有正文：[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md)、[概念](knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md)、[概念](knowledge/networking/policy-routing-control-planes-and-convergence.md)、[概念](knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md) |
+| [`networking.neighbor-discovery`](glossary/networking.md#networking.neighbor-discovery)<br>[ARP / IPv6 Neighbor Discovery](glossary/networking.md#networking.neighbor-discovery) | 在当前链路上取得邻居的链路地址等信息，IPv4 以太网常用 ARP，IPv6 使用 Neighbor Discovery。 | P1 | 有正文：[概念](knowledge/networking/network-layers-ip-subnets-and-routing.md)、[概念](knowledge/networking/ipv6-addresses-slaac-and-neighbor-discovery.md)、[概念](knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md) |
+| [`networking.nat`](glossary/networking.md#networking.nat)<br>[NAT / SNAT / DNAT / NAPT](glossary/networking.md#networking.nat) | 在地址域之间改写 IP 地址及适用端口的机制；源/目的转换方向与是否转换端口是不同维度。 | P0 | 有正文：[概念](knowledge/networking/nat-proxies-and-l4-l7-load-balancing.md) |
+| [`networking.policy-routing`](glossary/networking.md#networking.policy-routing)<br>[Policy Routing / BGP / RIB / FIB](glossary/networking.md#networking.policy-routing) | 按政策选择路由、传播可达性与执行转发的不同层次。 | P1 | 有正文：[概念](knowledge/networking/policy-routing-control-planes-and-convergence.md) |
+| [`networking.path-mtu`](glossary/networking.md#networking.path-mtu)<br>[MTU / PMTU / MSS / PMTUD](glossary/networking.md#networking.path-mtu) | 区分链路/路径分组大小、TCP 数据预算与路径大小发现。 | P1 | 有正文：[概念](knowledge/networking/path-mtu-icmp-tunnels-and-black-holes.md) |
+| [`networking.congestion-algorithms`](glossary/networking.md#networking.congestion-algorithms)<br>[Reno / CUBIC / BBR](glossary/networking.md#networking.congestion-algorithms) | 以窗口、发送节奏及拥塞/交付观测调整发送的算法思路。 | P1 | 有正文：[概念](knowledge/networking/congestion-algorithms-aqm-and-ecn.md) |
+| [`networking.queue-management`](glossary/networking.md#networking.queue-management)<br>[AQM / ECN / BDP](glossary/networking.md#networking.queue-management) | 区分管道在途量、队列管理、调度与拥塞标记反馈。 | P1 | 有正文：[概念](knowledge/networking/congestion-algorithms-aqm-and-ecn.md) |
+| [`networking.ipv6-source-privacy`](glossary/networking.md#networking.ipv6-source-privacy)<br>[IPv6 Source Address Selection / Temporary Address](glossary/networking.md#networking.ipv6-source-privacy) | 根据地址状态、作用范围与政策选择源，并用不同生成方式限制地址关联。 | P1 | 有正文：[概念](knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md) |
+| [`networking.first-hop-protection`](glossary/networking.md#networking.first-hop-protection)<br>[RA Guard / Source Address Validation](glossary/networking.md#networking.first-hop-protection) | 约束本地链路的路由通告与源地址使用，防止部分伪造或误配。 | P1 | 有正文：[概念](knowledge/networking/ipv6-source-selection-privacy-and-first-hop-protection.md) |
 
 <a id="algorithms"></a>
 
@@ -54,18 +70,26 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `algorithms.complexity`<br>Time / Space Complexity | 时间、空间随输入规模增长的趋势。 | P0 | 有正文：[概念](knowledge/algorithms/complexity-and-data-structures.md) |
-| `algorithms.sequences`<br>Array / Linked List | 连续或链式存储及访问和修改成本。 | P0 | 有正文：[概念](knowledge/algorithms/complexity-and-data-structures.md) |
-| `algorithms.hash-table`<br>Hash Table / Hash Function | 键映射、碰撞处理和负载因子。 | P0 | 有正文：[概念](knowledge/algorithms/complexity-and-data-structures.md) |
-| `algorithms.queues`<br>Stack / Queue / Deque | 后进先出、先进先出与双端操作。 | P0 | 已收录 |
-| `algorithms.trees`<br>Tree / Heap / Trie | 层级关系、优先级和前缀索引。 | P0 | 已收录 |
-| `algorithms.b-tree`<br>B-Tree / B+Tree | 面向页访问的多路平衡树及索引组织。 | P0 | 已收录 |
-| `algorithms.sorting-search`<br>Sorting / Binary Search | 排序与有序区间上的查找。 | P0 | 已收录 |
-| `algorithms.graph-traversal`<br>Graph / BFS / DFS | 关系建模与图遍历。 | P0 | 已收录 |
-| `algorithms.bloom`<br>Bloom Filter | 允许误报的集合成员近似判断。 | P0 | 已收录 |
-| `algorithms.eviction`<br>LRU / LFU | 按访问新近程度或频率淘汰缓存。 | P0 | 已收录 |
-| `algorithms.amortized`<br>Amortized Analysis | 在一系列操作上分摊成本。 | P0 | 有正文：[概念](knowledge/algorithms/complexity-and-data-structures.md) |
-| `algorithms.probabilistic`<br>Probabilistic Data Structure | 用可控误差换取空间或时间效率。 | P0 | 已收录 |
+| [`algorithms.complexity`](glossary/algorithms.md#algorithms.complexity)<br>[Time / Space Complexity](glossary/algorithms.md#algorithms.complexity) | 时间、空间随输入规模增长的趋势。 | P0 | 有正文：[概念](knowledge/algorithms/complexity-and-data-structures.md)、[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md)、[概念](knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md) |
+| [`algorithms.sequences`](glossary/algorithms.md#algorithms.sequences)<br>[Array / Linked List](glossary/algorithms.md#algorithms.sequences) | 连续槽位或链式节点的访问和修改，完整成本包含定位与维护。 | P0 | 有正文：[概念](knowledge/algorithms/sequences-stacks-queues-and-deques.md)、[概念](knowledge/algorithms/complexity-and-data-structures.md) |
+| [`algorithms.hash-table`](glossary/algorithms.md#algorithms.hash-table)<br>[Hash Table / Hash Function](glossary/algorithms.md#algorithms.hash-table) | 按哈希缩小候选并依键相等定位，涉及碰撞、负载及扩容前提。 | P0 | 有正文：[概念](knowledge/algorithms/hash-tables-collisions-and-key-contracts.md)、[概念](knowledge/algorithms/complexity-and-data-structures.md) |
+| [`algorithms.queues`](glossary/algorithms.md#algorithms.queues)<br>[Stack / Queue / Deque](glossary/algorithms.md#algorithms.queues) | 后进先出、先进先出与双端接口，需另外约定容量和共享操作语义。 | P0 | 有正文：[概念](knowledge/algorithms/sequences-stacks-queues-and-deques.md) |
+| [`algorithms.trees`](glossary/algorithms.md#algorithms.trees)<br>[Tree / Heap / Trie](glossary/algorithms.md#algorithms.trees) | 树形、搜索顺序、堆优先关系与 Trie 前缀分支各有不变量及更新责任。 | P0 | 有正文：[概念](knowledge/algorithms/trees-heaps-and-priority-queues.md)、[概念](knowledge/algorithms/tries-prefix-search-and-key-encoding.md) |
+| [`algorithms.b-tree`](glossary/algorithms.md#algorithms.b-tree)<br>[B-Tree / B+Tree](glossary/algorithms.md#algorithms.b-tree) | 面向页访问的多路平衡树，区分分隔键、叶载荷、范围扫描和维护成本。 | P0 | 有正文：[概念](knowledge/algorithms/b-trees-bplus-trees-and-page-indexes.md) |
+| [`algorithms.sorting-search`](glossary/algorithms.md#algorithms.sorting-search)<br>[Sorting / Binary Search](glossary/algorithms.md#algorithms.sorting-search) | 排序契约与有序区间边界，区分存在性、重复范围及有序维护。 | P0 | 有正文：[概念](knowledge/algorithms/sorting-binary-search-and-boundaries.md)、[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.graph-traversal`](glossary/algorithms.md#algorithms.graph-traversal)<br>[Graph / BFS / DFS](glossary/algorithms.md#algorithms.graph-traversal) | 图表示与遍历，区分可达性、无权距离、环和依赖顺序。 | P0 | 有正文：[概念](knowledge/algorithms/graphs-traversal-and-dependency-order.md)、[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.bloom`](glossary/algorithms.md#algorithms.bloom)<br>[Bloom Filter](glossary/algorithms.md#algorithms.bloom) | 用共享位判断集合成员；阳性可能误报，阴性依赖完整插入、位状态与同步覆盖。 | P0 | 有正文：[概念](knowledge/cache-search/bloom-filters-membership-and-synchronization.md) |
+| [`algorithms.eviction`](glossary/algorithms.md#algorithms.eviction)<br>[LRU / LFU](glossary/algorithms.md#algorithms.eviction) | 依据新近或频次分配有限缓存容量，区分精确/近似、接纳、过期和失效。 | P0 | 有正文：[概念](knowledge/cache-search/lru-lfu-and-capacity-eviction.md) |
+| [`algorithms.amortized`](glossary/algorithms.md#algorithms.amortized)<br>[Amortized Analysis](glossary/algorithms.md#algorithms.amortized) | 把一系列操作的总成本分摊，不保证每次操作的最坏延迟。 | P0 | 有正文：[概念](knowledge/algorithms/sequences-stacks-queues-and-deques.md)、[概念](knowledge/algorithms/complexity-and-data-structures.md)、[概念](knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md) |
+| [`algorithms.probabilistic`](glossary/algorithms.md#algorithms.probabilistic)<br>[Probabilistic Data Structure](glossary/algorithms.md#algorithms.probabilistic) | 以 Bloom 为例用概率误报换取空间或工作量，其他概率结构仍待深入。 | P0 | 有正文：[概念](knowledge/cache-search/bloom-filters-membership-and-synchronization.md) |
+| [`algorithms.shortest-path`](glossary/algorithms.md#algorithms.shortest-path)<br>[Weighted Shortest Path / Relaxation](glossary/algorithms.md#algorithms.shortest-path) | 在明确边权与图前提下计算最小可加路线成本，区分发现、确认、有限距离、不可达与负环影响。 | P1 | 有正文：[概念](knowledge/algorithms/weighted-shortest-paths-and-relaxation.md) |
+| [`algorithms.greedy`](glossary/algorithms.md#algorithms.greedy)<br>[Greedy Algorithm / Exchange Argument](glossary/algorithms.md#algorithms.greedy) | 按局部规则承诺选择，并用安全交换等论证连接到全局目标；可行、不能扩充与最优分别判断。 | P1 | 有正文：[概念](knowledge/algorithms/greedy-choices-and-exchange-arguments.md)、[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.dynamic-programming`](glossary/algorithms.md#algorithms.dynamic-programming)<br>[Dynamic Programming / Memoization](glossary/algorithms.md#algorithms.dynamic-programming) | 定义充分状态及无环依赖，复用子问题结果；初始化、更新方向、方案恢复与数值规模分别限定。 | P1 | 有正文：[概念](knowledge/algorithms/dynamic-programming-states-and-dependency-order.md)、[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.union-find`](glossary/algorithms.md#algorithms.union-find)<br>[Union-Find / Disjoint Set Union](glossary/algorithms.md#algorithms.union-find) | 通过代表维护只合并的互斥分组，按秩/大小与压缩改善序列成本；内部父指针不是原图路线。 | P1 | 有正文：[概念](knowledge/algorithms/union-find-components-and-minimum-spanning-trees.md) |
+| [`algorithms.mst`](glossary/algorithms.md#algorithms.mst)<br>[Minimum Spanning Tree / Kruskal](glossary/algorithms.md#algorithms.mst) | 在无向图中以最小边权总和连接各分量，结合无环与安全跨割边；目标不同于单源最短路径。 | P1 | 有正文：[概念](knowledge/algorithms/union-find-components-and-minimum-spanning-trees.md) |
+| [`algorithms.divide-conquer`](glossary/algorithms.md#algorithms.divide-conquer)<br>[Divide and Conquer](glossary/algorithms.md#algorithms.divide-conquer) | 把问题分成更小同类问题，再依正确的组合规则构造原答案。 | P1 | 有正文：[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.backtracking`](glossary/algorithms.md#algorithms.backtracking)<br>[Backtracking](glossary/algorithms.md#algorithms.backtracking) | 逐步选择并探索部分方案，在返回时恢复选择，用有证明的条件排除无用分支。 | P1 | 有正文：[概念](knowledge/algorithms/divide-and-conquer-backtracking-and-pruning.md) |
+| [`algorithms.string-matching`](glossary/algorithms.md#algorithms.string-matching)<br>[Exact String Matching / KMP](glossary/algorithms.md#algorithms.string-matching) | 按明确符号与位置契约找精确子串，用前缀函数安全复用失配前信息。 | P1 | 有正文：[概念](knowledge/algorithms/string-matching-prefix-functions-and-text-boundaries.md) |
 
 <a id="runtime"></a>
 
@@ -73,19 +97,20 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `runtime.compilation`<br>Compiler / Interpreter / JIT | 编译、解释与运行期间的编译优化。 | P0 | 已收录 |
-| `runtime.virtual-machine`<br>Runtime / VM | 执行语言所需的调度、内存和宿主能力。 | P0 | 已收录 |
-| `runtime.event-loop`<br>Event Loop | 协调任务、I/O 完成事件和回调执行。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md)、[概念](knowledge/frontend/long-tasks-and-responsiveness.md) |
-| `runtime.async`<br>Sync / Async / Promise / Async-Await | 调用结果的交付与异步控制流。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md) |
-| `runtime.microtasks`<br>Task / Microtask | 宿主调度任务和微任务，具体规则依 Runtime 而异。 | P0 | 已收录 |
-| `runtime.closure`<br>Closure / Scope | 词法作用域和对外部绑定的访问。 | P0 | 已收录 |
-| `runtime.gc`<br>GC / Reference Counting | 自动内存回收策略及其代价。 | P0 | 已收录 |
-| `runtime.type-system`<br>Type System / Type Inference | 类型约束和自动类型推导。 | P0 | 已收录 |
-| `runtime.generics`<br>Generics / Structural Typing | 参数化类型与按结构兼容的类型关系。 | P0 | 已收录 |
-| `runtime.serialization`<br>Serialization / Deserialization | 在运行时对象和交换格式间转换。 | P0 | 已收录 |
-| `runtime.errors`<br>Exception / Error Propagation | 失败信号、传播边界与资源清理。 | P0 | 已收录 |
-| `runtime.modules`<br>Module System / Dependency | 模块加载、依赖解析和初始化。 | P0 | 已收录 |
-| `runtime.ffi-wasm`<br>FFI / WebAssembly | 语言边界调用与可移植字节码执行。 | P0 | 已收录 |
+| [`runtime.compilation`](glossary/runtime.md#runtime.compilation)<br>[Compiler / Interpreter / JIT](glossary/runtime.md#runtime.compilation) | 程序表示转换、解释执行与运行期间编译。 | P0 | 有正文：[概念](knowledge/runtime/compilation-interpretation-jit-and-deoptimization.md) |
+| [`runtime.virtual-machine`](glossary/runtime.md#runtime.virtual-machine)<br>[Runtime / VM](glossary/runtime.md#runtime.virtual-machine) | 执行语言所需的调度、内存和宿主能力。 | P0 | 有正文：[概念](knowledge/runtime/virtual-machines-bytecode-hosts-and-isolation.md) |
+| [`runtime.event-loop`](glossary/runtime.md#runtime.event-loop)<br>[Event Loop](glossary/runtime.md#runtime.event-loop) | 协调任务、I/O 完成事件和回调执行。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md)、[概念](knowledge/frontend/long-tasks-and-responsiveness.md)、[概念](knowledge/runtime/event-loop-and-microtasks.md) |
+| [`runtime.async`](glossary/runtime.md#runtime.async)<br>[Sync / Async / Promise / Async-Await](glossary/runtime.md#runtime.async) | 调用结果的交付与异步控制流。 | P0 | 有正文：[对比](knowledge/runtime/async-and-blocking.md)、[概念](knowledge/runtime/event-loop-and-microtasks.md) |
+| [`runtime.microtasks`](glossary/runtime.md#runtime.microtasks)<br>[Task / Microtask](glossary/runtime.md#runtime.microtasks) | 宿主调度任务和微任务，具体规则依 Runtime 而异。 | P0 | 有正文：[概念](knowledge/runtime/event-loop-and-microtasks.md) |
+| [`runtime.closure`](glossary/runtime.md#runtime.closure)<br>[Closure / Scope](glossary/runtime.md#runtime.closure) | 词法作用域和对外部绑定的访问。 | P0 | 有正文：[概念](knowledge/runtime/reachability-and-garbage-collection.md)、[概念](knowledge/runtime/closures-and-lexical-bindings.md) |
+| [`runtime.gc`](glossary/runtime.md#runtime.gc)<br>[GC / Reference Counting](glossary/runtime.md#runtime.gc) | 自动内存回收策略及其代价。 | P0 | 有正文：[概念](knowledge/runtime/reachability-and-garbage-collection.md) |
+| [`runtime.type-system`](glossary/runtime.md#runtime.type-system)<br>[Type System / Type Inference](glossary/runtime.md#runtime.type-system) | 类型约束和自动类型推导。 | P0 | 有正文：[概念](knowledge/runtime/type-systems-and-runtime-validation.md) |
+| [`runtime.generics`](glossary/runtime.md#runtime.generics)<br>[Generics / Structural Typing](glossary/runtime.md#runtime.generics) | 参数化类型与按结构兼容的类型关系。 | P0 | 有正文：[概念](knowledge/runtime/type-systems-and-runtime-validation.md) |
+| [`runtime.serialization`](glossary/runtime.md#runtime.serialization)<br>[Serialization / Deserialization](glossary/runtime.md#runtime.serialization) | 在运行时对象和交换格式间转换。 | P0 | 有正文：[概念](knowledge/runtime/serialization-representations-schemas-and-identity.md) |
+| [`runtime.errors`](glossary/runtime.md#runtime.errors)<br>[Exception / Error Propagation](glossary/runtime.md#runtime.errors) | 失败信号、传播边界与资源清理。 | P0 | 有正文：[概念](knowledge/runtime/exceptions-unwinding-cleanup-and-async-boundaries.md) |
+| [`runtime.modules`](glossary/runtime.md#runtime.modules)<br>[Module System / Dependency](glossary/runtime.md#runtime.modules) | 模块加载、依赖解析和初始化。 | P0 | 有正文：[概念](knowledge/runtime/modules-bindings-and-circular-dependencies.md) |
+| [`runtime.ffi-wasm`](glossary/runtime.md#runtime.ffi-wasm)<br>[FFI / WebAssembly](glossary/runtime.md#runtime.ffi-wasm) | 语言边界调用与可移植字节码执行。 | P0 | 有正文：[概念](knowledge/runtime/ffi-abi-ownership-and-runtime-boundaries.md)、[概念](knowledge/runtime/virtual-machines-bytecode-hosts-and-isolation.md) |
+| [`runtime.reachability`](glossary/runtime.md#runtime.reachability)<br>[Reachability / Retention](glossary/runtime.md#runtime.reachability) | 从根沿引用路径能否到达对象，以及哪些持有关系延长其生命周期。 | P1 | 有正文：[概念](knowledge/runtime/reachability-and-garbage-collection.md) |
 
 <a id="frontend"></a>
 
@@ -93,19 +118,21 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `frontend.render-tree`<br>DOM / CSSOM / Render Tree | 文档、样式和渲染结构。 | P1 | 已收录 |
-| `frontend.render-pipeline`<br>Layout / Paint / Compositing | 布局计算、绘制与图层合成。 | P1 | 已收录 |
-| `frontend.rendering-strategies`<br>CSR / SSR / SSG / ISR | 客户端渲染、服务端渲染、预生成与增量再生成。 | P1 | 已收录 |
-| `frontend.hydration`<br>Hydration | 让服务端输出的页面连接客户端交互逻辑。 | P1 | 已收录 |
-| `frontend.spa`<br>SPA / Client-side Routing | 单页导航与客户端路由状态。 | P1 | 已收录 |
-| `frontend.state`<br>Reactivity / State Management | 数据变化、界面更新及状态所有权。 | P1 | 已收录 |
-| `frontend.vdom`<br>Virtual DOM / Reconciliation | UI 描述与更新协调策略。 | P1 | 已收录 |
-| `frontend.bundling`<br>Bundling / Tree Shaking | 模块打包与可证明无用代码的移除。 | P1 | 已收录 |
-| `frontend.offline`<br>Browser Cache / Service Worker | 响应复用、请求代理和离线能力。 | P1 | 已收录 |
-| `frontend.realtime`<br>WebSocket / SSE | 双向连接通信与服务器事件推送。 | P1 | 已收录 |
-| `frontend.web-vitals`<br>Core Web Vitals | 衡量加载、交互和布局稳定性的指标集合。 | P1 | 已收录 |
-| `frontend.bff`<br>BFF | 为特定客户端提供聚合和适配的后端。 | P1 | 已收录 |
-| `frontend.long-tasks`<br>Long Task / Main-thread Yielding | 识别持续占用主线程的任务，分批执行并让出调度机会。 | P1 | 有正文：[概念](knowledge/frontend/long-tasks-and-responsiveness.md) |
+| [`frontend.render-tree`](glossary/frontend.md#frontend.render-tree)<br>[DOM / CSSOM / Render Tree](glossary/frontend.md#frontend.render-tree) | 文档、样式和渲染结构。 | P1 | 有正文：[概念](knowledge/frontend/rendering-and-hydration.md) |
+| [`frontend.render-pipeline`](glossary/frontend.md#frontend.render-pipeline)<br>[Layout / Paint / Compositing](glossary/frontend.md#frontend.render-pipeline) | 布局计算、绘制与图层合成。 | P1 | 有正文：[概念](knowledge/frontend/rendering-and-hydration.md) |
+| [`frontend.rendering-strategies`](glossary/frontend.md#frontend.rendering-strategies)<br>[CSR / SSR / SSG / ISR](glossary/frontend.md#frontend.rendering-strategies) | 客户端渲染、服务端渲染、预生成与增量再生成。 | P1 | 有正文：[概念](knowledge/frontend/rendering-and-hydration.md)、[概念](knowledge/frontend/incremental-regeneration-revalidation-and-freshness.md) |
+| [`frontend.hydration`](glossary/frontend.md#frontend.hydration)<br>[Hydration](glossary/frontend.md#frontend.hydration) | 让服务端输出的页面连接客户端交互逻辑。 | P1 | 有正文：[概念](knowledge/frontend/rendering-and-hydration.md) |
+| [`frontend.spa`](glossary/frontend.md#frontend.spa)<br>[SPA / Client-side Routing](glossary/frontend.md#frontend.spa) | 单页导航与客户端路由状态。 | P1 | 有正文：[概念](knowledge/frontend/routing-state-and-cache-lifecycles.md) |
+| [`frontend.state`](glossary/frontend.md#frontend.state)<br>[Reactivity / State Management](glossary/frontend.md#frontend.state) | 数据变化、界面更新及状态所有权。 | P1 | 有正文：[概念](knowledge/frontend/reactive-state-and-update-scheduling.md)、[概念](knowledge/frontend/routing-state-and-cache-lifecycles.md) |
+| [`frontend.vdom`](glossary/frontend.md#frontend.vdom)<br>[Virtual DOM / Reconciliation](glossary/frontend.md#frontend.vdom) | UI 描述与更新协调策略。 | P1 | 有正文：[概念](knowledge/frontend/reconciliation-keys-and-component-identity.md) |
+| [`frontend.bundling`](glossary/frontend.md#frontend.bundling)<br>[Bundling / Tree Shaking](glossary/frontend.md#frontend.bundling) | 依据模块使用与副作用等信息组织、移除和拆分输出代码；资源粒度、传输成本与运行时执行需分别分析。 | P1 | 有正文：[概念](knowledge/frontend/bundling-tree-shaking-and-code-splitting.md) |
+| [`frontend.offline`](glossary/frontend.md#frontend.offline)<br>[Browser Cache / Service Worker](glossary/frontend.md#frontend.offline) | 响应复用、请求代理和离线能力。 | P1 | 有正文：[概念](knowledge/frontend/routing-state-and-cache-lifecycles.md)、[概念](knowledge/frontend/service-workers-offline-caches-and-update-lifecycles.md) |
+| [`frontend.realtime`](glossary/frontend.md#frontend.realtime)<br>[WebSocket / SSE](glossary/frontend.md#frontend.realtime) | 双向连接通信与服务器事件推送。 | P1 | 有正文：[概念](knowledge/frontend/websocket-sse-reconnection-and-replay.md) |
+| [`frontend.web-vitals`](glossary/frontend.md#frontend.web-vitals)<br>[Core Web Vitals](glossary/frontend.md#frontend.web-vitals) | 衡量加载、交互和布局稳定性的指标集合。 | P1 | 有正文：[概念](knowledge/frontend/core-web-vitals-field-data-and-diagnostic-boundaries.md) |
+| [`frontend.bff`](glossary/frontend.md#frontend.bff)<br>[BFF](glossary/frontend.md#frontend.bff) | 为特定客户端提供聚合和适配的后端。 | P1 | 有正文：[概念](knowledge/frontend/backends-for-frontends-projections-and-service-boundaries.md) |
+| [`frontend.long-tasks`](glossary/frontend.md#frontend.long-tasks)<br>[Long Task / Main-thread Yielding](glossary/frontend.md#frontend.long-tasks) | 识别持续占用主线程的任务，分批执行并让出调度机会。 | P1 | 有正文：[概念](knowledge/frontend/long-tasks-and-responsiveness.md)、[实验](knowledge/frontend/long-tasks-lab.md) |
+| [`frontend.hydration-mismatch`](glossary/frontend.md#frontend.hydration-mismatch)<br>[Hydration Mismatch](glossary/frontend.md#frontend.hydration-mismatch) | 预生成 DOM 与客户端首次预期输出不对应，需检查初始数据、结构与环境差异。 | P1 | 有正文：[概念](knowledge/frontend/rendering-and-hydration.md) |
+| [`frontend.component-identity`](glossary/frontend.md#frontend.component-identity)<br>[Component Identity / Stable Key](glossary/frontend.md#frontend.component-identity) | 更新前后组件或列表项的对应关系，决定局部状态保留与重置。 | P1 | 有正文：[概念](knowledge/frontend/reconciliation-keys-and-component-identity.md) |
 
 <a id="api"></a>
 
@@ -113,20 +140,22 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `api.styles`<br>REST / RPC / GraphQL / gRPC | API 风格、查询模型与调用协议。 | P0 | 已收录 |
-| `api.resource-model`<br>Resource Modeling | 资源标识、状态变化与操作语义。 | P0 | 已收录 |
-| `api.http-semantics`<br>HTTP Method / Status Code | 方法意图和响应结果的协议表达。 | P0 | 已收录 |
-| `api.idempotency`<br>Idempotency | 同一操作重复执行时约束业务效果。 | P0 | 有正文：[概念](knowledge/api/idempotency.md)、[实验](knowledge/api/idempotency-lab.md) |
-| `api.pagination`<br>Pagination / Cursor | 按偏移或位置边界分页。 | P0 | 已收录 |
-| `api.versioning`<br>API Versioning / Compatibility | 契约演进与调用方兼容。 | P0 | 已收录 |
-| `api.contracts`<br>OpenAPI / Protobuf / JSON Schema | 接口描述与结构约束。 | P0 | 已收录 |
-| `api.validation`<br>Validation / Sanitization | 校验输入及按上下文处理危险内容。 | P0 | 已收录 |
-| `api.retries`<br>Timeout / Retry / Backoff / Jitter | 截止时间、重试和随机退避。 | P0 | 有正文：[概念](knowledge/reliability/timeouts-and-retry-budgets.md) |
-| `api.limits`<br>Rate Limiting / Quota | 速率约束与时间窗口内的用量额度。 | P0 | 已收录 |
-| `api.gateway`<br>API Gateway | 统一流量入口和横切治理。 | P0 | 已收录 |
-| `api.webhook`<br>Webhook | 基于 HTTP 回调的异步事件通知。 | P0 | 已收录 |
-| `api.pool`<br>Connection Pool | 复用有限连接并控制等待。 | P0 | 有正文：[案例](knowledge/performance/slow-api-investigation.md) |
-| `api.shutdown`<br>Graceful Shutdown | 停止接流、处理在途任务和释放资源。 | P0 | 已收录 |
+| [`api.styles`](glossary/api.md#api.styles)<br>[REST / RPC / GraphQL / gRPC](glossary/api.md#api.styles) | API 架构约束、调用模型、查询规范与框架的对照组。 | P0 | 有正文：[概念](knowledge/api/api-styles-contracts-and-gateway-boundaries.md) |
+| [`api.resource-model`](glossary/api.md#api.resource-model)<br>[Resource Modeling](glossary/api.md#api.resource-model) | 资源标识、状态变化与操作语义。 | P0 | 有正文：[概念](knowledge/api/resource-models-input-validation-and-write-boundaries.md) |
+| [`api.http-semantics`](glossary/api.md#api.http-semantics)<br>[HTTP Method / Status Code](glossary/api.md#api.http-semantics) | 方法意图和响应结果的协议表达。 | P0 | 有正文：[概念](knowledge/api/contracts-and-pagination.md)、[概念](knowledge/api/conditional-requests-and-cache-validation.md) |
+| [`api.idempotency`](glossary/api.md#api.idempotency)<br>[Idempotency](glossary/api.md#api.idempotency) | 同一操作重复执行时约束业务效果。 | P0 | 有正文：[概念](knowledge/api/idempotency.md)、[实验](knowledge/api/idempotency-lab.md)、[概念](knowledge/api/webhook-signatures-replay-and-delivery.md) |
+| [`api.pagination`](glossary/api.md#api.pagination)<br>[Pagination / Cursor](glossary/api.md#api.pagination) | 按偏移或位置边界分页。 | P0 | 有正文：[概念](knowledge/api/contracts-and-pagination.md) |
+| [`api.versioning`](glossary/api.md#api.versioning)<br>[API Versioning / Compatibility](glossary/api.md#api.versioning) | 契约演进与调用方兼容。 | P0 | 有正文：[概念](knowledge/api/contracts-and-pagination.md) |
+| [`api.contracts`](glossary/api.md#api.contracts)<br>[OpenAPI / Protobuf / JSON Schema](glossary/api.md#api.contracts) | 接口描述与结构约束。 | P0 | 有正文：[概念](knowledge/api/contracts-and-pagination.md)、[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md) |
+| [`api.validation`](glossary/api.md#api.validation)<br>[Validation / Sanitization](glossary/api.md#api.validation) | 校验输入及按上下文处理危险内容。 | P0 | 有正文：[概念](knowledge/api/resource-models-input-validation-and-write-boundaries.md) |
+| [`api.retries`](glossary/api.md#api.retries)<br>[Timeout / Retry / Backoff / Jitter](glossary/api.md#api.retries) | [截止时间](glossary/reliability.md#reliability.retry-budget)、重试和随机退避。 | P0 | 有正文：[概念](knowledge/reliability/timeouts-and-retry-budgets.md)、[概念](knowledge/api/webhook-signatures-replay-and-delivery.md) |
+| [`api.limits`](glossary/api.md#api.limits)<br>[Rate Limiting / Quota](glossary/api.md#api.limits) | 速率约束与时间窗口内的用量额度。 | P0 | 有正文：[概念](knowledge/api/rate-limits-concurrency-and-quotas.md) |
+| [`api.gateway`](glossary/api.md#api.gateway)<br>[API Gateway](glossary/api.md#api.gateway) | 在边界统一承接路由、凭证验证和流量治理的入口层。 | P0 | 有正文：[概念](knowledge/api/api-styles-contracts-and-gateway-boundaries.md) |
+| [`api.webhook`](glossary/api.md#api.webhook)<br>[Webhook](glossary/api.md#api.webhook) | 基于 HTTP 回调的异步事件通知。 | P0 | 有正文：[概念](knowledge/api/webhook-signatures-replay-and-delivery.md) |
+| [`api.pool`](glossary/api.md#api.pool)<br>[Connection Pool](glossary/api.md#api.pool) | 复用有限连接并控制等待。 | P0 | 有正文：[案例](knowledge/performance/slow-api-investigation.md) |
+| [`api.shutdown`](glossary/api.md#api.shutdown)<br>[Graceful Shutdown](glossary/api.md#api.shutdown) | 停止接流、处理在途任务和释放资源。 | P0 | 有正文：[概念](knowledge/api/graceful-shutdown-draining-and-inflight-outcomes.md) |
+| [`api.problem-details`](glossary/api.md#api.problem-details)<br>[Problem Details](glossary/api.md#api.problem-details) | HTTP API 的结构化问题详情表示，以稳定的问题类型关联机器处理与人类说明。 | P1 | 有正文：[概念](knowledge/api/contracts-and-pagination.md) |
+| [`api.conditionals`](glossary/api.md#api.conditionals)<br>[ETag / Conditional Request](glossary/api.md#api.conditionals) | 以表示验证器表达读取或修改的前提，区分缓存验证与条件保存；不替代[授权](glossary/security.md#security.identity)、幂等协议或跨资源不变量。 | P1 | 有正文：[概念](knowledge/api/conditional-requests-and-cache-validation.md)、[概念](knowledge/networking/cdn-edge-caches-and-waf-boundaries.md) |
 
 <a id="architecture"></a>
 
@@ -134,22 +163,25 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `architecture.principles`<br>SOLID / KISS / DRY / YAGNI | 设计原则和复杂度约束，须结合上下文使用。 | P0 | 已收录 |
-| `architecture.coupling`<br>Cohesion / Coupling | 职责聚合程度与组件间依赖。 | P0 | 已收录 |
-| `architecture.concerns`<br>Separation of Concerns | 按职责隔离不同变化来源。 | P0 | 已收录 |
-| `architecture.layering`<br>Layered Architecture | 职责分层和依赖方向。 | P0 | 已收录 |
-| `architecture.modular-monolith`<br>Modular Monolith | 在同一部署单元内保持模块边界。 | P0 | 已收录 |
-| `architecture.microservices`<br>Microservices | 独立演进和部署的服务及其协调成本。 | P0 | 已收录 |
-| `architecture.ddd`<br>DDD / Bounded Context | 领域建模与模型适用范围。 | P0 | 已收录 |
-| `architecture.domain-model`<br>Entity / Value Object / Aggregate | 标识、值语义与一致性边界。 | P0 | 已收录 |
-| `architecture.ports-adapters`<br>Clean / Hexagonal Architecture | 通过依赖方向和端口隔离核心业务。 | P0 | 已收录 |
-| `architecture.di`<br>Dependency Injection / IoC | 外部提供依赖与控制关系反转。 | P0 | 已收录 |
-| `architecture.cqrs`<br>CQRS | 分离修改状态与读取状态的模型。 | P0 | 已收录 |
-| `architecture.event-sourcing`<br>Event Sourcing | 以事件序列记录状态演进。 | P0 | 已收录 |
-| `architecture.patterns`<br>Design Pattern / Anti-pattern | 可复用设计经验及常见不良结构。 | P0 | 已收录 |
-| `architecture.adr`<br>ADR | 记录特定上下文中的决策、备选方案及后果。 | P0 | 有正文：[决策](knowledge/architecture/knowledge-base-adr.md) |
-| `architecture.debt`<br>Technical Debt / Refactoring | 演进成本与保持行为的结构调整。 | P0 | 已收录 |
-| `architecture.strangler`<br>Strangler Fig Pattern | 渐进替换旧系统的迁移方法。 | P0 | 已收录 |
+| [`architecture.principles`](glossary/architecture.md#architecture.principles)<br>[SOLID / KISS / DRY / YAGNI](glossary/architecture.md#architecture.principles) | 设计原则和复杂度约束，须结合上下文使用。 | P0 | 有正文：[概念](knowledge/architecture/design-principles-contracts-and-abstraction-costs.md) |
+| [`architecture.coupling`](glossary/architecture.md#architecture.coupling)<br>[Cohesion / Coupling](glossary/architecture.md#architecture.coupling) | 职责聚合程度与组件间依赖。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md)、[概念](knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md) |
+| [`architecture.concerns`](glossary/architecture.md#architecture.concerns)<br>[Separation of Concerns](glossary/architecture.md#architecture.concerns) | 按职责隔离不同变化来源。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.layering`](glossary/architecture.md#architecture.layering)<br>[Layered Architecture](glossary/architecture.md#architecture.layering) | 职责分层和依赖方向。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.modular-monolith`](glossary/architecture.md#architecture.modular-monolith)<br>[Modular Monolith](glossary/architecture.md#architecture.modular-monolith) | 在同一部署单元内保持模块边界。 | P0 | 有正文：[概念](knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md) |
+| [`architecture.microservices`](glossary/architecture.md#architecture.microservices)<br>[Microservices](glossary/architecture.md#architecture.microservices) | 独立演进和部署的服务及其协调成本。 | P0 | 有正文：[概念](knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md) |
+| [`architecture.ddd`](glossary/architecture.md#architecture.ddd)<br>[DDD / Bounded Context](glossary/architecture.md#architecture.ddd) | 领域建模与模型适用范围。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md)、[概念](knowledge/architecture/domain-models-aggregates-and-invariants.md)、[概念](knowledge/architecture/modular-monoliths-microservices-and-service-boundaries.md) |
+| [`architecture.domain-model`](glossary/architecture.md#architecture.domain-model)<br>[Entity / Value Object / Aggregate](glossary/architecture.md#architecture.domain-model) | 标识、值语义与一致性边界。 | P0 | 有正文：[概念](knowledge/architecture/domain-models-aggregates-and-invariants.md) |
+| [`architecture.ports-adapters`](glossary/architecture.md#architecture.ports-adapters)<br>[Clean / Hexagonal Architecture](glossary/architecture.md#architecture.ports-adapters) | 通过依赖方向和端口隔离核心业务。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.di`](glossary/architecture.md#architecture.di)<br>[Dependency Injection / IoC](glossary/architecture.md#architecture.di) | 外部提供依赖与控制关系反转。 | P0 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.cqrs`](glossary/architecture.md#architecture.cqrs)<br>[CQRS](glossary/architecture.md#architecture.cqrs) | 分离修改状态与读取状态的模型。 | P0 | 有正文：[概念](knowledge/architecture/cqrs-read-write-models-and-projection-lag.md) |
+| [`architecture.event-sourcing`](glossary/architecture.md#architecture.event-sourcing)<br>[Event Sourcing](glossary/architecture.md#architecture.event-sourcing) | 以事件序列记录状态演进。 | P0 | 有正文：[概念](knowledge/architecture/event-sourcing-streams-snapshots-and-projections.md) |
+| [`architecture.patterns`](glossary/architecture.md#architecture.patterns)<br>[Design Pattern / Anti-pattern](glossary/architecture.md#architecture.patterns) | 可复用设计经验及常见不良结构。 | P0 | 有正文：[概念](knowledge/architecture/design-patterns-collaboration-and-semantic-boundaries.md) |
+| [`architecture.adr`](glossary/architecture.md#architecture.adr)<br>[ADR](glossary/architecture.md#architecture.adr) | 记录特定上下文中的决策、备选方案及后果。 | P0 | 有正文：[概念](knowledge/architecture/quality-attribute-scenarios-tradeoffs-and-adrs.md)、[决策](knowledge/architecture/knowledge-base-adr.md) |
+| [`architecture.debt`](glossary/architecture.md#architecture.debt)<br>[Technical Debt / Refactoring](glossary/architecture.md#architecture.debt) | 用后续变更的额外成本讨论技术债，通过保持约定行为的结构调整改善维护；现状记录不自动等于正确规格。 | P0 | 有正文：[概念](knowledge/architecture/technical-debt-refactoring-and-behavior.md) |
+| [`architecture.strangler`](glossary/architecture.md#architecture.strangler)<br>[Strangler Fig Pattern](glossary/architecture.md#architecture.strangler) | 渐进替换旧系统的迁移方法。 | P0 | 有正文：[概念](knowledge/architecture/strangler-fig-migration-write-authority-and-rollback.md) |
+| [`architecture.information-hiding`](glossary/architecture.md#architecture.information-hiding)<br>[Information Hiding](glossary/architecture.md#architecture.information-hiding) | 把容易变化的设计决定封装在模块内部，以必要接口限制知识传播与变更影响。 | P1 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.dependency-inversion`](glossary/architecture.md#architecture.dependency-inversion)<br>[Dependency Inversion Principle / DIP](glossary/architecture.md#architecture.dependency-inversion) | 围绕核心约定组织源码依赖，使具体适配实现依赖该约定；与运行调用方向及依赖注入分别分析。 | P1 | 有正文：[概念](knowledge/architecture/module-boundaries-and-dependencies.md) |
+| [`architecture.quality-scenario`](glossary/architecture.md#architecture.quality-scenario)<br>[Quality Attribute Scenario](glossary/architecture.md#architecture.quality-scenario) | 用刺激源、刺激、环境、受影响对象、响应及度量限定架构目标。 | P1 | 有正文：[概念](knowledge/architecture/quality-attribute-scenarios-tradeoffs-and-adrs.md) |
 
 <a id="security"></a>
 
@@ -157,21 +189,34 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `security.identity`<br>Authentication / Authorization | 证明身份与判断访问权。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md) |
-| `security.sessions`<br>Session / Cookie | 会话状态和浏览器保存、发送的数据。 | P0 | 已收录 |
-| `security.oauth`<br>OAuth 2.0 / OpenID Connect | 委托授权框架与其上的身份层。 | P0 | 已收录 |
-| `security.tokens`<br>JWT / JWS / JWK | 声明容器、签名格式和密钥表示。 | P0 | 已收录 |
-| `security.access-control`<br>RBAC / ABAC | 按角色或属性判断权限。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md) |
-| `security.token-lifecycle`<br>Access Token / Refresh Token | 访问凭据和更新访问凭据的机制。 | P0 | 已收录 |
-| `security.origin`<br>CORS / Same-Origin Policy | 浏览器同源边界与跨源响应访问机制。 | P0 | 已收录 |
-| `security.web-attacks`<br>XSS / CSRF / SSRF | 脚本注入、跨站请求伪造和服务端请求伪造。 | P0 | 已收录 |
-| `security.sql-injection`<br>SQL Injection / Parameterized Query | 查询结构注入与参数绑定防护。 | P0 | 已收录 |
-| `security.passwords`<br>Hash / Salt / KDF | 哈希、随机盐和适合口令的派生机制。 | P0 | 已收录 |
-| `security.mtls`<br>mTLS / Certificate | 连接两端的证书身份校验。 | P0 | 已收录 |
-| `security.secrets`<br>Secrets Management | 敏感凭据的保存、分发与轮换。 | P0 | 已收录 |
-| `security.trust`<br>Least Privilege / Zero Trust | 最小授权和持续验证访问条件。 | P0 | 已收录 |
-| `security.threats`<br>Threat Modeling / OWASP | 识别攻击面并参考应用安全研究与规范。 | P0 | 已收录 |
-| `security.tenant-isolation`<br>Tenant Isolation / Object-level Authorization | 租户边界与逐对象访问检查。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md) |
+| [`security.identity`](glossary/security.md#security.identity)<br>[Authentication / Authorization](glossary/security.md#security.identity) | 证明身份与判断访问权。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md)、[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md)、[概念](knowledge/security/multi-factor-authentication-passkeys-and-recovery.md) |
+| [`security.sessions`](glossary/security.md#security.sessions)<br>[Session / Cookie](glossary/security.md#security.sessions) | 会话状态和浏览器保存、发送的数据。 | P0 | 有正文：[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/password-storage-and-account-recovery.md)、[概念](knowledge/security/xss-contexts-sinks-and-browser-defenses.md)、[概念](knowledge/security/multi-factor-authentication-passkeys-and-recovery.md) |
+| [`security.oauth`](glossary/security.md#security.oauth)<br>[OAuth 2.0 / OpenID Connect](glossary/security.md#security.oauth) | 委托授权框架与其上的身份层。 | P0 | 有正文：[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/oauth-oidc-and-pkce.md)、[概念](knowledge/security/service-delegation-token-exchange-and-audience.md) |
+| [`security.tokens`](glossary/security.md#security.tokens)<br>[JWT / JWS / JWK](glossary/security.md#security.tokens) | 声明容器、签名格式和密钥表示。 | P0 | 有正文：[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/service-delegation-token-exchange-and-audience.md) |
+| [`security.access-control`](glossary/security.md#security.access-control)<br>[RBAC / ABAC](glossary/security.md#security.access-control) | 通过角色分配或主体、对象、动作与环境属性表达访问规则。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md)、[概念](knowledge/security/authorization-models-policy-distribution-and-revocation.md) |
+| [`security.token-lifecycle`](glossary/security.md#security.token-lifecycle)<br>[Access Token / Refresh Token](glossary/security.md#security.token-lifecycle) | 访问凭据和更新访问凭据的机制。 | P0 | 有正文：[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md) |
+| [`security.origin`](glossary/security.md#security.origin)<br>[CORS / Same-Origin Policy](glossary/security.md#security.origin) | 浏览器同源边界与跨源响应访问机制。 | P0 | 有正文：[概念](knowledge/security/origins-cors-and-csrf.md) |
+| [`security.web-attacks`](glossary/security.md#security.web-attacks)<br>[XSS / CSRF / SSRF](glossary/security.md#security.web-attacks) | 脚本注入、跨站请求伪造和服务端请求伪造。 | P0 | 有正文：[概念](knowledge/security/origins-cors-and-csrf.md)、[概念](knowledge/security/xss-contexts-sinks-and-browser-defenses.md)、[概念](knowledge/security/ssrf-url-resolution-and-egress-boundaries.md) |
+| [`security.sql-injection`](glossary/security.md#security.sql-injection)<br>[SQL Injection / Parameterized Query](glossary/security.md#security.sql-injection) | 查询结构注入与参数绑定防护。 | P0 | 有正文：[概念](knowledge/security/sql-injection-parameters-and-query-structure.md) |
+| [`security.passwords`](glossary/security.md#security.passwords)<br>[Hash / Salt / KDF](glossary/security.md#security.passwords) | 哈希、随机盐和适合口令的派生机制。 | P0 | 有正文：[概念](knowledge/security/password-storage-and-account-recovery.md) |
+| [`security.mtls`](glossary/security.md#security.mtls)<br>[mTLS / Certificate](glossary/security.md#security.mtls) | TLS 连接双方按约定使用证书及对应私钥证明建立对端身份。 | P0 | 有正文：[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md) |
+| [`security.secrets`](glossary/security.md#security.secrets)<br>[Secrets Management](glossary/security.md#security.secrets) | 敏感凭据的保存、分发与轮换。 | P0 | 有正文：[概念](knowledge/security/password-storage-and-account-recovery.md)、[概念](knowledge/api/webhook-signatures-replay-and-delivery.md)、[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md)、[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md) |
+| [`security.trust`](glossary/security.md#security.trust)<br>[Least Privilege / Zero Trust](glossary/security.md#security.trust) | 最小授权和持续验证访问条件。 | P0 | 有正文：[概念](knowledge/security/trust-boundaries-least-privilege-and-threat-modeling.md) |
+| [`security.threats`](glossary/security.md#security.threats)<br>[Threat Modeling / OWASP](glossary/security.md#security.threats) | 识别攻击面并参考应用安全研究与规范。 | P0 | 有正文：[概念](knowledge/security/trust-boundaries-least-privilege-and-threat-modeling.md) |
+| [`security.tenant-isolation`](glossary/security.md#security.tenant-isolation)<br>[Tenant Isolation / Object-level Authorization](glossary/security.md#security.tenant-isolation) | 租户边界与逐对象访问检查。 | P0 | 有正文：[概念](knowledge/security/object-level-authorization.md)、[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md)、[概念](knowledge/security/authorization-models-policy-distribution-and-revocation.md) |
+| [`security.revocation`](glossary/security.md#security.revocation)<br>[Session / Token Revocation](glossary/security.md#security.revocation) | 主动终止会话或令牌的继续使用，真实生效范围取决于验证状态与传播策略。 | P1 | 有正文：[概念](knowledge/security/authentication-sessions-and-tokens.md)、[概念](knowledge/security/password-storage-and-account-recovery.md)、[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md)、[概念](knowledge/security/authorization-models-policy-distribution-and-revocation.md)、[概念](knowledge/cache-search/object-storage-versions-uploads-and-presigned-access.md)、[概念](knowledge/security/service-delegation-token-exchange-and-audience.md) |
+| [`security.account-recovery`](glossary/security.md#security.account-recovery)<br>[Account Recovery](glossary/security.md#security.account-recovery) | 丢失所需认证能力后，凭约定证据重新取得账号控制的过程。 | P1 | 有正文：[概念](knowledge/security/password-storage-and-account-recovery.md)、[概念](knowledge/security/multi-factor-authentication-passkeys-and-recovery.md) |
+| [`security.pepper`](glossary/security.md#security.pepper)<br>[Pepper](glossary/security.md#security.pepper) | 与密码库分离保存、参与密码校验保护的额外秘密。 | P1 | 有正文：[概念](knowledge/security/password-storage-and-account-recovery.md)、[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md) |
+| [`security.hmac`](glossary/security.md#security.hmac)<br>[HMAC](glossary/security.md#security.hmac) | 使用共享秘密与密码学哈希认证指定消息内容的机制。 | P1 | 有正文：[概念](knowledge/api/webhook-signatures-replay-and-delivery.md)、[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md) |
+| [`security.replay`](glossary/security.md#security.replay)<br>[Replay Attack](glossary/security.md#security.replay) | 重新提交先前有效的消息或凭证，试图再次获得访问或业务效果。 | P1 | 有正文：[概念](knowledge/api/webhook-signatures-replay-and-delivery.md) |
+| [`security.output-encoding`](glossary/security.md#security.output-encoding)<br>[Contextual Output Encoding](glossary/security.md#security.output-encoding) | 按数据最终进入的 HTML、属性、URL 或脚本语法位置编码，使数据不被误解释成该位置的代码。 | P1 | 有正文：[概念](knowledge/security/xss-contexts-sinks-and-browser-defenses.md) |
+| [`security.trusted-types`](glossary/security.md#security.trusted-types)<br>[Trusted Types](glossary/security.md#security.trusted-types) | 通过集中策略产生特定可信类型，并按 CSP 约束受管控的 DOM 注入汇接受这些值的浏览器机制。 | P1 | 有正文：[概念](knowledge/security/xss-contexts-sinks-and-browser-defenses.md) |
+| [`security.envelope-encryption`](glossary/security.md#security.envelope-encryption)<br>[Envelope Encryption](glossary/security.md#security.envelope-encryption) | 用数据密钥保护数据，再用包装密钥保护数据密钥，并保存可恢复的密文与版本关系。 | P1 | 有正文：[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md) |
+| [`security.dynamic-credentials`](glossary/security.md#security.dynamic-credentials)<br>[Dynamic Credentials](glossary/security.md#security.dynamic-credentials) | 按已授权角色按需生成、期限和权限受限的凭据，并通过目标系统接口完成续期与撤销。 | P1 | 有正文：[概念](knowledge/security/secrets-credentials-rotation-and-revocation.md) |
+| [`security.workload-identity`](glossary/security.md#security.workload-identity)<br>[Workload Identity](glossary/security.md#security.workload-identity) | 标识运行中服务或进程主体、供通信认证与策略映射使用的身份。 | P1 | 有正文：[概念](knowledge/security/mtls-service-identities-and-trust-boundaries.md)、[概念](knowledge/security/service-delegation-token-exchange-and-audience.md) |
+| [`security.rebac`](glossary/security.md#security.rebac)<br>[Relationship-Based Access Control](glossary/security.md#security.rebac) | 按主体与对象、对象与对象之间的关系及组合规则推导访问资格。 | P1 | 有正文：[概念](knowledge/security/authorization-models-policy-distribution-and-revocation.md) |
+| [`security.mfa`](glossary/security.md#security.mfa)<br>[Multi-Factor Authentication](glossary/security.md#security.mfa) | 组合不同类别的认证因子，并保持挑战、绑定、会话及恢复路径的保证。 | P1 | 有正文：[概念](knowledge/security/multi-factor-authentication-passkeys-and-recovery.md) |
+| [`security.service-delegation`](glossary/security.md#security.service-delegation)<br>[Service Delegation](glossary/security.md#security.service-delegation) | 让当前执行者在明确主体、目标资源与权限范围内代为执行操作。 | P1 | 有正文：[概念](knowledge/security/service-delegation-token-exchange-and-audience.md) |
 
 <a id="database"></a>
 
@@ -179,22 +224,30 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `database.db-models`<br>RDBMS / NoSQL | 关系模型及多种非关系数据模型。 | P0 | 已收录 |
-| `database.workloads`<br>OLTP / OLAP | 在线事务与分析型访问模式。 | P0 | 已收录 |
-| `database.acid`<br>ACID | 事务原子性、约束一致性、隔离性和持久性。 | P0 | 已收录 |
-| `database.isolation`<br>Transaction / Isolation Level | 事务边界及并发可见性保证。 | P0 | 有正文：[概念](knowledge/database/concurrent-inventory.md) |
-| `database.anomalies`<br>Dirty / Non-repeatable / Phantom Read | 读取未提交数据、重复读取变化和结果集变化。 | P0 | 已收录 |
-| `database.mvcc`<br>MVCC | 用数据版本协调读写并发。 | P0 | 已收录 |
-| `database.locking`<br>Optimistic / Pessimistic Lock | 检测冲突后处理与提前限制竞争。 | P0 | 有正文：[概念](knowledge/database/concurrent-inventory.md) |
-| `database.indexes`<br>Index / Covering Index | 缩小访问范围及从索引满足查询。 | P0 | 已收录 |
-| `database.plans`<br>Query Plan / EXPLAIN | 数据库执行路径、估算与实际执行信息。 | P0 | 已收录 |
-| `database.recovery-log`<br>WAL / Redo / Undo | 预写、重放与回滚相关日志机制，细节因引擎而异。 | P0 | 已收录 |
-| `database.normalization`<br>Normalization / Denormalization | 减少冗余与按访问需求引入冗余。 | P0 | 已收录 |
-| `database.replication`<br>Replication / Read Replica | 复制状态并提供副本读取。 | P0 | 已收录 |
-| `database.partitioning`<br>Partitioning / Sharding | 在逻辑或节点间拆分数据。 | P0 | 已收录 |
-| `database.prepared`<br>Prepared Statement | 参数化执行与可能的计划复用，依驱动和数据库而异。 | P0 | 已收录 |
-| `database.migration`<br>Schema Migration / CDC | 结构演进与数据变更捕获。 | P0 | 已收录 |
-| `database.constraints`<br>Unique Constraint / Foreign Key | 由数据库维护唯一性和引用关系。 | P0 | 有正文：[概念](knowledge/api/idempotency.md)、[概念](knowledge/database/concurrent-inventory.md) |
+| [`database.db-models`](glossary/database.md#database.db-models)<br>[RDBMS / NoSQL](glossary/database.md#database.db-models) | 关系模型及多种非关系数据模型。 | P0 | 有正文：[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.workloads`](glossary/database.md#database.workloads)<br>[OLTP / OLAP](glossary/database.md#database.workloads) | 在线事务与分析型访问模式。 | P0 | 有正文：[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.acid`](glossary/database.md#database.acid)<br>[ACID](glossary/database.md#database.acid) | 事务原子性、约束一致性、隔离性和持久性。 | P0 | 有正文：[概念](knowledge/database/isolation-and-mvcc.md) |
+| [`database.isolation`](glossary/database.md#database.isolation)<br>[Transaction / Isolation Level](glossary/database.md#database.isolation) | 事务边界及并发可见性保证。 | P0 | 有正文：[概念](knowledge/database/concurrent-inventory.md)、[概念](knowledge/database/isolation-and-mvcc.md)、[实验](knowledge/database/inventory-concurrency-lab.md)、[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.anomalies`](glossary/database.md#database.anomalies)<br>[Dirty / Non-repeatable / Phantom Read](glossary/database.md#database.anomalies) | 读取未提交数据、重复读取变化和结果集变化。 | P0 | 有正文：[概念](knowledge/database/isolation-and-mvcc.md) |
+| [`database.mvcc`](glossary/database.md#database.mvcc)<br>[MVCC](glossary/database.md#database.mvcc) | 用数据版本协调读写并发。 | P0 | 有正文：[概念](knowledge/database/isolation-and-mvcc.md)、[概念](knowledge/database/cdc-snapshots-log-positions-and-replay.md) |
+| [`database.locking`](glossary/database.md#database.locking)<br>[Optimistic / Pessimistic Lock](glossary/database.md#database.locking) | 检测冲突后处理与提前限制竞争。 | P0 | 有正文：[概念](knowledge/database/concurrent-inventory.md)、[概念](knowledge/systems/locks-and-synchronization.md)、[概念](knowledge/systems/deadlocks-and-recovery.md)、[实验](knowledge/database/inventory-concurrency-lab.md) |
+| [`database.indexes`](glossary/database.md#database.indexes)<br>[Index / Covering Index](glossary/database.md#database.indexes) | 缩小访问范围及从索引满足查询。 | P0 | 有正文：[概念](knowledge/database/indexes-and-query-plans.md)、[实验](knowledge/database/query-plans-lab.md)、[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.plans`](glossary/database.md#database.plans)<br>[Query Plan / EXPLAIN](glossary/database.md#database.plans) | 数据库执行路径、估算与实际执行信息。 | P0 | 有正文：[概念](knowledge/database/indexes-and-query-plans.md)、[实验](knowledge/database/query-plans-lab.md) |
+| [`database.recovery-log`](glossary/database.md#database.recovery-log)<br>[WAL / Redo / Undo](glossary/database.md#database.recovery-log) | 预写、重放与回滚相关日志机制，细节因引擎而异。 | P0 | 有正文：[概念](knowledge/database/wal-and-crash-recovery.md)、[概念](knowledge/database/backups-and-point-in-time-recovery.md)、[实验](knowledge/database/backup-recovery-lab.md)、[概念](knowledge/cache-search/write-through-write-behind-and-durability.md) |
+| [`database.lsm`](glossary/database.md#database.lsm)<br>[LSM / SSTable / Compaction](glossary/database.md#database.lsm) | 以内存积累、有序文件与后台合并组织键值更新，区分版本、删除及读写空间放大。 | P1 | 有正文：[概念](knowledge/database/lsm-sstables-and-compaction.md) |
+| [`database.normalization`](glossary/database.md#database.normalization)<br>[Normalization / Denormalization](glossary/database.md#database.normalization) | 减少冗余与按访问需求引入冗余。 | P0 | 有正文：[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.replication`](glossary/database.md#database.replication)<br>[Replication / Read Replica](glossary/database.md#database.replication) | 复制状态并提供副本读取。 | P0 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md) |
+| [`database.partitioning`](glossary/database.md#database.partitioning)<br>[Partitioning / Sharding](glossary/database.md#database.partitioning) | 在逻辑或节点间拆分数据。 | P0 | 有正文：[概念](knowledge/database/partitioning-sharding-and-data-routing.md) |
+| [`database.prepared`](glossary/database.md#database.prepared)<br>[Prepared Statement](glossary/database.md#database.prepared) | 参数化执行与可能的计划复用，依驱动和数据库而异。 | P0 | 有正文：[概念](knowledge/security/sql-injection-parameters-and-query-structure.md) |
+| [`database.migration`](glossary/database.md#database.migration)<br>[Schema Migration / CDC](glossary/database.md#database.migration) | 结构演进与数据变更捕获。 | P0 | 有正文：[概念](knowledge/database/schema-migrations-and-compatibility.md)、[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md)、[概念](knowledge/database/cdc-snapshots-log-positions-and-replay.md) |
+| [`database.constraints`](glossary/database.md#database.constraints)<br>[Unique Constraint / Foreign Key](glossary/database.md#database.constraints) | 由数据库维护唯一性和引用关系。 | P0 | 有正文：[概念](knowledge/api/idempotency.md)、[概念](knowledge/database/concurrent-inventory.md)、[实验](knowledge/database/inventory-concurrency-lab.md)、[概念](knowledge/api/webhook-signatures-replay-and-delivery.md)、[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.write-skew`](glossary/database.md#database.write-skew)<br>[Write Skew](glossary/database.md#database.write-skew) | 并发事务依据各自快照做出相关判断、更新不同记录，合并结果可能违反跨记录约束的异常。 | P1 | 有正文：[概念](knowledge/database/isolation-and-mvcc.md) |
+| [`database.selectivity`](glossary/database.md#database.selectivity)<br>[Selectivity / Row Estimate](glossary/database.md#database.selectivity) | 条件匹配比例与计划节点预计输出行数，用于分析访问路径和估计误差。 | P1 | 有正文：[概念](knowledge/database/indexes-and-query-plans.md) |
+| [`database.backups`](glossary/database.md#database.backups)<br>[Logical Backup / Physical Backup / PITR](glossary/database.md#database.backups) | 按对象或集群保存恢复材料，并用基础备份与连续日志到达所选历史边界。 | P0 | 有正文：[概念](knowledge/database/backups-and-point-in-time-recovery.md)、[实验](knowledge/database/backup-recovery-lab.md) |
+| [`database.checkpoints`](glossary/database.md#database.checkpoints)<br>[Checkpoint / WAL Flush](glossary/database.md#database.checkpoints) | 区分日志持久化、数据页写回与恢复起点，不把提交确认当作所有页已同步写回。 | P1 | 有正文：[概念](knowledge/database/wal-and-crash-recovery.md) |
+| [`database.functional-dependency`](glossary/database.md#database.functional-dependency)<br>[Functional Dependency](glossary/database.md#database.functional-dependency) | 关系中的 X→Y 要求所有合法状态中，任意两行的 X 值相同就有相同的 Y 值。 | P1 | 有正文：[概念](knowledge/database/data-models-and-access-patterns.md) |
+| [`database.shard-key`](glossary/database.md#database.shard-key)<br>[Shard Key](glossary/database.md#database.shard-key) | 参与数据放置及目标选择的字段组合，其分布和查询使用方式影响[热点](glossary/performance.md#performance.contention)、扇出与跨片约束。 | P1 | 有正文：[概念](knowledge/database/partitioning-sharding-and-data-routing.md) |
+| [`database.partition-pruning`](glossary/database.md#database.partition-pruning)<br>[Partition Pruning](glossary/database.md#database.partition-pruning) | 根据查询条件和分区边界，排除不可能包含匹配数据的分区，再在留下的范围内选择访问路径。 | P1 | 有正文：[概念](knowledge/database/partitioning-sharding-and-data-routing.md) |
 
 <a id="cache-search"></a>
 
@@ -202,19 +255,21 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `cache-search.cache-read`<br>Cache Aside / Read Through | 应用管理缓存或由缓存层加载数据。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md) |
-| `cache-search.cache-write`<br>Write Through / Write Behind | 写入同步持久化或延后异步写回。 | P0 | 已收录 |
-| `cache-search.invalidation`<br>Cache Invalidation / TTL | 主动失效与按时过期。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md) |
-| `cache-search.cache-failures`<br>Penetration / Breakdown / Avalanche | 不存在键回源、热点失效和批量失效问题。 | P0 | 已收录 |
-| `cache-search.stampede`<br>Cache Stampede | 并发未命中引发重复加载与回源放大。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md) |
-| `cache-search.redis-types`<br>Redis Data Structures | 按访问语义选择字符串、哈希、集合、有序集合和流。 | P0 | 已收录 |
-| `cache-search.lock-lease`<br>Distributed Lock / Lease | 跨节点互斥及有期限的持有权。 | P0 | 已收录 |
-| `cache-search.inverted`<br>Inverted Index | 从词项定位包含它的文档。 | P0 | 已收录 |
-| `cache-search.bm25`<br>BM25 / Full-text Search | 基于词项统计的相关性排序与全文检索。 | P0 | 已收录 |
-| `cache-search.vectors`<br>Embedding / Similarity Search | 向量表示与距离或相似性查找。 | P0 | 已收录 |
-| `cache-search.ann`<br>ANN / HNSW | 近似近邻搜索及分层图索引。 | P0 | 已收录 |
-| `cache-search.hybrid`<br>Hybrid Search / Reranking | 组合多种召回并重新评分排序。 | P0 | 已收录 |
-| `cache-search.objects`<br>Object Storage / Presigned URL | 按对象保存数据与限时签名访问。 | P0 | 已收录 |
+| [`cache-search.cache-read`](glossary/cache-search.md#cache-search.cache-read)<br>[Cache Aside / Read Through](glossary/cache-search.md#cache-search.cache-read) | 应用管理缓存或由缓存层加载数据。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md)、[概念](knowledge/cache-search/cache-load-coalescing-and-stampedes.md)、[概念](knowledge/cache-search/write-through-write-behind-and-durability.md) |
+| [`cache-search.cache-write`](glossary/cache-search.md#cache-search.cache-write)<br>[Write Through / Write Behind](glossary/cache-search.md#cache-search.cache-write) | 由缓存写路径同步推进后端，或先接纳待写状态再延后推进后端的两种组织方式。 | P0 | 有正文：[概念](knowledge/cache-search/write-through-write-behind-and-durability.md) |
+| [`cache-search.invalidation`](glossary/cache-search.md#cache-search.invalidation)<br>[Cache Invalidation / TTL](glossary/cache-search.md#cache-search.invalidation) | 主动失效与按时过期。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md)、[概念](knowledge/networking/cdn-edge-caches-and-waf-boundaries.md)、[概念](knowledge/cache-search/cache-load-coalescing-and-stampedes.md)、[概念](knowledge/cache-search/write-through-write-behind-and-durability.md)、[概念](knowledge/security/authorization-models-policy-distribution-and-revocation.md)、[概念](knowledge/cache-search/redis-data-types-operations-and-atomicity.md) |
+| [`cache-search.cache-failures`](glossary/cache-search.md#cache-search.cache-failures)<br>[Penetration / Breakdown / Avalanche](glossary/cache-search.md#cache-search.cache-failures) | 不存在键回源、热点失效和大量键或节点失效造成的负载问题。 | P0 | 有正文：[概念](knowledge/cache-search/cache-load-coalescing-and-stampedes.md) |
+| [`cache-search.stampede`](glossary/cache-search.md#cache-search.stampede)<br>[Cache Stampede](glossary/cache-search.md#cache-search.stampede) | 并发未命中或刷新引发同一结果的重复加载与回源放大。 | P0 | 有正文：[概念](knowledge/cache-search/cache-aside-and-invalidation.md)、[概念](knowledge/cache-search/cache-load-coalescing-and-stampedes.md) |
+| [`cache-search.redis-types`](glossary/cache-search.md#cache-search.redis-types)<br>[Redis Data Structures](glossary/cache-search.md#cache-search.redis-types) | 按整值、字段、成员、排名或消费位置组织服务器操作的 Redis 逻辑类型。 | P0 | 有正文：[概念](knowledge/cache-search/redis-data-types-operations-and-atomicity.md) |
+| [`cache-search.lock-lease`](glossary/cache-search.md#cache-search.lock-lease)<br>[Distributed Lock / Lease](glossary/cache-search.md#cache-search.lock-lease) | 跨节点互斥及有期限的持有权。 | P0 | 有正文：[概念](knowledge/distributed/leases-heartbeats-and-fencing.md) |
+| [`cache-search.inverted`](glossary/cache-search.md#cache-search.inverted)<br>[Inverted Index](glossary/cache-search.md#cache-search.inverted) | 从词项定位文档及可选位置，分析规则、布尔条件与短语匹配分别决定结果。 | P0 | 有正文：[概念](knowledge/cache-search/inverted-indexes-analysis-and-relevance.md)、[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md) |
+| [`cache-search.bm25`](glossary/cache-search.md#cache-search.bm25)<br>[BM25 / Full-text Search](glossary/cache-search.md#cache-search.bm25) | 全文匹配与相关性排序分别负责候选和次序；正文概述 BM25 的词频、集合及长度因素，不提供完整评分实现。 | P0 | 有正文：[概念](knowledge/cache-search/inverted-indexes-analysis-and-relevance.md) |
+| [`cache-search.vectors`](glossary/cache-search.md#cache-search.vectors)<br>[Embedding / Similarity Search](glossary/cache-search.md#cache-search.vectors) | 用兼容空间中的距离或相似度比较向量，区分编码质量、归一化与精确搜索基线。 | P0 | 有正文：[概念](knowledge/ai/rag-retrieval-and-grounding.md)、[概念](knowledge/cache-search/vector-indexes-metrics-and-approximate-search.md) |
+| [`cache-search.ann`](glossary/cache-search.md#cache-search.ann)<br>[ANN / HNSW](glossary/cache-search.md#cache-search.ann) | 通过图探索、分区或量化交换查询/空间成本与近邻覆盖；过滤和精确基线有各自前提。 | P0 | 有正文：[概念](knowledge/cache-search/vector-indexes-metrics-and-approximate-search.md) |
+| [`cache-search.hybrid`](glossary/cache-search.md#cache-search.hybrid)<br>[Hybrid Search / Reranking](glossary/cache-search.md#cache-search.hybrid) | 对齐多路候选身份后融合排名或校准分数，再对有限输入重排；截断、相关性与来源支持分别检查。 | P0 | 有正文：[概念](knowledge/ai/rag-retrieval-and-grounding.md)、[概念](knowledge/cache-search/hybrid-retrieval-fusion-and-reranking.md) |
+| [`cache-search.objects`](glossary/cache-search.md#cache-search.objects)<br>[Object Storage / Presigned URL](glossary/cache-search.md#cache-search.objects) | 按键和可选版本保存对象，通过有范围与期限的签名请求能力访问。 | P0 | 有正文：[概念](knowledge/cache-search/object-storage-versions-uploads-and-presigned-access.md) |
+| [`cache-search.index-cutover`](glossary/cache-search.md#cache-search.index-cutover)<br>[Index Rebuild / Index Cutover](glossary/cache-search.md#cache-search.index-cutover) | 以快照与增量覆盖明确源状态边界，再发布新的索引代次，并安排在途请求、回退和旧代次回收。 | P1 | 有正文：[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md) |
+| [`cache-search.coalescing`](glossary/cache-search.md#cache-search.coalescing)<br>[Request Coalescing / Singleflight](glossary/cache-search.md#cache-search.coalescing) | 让可复用结果的同键重叠请求共享一项在途工作。 | P1 | 有正文：[概念](knowledge/cache-search/cache-load-coalescing-and-stampedes.md) |
 
 <a id="messaging"></a>
 
@@ -222,18 +277,22 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `messaging.models`<br>MQ / Pub-Sub / Event Streaming | 队列分发、广播订阅和可重放事件流。 | P1 | 已收录 |
-| `messaging.roles`<br>Producer / Consumer / Broker | 消息写入、处理与服务端存储分发角色。 | P1 | 已收录 |
-| `messaging.positions`<br>Topic / Partition / Offset | 主题、分区和分区内位置。 | P1 | 已收录 |
-| `messaging.groups`<br>Consumer Group | 多个消费者协作分担读取。 | P1 | 已收录 |
-| `messaging.delivery`<br>At-most-once / At-least-once | 可能丢失不重投与可能重复的投递保证。 | P1 | 已收录 |
-| `messaging.exactly-once`<br>Exactly-once Semantics | 在明确组件和事务范围内限制重复处理效果。 | P1 | 有正文：[模式](knowledge/messaging/transactional-outbox.md) |
-| `messaging.consumer-idempotency`<br>Idempotent Consumer | 重复消费仍保持受约束的业务效果。 | P1 | 已收录 |
-| `messaging.ordering`<br>Ordering / Partition Key | 在指定范围内维持顺序。 | P1 | 已收录 |
-| `messaging.retry-dlq`<br>Dead Letter Queue / Retry Queue | 隔离持续失败消息与安排重试。 | P1 | 已收录 |
-| `messaging.backpressure`<br>Backpressure | 下游将容量压力传回上游。 | P1 | 已收录 |
-| `messaging.outbox`<br>Transactional Outbox | 同一事务记录业务变化和待发布事件。 | P1 | 有正文：[模式](knowledge/messaging/transactional-outbox.md) |
-| `messaging.cdc`<br>CDC / Asynchronous Processing | 捕获数据变化并解耦后续处理。 | P1 | 已收录 |
+| [`messaging.models`](glossary/messaging.md#messaging.models)<br>[MQ / Pub-Sub / Event Streaming](glossary/messaging.md#messaging.models) | 队列分发、广播订阅和可重放事件流。 | P1 | 有正文：[概念](knowledge/messaging/queues-pubsub-event-streams-and-retention.md) |
+| [`messaging.roles`](glossary/messaging.md#messaging.roles)<br>[Producer / Consumer / Broker](glossary/messaging.md#messaging.roles) | 消息写入、处理与服务端存储分发角色。 | P1 | 有正文：[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md) |
+| [`messaging.positions`](glossary/messaging.md#messaging.positions)<br>[Topic / Partition / Offset](glossary/messaging.md#messaging.positions) | 主题、分区和分区内位置。 | P1 | 有正文：[概念](knowledge/messaging/partitions-consumer-groups-and-offsets.md)、[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md) |
+| [`messaging.groups`](glossary/messaging.md#messaging.groups)<br>[Consumer Group](glossary/messaging.md#messaging.groups) | 多个消费者协作分担读取。 | P1 | 有正文：[概念](knowledge/messaging/partitions-consumer-groups-and-offsets.md) |
+| [`messaging.delivery`](glossary/messaging.md#messaging.delivery)<br>[At-most-once / At-least-once](glossary/messaging.md#messaging.delivery) | 可能丢失不重投与可能重复的投递保证。 | P1 | 有正文：[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md) |
+| [`messaging.exactly-once`](glossary/messaging.md#messaging.exactly-once)<br>[Exactly-once Semantics](glossary/messaging.md#messaging.exactly-once) | 在明确组件和事务范围内限制重复处理效果。 | P1 | 有正文：[模式](knowledge/messaging/transactional-outbox.md)、[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md)、[概念](knowledge/messaging/partitions-consumer-groups-and-offsets.md) |
+| [`messaging.consumer-idempotency`](glossary/messaging.md#messaging.consumer-idempotency)<br>[Idempotent Consumer](glossary/messaging.md#messaging.consumer-idempotency) | 重复消费仍保持受约束的业务效果。 | P1 | 有正文：[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md)、[概念](knowledge/messaging/partitions-consumer-groups-and-offsets.md)、[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md) |
+| [`messaging.ordering`](glossary/messaging.md#messaging.ordering)<br>[Ordering / Partition Key](glossary/messaging.md#messaging.ordering) | 在指定范围内维持顺序。 | P1 | 有正文：[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md)、[概念](knowledge/messaging/partitions-consumer-groups-and-offsets.md)、[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md) |
+| [`messaging.retry-dlq`](glossary/messaging.md#messaging.retry-dlq)<br>[Dead Letter Queue / Retry Queue](glossary/messaging.md#messaging.retry-dlq) | 隔离持续失败消息与安排重试。 | P1 | 有正文：[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md)、[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md) |
+| [`messaging.backpressure`](glossary/messaging.md#messaging.backpressure)<br>[Backpressure](glossary/messaging.md#messaging.backpressure) | 下游将容量压力传回上游。 | P1 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md)、[概念](knowledge/messaging/delivery-acknowledgements-and-idempotency.md)、[概念](knowledge/performance/backpressure-and-bounded-queues.md) |
+| [`messaging.outbox`](glossary/messaging.md#messaging.outbox)<br>[Transactional Outbox](glossary/messaging.md#messaging.outbox) | 同一事务记录业务变化和待发布事件。 | P1 | 有正文：[模式](knowledge/messaging/transactional-outbox.md)、[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md) |
+| [`messaging.cdc`](glossary/messaging.md#messaging.cdc)<br>[CDC / Asynchronous Processing](glossary/messaging.md#messaging.cdc) | 捕获数据变化并解耦后续处理。 | P1 | 有正文：[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md)、[概念](knowledge/database/cdc-snapshots-log-positions-and-replay.md) |
+| [`messaging.event-contract`](glossary/messaging.md#messaging.event-contract)<br>[Event Contract / Event Schema Evolution](glossary/messaging.md#messaging.event-contract) | 约定事件身份、载荷结构与事实含义，保护新旧读写及历史回放的兼容范围。 | P1 | 有正文：[概念](knowledge/messaging/event-contracts-schema-evolution-and-replay.md)、[概念](knowledge/architecture/event-sourcing-streams-snapshots-and-projections.md)、[概念](knowledge/messaging/event-time-watermarks-windows-and-late-data.md) |
+| [`messaging.event-time`](glossary/messaging.md#messaging.event-time)<br>[Event Time / Event-time Watermark](glossary/messaging.md#messaging.event-time) | 用记录携带的发生时间归类，并用水位线表达事件时间进度；处理时间则来自实际执行时钟。 | P1 | 有正文：[概念](knowledge/messaging/event-time-watermarks-windows-and-late-data.md) |
+| [`messaging.windows`](glossary/messaging.md#messaging.windows)<br>[Window / Trigger / Pane](glossary/messaging.md#messaging.windows) | 窗口决定数据分组范围，触发器决定何时输出，pane 是一次触发产生的结果。 | P1 | 有正文：[概念](knowledge/messaging/event-time-watermarks-windows-and-late-data.md) |
+| [`messaging.late-data`](glossary/messaging.md#messaging.late-data)<br>[Late Data / Allowed Lateness](glossary/messaging.md#messaging.late-data) | 水位线越过事件所属窗口后到达的数据，以及系统继续保留状态并接受修订的期限。 | P1 | 有正文：[概念](knowledge/messaging/event-time-watermarks-windows-and-late-data.md) |
 
 <a id="distributed"></a>
 
@@ -241,20 +300,25 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `distributed.cap`<br>CAP / PACELC | 分区下的取舍及正常情况下延迟和一致性的权衡。 | P1 | 已收录 |
-| `distributed.consistency`<br>Strong / Eventual Consistency | 不同可见性保证，强一致须进一步说明具体模型。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md) |
-| `distributed.linear-serial`<br>Linearizability / Serializability | 实时单操作顺序与事务可串行执行的等价性。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md) |
-| `distributed.consensus`<br>Consensus / Raft | 在故障模型下就日志或状态达成一致。 | P1 | 已收录 |
-| `distributed.leadership`<br>Leader Election / Quorum | 选主与按法定集合达成读写条件。 | P1 | 已收录 |
-| `distributed.fencing`<br>Heartbeat / Lease / Fencing Token | 存活检测、限时持有与拒绝过期执行者。 | P1 | 已收录 |
-| `distributed.lag`<br>Replication Lag | 副本应用变更落后于上游。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md) |
-| `distributed.split-brain`<br>Split Brain | 多个节点同时认为自己拥有权威。 | P1 | 已收录 |
-| `distributed.partition`<br>Network Partition | 节点间通信被切断或严重不可达。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md) |
-| `distributed.2pc`<br>Distributed Transaction / 2PC | 跨参与者协调提交及其阻塞等成本。 | P1 | 已收录 |
-| `distributed.saga`<br>Saga / Compensation | 多步业务通过补偿应对部分成功。 | P1 | 已收录 |
-| `distributed.hashing`<br>Consistent Hashing | 减少节点变化时键重新分布的范围。 | P1 | 已收录 |
-| `distributed.clocks`<br>Logical Clock / Clock Skew | 因果顺序表示与物理时钟偏差。 | P1 | 已收录 |
-| `distributed.ids`<br>Snowflake ID / ULID | 不同的分布式或可排序标识生成方案。 | P1 | 已收录 |
+| [`distributed.cap`](glossary/distributed.md#distributed.cap)<br>[CAP / PACELC](glossary/distributed.md#distributed.cap) | CAP 限定分区模型下[线性一致性](glossary/distributed.md#distributed.linear-serial)与请求最终完成无法同时保证；PACELC 还分析正常通信时延迟与一致性的设计取舍。 | P1 | 有正文：[概念](knowledge/distributed/cap-pacelc-and-operation-guarantees.md) |
+| [`distributed.consistency`](glossary/distributed.md#distributed.consistency)<br>[Strong / Eventual Consistency](glossary/distributed.md#distributed.consistency) | 不同可见性保证，强一致须进一步说明具体模型。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md)、[概念](knowledge/distributed/cap-pacelc-and-operation-guarantees.md)、[概念](knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md) |
+| [`distributed.linear-serial`](glossary/distributed.md#distributed.linear-serial)<br>[Linearizability / Serializability](glossary/distributed.md#distributed.linear-serial) | 实时单操作顺序与事务可串行执行的等价性。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md)、[概念](knowledge/distributed/cap-pacelc-and-operation-guarantees.md) |
+| [`distributed.consensus`](glossary/distributed.md#distributed.consensus)<br>[Consensus / Raft](glossary/distributed.md#distributed.consensus) | 在故障模型下就日志或状态达成一致。 | P1 | 有正文：[概念](knowledge/distributed/consensus-leaders-and-quorums.md)、[概念](knowledge/distributed/membership-changes-and-partition-recovery.md) |
+| [`distributed.leadership`](glossary/distributed.md#distributed.leadership)<br>[Leader Election / Quorum](glossary/distributed.md#distributed.leadership) | 选主与按法定集合达成读写条件。 | P1 | 有正文：[概念](knowledge/distributed/consensus-leaders-and-quorums.md)、[概念](knowledge/distributed/cap-pacelc-and-operation-guarantees.md)、[概念](knowledge/distributed/membership-changes-and-partition-recovery.md) |
+| [`distributed.fencing`](glossary/distributed.md#distributed.fencing)<br>[Heartbeat / Lease / Fencing Token](glossary/distributed.md#distributed.fencing) | 存活检测、限时持有与拒绝过期执行者。 | P1 | 有正文：[概念](knowledge/distributed/leases-heartbeats-and-fencing.md)、[概念](knowledge/distributed/membership-changes-and-partition-recovery.md) |
+| [`distributed.lag`](glossary/distributed.md#distributed.lag)<br>[Replication Lag](glossary/distributed.md#distributed.lag) | 副本应用变更落后于上游。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md)、[概念](knowledge/cache-search/index-rebuild-watermarks-and-cutover.md)、[概念](knowledge/distributed/membership-changes-and-partition-recovery.md)、[概念](knowledge/database/cdc-snapshots-log-positions-and-replay.md) |
+| [`distributed.split-brain`](glossary/distributed.md#distributed.split-brain)<br>[Split Brain](glossary/distributed.md#distributed.split-brain) | 多个节点同时认为自己拥有权威。 | P1 | 有正文：[概念](knowledge/distributed/consensus-leaders-and-quorums.md)、[概念](knowledge/distributed/leases-heartbeats-and-fencing.md) |
+| [`distributed.partition`](glossary/distributed.md#distributed.partition)<br>[Network Partition](glossary/distributed.md#distributed.partition) | 节点间通信被切断或严重不可达。 | P1 | 有正文：[概念](knowledge/distributed/consistency-and-replication.md)、[概念](knowledge/distributed/consensus-leaders-and-quorums.md)、[概念](knowledge/distributed/cap-pacelc-and-operation-guarantees.md) |
+| [`distributed.2pc`](glossary/distributed.md#distributed.2pc)<br>[Distributed Transaction / 2PC](glossary/distributed.md#distributed.2pc) | 跨参与者协调提交及其阻塞等成本。 | P1 | 有正文：[概念](knowledge/distributed/two-phase-commit-sagas-and-recovery.md) |
+| [`distributed.saga`](glossary/distributed.md#distributed.saga)<br>[Saga / Compensation](glossary/distributed.md#distributed.saga) | 多步业务通过补偿应对部分成功。 | P1 | 有正文：[概念](knowledge/distributed/two-phase-commit-sagas-and-recovery.md) |
+| [`distributed.hashing`](glossary/distributed.md#distributed.hashing)<br>[Consistent Hashing](glossary/distributed.md#distributed.hashing) | 减少节点变化时键重新分布的范围。 | P1 | 有正文：[概念](knowledge/distributed/consistent-hashing-placement-and-rebalancing.md) |
+| [`distributed.clocks`](glossary/distributed.md#distributed.clocks)<br>[Logical Clock / Clock Skew](glossary/distributed.md#distributed.clocks) | 因果顺序表示与物理时钟偏差。 | P1 | 有正文：[概念](knowledge/distributed/logical-clocks-causality-and-concurrency.md)、[概念](knowledge/distributed/hybrid-logical-clocks-and-timestamp-boundaries.md) |
+| [`distributed.ids`](glossary/distributed.md#distributed.ids)<br>[Snowflake ID / ULID](glossary/distributed.md#distributed.ids) | 对照基于节点与序列的Snowflake类ID和基于时间与随机部分的ULID，按各自条件判断唯一性与排序。 | P1 | 有正文：[概念](knowledge/distributed/distributed-identifiers-time-and-uniqueness.md) |
+| [`distributed.vector-clocks`](glossary/distributed.md#distributed.vector-clocks)<br>[Vector Clock](glossary/distributed.md#distributed.vector-clocks) | 以参与者计数向量表达因果包含，逐维比较区分后继与并发；精确性依赖身份、更新和上下文传播规则。 | P1 | 有正文：[概念](knowledge/distributed/logical-clocks-causality-and-concurrency.md)、[概念](knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md) |
+| [`distributed.uuid`](glossary/distributed.md#distributed.uuid)<br>[UUIDv4 / UUIDv7](glossary/distributed.md#distributed.uuid) | RFC9562中的128位标识格式；v4采用122位随机数据，v7组合时间前缀与随机或可选单调构造，保证仍依赖版本和实现。 | P1 | 有正文：[概念](knowledge/distributed/distributed-identifiers-time-and-uniqueness.md) |
+| [`distributed.membership`](glossary/distributed.md#distributed.membership)<br>[Membership Reconfiguration](glossary/distributed.md#distributed.membership) | 按协议改变复制组的投票资格与法定集合，保护新旧配置之间的决定关系。 | P1 | 有正文：[概念](knowledge/distributed/membership-changes-and-partition-recovery.md) |
+| [`distributed.hlc`](glossary/distributed.md#distributed.hlc)<br>[Hybrid Logical Clock](glossary/distributed.md#distributed.hlc) | 结合已知物理分量与逻辑计数，让已编码的因果边对应严格递增时间戳。 | P1 | 有正文：[概念](knowledge/distributed/hybrid-logical-clocks-and-timestamp-boundaries.md) |
+| [`distributed.crdt`](glossary/distributed.md#distributed.crdt)<br>[Conflict-free Replicated Data Type](glossary/distributed.md#distributed.crdt) | 把允许更新、并发语义与合并规则共同设计，在传播前提成立时使同一对象的副本收敛。 | P1 | 有正文：[概念](knowledge/distributed/crdts-convergence-and-concurrent-merge-semantics.md) |
 
 <a id="performance"></a>
 
@@ -262,19 +326,21 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `performance.latency-throughput`<br>Latency / Throughput | 完成一次操作的时间与单位时间处理量。 | P0 | 已收录 |
-| `performance.rates`<br>QPS / RPS / TPS | 查询、请求和事务速率，须写清计数口径。 | P0 | 已收录 |
-| `performance.percentiles`<br>P50 / P95 / P99 | 观测窗口内延迟分布的分位数。 | P0 | 已收录 |
-| `performance.bound`<br>CPU-bound / I/O-bound | 瓶颈主要在计算还是 I/O 等待。 | P0 | 已收录 |
-| `performance.little`<br>Little’s Law | 稳定系统中平均在途量、到达率和停留时间的关系。 | P0 | 已收录 |
-| `performance.profiling`<br>Profiling / Flame Graph | 采样或插桩分析与堆栈聚合展示。 | P0 | 已收录 |
-| `performance.load-tests`<br>Load / Stress / Soak Test | 目标负载、极限负载和长时间运行验证。 | P0 | 已收录 |
-| `performance.scaling`<br>Horizontal / Vertical Scaling | 增加实例与提升单实例资源。 | P0 | 已收录 |
-| `performance.batching`<br>Batching / Pipelining | 合并操作和重叠多个执行阶段。 | P0 | 已收录 |
-| `performance.overload`<br>Rate Limiting / Load Shedding | 约束进入速率和过载时拒绝工作。 | P0 | 已收录 |
-| `performance.contention`<br>Hotspot / Contention | 局部集中访问与共享资源竞争。 | P0 | 已收录 |
-| `performance.queueing`<br>Queueing / Backpressure | 等待队列形成和压力反馈。 | P0 | 有正文：[案例](knowledge/performance/slow-api-investigation.md) |
-| `performance.capacity`<br>Capacity Planning | 用工作负载、资源余量和增长预估容量。 | P0 | 已收录 |
+| [`performance.latency-throughput`](glossary/performance.md#performance.latency-throughput)<br>[Latency / Throughput](glossary/performance.md#performance.latency-throughput) | 完成一次操作的时间与单位时间处理量。 | P0 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md) |
+| [`performance.rates`](glossary/performance.md#performance.rates)<br>[QPS / RPS / TPS](glossary/performance.md#performance.rates) | 查询、请求和事务速率，须写清计数口径。 | P0 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md) |
+| [`performance.percentiles`](glossary/performance.md#performance.percentiles)<br>[P50 / P95 / P99](glossary/performance.md#performance.percentiles) | 观测窗口内延迟分布的分位数。 | P0 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md) |
+| [`performance.bound`](glossary/performance.md#performance.bound)<br>[CPU-bound / I/O-bound](glossary/performance.md#performance.bound) | 描述当前主要受计算或 I/O 等资源约束的工作，需结合运行与等待证据，不能靠固定利用率阈值分类。 | P0 | 有正文：[概念](knowledge/performance/cpu-time-utilization-load-and-quotas.md) |
+| [`performance.little`](glossary/performance.md#performance.little)<br>[Little’s Law](glossary/performance.md#performance.little) | 稳定系统中平均在途量、到达率和停留时间的关系。 | P0 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md) |
+| [`performance.profiling`](glossary/performance.md#performance.profiling)<br>[Profiling / Flame Graph](glossary/performance.md#performance.profiling) | 把所选事件和资源权重归到代码或调用栈，区分聚合宽度、执行时间线、累计/自身及运行/等待范围。 | P0 | 有正文：[概念](knowledge/performance/profiling-stacks-and-flame-graphs.md) |
+| [`performance.load-tests`](glossary/performance.md#performance.load-tests)<br>[Load / Stress / Soak Test](glossary/performance.md#performance.load-tests) | 分别观察目标负载、超限失效和持续退化；需说明请求发起方式、正确性、尾延迟及资源边界。 | P0 | 有正文：[概念](knowledge/performance/benchmarks-workloads-and-speedup.md) |
+| [`performance.scaling`](glossary/performance.md#performance.scaling)<br>[Horizontal / Vertical Scaling](glossary/performance.md#performance.scaling) | 增加实例与提升单实例资源。 | P0 | 有正文：[概念](knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md) |
+| [`performance.batching`](glossary/performance.md#performance.batching)<br>[Batching / Pipelining](glossary/performance.md#performance.batching) | 合并操作和重叠多个执行阶段。 | P0 | 有正文：[概念](knowledge/performance/batching-pipelining-and-amortized-waiting.md) |
+| [`performance.overload`](glossary/performance.md#performance.overload)<br>[Rate Limiting / Load Shedding](glossary/performance.md#performance.overload) | 约束进入速率和过载时拒绝工作。 | P0 | 有正文：[概念](knowledge/performance/latency-throughput-and-queues.md)、[概念](knowledge/api/rate-limits-concurrency-and-quotas.md)、[实验](knowledge/performance/overload-control-lab.md) |
+| [`performance.contention`](glossary/performance.md#performance.contention)<br>[Hotspot / Contention](glossary/performance.md#performance.contention) | 局部集中访问与共享资源竞争。 | P0 | 有正文：[概念](knowledge/performance/hotspots-contention-and-serialized-service.md) |
+| [`performance.queueing`](glossary/performance.md#performance.queueing)<br>[Queueing / Backpressure](glossary/performance.md#performance.queueing) | 等待队列形成和压力反馈。 | P0 | 有正文：[案例](knowledge/performance/slow-api-investigation.md)、[概念](knowledge/performance/latency-throughput-and-queues.md)、[概念](knowledge/performance/backpressure-and-bounded-queues.md)、[实验](knowledge/performance/overload-control-lab.md)、[概念](knowledge/networking/tcp-flow-control-and-congestion.md) |
+| [`performance.capacity`](glossary/performance.md#performance.capacity)<br>[Capacity Planning](glossary/performance.md#performance.capacity) | 用工作负载、资源余量和增长预估容量。 | P0 | 有正文：[概念](knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md) |
+| [`performance.cpu-metrics`](glossary/performance.md#performance.cpu-metrics)<br>[CPU Time / Utilization / Load Average](glossary/performance.md#performance.cpu-metrics) | 按范围、时间窗口和分母解释执行、利用率、平滑负载、组带宽与资源停顿，不能直接换算成慢请求比例。 | P0 | 有正文：[概念](knowledge/performance/cpu-time-utilization-load-and-quotas.md) |
+| [`performance.benchmark`](glossary/performance.md#performance.benchmark)<br>[Benchmark / Speedup / Amdahl’s Law](glossary/performance.md#performance.benchmark) | 固定工作契约、测量边界和负载比较成本，用明确假设下的局部时间占比解释整体收益与上限。 | P1 | 有正文：[概念](knowledge/performance/benchmarks-workloads-and-speedup.md) |
 
 <a id="devops"></a>
 
@@ -282,20 +348,21 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `devops.linux`<br>Linux Process / Signal / Permission | 进程生命周期、信号与访问权限。 | P1 | 已收录 |
-| `devops.isolation`<br>Namespace / cgroups | 资源视图隔离和用量限制。 | P1 | 已收录 |
-| `devops.containers`<br>Image / Container | 文件系统与配置模板及其运行实例。 | P1 | 已收录 |
-| `devops.k8s`<br>Pod / Deployment / Service | 工作单元、声明式副本管理与服务访问。 | P1 | 已收录 |
-| `devops.entry`<br>Ingress / Gateway API | 集群入口路由与流量管理接口。 | P1 | 已收录 |
-| `devops.discovery`<br>Service Discovery | 查找当前可用服务实例。 | P1 | 已收录 |
-| `devops.cloud-network`<br>VPC / Subnet / Security Group | 云网络边界和访问控制。 | P1 | 已收录 |
-| `devops.iac`<br>IaC / Terraform | 以版本化声明管理基础设施。 | P1 | 已收录 |
-| `devops.cicd`<br>CI / CD | 持续集成、交付或自动部署。 | P1 | 有正文：[概念](knowledge/devops/build-deploy-rollback.md) |
-| `devops.rollout`<br>Rolling / Blue-Green / Canary | 不同发布替换和流量迁移策略。 | P1 | 有正文：[概念](knowledge/devops/build-deploy-rollback.md) |
-| `devops.flags`<br>Feature Flag | 按条件启用行为并管理开关生命周期。 | P1 | 有正文：[概念](knowledge/devops/build-deploy-rollback.md) |
-| `devops.immutable`<br>Immutable Infrastructure | 通过替换实例交付新配置。 | P1 | 已收录 |
-| `devops.autoscaling`<br>Autoscaling / HPA | 基于观测信号调整资源或副本数。 | P1 | 已收录 |
-| `devops.regions`<br>Multi-AZ / Multi-Region | 跨可用区与跨地域部署。 | P1 | 已收录 |
+| [`devops.linux`](glossary/devops.md#devops.linux)<br>[Linux Process / Signal / Permission](glossary/devops.md#devops.linux) | 进程生命周期、信号与访问权限。 | P1 | 有正文：[概念](knowledge/systems/signals-cancellation-and-shutdown.md) |
+| [`devops.isolation`](glossary/devops.md#devops.isolation)<br>[Namespace / cgroups](glossary/devops.md#devops.isolation) | 资源视图隔离和用量限制。 | P1 | 有正文：[概念](knowledge/devops/images-containers-and-resource-isolation.md) |
+| [`devops.containers`](glossary/devops.md#devops.containers)<br>[Image / Container](glossary/devops.md#devops.containers) | 文件系统与配置模板及其运行实例。 | P1 | 有正文：[概念](knowledge/devops/images-containers-and-resource-isolation.md) |
+| [`devops.k8s`](glossary/devops.md#devops.k8s)<br>[Pod / Deployment / Service](glossary/devops.md#devops.k8s) | 工作单元、声明式副本管理与服务访问。 | P1 | 有正文：[概念](knowledge/devops/declarative-deployments-and-health-probes.md) |
+| [`devops.entry`](glossary/devops.md#devops.entry)<br>[Ingress / Gateway API](glossary/devops.md#devops.entry) | 集群入口路由与流量管理接口。 | P1 | 有正文：[概念](knowledge/devops/ingress-gateway-api-service-discovery-and-endpoints.md) |
+| [`devops.discovery`](glossary/devops.md#devops.discovery)<br>[Service Discovery](glossary/devops.md#devops.discovery) | 通过名称或逻辑身份查找服务地址或候选端点信息。 | P1 | 有正文：[概念](knowledge/devops/ingress-gateway-api-service-discovery-and-endpoints.md) |
+| [`devops.cloud-network`](glossary/devops.md#devops.cloud-network)<br>[VPC / Subnet / Security Group](glossary/devops.md#devops.cloud-network) | 云网络边界和访问控制。 | P1 | 有正文：[概念](knowledge/devops/cloud-networks-subnets-routes-and-security-groups.md) |
+| [`devops.iac`](glossary/devops.md#devops.iac)<br>[IaC / Terraform](glossary/devops.md#devops.iac) | 以版本化声明管理基础设施。 | P1 | 有正文：[概念](knowledge/devops/iac-state-drift-and-change-plans.md) |
+| [`devops.cicd`](glossary/devops.md#devops.cicd)<br>[CI / CD](glossary/devops.md#devops.cicd) | 持续集成、交付或自动部署。 | P1 | 有正文：[概念](knowledge/devops/build-deploy-rollback.md)、[概念](knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md) |
+| [`devops.rollout`](glossary/devops.md#devops.rollout)<br>[Rolling / Blue-Green / Canary](glossary/devops.md#devops.rollout) | 不同发布替换和流量迁移策略。 | P1 | 有正文：[概念](knowledge/devops/build-deploy-rollback.md)、[概念](knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md) |
+| [`devops.flags`](glossary/devops.md#devops.flags)<br>[Feature Flag](glossary/devops.md#devops.flags) | 按条件启用行为并管理开关生命周期。 | P1 | 有正文：[概念](knowledge/engineering/trunk-based-development-and-feature-flags.md)、[概念](knowledge/devops/build-deploy-rollback.md) |
+| [`devops.immutable`](glossary/devops.md#devops.immutable)<br>[Immutable Infrastructure](glossary/devops.md#devops.immutable) | 通过替换实例交付新配置。 | P1 | 有正文：[概念](knowledge/devops/declarative-deployments-and-health-probes.md) |
+| [`devops.autoscaling`](glossary/devops.md#devops.autoscaling)<br>[Autoscaling / HPA](glossary/devops.md#devops.autoscaling) | 基于观测信号调整资源或副本数。 | P1 | 有正文：[概念](knowledge/performance/capacity-planning-scaling-and-autoscaling-feedback.md) |
+| [`devops.regions`](glossary/devops.md#devops.regions)<br>[Multi-AZ / Multi-Region](glossary/devops.md#devops.regions) | 跨可用区与跨地域部署。 | P1 | 有正文：[概念](knowledge/reliability/failure-domains-redundancy-and-recovery.md) |
+| [`devops.provenance`](glossary/devops.md#devops.provenance)<br>[Artifact Digest / Build Provenance](glossary/devops.md#devops.provenance) | 绑定具体产物内容、受信构建者、源码来源及构建参数的验证信息。 | P1 | 有正文：[概念](knowledge/devops/artifact-provenance-verification-and-progressive-delivery.md) |
 
 <a id="reliability"></a>
 
@@ -303,20 +370,23 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `reliability.signals`<br>Logs / Metrics / Traces | 离散事件、聚合数值与请求因果链。 | P0 | 已收录 |
-| `reliability.otel`<br>OpenTelemetry | 可观测性 API、SDK、协议及采集生态。 | P0 | 已收录 |
-| `reliability.trace`<br>Trace ID / Span / Correlation ID | 链路标识、执行片段和业务关联。 | P0 | 已收录 |
-| `reliability.methods`<br>RED / USE | 请求速率错误延迟与资源使用率饱和错误。 | P0 | 已收录 |
-| `reliability.slos`<br>SLI / SLO / SLA | 指标、目标和对外服务约定。 | P0 | 已收录 |
-| `reliability.budget`<br>Error Budget | 由可靠性目标推导的可接受失败额度。 | P0 | 已收录 |
-| `reliability.availability`<br>Availability / Reliability | 可提供服务的程度与持续正确工作的能力。 | P0 | 已收录 |
-| `reliability.recovery`<br>RTO / RPO | 恢复耗时目标和可接受数据丢失范围。 | P0 | 已收录 |
-| `reliability.isolation`<br>Circuit Breaker / Bulkhead | 熔断失败依赖与隔离资源池。 | P0 | 已收录 |
-| `reliability.retry-budget`<br>Timeout / Deadline / Retry Budget | 限制等待时间、传播截止时间并约束重试消耗。 | P0 | 有正文：[概念](knowledge/reliability/timeouts-and-retry-budgets.md) |
-| `reliability.probes`<br>Readiness / Liveness | 是否接收流量与是否需要重启的探测。 | P0 | 已收录 |
-| `reliability.dr`<br>Disaster Recovery / Failover | 灾难恢复计划与服务切换。 | P0 | 已收录 |
-| `reliability.incidents`<br>Incident Response / Postmortem | 止损、诊断、恢复与复盘。 | P0 | 已收录 |
-| `reliability.chaos`<br>Chaos Engineering | 通过受控故障验证系统假设。 | P0 | 已收录 |
+| [`reliability.signals`](glossary/reliability.md#reliability.signals)<br>[Logs / Metrics / Traces](glossary/reliability.md#reliability.signals) | 离散事件、聚合数值与请求因果链。 | P0 | 有正文：[概念](knowledge/reliability/slis-slos-and-error-budgets.md)、[概念](knowledge/reliability/logs-metrics-and-traces.md) |
+| [`reliability.otel`](glossary/reliability.md#reliability.otel)<br>[OpenTelemetry](glossary/reliability.md#reliability.otel) | 可观测性 API、SDK、协议及采集生态。 | P0 | 有正文：[概念](knowledge/reliability/logs-metrics-and-traces.md) |
+| [`reliability.trace`](glossary/reliability.md#reliability.trace)<br>[Trace ID / Span / Correlation ID](glossary/reliability.md#reliability.trace) | 链路标识、执行片段和业务关联。 | P0 | 有正文：[概念](knowledge/reliability/logs-metrics-and-traces.md) |
+| [`reliability.methods`](glossary/reliability.md#reliability.methods)<br>[RED / USE](glossary/reliability.md#reliability.methods) | 请求速率错误延迟与资源使用率饱和错误。 | P0 | 有正文：[概念](knowledge/reliability/red-use-service-signals-and-resource-evidence.md) |
+| [`reliability.slos`](glossary/reliability.md#reliability.slos)<br>[SLI / SLO / SLA](glossary/reliability.md#reliability.slos) | 指标、目标和对外服务约定。 | P0 | 有正文：[概念](knowledge/reliability/slis-slos-and-error-budgets.md) |
+| [`reliability.budget`](glossary/reliability.md#reliability.budget)<br>[Error Budget](glossary/reliability.md#reliability.budget) | 由可靠性目标推导的可接受失败额度。 | P0 | 有正文：[概念](knowledge/reliability/slis-slos-and-error-budgets.md) |
+| [`reliability.availability`](glossary/reliability.md#reliability.availability)<br>[Availability / Reliability](glossary/reliability.md#reliability.availability) | 可提供服务的程度与持续正确工作的能力。 | P0 | 有正文：[概念](knowledge/reliability/availability-reliability-and-observation-windows.md) |
+| [`reliability.recovery`](glossary/reliability.md#reliability.recovery)<br>[RTO / RPO](glossary/reliability.md#reliability.recovery) | 恢复耗时目标和可接受数据丢失范围。 | P0 | 有正文：[概念](knowledge/database/backups-and-point-in-time-recovery.md)、[概念](knowledge/reliability/failure-domains-redundancy-and-recovery.md)、[概念](knowledge/cache-search/write-through-write-behind-and-durability.md) |
+| [`reliability.isolation`](glossary/reliability.md#reliability.isolation)<br>[Circuit Breaker / Bulkhead](glossary/reliability.md#reliability.isolation) | 熔断失败依赖与隔离资源池。 | P0 | 有正文：[概念](knowledge/reliability/circuit-breakers-isolation-and-degradation.md) |
+| [`reliability.retry-budget`](glossary/reliability.md#reliability.retry-budget)<br>[Timeout / Deadline / Retry Budget](glossary/reliability.md#reliability.retry-budget) | 限制等待时间、传播截止时间并约束重试消耗。 | P0 | 有正文：[概念](knowledge/reliability/timeouts-and-retry-budgets.md)、[概念](knowledge/systems/signals-cancellation-and-shutdown.md)、[概念](knowledge/networking/tcp-flow-control-and-congestion.md) |
+| [`reliability.probes`](glossary/reliability.md#reliability.probes)<br>[Readiness / Liveness / Startup Probe](glossary/reliability.md#reliability.probes) | 区分接流量、重启恢复和启动完成的探测；探针结果不等于全部用户业务目标达成。 | P0 | 有正文：[概念](knowledge/devops/declarative-deployments-and-health-probes.md) |
+| [`reliability.dr`](glossary/reliability.md#reliability.dr)<br>[Disaster Recovery / Failover](glossary/reliability.md#reliability.dr) | 灾难恢复计划与服务切换。 | P0 | 有正文：[概念](knowledge/reliability/failure-domains-redundancy-and-recovery.md) |
+| [`reliability.incidents`](glossary/reliability.md#reliability.incidents)<br>[Incident Response / Postmortem](glossary/reliability.md#reliability.incidents) | 止损、诊断、恢复与复盘。 | P0 | 有正文：[概念](knowledge/reliability/incident-response-recovery-and-postmortems.md) |
+| [`reliability.chaos`](glossary/reliability.md#reliability.chaos)<br>[Chaos Engineering](glossary/reliability.md#reliability.chaos) | 通过受控故障验证系统假设。 | P0 | 有正文：[概念](knowledge/reliability/chaos-engineering-hypotheses-stop-conditions-and-recovery.md) |
+| [`reliability.burn-rate`](glossary/reliability.md#reliability.burn-rate)<br>[Error Budget Burn Rate](glossary/reliability.md#reliability.burn-rate) | 对事件比例型 SLO，以观察窗口的不合格比例除以预算比例，衡量相对消耗速度；不等于已消耗预算份额。 | P1 | 有正文：[概念](knowledge/reliability/slis-slos-and-error-budgets.md) |
+| [`reliability.cardinality`](glossary/reliability.md#reliability.cardinality)<br>[Label Cardinality](glossary/reliability.md#reliability.cardinality) | 指标标签或其组合的不同取值规模，影响时间序列数量与资源成本。 | P1 | 有正文：[概念](knowledge/reliability/logs-metrics-and-traces.md) |
+| [`reliability.fault-domains`](glossary/reliability.md#reliability.fault-domains)<br>[Failure Domain / Redundancy](glossary/reliability.md#reliability.fault-domains) | 按故障假设识别共同失效的范围，以独立性、剩余容量与恢复路径评价冗余，而不只统计副本数。 | P1 | 有正文：[概念](knowledge/reliability/failure-domains-redundancy-and-recovery.md)、[概念](knowledge/distributed/consistent-hashing-placement-and-rebalancing.md) |
 
 <a id="engineering"></a>
 
@@ -324,21 +394,23 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `engineering.tests`<br>Unit / Integration / E2E Test | 按验证边界划分的测试。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md) |
-| `engineering.contracts`<br>Contract Testing | 验证交互契约的兼容性。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md) |
-| `engineering.doubles`<br>Mock / Stub / Fake | 交互验证、固定行为和简化实现等测试替身。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md) |
-| `engineering.tdd`<br>TDD / BDD | 以测试或可讨论的行为规格推动开发。 | P0 | 已收录 |
-| `engineering.generative`<br>Property-based / Fuzz Testing | 自动生成输入验证性质或探测异常。 | P0 | 已收录 |
-| `engineering.regression`<br>Regression Testing | 验证原有行为未被意外破坏。 | P0 | 已收录 |
-| `engineering.pyramid`<br>Test Pyramid | 关于不同测试层次成本与数量的经验模型。 | P0 | 已收录 |
-| `engineering.analysis`<br>Static Analysis / Lint | 静态推断缺陷与检查约定。 | P0 | 已收录 |
-| `engineering.review`<br>Code Review | 共同检查变更并传播上下文。 | P0 | 已收录 |
-| `engineering.trunk`<br>Trunk-based Development | 短生命周期分支和频繁集成。 | P0 | 已收录 |
-| `engineering.semver`<br>Semantic Versioning | 通过版本号表达兼容性意图。 | P0 | 已收录 |
-| `engineering.supply-chain`<br>Dependency Management / SBOM | 依赖解析、维护与组件清单。 | P0 | 已收录 |
-| `engineering.design-docs`<br>ADR / RFC / Design Doc | 决策记录、提案和设计说明。 | P0 | 已收录 |
-| `engineering.sdd`<br>Spec-Driven Development | 以可验证规格约束实现和验收。 | P0 | 已收录 |
-| `engineering.dx`<br>Golden Path / Developer Experience | 标准交付路径和研发使用体验。 | P0 | 已收录 |
+| [`engineering.tests`](glossary/engineering.md#engineering.tests)<br>[Unit / Integration / E2E Test](glossary/engineering.md#engineering.tests) | 按验证边界划分的测试。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md) |
+| [`engineering.contracts`](glossary/engineering.md#engineering.contracts)<br>[Contract Testing](glossary/engineering.md#engineering.contracts) | 验证交互契约的兼容性。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md)、[概念](knowledge/engineering/contract-testing-and-compatibility.md) |
+| [`engineering.doubles`](glossary/engineering.md#engineering.doubles)<br>[Mock / Stub / Fake](glossary/engineering.md#engineering.doubles) | 交互验证、固定行为和简化实现等测试替身。 | P0 | 有正文：[概念](knowledge/engineering/test-scopes-and-doubles.md) |
+| [`engineering.tdd`](glossary/engineering.md#engineering.tdd)<br>[TDD / BDD](glossary/engineering.md#engineering.tdd) | 以测试或可讨论的行为规格推动开发。 | P0 | 有正文：[概念](knowledge/engineering/tdd-bdd-examples-and-feedback-loops.md) |
+| [`engineering.generative`](glossary/engineering.md#engineering.generative)<br>[Property-based / Fuzz Testing](glossary/engineering.md#engineering.generative) | 自动生成输入验证性质或探测异常。 | P0 | 有正文：[概念](knowledge/engineering/property-testing-and-state-models.md) |
+| [`engineering.regression`](glossary/engineering.md#engineering.regression)<br>[Regression Testing](glossary/engineering.md#engineering.regression) | 验证原有行为未被意外破坏。 | P0 | 有正文：[概念](knowledge/engineering/property-testing-and-state-models.md) |
+| [`engineering.pyramid`](glossary/engineering.md#engineering.pyramid)<br>[Test Pyramid](glossary/engineering.md#engineering.pyramid) | 关于不同测试层次成本与数量的经验模型。 | P0 | 有正文：[概念](knowledge/engineering/test-pyramids-risk-portfolios-and-coverage.md) |
+| [`engineering.analysis`](glossary/engineering.md#engineering.analysis)<br>[Static Analysis / Lint](glossary/engineering.md#engineering.analysis) | 基于代码表示与规则推断性质，先核对分析完成与范围，再区分真实问题、误报、漏报及报告策略。 | P0 | 有正文：[概念](knowledge/engineering/static-analysis-rules-and-findings.md) |
+| [`engineering.review`](glossary/engineering.md#engineering.review)<br>[Code Review](glossary/engineering.md#engineering.review) | 结合意图、上下文与证据判断完整变更单元，明确意见级别、分工、最终版本及发布边界。 | P0 | 有正文：[概念](knowledge/engineering/code-review-context-and-change-boundaries.md) |
+| [`engineering.flaky-tests`](glossary/engineering.md#engineering.flaky-tests)<br>[Flaky Tests / Test Isolation](glossary/engineering.md#engineering.flaky-tests) | 追查间歇失败的状态依赖，明确测试隔离与重试证据。 | P0 | 有正文：[概念](knowledge/engineering/flaky-tests-isolation-and-evidence.md) |
+| [`engineering.trunk`](glossary/engineering.md#engineering.trunk)<br>[Trunk-based Development](glossary/engineering.md#engineering.trunk) | 短生命周期分支和频繁集成。 | P0 | 有正文：[概念](knowledge/engineering/trunk-based-development-and-feature-flags.md) |
+| [`engineering.semver`](glossary/engineering.md#engineering.semver)<br>[Semantic Versioning](glossary/engineering.md#engineering.semver) | 通过版本号表达兼容性意图。 | P0 | 有正文：[概念](knowledge/engineering/contract-testing-and-compatibility.md) |
+| [`engineering.supply-chain`](glossary/engineering.md#engineering.supply-chain)<br>[Dependency Management / SBOM](glossary/engineering.md#engineering.supply-chain) | 区分依赖声明、解析锁定、安装与交付清单，核对组件身份、兼容性和来源证据。 | P0 | 有正文：[概念](knowledge/engineering/dependency-resolution-lockfiles-and-sbom.md) |
+| [`engineering.design-docs`](glossary/engineering.md#engineering.design-docs)<br>[ADR / RFC / Design Doc](glossary/engineering.md#engineering.design-docs) | 决策记录、提案和设计说明。 | P0 | 有正文：[概念](knowledge/engineering/design-docs-rfcs-adrs-and-decision-lifecycles.md) |
+| [`engineering.sdd`](glossary/engineering.md#engineering.sdd)<br>[Spec-Driven Development](glossary/engineering.md#engineering.sdd) | 以可验证规格约束实现和验收。 | P0 | 有正文：[概念](knowledge/engineering/specifications-contracts-traceability-and-acceptance.md) |
+| [`engineering.dx`](glossary/engineering.md#engineering.dx)<br>[Golden Path / Developer Experience](glossary/engineering.md#engineering.dx) | 标准交付路径和研发使用体验。 | P0 | 有正文：[概念](knowledge/engineering/golden-paths-developer-experience-and-platform-feedback.md) |
+| [`engineering.state-models`](glossary/engineering.md#engineering.state-models)<br>[Stateful Testing / Model-based Testing](glossary/engineering.md#engineering.state-models) | 以简化模型驱动命令序列并检查状态关系，证据受模型、调度与真实依赖范围限制；顺序模型不自动证明并发正确性。 | P1 | 有正文：[概念](knowledge/engineering/property-testing-and-state-models.md) |
 
 <a id="ai"></a>
 
@@ -346,23 +418,26 @@
 
 | ID / 术语 | 简释 | 优先级 | 覆盖 |
 | --- | --- | --- | --- |
-| `ai.context`<br>Token / Context Window | 模型处理单元及单次可处理的上下文范围。 | P1 | 已收录 |
-| `ai.instructions`<br>Prompt / System Instruction | 任务输入、约束和应用定义的指令边界。 | P1 | 已收录 |
-| `ai.sampling`<br>Temperature / Sampling | 生成时的分布变换和采样方法。 | P1 | 已收录 |
-| `ai.structured`<br>Structured Output / JSON Schema | 按结构约束生成并校验结果。 | P1 | 已收录 |
-| `ai.tools`<br>Tool Calling / Function Calling | 模型提出工具请求，由宿主校验和执行。 | P1 | 已收录 |
-| `ai.embeddings`<br>Embedding / Vector Store | 内容向量化与相应检索存储。 | P1 | 已收录 |
-| `ai.rag`<br>RAG / Retrieval Pipeline | 获取相关证据并供生成使用的流程。 | P1 | 已收录 |
-| `ai.grounding`<br>Chunking / Reranking / Grounding | 文档切分、候选重排和答案证据约束。 | P1 | 已收录 |
-| `ai.loop`<br>Agent Loop | 决策、行动、观察与停止控制循环。 | P1 | 有正文：[概念](knowledge/ai/recoverable-runtime.md) |
-| `ai.planning`<br>Planning / Routing / Handoff | 任务分解、处理路径选择和控制权移交。 | P1 | 已收录 |
-| `ai.harness`<br>Harness / Orchestration | 围绕模型的执行、工具、状态和控制体系。 | P1 | 已收录 |
-| `ai.mcp`<br>MCP | 模型应用连接工具和上下文的协议体系。 | P1 | 已收录 |
-| `ai.state`<br>Agent State / Checkpoint | 执行状态及可用于恢复的持久化进度。 | P1 | 有正文：[概念](knowledge/ai/recoverable-runtime.md) |
-| `ai.memory`<br>Short-term / Long-term Memory | 当前任务上下文和跨任务持久信息。 | P1 | 已收录 |
-| `ai.memory-types`<br>Semantic / Episodic Memory | 可复用事实知识和情境经历记录。 | P1 | 已收录 |
-| `ai.human`<br>Human-in-the-loop | 在特定决策或执行点引入人工参与。 | P1 | 已收录 |
-| `ai.injection`<br>Prompt Injection / Tool Security | 外部内容诱导越权与工具访问控制。 | P1 | 已收录 |
-| `ai.evals`<br>Evals / Golden Dataset | 系统化评测任务、数据、指标和判定。 | P1 | 已收录 |
-| `ai.cost`<br>Tracing / Token Cost / Latency | 执行可观测性和费用、时延预算。 | P1 | 已收录 |
-| `ai.training`<br>Fine-tuning / Distillation | 参数适配和用教师信号训练学生模型。 | P1 | 已收录 |
+| [`ai.context`](glossary/ai.md#ai.context)<br>[Token / Context Window](glossary/ai.md#ai.context) | 模型处理单元及单次可处理的上下文范围。 | P1 | 有正文：[概念](knowledge/ai/tokens-context-and-memory.md) |
+| [`ai.instructions`](glossary/ai.md#ai.instructions)<br>[Prompt / System Instruction](glossary/ai.md#ai.instructions) | 任务输入、约束和应用定义的指令边界。 | P1 | 有正文：[概念](knowledge/ai/prompts-message-roles-and-instruction-boundaries.md) |
+| [`ai.sampling`](glossary/ai.md#ai.sampling)<br>[Temperature / Sampling](glossary/ai.md#ai.sampling) | 生成时的分布变换和采样方法。 | P1 | 有正文：[概念](knowledge/ai/temperature-sampling-and-reproducibility.md) |
+| [`ai.structured`](glossary/ai.md#ai.structured)<br>[Structured Output / JSON Schema](glossary/ai.md#ai.structured) | 按结构约束生成并校验结果。 | P1 | 有正文：[概念](knowledge/ai/structured-outputs-and-validation.md) |
+| [`ai.tools`](glossary/ai.md#ai.tools)<br>[Tool Calling / Function Calling](glossary/ai.md#ai.tools) | 模型提出工具请求，由宿主校验和执行。 | P1 | 有正文：[概念](knowledge/ai/tool-calling-and-execution-contracts.md)、[实验](knowledge/ai/tool-execution-boundaries-lab.md) |
+| [`ai.embeddings`](glossary/ai.md#ai.embeddings)<br>[Embedding / Vector Store](glossary/ai.md#ai.embeddings) | 内容向量化与相应检索存储。 | P1 | 有正文：[概念](knowledge/ai/rag-retrieval-and-grounding.md) |
+| [`ai.rag`](glossary/ai.md#ai.rag)<br>[RAG / Retrieval Pipeline](glossary/ai.md#ai.rag) | 获取相关证据并供生成使用的流程。 | P1 | 有正文：[概念](knowledge/ai/rag-retrieval-and-grounding.md) |
+| [`ai.grounding`](glossary/ai.md#ai.grounding)<br>[Chunking / Reranking / Grounding](glossary/ai.md#ai.grounding) | 文档切分、候选重排和答案证据约束。 | P1 | 有正文：[概念](knowledge/ai/rag-retrieval-and-grounding.md) |
+| [`ai.loop`](glossary/ai.md#ai.loop)<br>[Agent Loop](glossary/ai.md#ai.loop) | 决策、行动、观察与停止控制循环。 | P1 | 有正文：[概念](knowledge/ai/recoverable-runtime.md)、[概念](knowledge/ai/workflow-routing-and-handoff-contracts.md)、[概念](knowledge/ai/durable-budgets-and-failure-convergence.md) |
+| [`ai.planning`](glossary/ai.md#ai.planning)<br>[Planning / Routing / Handoff](glossary/ai.md#ai.planning) | 任务分解、处理路径选择和控制权移交。 | P1 | 有正文：[概念](knowledge/ai/workflow-routing-and-handoff-contracts.md) |
+| [`ai.harness`](glossary/ai.md#ai.harness)<br>[Harness / Orchestration](glossary/ai.md#ai.harness) | 围绕模型的执行、工具、状态和控制体系。 | P1 | 有正文：[概念](knowledge/ai/tool-calling-and-execution-contracts.md)、[概念](knowledge/ai/workflow-routing-and-handoff-contracts.md)、[概念](knowledge/ai/workflow-state-and-checkpoints.md)、[概念](knowledge/ai/durable-budgets-and-failure-convergence.md) |
+| [`ai.mcp`](glossary/ai.md#ai.mcp)<br>[MCP](glossary/ai.md#ai.mcp) | 模型应用连接工具和上下文的协议体系。 | P1 | 有正文：[概念](knowledge/ai/mcp-hosts-capabilities-and-execution-boundaries.md) |
+| [`ai.state`](glossary/ai.md#ai.state)<br>[Agent State / Checkpoint](glossary/ai.md#ai.state) | 执行状态及可用于恢复的持久化进度。 | P1 | 有正文：[概念](knowledge/ai/recoverable-runtime.md)、[实验](knowledge/ai/tool-execution-boundaries-lab.md)、[概念](knowledge/ai/workflow-state-and-checkpoints.md) |
+| [`ai.memory`](glossary/ai.md#ai.memory)<br>[Short-term / Long-term Memory](glossary/ai.md#ai.memory) | 区分当前任务上下文与跨任务保留的信息，并为长期记录约束来源、版本、权限及生命周期。 | P1 | 有正文：[概念](knowledge/ai/tokens-context-and-memory.md)、[概念](knowledge/ai/memory-writing-and-provenance.md)、[概念](knowledge/ai/memory-versions-conflicts-and-expiry.md)、[概念](knowledge/ai/memory-access-revocation-and-deletion.md)、[实验](knowledge/ai/memory-governance-lab.md) |
+| [`ai.memory-types`](glossary/ai.md#ai.memory-types)<br>[Semantic / Episodic Memory](glossary/ai.md#ai.memory-types) | 按事实知识、情境经历等用途理解记忆；用途分类不能替代来源核实或权限。 | P1 | 有正文：[概念](knowledge/ai/memory-writing-and-provenance.md) |
+| [`ai.human`](glossary/ai.md#ai.human)<br>[Human-in-the-loop](glossary/ai.md#ai.human) | 在特定决策或执行点引入人工参与。 | P1 | 有正文：[概念](knowledge/ai/tool-authorization-and-untrusted-results.md) |
+| [`ai.injection`](glossary/ai.md#ai.injection)<br>[Prompt Injection / Tool Security](glossary/ai.md#ai.injection) | 外部内容诱导越权与工具访问控制。 | P1 | 有正文：[概念](knowledge/ai/tool-authorization-and-untrusted-results.md)、[实验](knowledge/ai/tool-execution-boundaries-lab.md) |
+| [`ai.evals`](glossary/ai.md#ai.evals)<br>[Evals / Golden Dataset](glossary/ai.md#ai.evals) | 系统化评测任务、数据、指标和判定。 | P1 | 有正文：[概念](knowledge/ai/evals-and-failure-analysis.md) |
+| [`ai.cost`](glossary/ai.md#ai.cost)<br>[Tracing / Token Cost / Latency](glossary/ai.md#ai.cost) | 执行可观测性和费用、时延预算。 | P1 | 有正文：[概念](knowledge/ai/durable-budgets-and-failure-convergence.md)、[概念](knowledge/reliability/logs-metrics-and-traces.md) |
+| [`ai.training`](glossary/ai.md#ai.training)<br>[Fine-tuning / Distillation](glossary/ai.md#ai.training) | 参数适配和用教师信号训练学生模型。 | P1 | 有正文：[概念](knowledge/ai/fine-tuning-distillation-and-evaluation-boundaries.md) |
+| [`ai.compaction`](glossary/ai.md#ai.compaction)<br>[Context Compaction](glossary/ai.md#ai.compaction) | 用较少 Token 续接所需上下文，表示与保留规则依实现而异，不代替业务执行记录。 | P1 | 有正文：[概念](knowledge/ai/tokens-context-and-memory.md) |
+| [`ai.eval-rubric`](glossary/ai.md#ai.eval-rubric)<br>[Eval Rubric / Model Grader](glossary/ai.md#ai.eval-rubric) | 将任务目标转为可判定标准，并核查自动评分与参考判断是否一致。 | P1 | 有正文：[概念](knowledge/ai/evals-and-failure-analysis.md) |
+| [`ai.eval-splits`](glossary/ai.md#ai.eval-splits)<br>[Development / Held-out Eval Set](glossary/ai.md#ai.eval-splits) | 区分反复调试样本和相对独立检查样本，避免据熟悉题目调优后高估泛化。 | P1 | 有正文：[概念](knowledge/ai/evals-and-failure-analysis.md) |

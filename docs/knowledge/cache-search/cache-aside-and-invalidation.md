@@ -6,29 +6,29 @@ domain: "cache-search"
 status: "evolving"
 summary: "区分缓存读取、权威写入、失效与过期，分析旧值回填和回源的边界。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-23"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-distributed-consistency", "kb-database-concurrent-inventory", "kb-reliability-retry-budgets", "kb-algorithms-complexity"]
+related: ["kb-distributed-consistency", "kb-database-concurrent-inventory", "kb-reliability-retry-budgets", "kb-algorithms-complexity", "kb-ai-context", "kb-ai-rag", "kb-ai-memory-versioning", "kb-ai-memory-lab", "kb-frontend-routing-cache", "kb-cache-search-bloom", "kb-cache-search-eviction", "kb-distributed-consistent-hashing", "kb-cache-load-coalescing", "kb-cache-write-paths", "kb-cache-redis-data-types"]
 tags: ["cache", "consistency", "invalidation"]
 ---
 
 # Cache-Aside 与失效：缓存为什么会返回旧数据
 
-学习入口：数据库已经改成新值，页面为何仍看到旧值？前置知识：键值读取、数据库提交与并发请求。本文讨论单一权威数据源旁的应用缓存，使用教学时序解释机制，不搭建新的缓存实验。
+学习入口：数据库已经改成新值，页面为何仍看到旧值？前置知识：键值读取、数据库提交与[并发](../../glossary/systems.md#systems.concurrency)请求。本文讨论单一权威数据源旁的应用缓存，使用教学时序解释机制，不搭建新的缓存实验。
 
 ## Definition：定义与问题
 
 缓存是为减少重复读取或计算而保存的副本或派生结果。Cache-Aside 由应用协调缓存与数据源：先读缓存，未命中时读取数据源并回填。缓存条目存在不等于条目仍反映权威数据的最新状态。
 
-失效是主动删除或标记不再可用；TTL 是条目的有效期限；容量淘汰是空间管理。它们解决的问题不同，TTL 本身不能保证数据库更新后立即可见。
+失效是主动删除或标记不再可用；[TTL](../../glossary/cache-search.md#cache-search.invalidation) 是条目的有效期限；[容量淘汰](../../glossary/algorithms.md#algorithms.eviction)是空间管理。它们解决的问题不同，TTL 本身不能保证数据库更新后立即可见。
 
 ## Principles：工作机制与核心原理
 
 | 路径 | 常见动作 | 关键边界 |
 | --- | --- | --- |
-| 读命中 | 检查访问范围并返回缓存值 | 仍需满足授权与允许陈旧程度 |
+| 读命中 | 检查访问范围并返回缓存值 | 仍需满足[授权](../../glossary/security.md#security.identity)与允许陈旧程度 |
 | 读未命中 | 查权威数据源，回填值和有效期 | 回填时数据可能已经再次改变 |
 | 写入 | 提交权威数据，再使相关缓存失效 | 两个系统的动作可能部分成功 |
 | 过期或故障 | 重新读取、降级或拒绝请求 | 回源负载与错误不能无限扩散 |
@@ -44,7 +44,7 @@ tags: ["cache", "consistency", "invalidation"]
 - 版本号有助于识别新旧值，但拒绝旧值覆盖需要原子比较与更新，以及覆盖删除、重建和乱序事件的协议。
 - 允许短时间陈旧的展示数据较容易缓存；权限撤销、余额判断或库存分配需由业务明确读取保证和权威执行位置。
 
-[缓存指导](https://learn.microsoft.com/en-us/azure/architecture/best-practices/caching)讨论了有效期、并发访问、可用性和数据一致性。本文不提供通用 TTL，也不把缓存当作业务正确性的唯一依据。
+[缓存指导](https://learn.microsoft.com/en-us/azure/architecture/best-practices/caching)讨论了有效期、并发访问、[可用性](../../glossary/reliability.md#reliability.availability)和数据一致性。本文不提供通用 TTL，也不把缓存当作业务正确性的唯一依据。
 
 ## Implementation：代码或架构实现
 
@@ -65,25 +65,42 @@ tags: ["cache", "consistency", "invalidation"]
 | --- | --- | --- |
 | 数据提交成功但失效失败 | 长时间命中旧值 | 记录失效进度、修复与最长可接受陈旧窗口 |
 | 旧读者在失效后回填 | 删过键仍读到旧值 | 设计回填版本与失效协调，必要时绕过缓存 |
-| 热点同时过期 | 大量请求同时访问数据源 | 合并同键加载、限制回源并发与等待 |
+| [热点](../../glossary/performance.md#performance.contention)同时过期 | 大量请求同时访问数据源 | 合并[同键加载](../../glossary/cache-search.md#cache-search.stampede)、限制回源并发与等待 |
 | 缓存故障全部直接回源 | 数据库被额外流量压满 | 设定回源预算、降级与拒绝策略 |
 | 缓存键跨租户或权限复用 | 返回不属于当前主体的数据 | 审查键空间与每次访问的授权边界 |
 
-同键加载合并只减少某些重复工作，并不自动解决跨实例协调、陈旧值或写入顺序；降级读取旧数据也必须获得业务语义支持。
+[同键加载合并](../../glossary/cache-search.md#cache-search.coalescing)只减少某些重复工作，并不自动解决跨实例协调、陈旧值或写入顺序；降级读取旧数据也必须获得业务语义支持。
 
 ## Practice：工程案例、测试与验证
 
-纸面练习：从初始 v1 出发，分别排列读未命中、读取数据源、提交 v2、删缓存、回填五个动作，标出谁最后写入缓存，以及何时可能读到 v1。这是时序推演，本文没有声称测得命中率或一致性延迟。
+纸面练习：从初始 v1 出发，分别排列读未命中、读取数据源、提交 v2、删缓存、回填五个动作，标出谁最后写入缓存，以及何时可能读到 v1。这是时序推演，本文没有声称测得命中率或一致性[延迟](../../glossary/performance.md#performance.latency-throughput)。
 
 为一类实际数据写出四条规则：允许陈旧多久、哪些操作必须读权威数据、失效失败怎么修复、缓存不可用时最多允许多少回源工作。再检查一个正常路径与一个“旧读者晚回填”路径是否符合规则。
 
 验收：能够区分“缓存没有命中”“缓存命中旧值”“失效事件遗漏”和“数据源本身读取旧副本”，并为每种现象指定证据。具体缓存协议与吞吐仍待实际系统验证。
 
+记忆记录还要把来源、期限与当前权限放进读取判断，见[记忆版本与失效](../ai/memory-versions-conflicts-and-expiry.md)。独立[记忆治理实验](../ai/memory-governance-lab.md)用 SQLite 索引/缓存替身验证局部时序，不是 Redis 或本文真实缓存负载实验。
+
+浏览器里的组件状态、应用查询、HTTP 响应与整页恢复也有不同保留边界，见[前端路由与缓存](../frontend/routing-state-and-cache-lifecycles.md)。某一层失效不表示所有层已清理；该篇没有新增缓存集成实测。
+
+缓存节点变化时的键归属与搬迁责任见[一致性哈希与再均衡](../distributed/consistent-hashing-placement-and-rebalancing.md)，映射变化不自动完成数据迁移或热点分摊。
+
+未命中后的共享工作、等待取消、跨实例放大与旧结果回填，继续见[缓存加载合并与惊群控制](cache-load-coalescing-and-stampedes.md)。减少重复读取不改变本篇对权威版本与失效窗口的要求。
+
+由缓存接口协调的同步或异步后端写入，继续见[写穿与异步写回](write-through-write-behind-and-durability.md)。待写接纳、缓存可见和后端耐久是不同阶段，不能用写回延迟代替丢失与恢复条件。
+
+具体存储结构的字段/成员操作、期限与原子执行，继续见[Redis 数据结构](redis-data-types-operations-and-atomicity.md)。客户端如何协调缓存，与服务器值采用何种类型是两个选择；选定类型不会自动消除旧回填窗口。
+
 ## Related Concepts：关联概念
+
+容量分配继续见 [LRU/LFU 与缓存淘汰](lru-lfu-and-capacity-eviction.md)，查询过滤继续见 [Bloom Filter](bloom-filters-membership-and-synchronization.md)。淘汰不能替代失效，阴性也只有在覆盖同步前提下才能省去权威查询；新文不构成本文真实缓存集成或负载验证。
+
+- [Token、上下文与记忆](../ai/tokens-context-and-memory.md)：计算缓存、持久记忆与业务状态承担不同职责。
+- [RAG 与依据](../ai/rag-retrieval-and-grounding.md)：源文档、索引与回答缓存也有版本和失效协调问题。
 
 - [分布式一致性](../distributed/consistency-and-replication.md)：副本可见性与读取契约是缓存问题的上层语义。
 - [库存并发](../database/concurrent-inventory.md)：正确分配应在权威写入边界执行，不能只靠缓存中的数量。
-- [重试预算](../reliability/timeouts-and-retry-budgets.md)：回源、失效重试和等待都需要资源与时间上限。
+- [重试预算](../reliability/timeouts-and-retry-budgets.md)：回源、失效[重试](../../glossary/api.md#api.retries)和等待都需要资源与时间上限。
 - [复杂度与数据结构](../algorithms/complexity-and-data-structures.md)：加速结构都要计算维护成本与数据生命周期。
 
 ## 来源与核查

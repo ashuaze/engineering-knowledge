@@ -1,0 +1,17 @@
+{
+  "recorded_date": "2026-10-20",
+  "files": {
+    "examples/memory_governance/lab.py": {
+      "bytes": 25637,
+      "sha256": "ef20ea89412f27e18c57c5581310d1caa8e892aa5097a0bd85de02d04ad2ea93"
+    },
+    "examples/memory_governance/results/results.json": {
+      "bytes": 123452,
+      "sha256": "78b25acdb2ed7b0f5991a524d83ad9e741fb317d02fd66fe4bdb0dce783b282d"
+    },
+    "examples/memory_governance/results/run.txt": {
+      "bytes": 750,
+      "sha256": "e5d5e925c0f18b9b05f33ba7264c30adb13bb922283d9df6d0808d518601e96e"
+    }
+  }
+}

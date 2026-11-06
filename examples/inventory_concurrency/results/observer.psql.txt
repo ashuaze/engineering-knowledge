@@ -1,0 +1,309 @@
+KB_883c2a01baee4a7aa07ee1b8d47ac19c_BEGIN
+KB_883c2a01baee4a7aa07ee1b8d47ac19c_STATE 00000
+KB_883c2a01baee4a7aa07ee1b8d47ac19c_END
+KB_55a6682f1a8946e38eae6848de8a176e_BEGIN
+KB_55a6682f1a8946e38eae6848de8a176e_STATE 00000
+KB_55a6682f1a8946e38eae6848de8a176e_END
+KB_432e3b93abf748c880c445b41e89678e_BEGIN
+KB_432e3b93abf748c880c445b41e89678e_STATE 00000
+KB_432e3b93abf748c880c445b41e89678e_END
+KB_daff517610bb4c2ba28b8fed3c8bd0a3_BEGIN
+25184
+KB_daff517610bb4c2ba28b8fed3c8bd0a3_STATE 00000
+KB_daff517610bb4c2ba28b8fed3c8bd0a3_END
+KB_b1a187c95659496aa3d1cfe642658991_BEGIN
+{"version" : "PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit", "version_num" : 180000}
+KB_b1a187c95659496aa3d1cfe642658991_STATE 00000
+KB_b1a187c95659496aa3d1cfe642658991_END
+KB_483d64129c844556b0da259bb4b6aa78_BEGIN
+KB_483d64129c844556b0da259bb4b6aa78_STATE 00000
+KB_483d64129c844556b0da259bb4b6aa78_END
+KB_794ef72609a148589ba6c4585c007942_BEGIN
+KB_794ef72609a148589ba6c4585c007942_STATE 00000
+KB_794ef72609a148589ba6c4585c007942_END
+KB_3893a1f75b244a25b3bd79f1b126c4e0_BEGIN
+{"isolation" : "read committed", "statement_timeout" : "15s", "lock_timeout" : "10s", "deadlock_timeout" : "100ms"}
+KB_3893a1f75b244a25b3bd79f1b126c4e0_STATE 00000
+KB_3893a1f75b244a25b3bd79f1b126c4e0_END
+KB_b4b53fdc4c2645af85cb16afac053c20_BEGIN
+KB_b4b53fdc4c2645af85cb16afac053c20_STATE 00000
+KB_b4b53fdc4c2645af85cb16afac053c20_END
+KB_d842e24e069a48e0b367efbe9f0dadc8_BEGIN
+KB_d842e24e069a48e0b367efbe9f0dadc8_STATE 00000
+KB_d842e24e069a48e0b367efbe9f0dadc8_END
+KB_044cb8a34d5d463c898c9fb169b0ee87_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 2, "requests" : ["request-a", "request-b"]}
+KB_044cb8a34d5d463c898c9fb169b0ee87_STATE 00000
+KB_044cb8a34d5d463c898c9fb169b0ee87_END
+KB_4cf61e9b850144b48d35237ee44f2335_BEGIN
+KB_4cf61e9b850144b48d35237ee44f2335_STATE 00000
+KB_4cf61e9b850144b48d35237ee44f2335_END
+KB_967cb629c7dc4249898128c04908cfb5_BEGIN
+KB_967cb629c7dc4249898128c04908cfb5_STATE 00000
+KB_967cb629c7dc4249898128c04908cfb5_END
+KB_23249c7631144c6588075236c44ebc1b_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_23249c7631144c6588075236c44ebc1b_STATE 00000
+KB_23249c7631144c6588075236c44ebc1b_END
+KB_d51d2bfe7cae4165b5af752a25433fd1_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_d51d2bfe7cae4165b5af752a25433fd1_STATE 00000
+KB_d51d2bfe7cae4165b5af752a25433fd1_END
+KB_0a62d67b697a43a899e973483ad7be5c_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_0a62d67b697a43a899e973483ad7be5c_STATE 00000
+KB_0a62d67b697a43a899e973483ad7be5c_END
+KB_994be3b3226c44d6895c66ba0c2432aa_BEGIN
+KB_994be3b3226c44d6895c66ba0c2432aa_STATE 00000
+KB_994be3b3226c44d6895c66ba0c2432aa_END
+KB_0a5b428294d04b42a9172b871cd9c9e4_BEGIN
+KB_0a5b428294d04b42a9172b871cd9c9e4_STATE 00000
+KB_0a5b428294d04b42a9172b871cd9c9e4_END
+KB_779cd735e76b4ba593a60721352d1ce3_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_779cd735e76b4ba593a60721352d1ce3_STATE 00000
+KB_779cd735e76b4ba593a60721352d1ce3_END
+KB_ddc65f6331df4bcc9810b717074bcc7d_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_ddc65f6331df4bcc9810b717074bcc7d_STATE 00000
+KB_ddc65f6331df4bcc9810b717074bcc7d_END
+KB_669e81a41b6f450dacce334cdb319931_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-b"]}
+KB_669e81a41b6f450dacce334cdb319931_STATE 00000
+KB_669e81a41b6f450dacce334cdb319931_END
+KB_7462c824305a4b25bccd04b7cdea05d1_BEGIN
+KB_7462c824305a4b25bccd04b7cdea05d1_STATE 00000
+KB_7462c824305a4b25bccd04b7cdea05d1_END
+KB_96f08436e2a3460a98b97025e698c4af_BEGIN
+KB_96f08436e2a3460a98b97025e698c4af_STATE 00000
+KB_96f08436e2a3460a98b97025e698c4af_END
+KB_90465f0effb4495fb7e61e1ee242a840_BEGIN
+{"id" : "request-a", "sku" : "book", "quantity" : 1}
+KB_90465f0effb4495fb7e61e1ee242a840_STATE 00000
+KB_90465f0effb4495fb7e61e1ee242a840_END
+KB_14b9e4afbb6d440b89a58557f6455065_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_14b9e4afbb6d440b89a58557f6455065_STATE 00000
+KB_14b9e4afbb6d440b89a58557f6455065_END
+KB_c26484fac79e4b6291f059975f0b668b_BEGIN
+KB_c26484fac79e4b6291f059975f0b668b_STATE 00000
+KB_c26484fac79e4b6291f059975f0b668b_END
+KB_8d2f64be40e24c6683a7151970650d6c_BEGIN
+KB_8d2f64be40e24c6683a7151970650d6c_STATE 00000
+KB_8d2f64be40e24c6683a7151970650d6c_END
+KB_f6657ecb210147aa85b81ca8f68b0772_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 1, "requests" : ["request-a"]}
+KB_f6657ecb210147aa85b81ca8f68b0772_STATE 00000
+KB_f6657ecb210147aa85b81ca8f68b0772_END
+KB_87acb0cb30904ac99584db08650dc895_BEGIN
+KB_87acb0cb30904ac99584db08650dc895_STATE 00000
+KB_87acb0cb30904ac99584db08650dc895_END
+KB_664772d26efb43d3b7470c03fc5cd1c4_BEGIN
+KB_664772d26efb43d3b7470c03fc5cd1c4_STATE 00000
+KB_664772d26efb43d3b7470c03fc5cd1c4_END
+KB_cf00582b09584666b971b698a83ac66a_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_cf00582b09584666b971b698a83ac66a_STATE 00000
+KB_cf00582b09584666b971b698a83ac66a_END
+KB_2ae363194ab54eceaab14a6638de9a4e_BEGIN
+{"inventory" : { "book" : 1, "pen" : 1 }, "remaining" : 2, "reserved" : 0, "requests" : []}
+KB_2ae363194ab54eceaab14a6638de9a4e_STATE 00000
+KB_2ae363194ab54eceaab14a6638de9a4e_END
+KB_52e889e0ca004e94905e528e4703eac3_BEGIN
+KB_52e889e0ca004e94905e528e4703eac3_STATE 00000
+KB_52e889e0ca004e94905e528e4703eac3_END
+KB_f962d4920be144c9b7eb5d7866c60d8c_BEGIN
+KB_f962d4920be144c9b7eb5d7866c60d8c_STATE 00000
+KB_f962d4920be144c9b7eb5d7866c60d8c_END
+KB_3838a509cd4046fbbcf26236a7d19d4e_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 0, "requests" : []}
+KB_3838a509cd4046fbbcf26236a7d19d4e_STATE 00000
+KB_3838a509cd4046fbbcf26236a7d19d4e_END
+KB_75d26c2e92e742dd99857a43f7c51098_BEGIN
+KB_75d26c2e92e742dd99857a43f7c51098_STATE 00000
+KB_75d26c2e92e742dd99857a43f7c51098_END
+KB_d529a020c19e4475bfff17308f28934e_BEGIN
+KB_d529a020c19e4475bfff17308f28934e_STATE 00000
+KB_d529a020c19e4475bfff17308f28934e_END
+KB_76bbb8a265934ba68ed6dfa478a1409d_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 2, "requests" : ["request-a", "request-b"]}
+KB_76bbb8a265934ba68ed6dfa478a1409d_STATE 00000
+KB_76bbb8a265934ba68ed6dfa478a1409d_END
+KB_eb4ee787898c424496ee3bafa5c1a6ea_BEGIN
+KB_eb4ee787898c424496ee3bafa5c1a6ea_STATE 00000
+KB_eb4ee787898c424496ee3bafa5c1a6ea_END
+KB_326cfcd458e14b558d53035e4fe421cb_BEGIN
+KB_326cfcd458e14b558d53035e4fe421cb_STATE 00000
+KB_326cfcd458e14b558d53035e4fe421cb_END
+KB_8199f85fb5c04223b87ce796f07773c8_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_8199f85fb5c04223b87ce796f07773c8_STATE 00000
+KB_8199f85fb5c04223b87ce796f07773c8_END
+KB_1bc0abdb17d548799e2226cad6839a0f_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_1bc0abdb17d548799e2226cad6839a0f_STATE 00000
+KB_1bc0abdb17d548799e2226cad6839a0f_END
+KB_1aa660d026cb47609b0a487c7f20a121_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_1aa660d026cb47609b0a487c7f20a121_STATE 00000
+KB_1aa660d026cb47609b0a487c7f20a121_END
+KB_8dab74fa025649dfb1cd5dc38f71a61e_BEGIN
+KB_8dab74fa025649dfb1cd5dc38f71a61e_STATE 00000
+KB_8dab74fa025649dfb1cd5dc38f71a61e_END
+KB_4c48ab05eebd455cb079930c1194de54_BEGIN
+KB_4c48ab05eebd455cb079930c1194de54_STATE 00000
+KB_4c48ab05eebd455cb079930c1194de54_END
+KB_418a85f2eeb84569a863f6976741969a_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_418a85f2eeb84569a863f6976741969a_STATE 00000
+KB_418a85f2eeb84569a863f6976741969a_END
+KB_91330c18811445eb8dc91ee2c4b7309f_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_91330c18811445eb8dc91ee2c4b7309f_STATE 00000
+KB_91330c18811445eb8dc91ee2c4b7309f_END
+KB_11dbc4cd01f34c4e9cd02696d41cf0ee_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-b"]}
+KB_11dbc4cd01f34c4e9cd02696d41cf0ee_STATE 00000
+KB_11dbc4cd01f34c4e9cd02696d41cf0ee_END
+KB_943638f1ff5844058614c7f84c8a027d_BEGIN
+KB_943638f1ff5844058614c7f84c8a027d_STATE 00000
+KB_943638f1ff5844058614c7f84c8a027d_END
+KB_cdbebb94b52e45c29e46afba77f09305_BEGIN
+KB_cdbebb94b52e45c29e46afba77f09305_STATE 00000
+KB_cdbebb94b52e45c29e46afba77f09305_END
+KB_2022c24a40b04867886e0ca8513fe29f_BEGIN
+{"id" : "request-a", "sku" : "book", "quantity" : 1}
+KB_2022c24a40b04867886e0ca8513fe29f_STATE 00000
+KB_2022c24a40b04867886e0ca8513fe29f_END
+KB_30777dd258b1449c9e6315bb3279b7e5_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_30777dd258b1449c9e6315bb3279b7e5_STATE 00000
+KB_30777dd258b1449c9e6315bb3279b7e5_END
+KB_7eee3725ff5346dd86fb9d3749a088fe_BEGIN
+KB_7eee3725ff5346dd86fb9d3749a088fe_STATE 00000
+KB_7eee3725ff5346dd86fb9d3749a088fe_END
+KB_92c6615376354e7ca36bd30033ff71ff_BEGIN
+KB_92c6615376354e7ca36bd30033ff71ff_STATE 00000
+KB_92c6615376354e7ca36bd30033ff71ff_END
+KB_adf1f7225c5e4020813ac4da618c9dc8_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 1, "requests" : ["request-a"]}
+KB_adf1f7225c5e4020813ac4da618c9dc8_STATE 00000
+KB_adf1f7225c5e4020813ac4da618c9dc8_END
+KB_2c9d4fa158c54829bffa3b68677a87e9_BEGIN
+KB_2c9d4fa158c54829bffa3b68677a87e9_STATE 00000
+KB_2c9d4fa158c54829bffa3b68677a87e9_END
+KB_f85d927f42b045c7bcd731f3b0330c16_BEGIN
+KB_f85d927f42b045c7bcd731f3b0330c16_STATE 00000
+KB_f85d927f42b045c7bcd731f3b0330c16_END
+KB_3ea17051121843e4bb257cb8232fc9fb_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_3ea17051121843e4bb257cb8232fc9fb_STATE 00000
+KB_3ea17051121843e4bb257cb8232fc9fb_END
+KB_debcc58c4cf1433fa3550d66ae425ada_BEGIN
+{"inventory" : { "book" : 1, "pen" : 1 }, "remaining" : 2, "reserved" : 0, "requests" : []}
+KB_debcc58c4cf1433fa3550d66ae425ada_STATE 00000
+KB_debcc58c4cf1433fa3550d66ae425ada_END
+KB_87284737ffdf448b907df7ee6bdaafb5_BEGIN
+KB_87284737ffdf448b907df7ee6bdaafb5_STATE 00000
+KB_87284737ffdf448b907df7ee6bdaafb5_END
+KB_b40e3d5ba3524d148e693aa59e0e38db_BEGIN
+KB_b40e3d5ba3524d148e693aa59e0e38db_STATE 00000
+KB_b40e3d5ba3524d148e693aa59e0e38db_END
+KB_2a81829801124d1aa838475714810942_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 0, "requests" : []}
+KB_2a81829801124d1aa838475714810942_STATE 00000
+KB_2a81829801124d1aa838475714810942_END
+KB_23ecbefbbd1141f38aab2b5eb39b8647_BEGIN
+KB_23ecbefbbd1141f38aab2b5eb39b8647_STATE 00000
+KB_23ecbefbbd1141f38aab2b5eb39b8647_END
+KB_77321b7fd9264d95b054bfdf1b14ae2a_BEGIN
+KB_77321b7fd9264d95b054bfdf1b14ae2a_STATE 00000
+KB_77321b7fd9264d95b054bfdf1b14ae2a_END
+KB_5fd765915c174d28b474b1c55a2afc36_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 2, "requests" : ["request-a", "request-b"]}
+KB_5fd765915c174d28b474b1c55a2afc36_STATE 00000
+KB_5fd765915c174d28b474b1c55a2afc36_END
+KB_777f99d48ef442a0a8c72e10ff17be38_BEGIN
+KB_777f99d48ef442a0a8c72e10ff17be38_STATE 00000
+KB_777f99d48ef442a0a8c72e10ff17be38_END
+KB_eae3afca22a44f59b333ff80737fe839_BEGIN
+KB_eae3afca22a44f59b333ff80737fe839_STATE 00000
+KB_eae3afca22a44f59b333ff80737fe839_END
+KB_473d3e3edc3d4d42b03fdcf376c6f750_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_473d3e3edc3d4d42b03fdcf376c6f750_STATE 00000
+KB_473d3e3edc3d4d42b03fdcf376c6f750_END
+KB_6d39227659e7402782a2e9749e415ec5_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_6d39227659e7402782a2e9749e415ec5_STATE 00000
+KB_6d39227659e7402782a2e9749e415ec5_END
+KB_a3f758c34f0848d3959ca2f0d949d461_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_a3f758c34f0848d3959ca2f0d949d461_STATE 00000
+KB_a3f758c34f0848d3959ca2f0d949d461_END
+KB_9e275a3c550445fba564b0792fcbc328_BEGIN
+KB_9e275a3c550445fba564b0792fcbc328_STATE 00000
+KB_9e275a3c550445fba564b0792fcbc328_END
+KB_6b3b810f19194ec1a775ebc17aad36ed_BEGIN
+KB_6b3b810f19194ec1a775ebc17aad36ed_STATE 00000
+KB_6b3b810f19194ec1a775ebc17aad36ed_END
+KB_20a7ba90f5a6442eae00826a93afb364_BEGIN
+{"waiter" : 42648, "blockers" : [], "wait_event_type" : null, "wait_event" : null}
+KB_20a7ba90f5a6442eae00826a93afb364_STATE 00000
+KB_20a7ba90f5a6442eae00826a93afb364_END
+KB_e5f2e54ebb5a43d1b3b52cff2bb0841a_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_e5f2e54ebb5a43d1b3b52cff2bb0841a_STATE 00000
+KB_e5f2e54ebb5a43d1b3b52cff2bb0841a_END
+KB_c3adb5bba8934d26b5bf8c7f64ad8425_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-b"]}
+KB_c3adb5bba8934d26b5bf8c7f64ad8425_STATE 00000
+KB_c3adb5bba8934d26b5bf8c7f64ad8425_END
+KB_d2a40e26a54a4464adf6fb1bbf02fad2_BEGIN
+KB_d2a40e26a54a4464adf6fb1bbf02fad2_STATE 00000
+KB_d2a40e26a54a4464adf6fb1bbf02fad2_END
+KB_dc1edee8abad4eaeb1a0d5571adef4d7_BEGIN
+KB_dc1edee8abad4eaeb1a0d5571adef4d7_STATE 00000
+KB_dc1edee8abad4eaeb1a0d5571adef4d7_END
+KB_18293290f85d44d0b9c9dc34fd0059a1_BEGIN
+{"id" : "request-a", "sku" : "book", "quantity" : 1}
+KB_18293290f85d44d0b9c9dc34fd0059a1_STATE 00000
+KB_18293290f85d44d0b9c9dc34fd0059a1_END
+KB_8389ff9271db447ba5118a6991ee6c19_BEGIN
+{"inventory" : { "book" : 0 }, "remaining" : 0, "reserved" : 1, "requests" : ["request-a"]}
+KB_8389ff9271db447ba5118a6991ee6c19_STATE 00000
+KB_8389ff9271db447ba5118a6991ee6c19_END
+KB_a5184840a7db4d828de6db016fe5530d_BEGIN
+KB_a5184840a7db4d828de6db016fe5530d_STATE 00000
+KB_a5184840a7db4d828de6db016fe5530d_END
+KB_be9a83e05ee944b09650e311e017cc64_BEGIN
+KB_be9a83e05ee944b09650e311e017cc64_STATE 00000
+KB_be9a83e05ee944b09650e311e017cc64_END
+KB_0bf9365e0ba546af8612933473c86ae1_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 1, "requests" : ["request-a"]}
+KB_0bf9365e0ba546af8612933473c86ae1_STATE 00000
+KB_0bf9365e0ba546af8612933473c86ae1_END
+KB_641fa0583aea4047a756d8dadd1b2afe_BEGIN
+KB_641fa0583aea4047a756d8dadd1b2afe_STATE 00000
+KB_641fa0583aea4047a756d8dadd1b2afe_END
+KB_70fd19b91cef4951a9cd824aec0a03f0_BEGIN
+KB_70fd19b91cef4951a9cd824aec0a03f0_STATE 00000
+KB_70fd19b91cef4951a9cd824aec0a03f0_END
+KB_07a4f59ca9b94ad786e5afd8c1b12297_BEGIN
+{"waiter" : 42648, "blockers" : [19644], "wait_event_type" : "Lock", "wait_event" : "transactionid"}
+KB_07a4f59ca9b94ad786e5afd8c1b12297_STATE 00000
+KB_07a4f59ca9b94ad786e5afd8c1b12297_END
+KB_a67562de51b34830858a59d481e02cf6_BEGIN
+{"inventory" : { "book" : 1, "pen" : 1 }, "remaining" : 2, "reserved" : 0, "requests" : []}
+KB_a67562de51b34830858a59d481e02cf6_STATE 00000
+KB_a67562de51b34830858a59d481e02cf6_END
+KB_6865ff9d15ff4ef8917b0497cd1d9479_BEGIN
+KB_6865ff9d15ff4ef8917b0497cd1d9479_STATE 00000
+KB_6865ff9d15ff4ef8917b0497cd1d9479_END
+KB_4442bbfdb45b440888c885f18f9a49a5_BEGIN
+KB_4442bbfdb45b440888c885f18f9a49a5_STATE 00000
+KB_4442bbfdb45b440888c885f18f9a49a5_END
+KB_5346c4d8edd845b5bf4cbe3c6980452f_BEGIN
+{"inventory" : { "book" : 1 }, "remaining" : 1, "reserved" : 0, "requests" : []}
+KB_5346c4d8edd845b5bf4cbe3c6980452f_STATE 00000
+KB_5346c4d8edd845b5bf4cbe3c6980452f_END

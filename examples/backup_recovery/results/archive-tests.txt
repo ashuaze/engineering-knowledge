@@ -1,0 +1,9 @@
+test_archive_is_repeatable_for_identical_bytes (test_archive.ArchiveContractTests.test_archive_is_repeatable_for_identical_bytes) ... ok
+test_conflicting_archive_is_preserved_and_rejected (test_archive.ArchiveContractTests.test_conflicting_archive_is_preserved_and_rejected) ... ok
+test_missing_source_is_failure_without_output (test_archive.ArchiveContractTests.test_missing_source_is_failure_without_output) ... ok
+test_restore_replaces_owned_recovery_output (test_archive.ArchiveContractTests.test_restore_replaces_owned_recovery_output) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.078s
+
+OK

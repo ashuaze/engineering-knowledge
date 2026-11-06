@@ -35,12 +35,26 @@ jobs:
         run: python3 scripts/validate.py
       - name: Verify generated indexes
         run: python3 scripts/generate_indexes.py --check
+      - name: Verify glossary prose links and rewriter behavior
+        run: |
+          python3 scripts/link_glossary.py --check
+          python3 -m unittest discover -s scripts -p 'test_*.py' -v
       - name: Run idempotency invariants
         run: python3 -m unittest discover -s examples/idempotency -p 'test_*.py' -v
       - name: Run retry budget invariants
         run: python3 -m unittest discover -s examples/retry_budget -p 'test_*.py' -v
       - name: Run authorization invariants
         run: python3 -m unittest discover -s examples/object_authorization -p 'test_*.py' -v
+      - name: Check archive helper contracts
+        run: python3 -m unittest discover -s examples/backup_recovery -p 'test_*.py' -v
+      - name: Check local admission and cancellation contracts
+        run: python3 -m unittest discover -s examples/overload_control -p 'test_*.py' -v
+      - name: Check loopback HTTP connection contracts
+        run: node examples/connection_lifecycle/lab.mjs --check
+      - name: Check local AI tool execution boundaries
+        run: python3 examples/ai_tool_boundaries/lab.py --check
+      - name: Check local memory governance boundaries
+        run: python3 examples/memory_governance/lab.py --check
       - name: Install locked site dependencies
         run: npm ci
       - name: Check deployment paths and search behavior

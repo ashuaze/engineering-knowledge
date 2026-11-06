@@ -1,0 +1,32 @@
+{
+  "recorded_date": "2026-10-19",
+  "scope": "Owned local cluster; controlled schedules, not capacity or crash recovery.",
+  "runtime": {
+    "url": "https://get.enterprisedb.com/postgresql/postgresql-18.0-1-windows-x64-binaries.zip",
+    "bytes": 334086873,
+    "sha256": "4a1ea6e6ecbde1747103c7b5bc0674cc415b9aa8ef7b7bad3a4ee38c37c051b1",
+    "redistributed": false
+  },
+  "files": {
+    "examples/inventory_concurrency/lab.py": {
+      "bytes": 14663,
+      "sha256": "79f9d5625dd2ac7044b909cc2d4b78f8067bc611e5203f65eb4ad11bac4cf124"
+    },
+    "examples/inventory_concurrency/results/results.json": {
+      "bytes": 83667,
+      "sha256": "7e5f91028ac8078003fb84dead1ab44c61a2614936d4119c09311aecafdcc415"
+    },
+    "examples/inventory_concurrency/results/a.psql.txt": {
+      "bytes": 10506,
+      "sha256": "66f2d2343efad30d6c10c7e7cb8d1e1b009967547d7606a50e024ac22442f383"
+    },
+    "examples/inventory_concurrency/results/b.psql.txt": {
+      "bytes": 13215,
+      "sha256": "7ba9f1824d899c286e5ef2ed7d40e8eaa12f1b1ca7c01a8a488bd2b9616e206d"
+    },
+    "examples/inventory_concurrency/results/observer.psql.txt": {
+      "bytes": 15617,
+      "sha256": "7c3d4d80dcfd1a35839620e07e418b7894f58dea9847b9bbcc186531cff83be8"
+    }
+  }
+}

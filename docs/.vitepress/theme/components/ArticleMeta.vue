@@ -8,11 +8,11 @@ const evidence = { 'source-checked': '已核查来源', tested: '随附实验已
 </script>
 
 <template>
-  <div v-if="frontmatter.id" class="article-meta" aria-label="文章信息">
+  <div v-if="frontmatter.id" class="article-meta">
     <div class="article-meta-labels">
       <span class="article-kind">{{ kinds[frontmatter.kind] }}</span>
-      <span>{{ states[frontmatter.status] }}</span>
       <span>{{ evidence[frontmatter.verification] }}</span>
+      <span>{{ states[frontmatter.status] }}</span>
     </div>
     <p>
       更新 <time :datetime="frontmatter.updated">{{ frontmatter.updated }}</time>

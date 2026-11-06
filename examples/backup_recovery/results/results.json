@@ -1,0 +1,472 @@
+{
+  "recorded_at": "2026-10-19T08:06:18.861088+00:00",
+  "python": "3.13.13",
+  "platform": "Windows",
+  "status": "passed",
+  "commands": [
+    {
+      "step": "initdb",
+      "tool": "initdb.exe",
+      "returncode": 0,
+      "output": "The files belonging to this database system will be owned by user \"jincheng\".\nThis user must also own the server process.\n\nThe database cluster will be initialized with locale \"C\".\nThe default text search configuration will be set to \"english\".\n\nData page checksums are enabled.\n\ncreating directory D:/dev/engineering-knowledge/.cache/kb-recovery-eg9egk77/source ... ok\ncreating subdirectories ... ok\nselecting dynamic shared memory implementation ... windows\nselecting default \"max_connections\" ... 100\nselecting default \"shared_buffers\" ... 128MB\nselecting default time zone ... Asia/Shanghai\ncreating configuration files ... ok\nrunning bootstrap script ... ok\nperforming post-bootstrap initialization ... ok\nsyncing data to disk ... ok\n"
+    },
+    {
+      "step": "start-source",
+      "tool": "pg_ctl.exe",
+      "returncode": 0,
+      "output": "waiting for server to start.... done\nserver started\n"
+    },
+    {
+      "step": "createdb",
+      "tool": "createdb.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"version\" : \"PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit\", \"version_num\" : 180000}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"fsync\" : \"on\", \"synchronous_commit\" : \"on\", \"full_page_writes\" : \"on\", \"wal_level\" : \"replica\", \"archive_mode\" : \"on\", \"wal_segment_size\" : \"16MB\"}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "[{\"id\":1,\"note\":\"baseline\"}]\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "\"000000010000000000000001\"\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "0/1C836B8\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : null, \"archived_count\" : 0, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : \"000000010000000000000001\", \"archived_count\" : 1, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "basebackup",
+      "tool": "pg_basebackup.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "verify-backup",
+      "tool": "pg_verifybackup.exe",
+      "returncode": 0,
+      "output": "backup successfully verified\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "0/3000000\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "\"0/30001F0\"\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "\"000000010000000000000003\"\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":2,\"note\":\"before-target\"}]\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":3,\"note\":\"after-target\"}]\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "0/30002F0\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"last_archived_wal\" : \"000000010000000000000003\", \"archived_count\" : 4, \"failed_count\" : 0}\n"
+    },
+    {
+      "step": "stop",
+      "tool": "pg_ctl.exe",
+      "returncode": 0,
+      "output": "waiting for server to shut down.... done\nserver stopped\n"
+    },
+    {
+      "step": "start-restored",
+      "tool": "pg_ctl.exe",
+      "returncode": 0,
+      "output": "waiting for server to start........... done\nserver started\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"not paused\", \"replay_lsn\" : \"0/3000000\", \"read_only\" : \"on\"}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"not paused\", \"replay_lsn\" : \"0/3000000\", \"read_only\" : \"on\"}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"paused\", \"replay_lsn\" : \"0/30001F0\", \"read_only\" : \"on\"}\n"
+    },
+    {
+      "step": "sql",
+      "tool": "psql.exe",
+      "returncode": 0,
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":2,\"note\":\"before-target\"}]\n"
+    },
+    {
+      "step": "stop",
+      "tool": "pg_ctl.exe",
+      "returncode": 0,
+      "output": "waiting for server to shut down.... done\nserver stopped\n"
+    }
+  ],
+  "sql": [
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('version',version(),'version_num',current_setting('server_version_num')::int)",
+      "output": "{\"version\" : \"PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit\", \"version_num\" : 180000}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('fsync',current_setting('fsync'),'synchronous_commit',current_setting('synchronous_commit'),'full_page_writes',current_setting('full_page_writes'),'wal_level',current_setting('wal_level'),'archive_mode',current_setting('archive_mode'),'wal_segment_size',current_setting('wal_segment_size'))",
+      "output": "{\"fsync\" : \"on\", \"synchronous_commit\" : \"on\", \"full_page_writes\" : \"on\", \"wal_level\" : \"replica\", \"archive_mode\" : \"on\", \"wal_segment_size\" : \"16MB\"}"
+    },
+    {
+      "port": 58603,
+      "sql": "CREATE TABLE kb_events (id integer PRIMARY KEY,note text NOT NULL)",
+      "output": ""
+    },
+    {
+      "port": 58603,
+      "sql": "INSERT INTO kb_events VALUES (1,'baseline')",
+      "output": ""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT coalesce(json_agg(t ORDER BY id),'[]'::json) FROM (SELECT id,note FROM kb_events) t",
+      "output": "[{\"id\":1,\"note\":\"baseline\"}]"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT to_json(pg_walfile_name(pg_current_wal_insert_lsn()))",
+      "output": "\"000000010000000000000001\""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT pg_switch_wal()",
+      "output": "0/1C836B8"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : null, \"archived_count\" : 0, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : \"000000010000000000000001\", \"archived_count\" : 1, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT pg_switch_wal()",
+      "output": "0/3000000"
+    },
+    {
+      "port": 58603,
+      "sql": "INSERT INTO kb_events VALUES (2,'before-target')",
+      "output": ""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT to_json(pg_create_restore_point('kb_before_mistake'))",
+      "output": "\"0/30001F0\""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT to_json(pg_walfile_name('0/30001F0'::pg_lsn))",
+      "output": "\"000000010000000000000003\""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT coalesce(json_agg(t ORDER BY id),'[]'::json) FROM (SELECT id,note FROM kb_events) t",
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":2,\"note\":\"before-target\"}]"
+    },
+    {
+      "port": 58603,
+      "sql": "BEGIN; DELETE FROM kb_events WHERE id=2; INSERT INTO kb_events VALUES (3,'after-target'); COMMIT",
+      "output": ""
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT coalesce(json_agg(t ORDER BY id),'[]'::json) FROM (SELECT id,note FROM kb_events) t",
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":3,\"note\":\"after-target\"}]"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT pg_switch_wal()",
+      "output": "0/30002F0"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : \"000000010000000000000002.00000028.backup\", \"archived_count\" : 3, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58603,
+      "sql": "SELECT json_build_object('last_archived_wal',last_archived_wal,'archived_count',archived_count,'failed_count',failed_count) FROM pg_stat_archiver",
+      "output": "{\"last_archived_wal\" : \"000000010000000000000003\", \"archived_count\" : 4, \"failed_count\" : 0}"
+    },
+    {
+      "port": 58604,
+      "sql": "SELECT json_build_object('in_recovery',pg_is_in_recovery(),'pause_state',pg_get_wal_replay_pause_state(),'replay_lsn',pg_last_wal_replay_lsn(),'read_only',current_setting('transaction_read_only'))",
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"not paused\", \"replay_lsn\" : \"0/3000000\", \"read_only\" : \"on\"}"
+    },
+    {
+      "port": 58604,
+      "sql": "SELECT json_build_object('in_recovery',pg_is_in_recovery(),'pause_state',pg_get_wal_replay_pause_state(),'replay_lsn',pg_last_wal_replay_lsn(),'read_only',current_setting('transaction_read_only'))",
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"not paused\", \"replay_lsn\" : \"0/3000000\", \"read_only\" : \"on\"}"
+    },
+    {
+      "port": 58604,
+      "sql": "SELECT json_build_object('in_recovery',pg_is_in_recovery(),'pause_state',pg_get_wal_replay_pause_state(),'replay_lsn',pg_last_wal_replay_lsn(),'read_only',current_setting('transaction_read_only'))",
+      "output": "{\"in_recovery\" : true, \"pause_state\" : \"paused\", \"replay_lsn\" : \"0/30001F0\", \"read_only\" : \"on\"}"
+    },
+    {
+      "port": 58604,
+      "sql": "SELECT coalesce(json_agg(t ORDER BY id),'[]'::json) FROM (SELECT id,note FROM kb_events) t",
+      "output": "[{\"id\":1,\"note\":\"baseline\"}, \n {\"id\":2,\"note\":\"before-target\"}]"
+    }
+  ],
+  "scope": "Owned local base backup and named restore point; no crash/power-loss, time-based target, promotion, migration or production RPO/RTO test.",
+  "ports": {
+    "source": 58603,
+    "restored": 58604
+  },
+  "server": {
+    "version": "PostgreSQL 18.0 on x86_64-windows, compiled by msvc-19.44.35215, 64-bit",
+    "version_num": 180000
+  },
+  "settings": {
+    "fsync": "on",
+    "synchronous_commit": "on",
+    "full_page_writes": "on",
+    "wal_level": "replica",
+    "archive_mode": "on",
+    "wal_segment_size": "16MB"
+  },
+  "baseline": [
+    {
+      "id": 1,
+      "note": "baseline"
+    }
+  ],
+  "archive_before_backup": {
+    "filename": "000000010000000000000001",
+    "bytes": 16777216,
+    "sha256": "e6a9fe31597024dd63eaa27e17cdd407f044e9ed8d25273ac5621fa47e60bd9a",
+    "archiver": {
+      "last_archived_wal": "000000010000000000000001",
+      "archived_count": 1,
+      "failed_count": 0
+    }
+  },
+  "backup": {
+    "verified": true,
+    "verification_output": "backup successfully verified",
+    "manifest_sha256": "fde062a2e50a33e9371ab1b9a654ca1e51427ba8ea0afb4048bc1f9d0b4b5eac",
+    "files": 1273,
+    "wal_ranges": [
+      {
+        "Timeline": 1,
+        "Start-LSN": "0/2000028",
+        "End-LSN": "0/2000120"
+      }
+    ]
+  },
+  "target": {
+    "name": "kb_before_mistake",
+    "lsn": "0/30001F0",
+    "wal_file": "000000010000000000000003",
+    "already_in_base": false
+  },
+  "before_target": [
+    {
+      "id": 1,
+      "note": "baseline"
+    },
+    {
+      "id": 2,
+      "note": "before-target"
+    }
+  ],
+  "source_after_changes": [
+    {
+      "id": 1,
+      "note": "baseline"
+    },
+    {
+      "id": 3,
+      "note": "after-target"
+    }
+  ],
+  "target_archive": {
+    "filename": "000000010000000000000003",
+    "bytes": 16777216,
+    "sha256": "cc72a1d45456e7383a82d655e596df9e35ea9f886d2257fdd9e37e8c8030daf5",
+    "archiver": {
+      "last_archived_wal": "000000010000000000000003",
+      "archived_count": 4,
+      "failed_count": 0
+    }
+  },
+  "archive_files": [
+    {
+      "name": "000000010000000000000001",
+      "bytes": 16777216,
+      "sha256": "e6a9fe31597024dd63eaa27e17cdd407f044e9ed8d25273ac5621fa47e60bd9a"
+    },
+    {
+      "name": "000000010000000000000002",
+      "bytes": 16777216,
+      "sha256": "527462bdd451e86c6b5ff62f5230e93ac2b0bfa19d755ed181b10b2606216d17"
+    },
+    {
+      "name": "000000010000000000000002.00000028.backup",
+      "bytes": 338,
+      "sha256": "8b992f38874530c5ee6464c7c5cd61017ffb1e09a269d5079c3323ffe8c6c4d5"
+    },
+    {
+      "name": "000000010000000000000003",
+      "bytes": 16777216,
+      "sha256": "cc72a1d45456e7383a82d655e596df9e35ea9f886d2257fdd9e37e8c8030daf5"
+    }
+  ],
+  "recovery_state": {
+    "in_recovery": true,
+    "pause_state": "paused",
+    "replay_lsn": "0/30001F0",
+    "read_only": "on"
+  },
+  "recovered_rows": [
+    {
+      "id": 1,
+      "note": "baseline"
+    },
+    {
+      "id": 2,
+      "note": "before-target"
+    }
+  ],
+  "checks": {
+    "postgresql_18": true,
+    "durability_settings": true,
+    "archive_completed_before_backup": true,
+    "backup_verified": true,
+    "target_wal_not_in_base": true,
+    "target_wal_archived": true,
+    "baseline_only": true,
+    "target_rows": true,
+    "source_changed": true,
+    "recovery_paused_read_only": true,
+    "restored_target_rows": true,
+    "target_wal_retrieved": true,
+    "separate_port": true
+  },
+  "cleanup": {
+    "confirmed": true,
+    "source_and_restore_removed": true
+  }
+}

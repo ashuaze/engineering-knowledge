@@ -6,21 +6,21 @@ domain: "database"
 status: "evolving"
 summary: "从陈旧读取和单行条件更新理解事务隔离、数据库约束与业务不变量的分工。"
 created: "2026-10-16"
-updated: "2026-10-16"
-last_verified: "2026-10-16"
+updated: "2026-10-20"
+last_verified: "2026-10-19"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-api-idempotency", "kb-messaging-outbox", "kb-reliability-retry-budgets"]
+related: ["kb-api-idempotency", "kb-messaging-outbox", "kb-reliability-retry-budgets", "kb-database-isolation-mvcc", "kb-systems-races-atomicity", "kb-systems-synchronization", "kb-systems-deadlocks-recovery", "kb-database-inventory-lab", "kb-architecture-aggregates-invariants", "kb-engineering-property-state-models"]
 tags: ["concurrency", "transactions", "constraints"]
 ---
 
 # 库存并发：两个成功事务为何仍可能超卖
 
-学习入口：库存只有一件，两次请求都检查到有货，并且都下单成功，事务为什么没有防住？前置知识：SELECT、UPDATE 与事务提交。本文按 PostgreSQL 18 的 Read Committed 机制分析；SQL 是可供本地复现的步骤，本轮未运行 PostgreSQL 实验。
+学习入口：库存只有一件，两次请求都检查到有货，并且都下单成功，事务为什么没有防住？前置知识：SELECT、UPDATE 与事务提交。本文按 PostgreSQL 18 的 Read Committed 机制分析；SQL 为模型说明；[配套库存并发实验](inventory-concurrency-lab.md)已在 PostgreSQL 18.0 完成五类既有场景，并补充[死锁](../../glossary/systems.md#systems.race-deadlock)与锁[超时](../../glossary/api.md#api.retries)对照。
 
 ## Definition：定义与问题
 
-事务原子性保证一组写入一起提交或回滚；并发下还需选择隔离机制，并把业务不变量落到正确的数据操作上。“用了事务”不能替代对读取、判断和写入之间时序的分析。
+事务[原子性](../../glossary/systems.md#systems.atomicity)保证一组写入一起提交或回滚；[并发](../../glossary/systems.md#systems.concurrency)下还需选择隔离机制，并把[业务不变量](../../glossary/architecture.md#architecture.domain-model)落到正确的数据操作上。“用了事务”不能替代对读取、判断和写入之间时序的分析。
 
 本例初始库存为 1，出售一件应使可用库存减少 1，并产生一条数量为 1 的预订。在没有补货、取消和其他写入的前提下，不变量是：`剩余库存 ≥ 0`，且`预订数量之和 + 剩余库存 = 初始库存`。仅检查库存列非负，不能单独证明预订总量正确。
 
@@ -36,9 +36,9 @@ tags: ["concurrency", "transactions", "constraints"]
 
 | 方案 | 适合的问题 | 成本或边界 |
 | --- | --- | --- |
-| 条件更新并检查结果 | 单行余额、库存等局部约束 | 热点行仍会竞争；零行更新须作为业务失败处理 |
-| SELECT FOR UPDATE 后检查并写入 | 需要在锁定对象上做多步判断 | 持锁期间会阻塞竞争方，须保持短事务与一致锁顺序 |
-| UNIQUE、CHECK、外键等约束 | 可以直接表达的数据合法性 | 各自范围不同，不能用单行 CHECK 表达任意跨行统计规则 |
+| 条件更新并检查结果 | 单行余额、库存等局部约束 | [热点](../../glossary/performance.md#performance.contention)行仍会竞争；零行更新须作为业务失败处理 |
+| SELECT FOR UPDATE 后检查并写入 | 需要在锁定对象上做多步判断 | 持锁期间会[阻塞](../../glossary/systems.md#systems.blocking)竞争方，须保持短事务与一致锁顺序 |
+| UNIQUE、CHECK、[外键](../../glossary/database.md#database.constraints)等约束 | 可以直接表达的数据合法性 | 各自范围不同，不能用单行 CHECK 表达任意跨行统计规则 |
 | Serializable 事务 | 需要验证更复杂的并发执行关系 | 可能中止事务，调用方需要有边界地重试整个事务 |
 
 [PostgreSQL 约束说明](https://www.postgresql.org/docs/18/ddl-constraints.html)特别说明了 CHECK 对其他行数据的限制；[显式锁说明](https://www.postgresql.org/docs/18/explicit-locking.html)解释了行锁的阻塞与死锁风险。跨仓库、组合商品、补货和取消均需要扩展模型。
@@ -68,7 +68,7 @@ INSERT INTO kb_reservations VALUES ('request-a', 'book', 1);
 COMMIT;
 ```
 
-B 再执行相同更新，插入 request-b 并提交。虽然两个事务各自原子提交，预期会留下两笔预订，库存为 0。这是待复现的错误流程。
+B 再执行相同更新，插入 request-b 并提交。虽然两个事务各自原子提交，会留下两笔预订，库存为 0；配套实验已复现这一错误流程。
 
 修正方案用一条语句将“成功分配到库存”与“写预订”关联，A、B 分别使用不同 request_id：
 
@@ -88,21 +88,21 @@ COMMIT;
 
 没有分配到库存时，allocated 为空，INSERT 也不产生预订。调用方必须检查返回行，不能看到 COMMIT 成功就回复“下单成功”。零行也不能证明同一业务动作此前未成功：前一次请求可能已消耗最后一件库存，重放时根本不会执行 INSERT，更不会触发 request_id 冲突。
 
-若仍有库存，插入则可能因 request_id 冲突失败；此时当前事务须回滚。对重复或结果未知的请求，需要按稳定 request_id 查询并核对原请求参数、权限与结果。这条 SQL 只实现库存分配和预订写入的原子性，完整幂等协议另见关联文章。数据修改 CTE 的语义见 [WITH 文档](https://www.postgresql.org/docs/18/queries-with.html)。
+若仍有库存，插入则可能因 request_id 冲突失败；此时当前事务须回滚。对重复或结果未知的请求，需要按稳定 request_id 查询并核对原请求参数、权限与结果。这条 SQL 只实现库存分配和预订写入的原子性，完整[幂等](../../glossary/api.md#api.idempotency)协议另见关联文章。数据修改 CTE 的语义见 [WITH 文档](https://www.postgresql.org/docs/18/queries-with.html)。
 
 ## Failure Modes：常见错误与故障模式
 
 - **先读后写固定值**：旧库存被重复使用；把条件与扣减放到数据库写入中。
 - **忽略更新或返回行数**：库存不足仍创建订单或返回成功；把“分配到一行”作为进入后续业务的必要条件。
 - **库存与预订分开提交**：一个成功、另一个失败，账目失衡；放入同一事务并测试回滚。
-- **事务内等待外部服务**：长时间持锁，竞争方排队；缩短事务，把外部执行边界另行设计。
+- **事务内等待外部服务**：长时间持锁，竞争方[排队](../../glossary/performance.md#performance.queueing)；缩短事务，把外部执行边界另行设计。
 - **重试创建使用新业务标识**：数据库并发控制没有识别同一次业务意图；另行设计幂等协议。
 
 ## Practice：工程案例、测试与验证
 
-本文已核查 PostgreSQL 18 文档，**尚未连接 PostgreSQL 执行上述 SQL**。以下是复现计划，表中数字是预期结果：
+本文机制已核查 PostgreSQL 18 文档。[配套实验](inventory-concurrency-lab.md)在 18.0 上将下列五类场景各执行三次，另加死锁与锁超时，共 21 组通过。下表是已有场景的实际结果；完整原始记录与验证边界见实验页。
 
-| 对照 | 操作 | 应检查的结果 |
+| 对照 | 操作 | 本次实际结果 |
 | --- | --- | --- |
 | 陈旧读取 | A、B 都先读到 1，再分别写固定值和预订 | 两笔预订、库存 0，业务总量不守恒 |
 | 条件扣减 | A 成功更新后先不提交，B 发起相同分配，再提交 A | B 等待后无分配；最终一笔预订、库存 0 |
@@ -110,11 +110,15 @@ COMMIT;
 | 耗尽后重放 | 初始库存 1，成功预订后以同一 request_id 重放 | 返回零行；查询并核对原请求，不能据此认定原操作未成功 |
 | 有库存时重复标识 | 单独以初始库存 2 建立场景，使用同一 request_id 两次提交 | 第二次插入唯一冲突，回滚后库存仍为 1；查询并核对原结果 |
 
-保留数据库版本、会话隔离级别、语句顺序、返回行及最终两表数据。不要用现有 SQLite 幂等实验替代这里的 PostgreSQL 机制验证。
+实验已保存版本、会话设置、命令、SQLSTATE、阻塞查询和最终两表数据。条件扣减与回滚场景先观察实际锁等待，再释放持有事务；未做生产吞吐、[进程](../../glossary/systems.md#systems.execution-units)崩溃、外部支付和完整 HTTP 幂等集成。本文保留来源核查状态，局部实测由独立实验页记录。
 
 自检：如果剩余库存从未为负，但预订总量仍超出初始库存，哪条不变量没有被检查？如果扩展到多行总额度，现有单行条件更新还够吗？
 
 ## Related Concepts：关联概念
+
+- [竞态与原子性](../systems/races-and-atomicity.md) → [锁与同步原语](../systems/locks-and-synchronization.md) → [死锁与失败恢复](../systems/deadlocks-and-recovery.md)：从共享状态推理到等待与恢复。
+
+- [事务隔离与 MVCC](isolation-and-mvcc.md)：解释语句快照、稳定快照与跨行[写偏斜](../../glossary/database.md#database.write-skew)的区别。
 
 - [幂等性](../api/idempotency.md)：并发扣减与重复业务意图识别需要分别设计。
 - [Transactional Outbox](../messaging/transactional-outbox.md)：预订提交后发布事件，可在同一事务内记录待发事件。
@@ -122,9 +126,11 @@ COMMIT;
 
 ## 来源与核查
 
-核查日期：2026-10-16；适用机制限定为 PostgreSQL 18。快照、条件重判、约束、锁和 CTE 语义依据下列官方文档；库存模型与对照步骤为本知识库的教学设计，所有 SQL 观察结果仍待实测。
+核查日期：2026-10-19；适用机制限定为 PostgreSQL 18。快照、条件重判、约束、锁和 CTE 语义依据下列官方文档；库存模型与对照步骤为本知识库的教学设计，上述五类模型场景已有配套实测，结果和未覆盖边界单列于实验页。
 
 - [PostgreSQL 18：Transaction Isolation](https://www.postgresql.org/docs/18/transaction-iso.html)
 - [PostgreSQL 18：Constraints](https://www.postgresql.org/docs/18/ddl-constraints.html)
 - [PostgreSQL 18：Explicit Locking](https://www.postgresql.org/docs/18/explicit-locking.html)
 - [PostgreSQL 18：WITH Queries](https://www.postgresql.org/docs/18/queries-with.html)
+
+[领域模型、聚合与业务不变量](../architecture/domain-models-aggregates-and-invariants.md)讨论谁负责规则及原子提交；[属性测试与状态模型](../engineering/property-testing-and-state-models.md)用纸面重复取消反例解释顺序命令与守恒检查。新模型没有执行生成测试，也不替代本篇真实数据库并发范围；取消、过期与跨资源规则仍需扩展后验证。

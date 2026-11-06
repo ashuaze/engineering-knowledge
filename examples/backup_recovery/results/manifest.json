@@ -1,0 +1,44 @@
+{
+  "recorded_date": "2026-10-19",
+  "scope": "Text evidence only; native backup, binary WAL and data directories were not published.",
+  "runtime": {
+    "url": "https://get.enterprisedb.com/postgresql/postgresql-18.0-1-windows-x64-binaries.zip",
+    "bytes": 334086873,
+    "sha256": "4a1ea6e6ecbde1747103c7b5bc0674cc415b9aa8ef7b7bad3a4ee38c37c051b1",
+    "redistributed": false
+  },
+  "files": {
+    "examples/backup_recovery/lab.py": {
+      "bytes": 14268,
+      "sha256": "0620d289698a026988a985a33ca4c9166fb9cd948ccc40d3b3a1ea8c22a8f468"
+    },
+    "examples/backup_recovery/archive.py": {
+      "bytes": 1653,
+      "sha256": "45f780047c5095d3a6c59eafea739adc136865c872771a5bbc5f98cb0a7536b0"
+    },
+    "examples/backup_recovery/test_archive.py": {
+      "bytes": 2024,
+      "sha256": "bb77f085aca62c774cdc764f57a28f62e96b2d8fabdec0e78a002e2d08fe6508"
+    },
+    "examples/backup_recovery/results/results.json": {
+      "bytes": 16314,
+      "sha256": "75e99e232399caf5982614a1500b13babfbf63425d1475baaed5799dcfae6f0c"
+    },
+    "examples/backup_recovery/results/backup_manifest.json": {
+      "bytes": 182152,
+      "sha256": "fde062a2e50a33e9371ab1b9a654ca1e51427ba8ea0afb4048bc1f9d0b4b5eac"
+    },
+    "examples/backup_recovery/results/source.log.txt": {
+      "bytes": 2258,
+      "sha256": "5437c85048a3950551801e4870aeea87fc4cc8620312624e711deaceaef133c0"
+    },
+    "examples/backup_recovery/results/restored.log.txt": {
+      "bytes": 1910,
+      "sha256": "9fb49a1e542e497aefba95ea4abf1fc6ca20f20275540e438a60e6861e40d3b3"
+    },
+    "examples/backup_recovery/results/archive-tests.txt": {
+      "bytes": 655,
+      "sha256": "b1231a8bd0abd599610500a494d0c219fe6de46993c13bd8163919f6ed2cab10"
+    }
+  }
+}

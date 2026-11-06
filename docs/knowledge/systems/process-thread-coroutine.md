@@ -6,23 +6,25 @@ domain: "systems"
 status: "evolving"
 summary: "区分资源隔离、执行线程与可挂起任务，解释并发为什么不自动带来并行。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-26"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-runtime-async-blocking", "kb-frontend-long-tasks", "kb-networking-https-request"]
+related: ["kb-runtime-async-blocking", "kb-frontend-long-tasks", "kb-networking-https-request", "kb-systems-races-atomicity", "kb-systems-synchronization", "kb-systems-deadlocks-recovery", "kb-systems-virtual-memory", "kb-systems-syscalls", "kb-systems-file-descriptors", "kb-systems-io-multiplexing", "kb-performance-cpu-metrics", "kb-systems-signals-shutdown", "kb-systems-context-switch", "kb-systems-memory-layout"]
 tags: ["concurrency", "scheduling", "isolation"]
 ---
 
 # 进程、线程与协程：资源边界和执行调度如何分工
 
-学习入口：服务已经创建很多任务，为什么一段计算仍会让其他请求等待？前置知识：函数调用与内存的基本概念。本文以 Linux/POSIX 线程与 Python 3.13 asyncio 为具体参照，解释模型边界，不把某种语言的调度策略推广到所有 Runtime。
+唤醒、就绪等待与真正获得 CPU 的关系继续见[上下文切换与调度等待](context-switches-run-queues-and-scheduling-delay.md)；[线程](../../glossary/systems.md#systems.execution-units)栈、分配器和对象寿命继续见[栈堆与内存布局](process-memory-layout-stacks-heaps-and-lifetimes.md)。两篇补充来源核查与纸面模型，未扩大本文原实验范围。
+
+学习入口：服务已经创建很多任务，为什么一段计算仍会让其他请求等待？前置知识：函数调用与内存的基本概念。本文以 Linux/POSIX [线程](../../glossary/systems.md#systems.execution-units)与 Python 3.13 asyncio 为具体参照，解释模型边界，不把某种语言的调度策略推广到所有 [Runtime](../../glossary/runtime.md#runtime.virtual-machine)。
 
 ## Definition：定义与问题
 
 进程提供程序运行时的一组资源与地址空间边界；线程是在进程中推进执行的上下文；协程是语言或 Runtime 管理、能够挂起与恢复的执行上下文。三者关注的层次不同，一个服务可以同时使用多进程、多线程与协程。
 
-并发表示多个工作在一段时间内交错推进；并行表示它们在同一时刻实际执行。任务数量多不代表可同时使用更多 CPU 核心。
+[并发](../../glossary/systems.md#systems.concurrency)表示多个工作在一段时间内交错推进；并行表示它们在同一时刻实际执行。任务数量多不代表可同时使用更多 CPU 核心。
 
 ## Principles：工作机制与核心原理
 
@@ -31,16 +33,16 @@ tags: ["concurrency", "scheduling", "isolation"]
 | 资源边界 | 通常有各自的虚拟地址空间；可显式共享资源 | 同进程内共享地址空间与多种资源 | 依赖承载它的进程、线程与 Runtime |
 | 执行状态 | 包含线程与进程级资源 | 有自己的寄存器执行状态、栈等 | 保存函数执行进度及继续运行所需的上下文 |
 | 谁安排执行 | 操作系统调度其可运行线程 | 操作系统与具体线程实现 | 语言/Runtime 调度，再由承载线程执行 |
-| 等待的影响 | 取决于具体线程与资源 | 阻塞一个线程不一定阻塞其他线程 | 在共享调度线程上做阻塞工作可能拖住其他任务 |
+| 等待的影响 | 取决于具体线程与资源 | [阻塞](../../glossary/systems.md#systems.blocking)一个线程不一定阻塞其他线程 | 在共享调度线程上做阻塞工作可能拖住其他任务 |
 
-[POSIX 线程说明](https://man7.org/linux/man-pages/man7/pthreads.7.html)列出了同进程线程共享的全局内存、文件描述符等属性，以及各自的栈。线程有独立栈不意味着拥有相互隔离的内存保护边界，访问共享可变状态仍需同步。
+[POSIX 线程说明](https://man7.org/linux/man-pages/man7/pthreads.7.html)列出了同进程线程共享的全局内存、[文件描述符](../../glossary/systems.md#systems.fd-socket)等属性，以及各自的栈。线程有独立栈不意味着拥有相互隔离的内存保护边界，访问共享可变状态仍需同步。
 
-以 [asyncio Task](https://docs.python.org/3.13/library/asyncio-task.html)为例，一个事件循环一次执行一个 Task；Task 真正挂起等待时，循环才能推进其他 Task、回调或 I/O。协程可以由其他 Runtime 映射到多个线程，不能据 asyncio 推导所有协程都只用一个线程。`await` 是否发生挂起，也取决于等待对象与实现。
+以 [asyncio Task](https://docs.python.org/3.13/library/asyncio-task.html)为例，一个[事件循环](../../glossary/runtime.md#runtime.event-loop)一次执行一个 [Task](../../glossary/runtime.md#runtime.microtasks)；Task 真正挂起等待时，循环才能推进其他 Task、回调或 I/O。协程可以由其他 Runtime 映射到多个线程，不能据 asyncio 推导所有协程都只用一个线程。`await` 是否发生挂起，也取决于等待对象与实现。
 
 ## Trade-offs：优势、限制与适用边界
 
 - 多进程有助于划分故障和资源边界，但通信、数据传递与部署管理需要成本；地址空间分离也不自动提供完整安全隔离。
-- 多线程便于共享内存，适合需要并行或与阻塞接口集成的情况；共享状态会引入竞争、锁等待和死锁风险，实际并行能力还受语言与运行环境约束。
+- 多线程便于共享内存，适合需要并行或与阻塞接口集成的情况；共享状态会引入竞争、锁等待和[死锁](../../glossary/systems.md#systems.race-deadlock)风险，实际并行能力还受语言与运行环境约束。
 - 协程适合表达大量可挂起的工作，能减少为每项等待单独占用执行线程的需要；CPU 计算不会因为写成协程就自动迁移位置。
 
 选择之前先问：工作在计算还是等待？共享状态有多少？需要隔离哪类失败？并发是否超过连接、内存和下游容量？不存在对所有任务都最优的一种执行单元。
@@ -56,7 +58,7 @@ tags: ["concurrency", "scheduling", "isolation"]
   独立工作进程：按语言执行限制与隔离要求部署
 ```
 
-请求先做轻量校验，将必要工作交给适合的执行位置，再等待结果。工作池和任务队列应有容量、超时与停止条件；不能把无限创建任务当作资源调度方案。跨进程传递的数据、同线程共享对象及取消后的资源归还，都属于实现协议的一部分。
+请求先做轻量校验，将必要工作交给适合的执行位置，再等待结果。工作池和任务[队列](../../glossary/algorithms.md#algorithms.queues)应有容量、[超时](../../glossary/api.md#api.retries)与停止条件；不能把无限创建任务当作资源调度方案。跨进程传递的数据、同线程共享对象及取消后的资源归还，都属于实现协议的一部分。
 
 ## Failure Modes：常见错误与故障模式
 
@@ -65,7 +67,7 @@ tags: ["concurrency", "scheduling", "isolation"]
 | 在单个事件循环中长时间同步计算 | 其他任务迟迟得不到执行机会 | 查看执行线程与挂起点，拆分或迁移计算 |
 | 把协程数当作 CPU 并行度 | 加任务后吞吐没有增加 | 确认核心、承载线程及 Runtime 的实际执行能力 |
 | 多线程同时“检查再修改”共享数据 | 结果依赖交错顺序 | 明确原子边界与同步机制 |
-| 用更多线程掩盖慢依赖 | 排队和连接占用扩大 | 限制并发，先定位等待资源 |
+| 用更多线程掩盖慢依赖 | [排队](../../glossary/performance.md#performance.queueing)和连接占用扩大 | 限制并发，先定位等待资源 |
 | 以为进程退出会撤销外部动作 | 已提交写入或消息继续存在 | 将本地生命周期与外部业务状态分开判断 |
 
 ## Practice：工程案例、测试与验证
@@ -76,7 +78,15 @@ tags: ["concurrency", "scheduling", "isolation"]
 
 验收：能够区分“没有被调度”“正在等 I/O”“在等锁”和“持续计算”，并指出各自需要什么证据。具体 Runtime 的性能、取消与并行行为仍需按版本验证。
 
+进程和线程收到停止通知之后怎样协调退出，见[信号、取消与退出](signals-cancellation-and-shutdown.md)；执行上下文与清理责任须分别说明。
+
 ## Related Concepts：关联概念
+
+执行与等待的统计范围继续见[CPU 利用率、负载与配额](../performance/cpu-time-utilization-load-and-quotas.md)：进程 [CPU 时间](../../glossary/performance.md#performance.cpu-metrics)可以汇总多个线程，就绪等待不同于实际执行，配额也不同于专属核。该关联仅补概念，没有新增调度实验。
+
+资源机制继续读[虚拟内存与缺页](virtual-memory-pages-and-faults.md)、[系统调用与权限边界](syscalls-privilege-and-return-contracts.md)、[文件描述符](file-descriptors-and-open-file-descriptions.md)及 [I/O 多路复用](io-multiplexing-readiness-and-event-loops.md)，分别说明地址、内核入口、共享引用和等待条件。新文为来源核查与纸面推演，不扩展本文实验范围。
+
+- [竞态与原子性](races-and-atomicity.md) → [锁与同步原语](locks-and-synchronization.md) → [死锁与失败恢复](deadlocks-and-recovery.md)：解释执行单元共享状态后，如何保护正确性并恢复推进。
 
 - [同步、异步与阻塞](../runtime/async-and-blocking.md)：进一步区分调用契约与执行线程的等待。
 - [浏览器长任务](../frontend/long-tasks-and-responsiveness.md)：同一主线程被持续占用时的交互表现。

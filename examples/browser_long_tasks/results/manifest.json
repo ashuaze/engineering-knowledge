@@ -1,0 +1,78 @@
+{
+  "recorded_date": "2026-10-19",
+  "scope": "Synthetic local experiment; not a production benchmark.",
+  "files": {
+    "examples/browser_long_tasks/lab.html": {
+      "bytes": 7181,
+      "sha256": "0daf175b136b833ee89ba2efcf1b862f4c387f170f6cbde2ff287fa7f4b41ba7"
+    },
+    "examples/browser_long_tasks/run.mjs": {
+      "bytes": 7232,
+      "sha256": "3cdb1f654fc2cf3b3b03ce55eeabf788ab9ebe4a0e451ced85d215575f6e4241"
+    },
+    "examples/browser_long_tasks/results/results.json": {
+      "bytes": 41235,
+      "sha256": "d08ba1322af1d7f89da919b7800233fc0d59958cf2e866c2dcbd5dff491aacb1"
+    },
+    "examples/browser_long_tasks/results/1-sync.trace.json": {
+      "bytes": 308417,
+      "sha256": "776362b7a6c684a0a8ca5e76c688730652b13c21096eac4cbcda67ffb5a98e2d"
+    },
+    "examples/browser_long_tasks/results/1-microtask.trace.json": {
+      "bytes": 61418,
+      "sha256": "96919e7d3f81ffd4e6767abce3c2d6f12a8b062976b16067265c2778c12fee1b"
+    },
+    "examples/browser_long_tasks/results/1-yield.trace.json": {
+      "bytes": 149349,
+      "sha256": "79a81e5338b2be0b96aa83118f5c4d4dc0d5256347b3063f715343aa33f0f24d"
+    },
+    "examples/browser_long_tasks/results/1-timer.trace.json": {
+      "bytes": 344374,
+      "sha256": "50087d6ea1998f6306e51a23cfd5cacef99d1042a56020cdbcd7323aa4cdddc4"
+    },
+    "examples/browser_long_tasks/results/1-heavy.trace.json": {
+      "bytes": 62125,
+      "sha256": "4d9a8a0bdd258deb53868261f23a912bc0a19896711a74a4e0e2c3b0c22473d7"
+    },
+    "examples/browser_long_tasks/results/2-sync.trace.json": {
+      "bytes": 61829,
+      "sha256": "22b556fd8f08cf11ce8a105cd7ef02f79434756988d57353c103c4aee606418f"
+    },
+    "examples/browser_long_tasks/results/2-microtask.trace.json": {
+      "bytes": 61705,
+      "sha256": "e41e07716459a54817c06703d2f9747c2a3dbcd98d0d8c67f2c74d9a6943c7b4"
+    },
+    "examples/browser_long_tasks/results/2-yield.trace.json": {
+      "bytes": 161199,
+      "sha256": "84d0ada62bb279673e7541a4262e6ea8f7615ede02bb84a926f24efa36486f57"
+    },
+    "examples/browser_long_tasks/results/2-timer.trace.json": {
+      "bytes": 379649,
+      "sha256": "9f5c72cc02c83215d0ff432ab8c61ac5914276c05bb95f9a88fcb9ee81f2ee33"
+    },
+    "examples/browser_long_tasks/results/2-heavy.trace.json": {
+      "bytes": 61307,
+      "sha256": "6c7076f6cba9c18b4992261b6655ebdc0e85da1d40839b01ecbac3261ca595a7"
+    },
+    "examples/browser_long_tasks/results/3-sync.trace.json": {
+      "bytes": 67959,
+      "sha256": "0c4a9f95678af43866401e4ee6f996e59170e7bb1ffb064e1a129fe4a8f71004"
+    },
+    "examples/browser_long_tasks/results/3-microtask.trace.json": {
+      "bytes": 61912,
+      "sha256": "0975bfddec1fa81ee471948e9435b44c1d9647bf3810b873f37a83b2e84fab76"
+    },
+    "examples/browser_long_tasks/results/3-yield.trace.json": {
+      "bytes": 157848,
+      "sha256": "d7499c11afac31ba85843e0841fe946df7ff2c876ac33099a6ea9ac836c397c9"
+    },
+    "examples/browser_long_tasks/results/3-timer.trace.json": {
+      "bytes": 347505,
+      "sha256": "b905d9edaf6e1cd318143a54fcb916463b3eb147f593ddf9f9e0881f80d33c6c"
+    },
+    "examples/browser_long_tasks/results/3-heavy.trace.json": {
+      "bytes": 62291,
+      "sha256": "fd6328a8868dda4be7fdbab3db47a844a62a71c7ac3989d3216695eec85ee1da"
+    }
+  }
+}

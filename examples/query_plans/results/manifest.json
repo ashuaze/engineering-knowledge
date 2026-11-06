@@ -1,0 +1,28 @@
+{
+  "recorded_date": "2026-10-19",
+  "scope": "Synthetic local experiment; not a production benchmark.",
+  "files": {
+    "examples/query_plans/lab.py": {
+      "bytes": 7801,
+      "sha256": "65fa3233aa91fad9060bb8cfc2a8f344753fee308c1f8b2be9915f017ec2eb04"
+    },
+    "examples/query_plans/lab.sql": {
+      "bytes": 4332,
+      "sha256": "26ef2a421647b2a18780df1105ab6c64546b0a26783b8801fed779ba906d8c73"
+    },
+    "examples/query_plans/results/results.json": {
+      "bytes": 21435,
+      "sha256": "dbc9fd23ca052607cca4c2959388ae830db9c2f152e79889518e5eb9002e7648"
+    },
+    "examples/query_plans/results/results.psql.txt": {
+      "bytes": 18340,
+      "sha256": "e0c0af94fdfb5f8a105cd0665911209801a2bad87e175584e9e601718aef11f9"
+    }
+  },
+  "runtime": {
+    "url": "https://get.enterprisedb.com/postgresql/postgresql-18.0-1-windows-x64-binaries.zip",
+    "bytes": 334086873,
+    "sha256": "4a1ea6e6ecbde1747103c7b5bc0674cc415b9aa8ef7b7bad3a4ee38c37c051b1",
+    "redistributed": false
+  }
+}

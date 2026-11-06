@@ -12,18 +12,19 @@
 | --- | --- |
 | 了解这套知识库 | [首页](docs/index.md) · [设计蓝图](docs/handbook/design.md) |
 | 从实际工程问题开始 | [问题导航](docs/problems.md) |
-| 查一个概念 | [术语索引](docs/glossary.md) |
+| 查一个概念 | [术语索引](docs/glossary.md) · [分类词汇表](docs/glossary/index.md) |
 | 系统学习 | [学习路径](docs/paths/index.md) |
 | 阅读正文与跟进选题 | [文章目录](docs/articles.md) · [概念路线图](docs/handbook/concept-roadmap.md) · [选题进度](docs/handbook/topics.md) |
-| 运行实验 | [幂等性](docs/knowledge/api/idempotency-lab.md) · [重试预算](docs/knowledge/reliability/timeouts-and-retry-budgets.md) · [对象授权](docs/knowledge/security/object-level-authorization.md) |
+| 跟进内容更新安排 | [四周更新计划](UPDATE_PLAN.md) |
+| 运行实验 | [幂等性](docs/knowledge/api/idempotency-lab.md) · [重试预算](docs/knowledge/reliability/timeouts-and-retry-budgets.md) · [对象授权](docs/knowledge/security/object-level-authorization.md) · [查询计划](docs/knowledge/database/query-plans-lab.md) · [长任务](docs/knowledge/frontend/long-tasks-lab.md) · [库存并发](docs/knowledge/database/inventory-concurrency-lab.md) · [备份恢复](docs/knowledge/database/backup-recovery-lab.md) · [过载控制](docs/knowledge/performance/overload-control-lab.md) · [连接生命周期](docs/knowledge/networking/connection-lifecycle-lab.md) · [工具执行边界](docs/knowledge/ai/tool-execution-boundaries-lab.md) · [记忆治理实验](docs/knowledge/ai/memory-governance-lab.md) |
 | 贡献、订正与持续维护 | [维护规范](CONTRIBUTING.md) · [写作规范](docs/handbook/editorial.md) |
 | 准备对外发布 | [发布方案](docs/handbook/publishing.md) |
 
 ## 当前内容范围
 
-目前有 18 篇正文，涵盖概念、对比、模式、案例、实验与决策。最新一批补入进程/线程/协程、HTTPS 请求链路、复杂度与结构选择、缓存失效、一致性与复制、交付生命周期、测试层次七篇核心概念文章。17 个领域均有正文入口，其中 15 个领域已有概念类正文；架构与性能的核心概念列为下一批优先项。
+目前有 201 篇正文，17 个领域均有概念入口。本批补齐遗留八组：[BFF与前端适配](docs/knowledge/frontend/backends-for-frontends-projections-and-service-boundaries.md)、[复制与读副本](docs/knowledge/distributed/consistency-and-replication.md)、[分布式锁与缓存租约](docs/knowledge/distributed/leases-heartbeats-and-fencing.md)、[队列、发布订阅与事件流](docs/knowledge/messaging/queues-pubsub-event-streams-and-retention.md)、[提示词与指令边界](docs/knowledge/ai/prompts-message-roles-and-instruction-boundaries.md)、[温度、采样与复现](docs/knowledge/ai/temperature-sampling-and-reproducibility.md)、[MCP与能力协商](docs/knowledge/ai/mcp-hosts-capabilities-and-execution-boundaries.md)、[微调、蒸馏与评估](docs/knowledge/ai/fine-tuning-distillation-and-evaluation-boundaries.md)。六篇新文配合两篇既有专题增补，补齐最后八组词条关联；313组现有词条都有正文入口，具体子概念、产品机制和真实验证继续保留缺口。当前范围见[概念路线图](docs/handbook/concept-roadmap.md)和[三条主线覆盖清单](docs/handbook/concept-coverage.md)，验收见[更新计划](UPDATE_PLAN.md)。
 
-同一主题可覆盖多个术语。索引中的“已收录”表示有简释，“有正文”表示连接了相关深入文章；具体解释深度以正文为准。当前优先概念、原理与边界，实践维度保留必要示例和自检，独立实验按后续阶段推进。
+同一主题可覆盖多个术语。每组均有分类词汇表解释，包含定义、区别与边界和说明性例子；索引中的“有正文”表示另有相关深入文章。读者页面中的首次明确术语提及链接到解释，具体版本与验证深度以正文为准。当前优先概念、原理与边界，实践维度保留必要示例和自检，独立实验按后续阶段推进。
 
 ## 本地使用
 
@@ -53,14 +54,20 @@ python3 -m unittest discover -s examples/idempotency -p 'test_*.py' -v
 python3 -m unittest discover -s examples/retry_budget -p 'test_*.py' -v
 python3 -m unittest discover -s examples/object_authorization -p 'test_*.py' -v
 python3 scripts/generate_indexes.py --check
+python3 scripts/link_glossary.py --check
+python3 -m unittest discover -s scripts -p 'test_*.py' -v
+node examples/connection_lifecycle/lab.mjs --check
+python3 examples/ai_tool_boundaries/lab.py --check
+python3 examples/memory_governance/lab.py --check
 ```
 
-修改 `data/terms.json`、新增正文后，运行 `python3 scripts/generate_indexes.py` 更新生成的领域页、文章目录和术语索引。生成页请通过源数据修改。GitHub Actions 会运行结构校验、索引一致性检查、实验测试和网站构建验收；Pages 发布从默认分支手动触发。
+修改 `data/terms.json`、新增正文后，先运行 `python3 scripts/link_glossary.py` 补充读者页面的术语链接，再运行 `python3 scripts/generate_indexes.py` 更新领域页、文章目录、术语索引和 `docs/glossary/` 分类解释。生成页请通过源数据修改。GitHub Actions 会运行结构校验、索引与术语链接一致性检查、实验测试和网站构建验收；Pages 发布从默认分支手动触发。
 
 ## 仓库边界
 
 - `docs/`：读者可直接阅读的公共内容。
 - `data/`：领域和术语的唯一索引数据；正文只保存于所属领域。
+- `docs/glossary/`：按领域生成的词汇解释，每组术语用稳定 ID 定位。
 - `templates/`：六类写作模板。
 - `examples/`：与正文对应的可运行实验。
 - `scripts/`：索引生成、元数据与内部文件链接校验。

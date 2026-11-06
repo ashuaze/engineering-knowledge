@@ -1,0 +1,4326 @@
+{
+  "recorded_at": "2026-10-19T09:01:43.913Z",
+  "runtime": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64"
+  },
+  "scope": "Loopback plain HTTP/1.1 only; no DNS, TLS, packet capture, load benchmark or real database transaction.",
+  "configuration": {
+    "host": "127.0.0.1",
+    "port": "ephemeral per case",
+    "maxSockets": 1,
+    "maxTotalSockets": 1,
+    "maxFreeSockets": 1,
+    "keepAlive": true,
+    "server_keep_alive_ms": 60000,
+    "inactivity_notice_ms": 25,
+    "guard_ms": 5000,
+    "unread_body_bytes": 65536
+  },
+  "runs": [
+    {
+      "name": "reuse",
+      "repeat": 1,
+      "checks": {
+        "one_connection_for_three_requests": true,
+        "same_server_connection": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 44.597899999999996,
+          "server_port": 60535,
+          "client_port": 60536,
+          "closed_at_ms": 55.052400000000006,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "reuse-0",
+          "created_at_ms": 32.075500000000005,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 38.750600000000006,
+          "reused_socket": false,
+          "headers_at_ms": 50.72160000000001,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 50.8159,
+          "end_at_ms": 51.240899999999996,
+          "bytes": 10,
+          "sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b"
+        },
+        {
+          "id": "reuse-1",
+          "created_at_ms": 51.7638,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 52.01310000000001,
+          "reused_socket": true,
+          "headers_at_ms": 52.57730000000001,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 52.6092,
+          "end_at_ms": 52.69330000000001,
+          "bytes": 10,
+          "sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c"
+        },
+        {
+          "id": "reuse-2",
+          "created_at_ms": 52.79520000000001,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 52.91080000000001,
+          "reused_socket": true,
+          "headers_at_ms": 53.5809,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 53.593,
+          "end_at_ms": 53.656800000000004,
+          "bytes": 10,
+          "sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "reuse-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 46.903000000000006,
+          "expected_bytes": 10,
+          "expected_sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b",
+          "finished_at_ms": 49.965500000000006,
+          "closed_at_ms": 50.108000000000004,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-1",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 52.284800000000004,
+          "expected_bytes": 10,
+          "expected_sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c",
+          "finished_at_ms": 52.4804,
+          "closed_at_ms": 52.5039,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-2",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 53.278000000000006,
+          "expected_bytes": 10,
+          "expected_sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187",
+          "finished_at_ms": 53.4919,
+          "closed_at_ms": 53.510999999999996,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 38.774,
+          "event": "client_socket_assigned",
+          "id": "reuse-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 44.7843,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 47.4815,
+          "event": "server_request",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 49.9738,
+          "event": "server_response_finish",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 50.1276,
+          "event": "server_response_close",
+          "id": "reuse-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 50.7499,
+          "event": "client_headers",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 50.8201,
+          "event": "client_consume",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 51.264300000000006,
+          "event": "client_end",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 52.0159,
+          "event": "client_socket_assigned",
+          "id": "reuse-1",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 52.3023,
+          "event": "server_request",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 52.4833,
+          "event": "server_response_finish",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 52.5064,
+          "event": "server_response_close",
+          "id": "reuse-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 52.604600000000005,
+          "event": "client_headers",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 52.610299999999995,
+          "event": "client_consume",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 52.7042,
+          "event": "client_end",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 52.9127,
+          "event": "client_socket_assigned",
+          "id": "reuse-2",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 53.3036,
+          "event": "server_request",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 53.4935,
+          "event": "server_response_finish",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 53.513400000000004,
+          "event": "server_response_close",
+          "id": "reuse-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 53.5898,
+          "event": "client_headers",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 53.5938,
+          "event": "client_consume",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 53.6665,
+          "event": "client_end",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 54.956100000000006,
+          "event": "client_socket_close",
+          "id": "reuse-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 54.960800000000006,
+          "event": "client_socket_close",
+          "id": "reuse-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 54.962900000000005,
+          "event": "client_socket_close",
+          "id": "reuse-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 55.0586,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 55.0887,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "close_each",
+      "repeat": 1,
+      "checks": {
+        "three_connections_for_three_requests": true,
+        "different_server_connections": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 10.174700000000001,
+          "server_port": 60537,
+          "client_port": 60538,
+          "closed_at_ms": 12.5,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 12.819400000000002,
+          "server_port": 60537,
+          "client_port": 60539,
+          "closed_at_ms": 14.606499999999983,
+          "had_error_at_close": false
+        },
+        {
+          "id": 3,
+          "accepted_at_ms": 14.894299999999987,
+          "server_port": 60537,
+          "client_port": 60540,
+          "closed_at_ms": 16.348099999999988,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "close-0",
+          "created_at_ms": 8.631699999999995,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 9.751800000000003,
+          "reused_socket": false,
+          "headers_at_ms": 11.20859999999999,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 11.24169999999998,
+          "end_at_ms": 11.352100000000007,
+          "bytes": 10,
+          "sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f"
+        },
+        {
+          "id": "close-1",
+          "created_at_ms": 11.413499999999999,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.202100000000002,
+          "reused_socket": false,
+          "headers_at_ms": 13.460399999999993,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 13.474099999999993,
+          "end_at_ms": 13.580899999999986,
+          "bytes": 10,
+          "sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e"
+        },
+        {
+          "id": "close-2",
+          "created_at_ms": 13.65009999999998,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 14.416899999999998,
+          "reused_socket": false,
+          "headers_at_ms": 15.348700000000008,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 3,
+          "consume_at_ms": 15.363100000000003,
+          "end_at_ms": 15.4452,
+          "bytes": 10,
+          "sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "close-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 10.348799999999983,
+          "expected_bytes": 10,
+          "expected_sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f",
+          "finished_at_ms": 10.858199999999982,
+          "closed_at_ms": 10.883099999999985,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-1",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 12.961299999999994,
+          "expected_bytes": 10,
+          "expected_sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e",
+          "finished_at_ms": 13.1918,
+          "closed_at_ms": 13.252600000000001,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-2",
+          "method": "GET",
+          "connection_id": 3,
+          "http_version": "1.1",
+          "request_at_ms": 15.006799999999998,
+          "expected_bytes": 10,
+          "expected_sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085",
+          "finished_at_ms": 15.178499999999985,
+          "closed_at_ms": 15.197000000000003,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 9.756900000000002,
+          "event": "client_socket_assigned",
+          "id": "close-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 10.198299999999989,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 10.376100000000008,
+          "event": "server_request",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 10.860899999999987,
+          "event": "server_response_finish",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 10.88669999999999,
+          "event": "server_response_close",
+          "id": "close-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.235899999999987,
+          "event": "client_headers",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.242799999999988,
+          "event": "client_consume",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 11.3767,
+          "event": "client_end",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 12.204700000000003,
+          "event": "client_socket_assigned",
+          "id": "close-1",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.488399999999984,
+          "event": "client_socket_close",
+          "id": "close-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 12.502099999999984,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 12.841700000000003,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 12.990499999999997,
+          "event": "server_request",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 13.1952,
+          "event": "server_response_finish",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 13.256100000000004,
+          "event": "server_response_close",
+          "id": "close-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 13.469899999999996,
+          "event": "client_headers",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 13.475400000000008,
+          "event": "client_consume",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 13.603700000000003,
+          "event": "client_end",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 14.419700000000006,
+          "event": "client_socket_assigned",
+          "id": "close-2",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 14.592500000000001,
+          "event": "client_socket_close",
+          "id": "close-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 14.609099999999984,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 14.915099999999995,
+          "event": "server_connection",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 15.026700000000005,
+          "event": "server_request",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 15.180399999999992,
+          "event": "server_response_finish",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 15.19889999999998,
+          "event": "server_response_close",
+          "id": "close-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 15.358699999999999,
+          "event": "client_headers",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 15.364199999999983,
+          "event": "client_consume",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 15.455700000000007,
+          "event": "client_end",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 16.33019999999999,
+          "event": "client_socket_close",
+          "id": "close-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 16.35129999999998,
+          "event": "server_socket_close",
+          "connection_id": 3,
+          "had_error": false
+        },
+        {
+          "at_ms": 16.366799999999984,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "pool_wait",
+      "repeat": 1,
+      "checks": {
+        "second_queued_before_socket": true,
+        "second_not_yet_at_server": true,
+        "reuse_after_first_body": true,
+        "second_assignment_after_first_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 10.700199999999995,
+          "server_port": 60541,
+          "client_port": 60543,
+          "closed_at_ms": 13.820300000000003,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "held",
+          "created_at_ms": 7.922799999999995,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 9.29310000000001,
+          "reused_socket": false,
+          "headers_at_ms": 11.293599999999998,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 11.315200000000004,
+          "end_at_ms": 12.00970000000001,
+          "bytes": 7,
+          "sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703"
+        },
+        {
+          "id": "queued",
+          "created_at_ms": 11.429699999999997,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.108299999999986,
+          "reused_socket": false,
+          "headers_at_ms": 12.551799999999986,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 12.56620000000001,
+          "end_at_ms": 12.66749999999999,
+          "bytes": 9,
+          "sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "held",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 10.928599999999989,
+          "expected_bytes": 7,
+          "expected_sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703",
+          "finished_at_ms": 11.875599999999991,
+          "closed_at_ms": 11.895499999999998,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "queued",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 12.284699999999987,
+          "expected_bytes": 9,
+          "expected_sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc",
+          "finished_at_ms": 12.484399999999994,
+          "closed_at_ms": 12.500499999999988,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 9.301999999999992,
+          "event": "client_socket_assigned",
+          "id": "held",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 10.743499999999983,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 10.96629999999999,
+          "event": "server_request",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.30879999999999,
+          "event": "client_headers",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.316699999999997,
+          "event": "client_consume",
+          "id": "held"
+        },
+        {
+          "at_ms": 11.670500000000004,
+          "event": "pool_wait_snapshot",
+          "queued": 1,
+          "second_socket_assigned": false,
+          "second_reached_server": false
+        },
+        {
+          "at_ms": 11.878500000000003,
+          "event": "server_response_finish",
+          "id": "held"
+        },
+        {
+          "at_ms": 11.899399999999986,
+          "event": "server_response_close",
+          "id": "held",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 12.0308,
+          "event": "client_end",
+          "id": "held"
+        },
+        {
+          "at_ms": 12.110700000000008,
+          "event": "client_socket_assigned",
+          "id": "queued",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.298900000000003,
+          "event": "server_request",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 12.486500000000007,
+          "event": "server_response_finish",
+          "id": "queued"
+        },
+        {
+          "at_ms": 12.502700000000004,
+          "event": "server_response_close",
+          "id": "queued",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 12.562099999999987,
+          "event": "client_headers",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 12.56710000000001,
+          "event": "client_consume",
+          "id": "queued"
+        },
+        {
+          "at_ms": 12.682199999999995,
+          "event": "client_end",
+          "id": "queued"
+        },
+        {
+          "at_ms": 13.771500000000003,
+          "event": "client_socket_close",
+          "id": "held",
+          "had_error": false
+        },
+        {
+          "at_ms": 13.776199999999989,
+          "event": "client_socket_close",
+          "id": "queued",
+          "had_error": false
+        },
+        {
+          "at_ms": 13.82419999999999,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 13.831400000000002,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "unread_body",
+      "repeat": 1,
+      "checks": {
+        "unconsumed_response_holds_slot": true,
+        "full_64k_body_read": true,
+        "reuse_after_consumption": true,
+        "second_assignment_after_body_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 8.0428,
+          "server_port": 60546,
+          "client_port": 60547,
+          "closed_at_ms": 14.357,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "unread",
+          "created_at_ms": 3.659700000000015,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.208300000000008,
+          "reused_socket": false,
+          "headers_at_ms": 11.32050000000001,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 11.952200000000005,
+          "end_at_ms": 12.18350000000001,
+          "bytes": 65536,
+          "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3"
+        },
+        {
+          "id": "behind-unread",
+          "created_at_ms": 11.709400000000016,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.392300000000006,
+          "reused_socket": false,
+          "headers_at_ms": 13.157499999999999,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 13.187700000000007,
+          "end_at_ms": 13.306299999999993,
+          "bytes": 16,
+          "sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 9.346300000000014,
+          "expected_bytes": 65536,
+          "expected_sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "finished_at_ms": 11.068299999999994,
+          "closed_at_ms": 11.107400000000013,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "behind-unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 12.816000000000003,
+          "expected_bytes": 16,
+          "expected_sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5",
+          "finished_at_ms": 13.067300000000017,
+          "closed_at_ms": 13.0856,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 5.2283999999999935,
+          "event": "client_socket_assigned",
+          "id": "unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 8.399699999999996,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.452799999999996,
+          "event": "server_request",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.076400000000007,
+          "event": "server_response_finish",
+          "id": "unread"
+        },
+        {
+          "at_ms": 11.112799999999993,
+          "event": "server_response_close",
+          "id": "unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.363400000000013,
+          "event": "client_headers",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.9375,
+          "event": "unread_body_snapshot",
+          "queued": 1,
+          "readable_ended": false,
+          "second_socket_assigned": false,
+          "consume_started": false
+        },
+        {
+          "at_ms": 11.955000000000013,
+          "event": "client_consume",
+          "id": "unread"
+        },
+        {
+          "at_ms": 12.268500000000017,
+          "event": "client_end",
+          "id": "unread"
+        },
+        {
+          "at_ms": 12.3981,
+          "event": "client_socket_assigned",
+          "id": "behind-unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.846599999999995,
+          "event": "server_request",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 13.070400000000006,
+          "event": "server_response_finish",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 13.089400000000012,
+          "event": "server_response_close",
+          "id": "behind-unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 13.179000000000002,
+          "event": "client_headers",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 13.190400000000011,
+          "event": "client_consume",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 13.324700000000007,
+          "event": "client_end",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 14.304000000000002,
+          "event": "client_socket_close",
+          "id": "unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 14.313099999999991,
+          "event": "client_socket_close",
+          "id": "behind-unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 14.360000000000014,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 14.366600000000005,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "idle_close",
+      "repeat": 1,
+      "checks": {
+        "socket_in_free_pool": true,
+        "closed_socket_removed_from_pool": true,
+        "new_connection_after_observed_close": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 4.760300000000001,
+          "server_port": 60548,
+          "client_port": 60549,
+          "closed_at_ms": 8.804599999999994,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 7.227800000000002,
+          "server_port": 60548,
+          "client_port": 60550,
+          "closed_at_ms": 11.88639999999998,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "before-idle-close",
+          "created_at_ms": 3.6751999999999896,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.402500000000003,
+          "reused_socket": false,
+          "headers_at_ms": 5.116500000000002,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.1296999999999855,
+          "end_at_ms": 5.2099999999999795,
+          "bytes": 20,
+          "sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc"
+        },
+        {
+          "id": "after-idle-close",
+          "created_at_ms": 5.7087999999999965,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 6.330399999999997,
+          "reused_socket": false,
+          "headers_at_ms": 9.108899999999977,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 9.19029999999998,
+          "end_at_ms": 9.491899999999987,
+          "bytes": 19,
+          "sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "before-idle-close",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 4.879799999999989,
+          "expected_bytes": 20,
+          "expected_sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc",
+          "finished_at_ms": 5.047299999999979,
+          "closed_at_ms": 5.061799999999977,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "after-idle-close",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 7.614099999999979,
+          "expected_bytes": 19,
+          "expected_sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0",
+          "finished_at_ms": 8.593199999999996,
+          "closed_at_ms": 8.64779999999999,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.406499999999994,
+          "event": "client_socket_assigned",
+          "id": "before-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 4.783500000000004,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 4.901499999999999,
+          "event": "server_request",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.049199999999985,
+          "event": "server_response_finish",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 5.063299999999998,
+          "event": "server_response_close",
+          "id": "before-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.125699999999995,
+          "event": "client_headers",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.13069999999999,
+          "event": "client_consume",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 5.219599999999986,
+          "event": "client_end",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 5.3245000000000005,
+          "event": "explicit_server_close_idle"
+        },
+        {
+          "at_ms": 5.688999999999993,
+          "event": "client_socket_close",
+          "id": "before-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 6.331400000000002,
+          "event": "client_socket_assigned",
+          "id": "after-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 7.300099999999986,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 7.739399999999989,
+          "event": "server_request",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 8.596899999999977,
+          "event": "server_response_finish",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 8.6524,
+          "event": "server_response_close",
+          "id": "after-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 8.828399999999988,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 9.1601,
+          "event": "client_headers",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 9.193699999999978,
+          "event": "client_consume",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 9.554000000000002,
+          "event": "client_end",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 11.828899999999976,
+          "event": "client_socket_close",
+          "id": "after-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 11.894899999999978,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 11.908500000000004,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_notice",
+      "repeat": 1,
+      "checks": {
+        "timeout_did_not_destroy_request": true,
+        "server_response_still_held": true,
+        "body_completed_after_notice": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 5.344399999999979,
+          "server_port": 60551,
+          "client_port": 60552,
+          "closed_at_ms": 49.29649999999998,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "notice-only",
+          "created_at_ms": 4.129899999999992,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.01509999999999,
+          "reused_socket": false,
+          "headers_at_ms": 5.601100000000002,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.613699999999994,
+          "end_at_ms": 45.252999999999986,
+          "bytes": 14,
+          "sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "notice-only",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.4565000000000055,
+          "expected_bytes": 14,
+          "expected_sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94",
+          "finished_at_ms": 44.6114,
+          "closed_at_ms": 44.7217,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 5.016199999999998,
+          "event": "client_socket_assigned",
+          "id": "notice-only",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 5.369499999999988,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.477000000000004,
+          "event": "server_request",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.609099999999984,
+          "event": "client_headers",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.614399999999989,
+          "event": "client_consume",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 44.130799999999994,
+          "event": "timeout_notice_snapshot",
+          "destroyed": false,
+          "completed": false,
+          "held_on_server": true
+        },
+        {
+          "at_ms": 44.630799999999994,
+          "event": "server_response_finish",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 44.726699999999994,
+          "event": "server_response_close",
+          "id": "notice-only",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 45.41229999999999,
+          "event": "client_end",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 49.24379999999999,
+          "event": "client_socket_close",
+          "id": "notice-only",
+          "had_error": false
+        },
+        {
+          "at_ms": 49.30369999999999,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 49.3124,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_destroy",
+      "repeat": 1,
+      "checks": {
+        "explicit_destroy_ended_client": true,
+        "server_response_not_finished": true,
+        "memory_marker_not_rolled_back": true,
+        "expected_request_outcomes": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 6.527599999999978,
+          "server_port": 60553,
+          "client_port": 60554,
+          "closed_at_ms": 51.669399999999996,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "destroy-after-marker",
+          "created_at_ms": 4.830299999999994,
+          "socket_assigned": true,
+          "completed": false,
+          "socket_at_ms": 6.146999999999991,
+          "reused_socket": false,
+          "headers_at_ms": 6.799700000000001,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 6.812899999999985,
+          "error": {
+            "code": "LAB_TIMEOUT",
+            "message": "Local inactivity budget"
+          },
+          "error_at_ms": 50.13650000000001,
+          "additional_errors": [
+            {
+              "code": "ECONNRESET",
+              "message": "aborted"
+            }
+          ]
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "destroy-after-marker",
+          "method": "POST",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.6433999999999855,
+          "expected_bytes": 23,
+          "expected_sha256": "8f90aed867988175fcbae06aaad71e57994acb212cadcf757ee5fa9239076468",
+          "closed_at_ms": 51.71569999999997,
+          "writable_finished_at_close": false
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 6.148200000000003,
+          "event": "client_socket_assigned",
+          "id": "destroy-after-marker",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 6.558799999999991,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.664799999999985,
+          "event": "server_request",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.668399999999991,
+          "event": "server_memory_marker_applied",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 6.808199999999999,
+          "event": "client_headers",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.8134000000000015,
+          "event": "client_consume",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 44.9178,
+          "event": "explicit_client_destroy",
+          "marker": "applied-in-memory"
+        },
+        {
+          "at_ms": 50.15839999999997,
+          "event": "client_error",
+          "id": "destroy-after-marker",
+          "code": "LAB_TIMEOUT",
+          "message": "Local inactivity budget"
+        },
+        {
+          "at_ms": 51.678499999999985,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 51.723900000000015,
+          "event": "server_response_close",
+          "id": "destroy-after-marker",
+          "writable_finished": false
+        },
+        {
+          "at_ms": 51.767600000000016,
+          "event": "marker_after_client_close",
+          "value": "applied-in-memory"
+        },
+        {
+          "at_ms": 52.54660000000001,
+          "event": "fixture_closed",
+          "listening": false
+        },
+        {
+          "at_ms": 57.22989999999999,
+          "event": "client_socket_close",
+          "id": "destroy-after-marker",
+          "had_error": true
+        }
+      ]
+    },
+    {
+      "name": "reuse",
+      "repeat": 2,
+      "checks": {
+        "one_connection_for_three_requests": true,
+        "same_server_connection": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 4.92530000000005,
+          "server_port": 60555,
+          "client_port": 60556,
+          "closed_at_ms": 7.252300000000048,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "reuse-0",
+          "created_at_ms": 3.7479000000000156,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.478600000000029,
+          "reused_socket": false,
+          "headers_at_ms": 5.226500000000044,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.238800000000026,
+          "end_at_ms": 5.291100000000029,
+          "bytes": 10,
+          "sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b"
+        },
+        {
+          "id": "reuse-1",
+          "created_at_ms": 5.3673,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.44580000000002,
+          "reused_socket": true,
+          "headers_at_ms": 5.750200000000007,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.759200000000021,
+          "end_at_ms": 5.874000000000024,
+          "bytes": 10,
+          "sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c"
+        },
+        {
+          "id": "reuse-2",
+          "created_at_ms": 5.939600000000041,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 6.02230000000003,
+          "reused_socket": true,
+          "headers_at_ms": 6.3507000000000176,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 6.362099999999998,
+          "end_at_ms": 6.416500000000042,
+          "bytes": 10,
+          "sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "reuse-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.016900000000021,
+          "expected_bytes": 10,
+          "expected_sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b",
+          "finished_at_ms": 5.161600000000021,
+          "closed_at_ms": 5.175400000000025,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-1",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.5762000000000285,
+          "expected_bytes": 10,
+          "expected_sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c",
+          "finished_at_ms": 5.693900000000042,
+          "closed_at_ms": 5.706299999999999,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-2",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.140300000000025,
+          "expected_bytes": 10,
+          "expected_sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187",
+          "finished_at_ms": 6.265900000000045,
+          "closed_at_ms": 6.289100000000019,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.4798000000000116,
+          "event": "client_socket_assigned",
+          "id": "reuse-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 4.9436000000000035,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.037900000000036,
+          "event": "server_request",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.162300000000016,
+          "event": "server_response_finish",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.176500000000033,
+          "event": "server_response_close",
+          "id": "reuse-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.2345000000000255,
+          "event": "client_headers",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.239100000000008,
+          "event": "client_consume",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.2999000000000365,
+          "event": "client_end",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.4465000000000146,
+          "event": "client_socket_assigned",
+          "id": "reuse-1",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 5.585300000000018,
+          "event": "server_request",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.694299999999998,
+          "event": "server_response_finish",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 5.707100000000025,
+          "event": "server_response_close",
+          "id": "reuse-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.756799999999998,
+          "event": "client_headers",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.7596000000000345,
+          "event": "client_consume",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 5.881799999999998,
+          "event": "client_end",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 6.027600000000007,
+          "event": "client_socket_assigned",
+          "id": "reuse-2",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 6.148900000000026,
+          "event": "server_request",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.266400000000033,
+          "event": "server_response_finish",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 6.289900000000046,
+          "event": "server_response_close",
+          "id": "reuse-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 6.359300000000019,
+          "event": "client_headers",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.362500000000011,
+          "event": "client_consume",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 6.425900000000013,
+          "event": "client_end",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 7.212200000000053,
+          "event": "client_socket_close",
+          "id": "reuse-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.213800000000049,
+          "event": "client_socket_close",
+          "id": "reuse-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.214800000000025,
+          "event": "client_socket_close",
+          "id": "reuse-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.255700000000047,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 7.262100000000032,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "close_each",
+      "repeat": 2,
+      "checks": {
+        "three_connections_for_three_requests": true,
+        "different_server_connections": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 8.69300000000004,
+          "server_port": 60557,
+          "client_port": 60558,
+          "closed_at_ms": 10.724100000000021,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 11.008500000000026,
+          "server_port": 60557,
+          "client_port": 60559,
+          "closed_at_ms": 13.253400000000056,
+          "had_error_at_close": false
+        },
+        {
+          "id": 3,
+          "accepted_at_ms": 13.518700000000024,
+          "server_port": 60557,
+          "client_port": 60560,
+          "closed_at_ms": 15.100600000000043,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "close-0",
+          "created_at_ms": 6.9436000000000035,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 8.221000000000004,
+          "reused_socket": false,
+          "headers_at_ms": 9.480000000000018,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 9.498700000000042,
+          "end_at_ms": 9.616800000000012,
+          "bytes": 10,
+          "sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f"
+        },
+        {
+          "id": "close-1",
+          "created_at_ms": 9.667700000000025,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 10.473000000000013,
+          "reused_socket": false,
+          "headers_at_ms": 11.519000000000005,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 11.530100000000004,
+          "end_at_ms": 11.618700000000047,
+          "bytes": 10,
+          "sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e"
+        },
+        {
+          "id": "close-2",
+          "created_at_ms": 11.650400000000047,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.27860000000004,
+          "reused_socket": false,
+          "headers_at_ms": 14.149100000000033,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 3,
+          "consume_at_ms": 14.160800000000052,
+          "end_at_ms": 14.243600000000015,
+          "bytes": 10,
+          "sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "close-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 8.835800000000006,
+          "expected_bytes": 10,
+          "expected_sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f",
+          "finished_at_ms": 9.127700000000004,
+          "closed_at_ms": 9.149800000000027,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-1",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 11.10110000000003,
+          "expected_bytes": 10,
+          "expected_sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e",
+          "finished_at_ms": 11.303900000000056,
+          "closed_at_ms": 11.335800000000006,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-2",
+          "method": "GET",
+          "connection_id": 3,
+          "http_version": "1.1",
+          "request_at_ms": 13.587600000000009,
+          "expected_bytes": 10,
+          "expected_sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085",
+          "finished_at_ms": 13.767800000000022,
+          "closed_at_ms": 13.781100000000038,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 8.222500000000025,
+          "event": "client_socket_assigned",
+          "id": "close-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 8.71810000000005,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 8.884400000000028,
+          "event": "server_request",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.128500000000031,
+          "event": "server_response_finish",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 9.15100000000001,
+          "event": "server_response_close",
+          "id": "close-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 9.493200000000002,
+          "event": "client_headers",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.499300000000005,
+          "event": "client_consume",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 9.63820000000004,
+          "event": "client_end",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 10.474000000000046,
+          "event": "client_socket_assigned",
+          "id": "close-1",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 10.715000000000032,
+          "event": "client_socket_close",
+          "id": "close-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 10.72610000000003,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 11.027800000000013,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.117000000000019,
+          "event": "server_request",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.304700000000025,
+          "event": "server_response_finish",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 11.33710000000002,
+          "event": "server_response_close",
+          "id": "close-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.52660000000003,
+          "event": "client_headers",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.53060000000005,
+          "event": "client_consume",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 11.627800000000036,
+          "event": "client_end",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 12.279300000000035,
+          "event": "client_socket_assigned",
+          "id": "close-2",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 13.234700000000032,
+          "event": "client_socket_close",
+          "id": "close-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 13.254000000000019,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 13.535600000000045,
+          "event": "server_connection",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 13.602600000000052,
+          "event": "server_request",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 13.768500000000017,
+          "event": "server_response_finish",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 13.781900000000007,
+          "event": "server_response_close",
+          "id": "close-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 14.156900000000007,
+          "event": "client_headers",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 14.161700000000053,
+          "event": "client_consume",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 14.255200000000002,
+          "event": "client_end",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 15.094000000000051,
+          "event": "client_socket_close",
+          "id": "close-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 15.10110000000003,
+          "event": "server_socket_close",
+          "connection_id": 3,
+          "had_error": false
+        },
+        {
+          "at_ms": 15.127300000000048,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "pool_wait",
+      "repeat": 2,
+      "checks": {
+        "second_queued_before_socket": true,
+        "second_not_yet_at_server": true,
+        "reuse_after_first_body": true,
+        "second_assignment_after_first_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 10.789100000000019,
+          "server_port": 60561,
+          "client_port": 60562,
+          "closed_at_ms": 13.015800000000013,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "held",
+          "created_at_ms": 8.38050000000004,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 10.090599999999995,
+          "reused_socket": false,
+          "headers_at_ms": 11.127900000000011,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 11.178600000000017,
+          "end_at_ms": 11.54849999999999,
+          "bytes": 7,
+          "sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703"
+        },
+        {
+          "id": "queued",
+          "created_at_ms": 11.235700000000008,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 11.60650000000004,
+          "reused_socket": false,
+          "headers_at_ms": 11.893000000000029,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 11.918000000000006,
+          "end_at_ms": 11.96289999999999,
+          "bytes": 9,
+          "sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "held",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 10.924300000000017,
+          "expected_bytes": 7,
+          "expected_sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703",
+          "finished_at_ms": 11.479000000000042,
+          "closed_at_ms": 11.487599999999986,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "queued",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 11.725700000000018,
+          "expected_bytes": 9,
+          "expected_sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc",
+          "finished_at_ms": 11.847700000000032,
+          "closed_at_ms": 11.857200000000034,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 10.094600000000014,
+          "event": "client_socket_assigned",
+          "id": "held",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 10.826799999999992,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 10.947699999999998,
+          "event": "server_request",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.154300000000035,
+          "event": "client_headers",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.198399999999992,
+          "event": "client_consume",
+          "id": "held"
+        },
+        {
+          "at_ms": 11.329400000000021,
+          "event": "pool_wait_snapshot",
+          "queued": 1,
+          "second_socket_assigned": false,
+          "second_reached_server": false
+        },
+        {
+          "at_ms": 11.479700000000037,
+          "event": "server_response_finish",
+          "id": "held"
+        },
+        {
+          "at_ms": 11.488300000000038,
+          "event": "server_response_close",
+          "id": "held",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.56030000000004,
+          "event": "client_end",
+          "id": "held"
+        },
+        {
+          "at_ms": 11.607100000000003,
+          "event": "client_socket_assigned",
+          "id": "queued",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 11.735299999999995,
+          "event": "server_request",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.84820000000002,
+          "event": "server_response_finish",
+          "id": "queued"
+        },
+        {
+          "at_ms": 11.85790000000003,
+          "event": "server_response_close",
+          "id": "queued",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.915200000000027,
+          "event": "client_headers",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.918299999999988,
+          "event": "client_consume",
+          "id": "queued"
+        },
+        {
+          "at_ms": 11.969899999999996,
+          "event": "client_end",
+          "id": "queued"
+        },
+        {
+          "at_ms": 12.977100000000007,
+          "event": "client_socket_close",
+          "id": "held",
+          "had_error": false
+        },
+        {
+          "at_ms": 12.979899999999986,
+          "event": "client_socket_close",
+          "id": "queued",
+          "had_error": false
+        },
+        {
+          "at_ms": 13.016500000000008,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 13.026200000000017,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "unread_body",
+      "repeat": 2,
+      "checks": {
+        "unconsumed_response_holds_slot": true,
+        "full_64k_body_read": true,
+        "reuse_after_consumption": true,
+        "second_assignment_after_body_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 8.58710000000002,
+          "server_port": 60563,
+          "client_port": 60564,
+          "closed_at_ms": 14.821700000000021,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "unread",
+          "created_at_ms": 5.2929000000000315,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 6.7117000000000075,
+          "reused_socket": false,
+          "headers_at_ms": 12.066900000000032,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 12.28140000000002,
+          "end_at_ms": 12.400800000000004,
+          "bytes": 65536,
+          "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3"
+        },
+        {
+          "id": "behind-unread",
+          "created_at_ms": 12.161699999999996,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.521400000000028,
+          "reused_socket": false,
+          "headers_at_ms": 13.117400000000032,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 13.13760000000002,
+          "end_at_ms": 13.203300000000013,
+          "bytes": 16,
+          "sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 9.940600000000018,
+          "expected_bytes": 65536,
+          "expected_sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "finished_at_ms": 11.93810000000002,
+          "closed_at_ms": 11.95210000000003,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "behind-unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 12.7534,
+          "expected_bytes": 16,
+          "expected_sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5",
+          "finished_at_ms": 13.020500000000027,
+          "closed_at_ms": 13.044300000000021,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 6.713999999999999,
+          "event": "client_socket_assigned",
+          "id": "unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 8.856100000000026,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 10.118200000000002,
+          "event": "server_request",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 11.93889999999999,
+          "event": "server_response_finish",
+          "id": "unread"
+        },
+        {
+          "at_ms": 11.953100000000006,
+          "event": "server_response_close",
+          "id": "unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 12.081099999999992,
+          "event": "client_headers",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 12.272400000000005,
+          "event": "unread_body_snapshot",
+          "queued": 1,
+          "readable_ended": false,
+          "second_socket_assigned": false,
+          "consume_started": false
+        },
+        {
+          "at_ms": 12.281999999999982,
+          "event": "client_consume",
+          "id": "unread"
+        },
+        {
+          "at_ms": 12.467899999999986,
+          "event": "client_end",
+          "id": "unread"
+        },
+        {
+          "at_ms": 12.521999999999991,
+          "event": "client_socket_assigned",
+          "id": "behind-unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.770500000000027,
+          "event": "server_request",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 13.02249999999998,
+          "event": "server_response_finish",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 13.04540000000003,
+          "event": "server_response_close",
+          "id": "behind-unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 13.132000000000005,
+          "event": "client_headers",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 13.13839999999999,
+          "event": "client_consume",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 13.215399999999988,
+          "event": "client_end",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 14.768599999999992,
+          "event": "client_socket_close",
+          "id": "unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 14.773200000000031,
+          "event": "client_socket_close",
+          "id": "behind-unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 14.823199999999986,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 14.838000000000022,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "idle_close",
+      "repeat": 2,
+      "checks": {
+        "socket_in_free_pool": true,
+        "closed_socket_removed_from_pool": true,
+        "new_connection_after_observed_close": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 6.462499999999977,
+          "server_port": 60565,
+          "client_port": 60566,
+          "closed_at_ms": 13.689700000000016,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 12.49430000000001,
+          "server_port": 60565,
+          "client_port": 60567,
+          "closed_at_ms": 15.030300000000011,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "before-idle-close",
+          "created_at_ms": 4.669399999999996,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.9114999999999895,
+          "reused_socket": false,
+          "headers_at_ms": 7.03449999999998,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 7.0504999999999995,
+          "end_at_ms": 7.123499999999979,
+          "bytes": 20,
+          "sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc"
+        },
+        {
+          "id": "after-idle-close",
+          "created_at_ms": 7.591200000000015,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 8.417599999999993,
+          "reused_socket": false,
+          "headers_at_ms": 13.743200000000002,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 13.760899999999992,
+          "end_at_ms": 13.852399999999989,
+          "bytes": 19,
+          "sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "before-idle-close",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.610299999999995,
+          "expected_bytes": 20,
+          "expected_sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc",
+          "finished_at_ms": 6.924199999999985,
+          "closed_at_ms": 6.942099999999982,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "after-idle-close",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 13.119599999999991,
+          "expected_bytes": 19,
+          "expected_sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0",
+          "finished_at_ms": 13.632299999999987,
+          "closed_at_ms": 13.650599999999997,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 5.914300000000026,
+          "event": "client_socket_assigned",
+          "id": "before-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 6.496100000000013,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.64530000000002,
+          "event": "server_request",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.925099999999986,
+          "event": "server_response_finish",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 6.94380000000001,
+          "event": "server_response_close",
+          "id": "before-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 7.0452999999999975,
+          "event": "client_headers",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.050900000000013,
+          "event": "client_consume",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 7.136099999999999,
+          "event": "client_end",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 7.226200000000006,
+          "event": "explicit_server_close_idle"
+        },
+        {
+          "at_ms": 7.5738999999999805,
+          "event": "client_socket_close",
+          "id": "before-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 8.420999999999992,
+          "event": "client_socket_assigned",
+          "id": "after-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.651700000000005,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 13.211000000000013,
+          "event": "server_request",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 13.633199999999988,
+          "event": "server_response_finish",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 13.651700000000005,
+          "event": "server_response_close",
+          "id": "after-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 13.690400000000011,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 13.755200000000002,
+          "event": "client_headers",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 13.761500000000012,
+          "event": "client_consume",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 13.873699999999985,
+          "event": "client_end",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 14.981200000000001,
+          "event": "client_socket_close",
+          "id": "after-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 15.03109999999998,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 15.035799999999995,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_notice",
+      "repeat": 2,
+      "checks": {
+        "timeout_did_not_destroy_request": true,
+        "server_response_still_held": true,
+        "body_completed_after_notice": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 7.212900000000047,
+          "server_port": 60568,
+          "client_port": 60569,
+          "closed_at_ms": 49.75070000000005,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "notice-only",
+          "created_at_ms": 5.595100000000002,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 6.685800000000029,
+          "reused_socket": false,
+          "headers_at_ms": 7.562400000000025,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 7.58280000000002,
+          "end_at_ms": 47.08080000000001,
+          "bytes": 14,
+          "sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "notice-only",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 7.3399,
+          "expected_bytes": 14,
+          "expected_sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94",
+          "finished_at_ms": 46.1465,
+          "closed_at_ms": 46.20260000000002,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 6.7339000000000055,
+          "event": "client_socket_assigned",
+          "id": "notice-only",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 7.239100000000008,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.377800000000036,
+          "event": "server_request",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.575900000000047,
+          "event": "client_headers",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.58340000000004,
+          "event": "client_consume",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 44.04990000000004,
+          "event": "timeout_notice_snapshot",
+          "destroyed": false,
+          "completed": false,
+          "held_on_server": true
+        },
+        {
+          "at_ms": 46.1524,
+          "event": "server_response_finish",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 46.211400000000026,
+          "event": "server_response_close",
+          "id": "notice-only",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 47.274400000000014,
+          "event": "client_end",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 49.62360000000001,
+          "event": "client_socket_close",
+          "id": "notice-only",
+          "had_error": false
+        },
+        {
+          "at_ms": 49.7525,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 49.7654,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_destroy",
+      "repeat": 2,
+      "checks": {
+        "explicit_destroy_ended_client": true,
+        "server_response_not_finished": true,
+        "memory_marker_not_rolled_back": true,
+        "expected_request_outcomes": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 6.2035999999999945,
+          "server_port": 60570,
+          "client_port": 60571,
+          "closed_at_ms": 48.76559999999995,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "destroy-after-marker",
+          "created_at_ms": 5.068299999999965,
+          "socket_assigned": true,
+          "completed": false,
+          "socket_at_ms": 5.886699999999962,
+          "reused_socket": false,
+          "headers_at_ms": 6.439300000000003,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 6.452099999999973,
+          "error": {
+            "code": "LAB_TIMEOUT",
+            "message": "Local inactivity budget"
+          },
+          "error_at_ms": 48.11829999999998,
+          "additional_errors": [
+            {
+              "code": "ECONNRESET",
+              "message": "aborted"
+            }
+          ]
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "destroy-after-marker",
+          "method": "POST",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.2975999999999885,
+          "expected_bytes": 23,
+          "expected_sha256": "8f90aed867988175fcbae06aaad71e57994acb212cadcf757ee5fa9239076468",
+          "closed_at_ms": 48.77339999999998,
+          "writable_finished_at_close": false
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 5.887699999999995,
+          "event": "client_socket_assigned",
+          "id": "destroy-after-marker",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 6.220699999999965,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.3174999999999955,
+          "event": "server_request",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.3221999999999525,
+          "event": "server_memory_marker_applied",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 6.447299999999984,
+          "event": "client_headers",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.452499999999986,
+          "event": "client_consume",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 45.518899999999974,
+          "event": "explicit_client_destroy",
+          "marker": "applied-in-memory"
+        },
+        {
+          "at_ms": 48.12899999999996,
+          "event": "client_error",
+          "id": "destroy-after-marker",
+          "code": "LAB_TIMEOUT",
+          "message": "Local inactivity budget"
+        },
+        {
+          "at_ms": 48.76799999999997,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 48.77509999999995,
+          "event": "server_response_close",
+          "id": "destroy-after-marker",
+          "writable_finished": false
+        },
+        {
+          "at_ms": 48.80179999999996,
+          "event": "marker_after_client_close",
+          "value": "applied-in-memory"
+        },
+        {
+          "at_ms": 49.80939999999998,
+          "event": "fixture_closed",
+          "listening": false
+        },
+        {
+          "at_ms": 54.84819999999996,
+          "event": "client_socket_close",
+          "id": "destroy-after-marker",
+          "had_error": true
+        }
+      ]
+    },
+    {
+      "name": "reuse",
+      "repeat": 3,
+      "checks": {
+        "one_connection_for_three_requests": true,
+        "same_server_connection": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 5.205900000000042,
+          "server_port": 60572,
+          "client_port": 60573,
+          "closed_at_ms": 7.119100000000003,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "reuse-0",
+          "created_at_ms": 4.014400000000023,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.773900000000026,
+          "reused_socket": false,
+          "headers_at_ms": 5.4944000000000415,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.5061000000000035,
+          "end_at_ms": 5.561200000000042,
+          "bytes": 10,
+          "sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b"
+        },
+        {
+          "id": "reuse-1",
+          "created_at_ms": 5.602900000000034,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.676199999999994,
+          "reused_socket": true,
+          "headers_at_ms": 5.9132000000000176,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.922200000000032,
+          "end_at_ms": 5.967100000000016,
+          "bytes": 10,
+          "sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c"
+        },
+        {
+          "id": "reuse-2",
+          "created_at_ms": 5.9968000000000075,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 6.058899999999994,
+          "reused_socket": true,
+          "headers_at_ms": 6.279600000000016,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 6.287200000000041,
+          "end_at_ms": 6.319800000000043,
+          "bytes": 10,
+          "sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "reuse-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.294200000000046,
+          "expected_bytes": 10,
+          "expected_sha256": "17348f60f83d768d6b79f7c8c9153773d4f93d0e703867425ee10895ad3f230b",
+          "finished_at_ms": 5.4375,
+          "closed_at_ms": 5.448000000000036,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-1",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.777500000000032,
+          "expected_bytes": 10,
+          "expected_sha256": "c6ca7a02616586ce187ce8bdd84d45ee0378018ce9d57aab9dd0d10451246b1c",
+          "finished_at_ms": 5.872400000000027,
+          "closed_at_ms": 5.881500000000017,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "reuse-2",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.145000000000039,
+          "expected_bytes": 10,
+          "expected_sha256": "867a81c0ded1551e281f50d912aa83b7319776bc50e7532de8b5cc733cb02187",
+          "finished_at_ms": 6.241600000000005,
+          "closed_at_ms": 6.25,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.774900000000002,
+          "event": "client_socket_assigned",
+          "id": "reuse-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 5.222100000000012,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.315200000000004,
+          "event": "server_request",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.438000000000045,
+          "event": "server_response_finish",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.448700000000031,
+          "event": "server_response_close",
+          "id": "reuse-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.5026000000000295,
+          "event": "client_headers",
+          "id": "reuse-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.506600000000049,
+          "event": "client_consume",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.569800000000043,
+          "event": "client_end",
+          "id": "reuse-0"
+        },
+        {
+          "at_ms": 5.676800000000014,
+          "event": "client_socket_assigned",
+          "id": "reuse-1",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 5.786100000000033,
+          "event": "server_request",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.872800000000041,
+          "event": "server_response_finish",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 5.882200000000012,
+          "event": "server_response_close",
+          "id": "reuse-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.919800000000009,
+          "event": "client_headers",
+          "id": "reuse-1",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.922500000000014,
+          "event": "client_consume",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 5.973700000000008,
+          "event": "client_end",
+          "id": "reuse-1"
+        },
+        {
+          "at_ms": 6.0593000000000075,
+          "event": "client_socket_assigned",
+          "id": "reuse-2",
+          "reused_socket": true
+        },
+        {
+          "at_ms": 6.152600000000007,
+          "event": "server_request",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.242000000000019,
+          "event": "server_response_finish",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 6.250500000000045,
+          "event": "server_response_close",
+          "id": "reuse-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 6.285200000000032,
+          "event": "client_headers",
+          "id": "reuse-2",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.287599999999998,
+          "event": "client_consume",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 6.326000000000022,
+          "event": "client_end",
+          "id": "reuse-2"
+        },
+        {
+          "at_ms": 7.089300000000037,
+          "event": "client_socket_close",
+          "id": "reuse-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.091000000000008,
+          "event": "client_socket_close",
+          "id": "reuse-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.092000000000041,
+          "event": "client_socket_close",
+          "id": "reuse-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.119600000000048,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 7.123300000000029,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "close_each",
+      "repeat": 3,
+      "checks": {
+        "three_connections_for_three_requests": true,
+        "different_server_connections": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 9.115300000000047,
+          "server_port": 60574,
+          "client_port": 60575,
+          "closed_at_ms": 10.856000000000051,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 11.100500000000011,
+          "server_port": 60574,
+          "client_port": 60576,
+          "closed_at_ms": 12.3125,
+          "had_error_at_close": false
+        },
+        {
+          "id": 3,
+          "accepted_at_ms": 12.507100000000037,
+          "server_port": 60574,
+          "client_port": 60577,
+          "closed_at_ms": 13.5591,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "close-0",
+          "created_at_ms": 6.037900000000036,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 8.333600000000047,
+          "reused_socket": false,
+          "headers_at_ms": 9.750500000000045,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 9.772100000000023,
+          "end_at_ms": 9.835900000000038,
+          "bytes": 10,
+          "sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f"
+        },
+        {
+          "id": "close-1",
+          "created_at_ms": 9.880300000000034,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 10.683400000000006,
+          "reused_socket": false,
+          "headers_at_ms": 11.489500000000021,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 11.50200000000001,
+          "end_at_ms": 11.551900000000046,
+          "bytes": 10,
+          "sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e"
+        },
+        {
+          "id": "close-2",
+          "created_at_ms": 11.59740000000005,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 12.16560000000004,
+          "reused_socket": false,
+          "headers_at_ms": 12.855600000000038,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 3,
+          "consume_at_ms": 12.865700000000004,
+          "end_at_ms": 12.908000000000015,
+          "bytes": 10,
+          "sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "close-0",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 9.290200000000027,
+          "expected_bytes": 10,
+          "expected_sha256": "5c2342e36aaffbe3b7c5f8fb1d49bcfc0260aca1e32f311165f58ab9b012032f",
+          "finished_at_ms": 9.539800000000014,
+          "closed_at_ms": 9.552100000000053,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-1",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 11.166899999999998,
+          "expected_bytes": 10,
+          "expected_sha256": "cf707aabdf2c5136a1e8d45e01c4a415254d0558bf2ae6d4ab2b0f0301f70d6e",
+          "finished_at_ms": 11.298600000000022,
+          "closed_at_ms": 11.309300000000007,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "close-2",
+          "method": "GET",
+          "connection_id": 3,
+          "http_version": "1.1",
+          "request_at_ms": 12.58340000000004,
+          "expected_bytes": 10,
+          "expected_sha256": "12cf220f0b8dcf9c4949c3e0ecdcff7162c00fdbd48aa34d8f3764d00d68e085",
+          "finished_at_ms": 12.713999999999999,
+          "closed_at_ms": 12.72380000000004,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 8.33620000000002,
+          "event": "client_socket_assigned",
+          "id": "close-0",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 9.151499999999999,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.322100000000034,
+          "event": "server_request",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.54060000000004,
+          "event": "server_response_finish",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 9.552999999999997,
+          "event": "server_response_close",
+          "id": "close-0",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 9.764700000000005,
+          "event": "client_headers",
+          "id": "close-0",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 9.772700000000043,
+          "event": "client_consume",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 9.849199999999996,
+          "event": "client_end",
+          "id": "close-0"
+        },
+        {
+          "at_ms": 10.68440000000004,
+          "event": "client_socket_assigned",
+          "id": "close-1",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 10.845799999999997,
+          "event": "client_socket_close",
+          "id": "close-0",
+          "had_error": false
+        },
+        {
+          "at_ms": 10.856400000000008,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 11.117400000000032,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.178899999999999,
+          "event": "server_request",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.29910000000001,
+          "event": "server_response_finish",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 11.310000000000002,
+          "event": "server_response_close",
+          "id": "close-1",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 11.49780000000004,
+          "event": "client_headers",
+          "id": "close-1",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.502400000000023,
+          "event": "client_consume",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 11.575600000000009,
+          "event": "client_end",
+          "id": "close-1"
+        },
+        {
+          "at_ms": 12.166800000000023,
+          "event": "client_socket_assigned",
+          "id": "close-2",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 12.304900000000032,
+          "event": "client_socket_close",
+          "id": "close-1",
+          "had_error": false
+        },
+        {
+          "at_ms": 12.312900000000013,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 12.522800000000018,
+          "event": "server_connection",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 12.605700000000013,
+          "event": "server_request",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 12.714500000000044,
+          "event": "server_response_finish",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 12.724500000000035,
+          "event": "server_response_close",
+          "id": "close-2",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 12.862400000000036,
+          "event": "client_headers",
+          "id": "close-2",
+          "connection_id": 3
+        },
+        {
+          "at_ms": 12.866100000000017,
+          "event": "client_consume",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 12.915800000000047,
+          "event": "client_end",
+          "id": "close-2"
+        },
+        {
+          "at_ms": 13.552999999999997,
+          "event": "client_socket_close",
+          "id": "close-2",
+          "had_error": false
+        },
+        {
+          "at_ms": 13.559500000000014,
+          "event": "server_socket_close",
+          "connection_id": 3,
+          "had_error": false
+        },
+        {
+          "at_ms": 13.56510000000003,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "pool_wait",
+      "repeat": 3,
+      "checks": {
+        "second_queued_before_socket": true,
+        "second_not_yet_at_server": true,
+        "reuse_after_first_body": true,
+        "second_assignment_after_first_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 4.766300000000001,
+          "server_port": 60578,
+          "client_port": 60579,
+          "closed_at_ms": 7.803699999999992,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "held",
+          "created_at_ms": 3.7263000000000375,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.423600000000022,
+          "reused_socket": false,
+          "headers_at_ms": 5.016200000000026,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.02800000000002,
+          "end_at_ms": 5.257400000000018,
+          "bytes": 7,
+          "sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703"
+        },
+        {
+          "id": "queued",
+          "created_at_ms": 5.0563000000000216,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.301199999999994,
+          "reused_socket": false,
+          "headers_at_ms": 5.530399999999986,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 5.5394000000000005,
+          "end_at_ms": 5.57510000000002,
+          "bytes": 9,
+          "sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "held",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 4.869200000000035,
+          "expected_bytes": 7,
+          "expected_sha256": "bd0457a00ce8162b7106068a30b77e48720967497aec05ba5d12461cd8c4b703",
+          "finished_at_ms": 5.199999999999989,
+          "closed_at_ms": 5.207100000000025,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "queued",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 5.3998000000000275,
+          "expected_bytes": 9,
+          "expected_sha256": "3208768555ee019cb98df44ef6c68b7f5ad35ef058049cb07d7e4258a8d10dcc",
+          "finished_at_ms": 5.491700000000037,
+          "closed_at_ms": 5.500400000000013,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.424800000000005,
+          "event": "client_socket_assigned",
+          "id": "held",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 4.783800000000042,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 4.892100000000028,
+          "event": "server_request",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.024100000000033,
+          "event": "client_headers",
+          "id": "held",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.028500000000008,
+          "event": "client_consume",
+          "id": "held"
+        },
+        {
+          "at_ms": 5.114200000000039,
+          "event": "pool_wait_snapshot",
+          "queued": 1,
+          "second_socket_assigned": false,
+          "second_reached_server": false
+        },
+        {
+          "at_ms": 5.200400000000002,
+          "event": "server_response_finish",
+          "id": "held"
+        },
+        {
+          "at_ms": 5.207899999999995,
+          "event": "server_response_close",
+          "id": "held",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.266300000000001,
+          "event": "client_end",
+          "id": "held"
+        },
+        {
+          "at_ms": 5.301600000000008,
+          "event": "client_socket_assigned",
+          "id": "queued",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 5.407800000000009,
+          "event": "server_request",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.4920999999999935,
+          "event": "server_response_finish",
+          "id": "queued"
+        },
+        {
+          "at_ms": 5.501000000000033,
+          "event": "server_response_close",
+          "id": "queued",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 5.537000000000035,
+          "event": "client_headers",
+          "id": "queued",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 5.539700000000039,
+          "event": "client_consume",
+          "id": "queued"
+        },
+        {
+          "at_ms": 5.5815000000000055,
+          "event": "client_end",
+          "id": "queued"
+        },
+        {
+          "at_ms": 7.323900000000037,
+          "event": "client_socket_close",
+          "id": "held",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.338900000000024,
+          "event": "client_socket_close",
+          "id": "queued",
+          "had_error": false
+        },
+        {
+          "at_ms": 7.808899999999994,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 7.851800000000026,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "unread_body",
+      "repeat": 3,
+      "checks": {
+        "unconsumed_response_holds_slot": true,
+        "full_64k_body_read": true,
+        "reuse_after_consumption": true,
+        "second_assignment_after_body_end": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 6.157300000000021,
+          "server_port": 60580,
+          "client_port": 60581,
+          "closed_at_ms": 8.946700000000021,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "unread",
+          "created_at_ms": 5.0428,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 5.862799999999993,
+          "reused_socket": false,
+          "headers_at_ms": 7.102399999999989,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 7.224699999999984,
+          "end_at_ms": 7.306699999999978,
+          "bytes": 65536,
+          "sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3"
+        },
+        {
+          "id": "behind-unread",
+          "created_at_ms": 7.154299999999978,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 7.3811000000000035,
+          "reused_socket": false,
+          "headers_at_ms": 8.125200000000007,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 8.13530000000003,
+          "end_at_ms": 8.178800000000024,
+          "bytes": 16,
+          "sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.297200000000032,
+          "expected_bytes": 65536,
+          "expected_sha256": "1f8745f0d2d1387ec1af2211a3cf417b2e9e885e853472649c1d979d0e9370e3",
+          "finished_at_ms": 7.028200000000027,
+          "closed_at_ms": 7.038400000000024,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "behind-unread",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 7.948500000000024,
+          "expected_bytes": 16,
+          "expected_sha256": "714fc81e8a4f73a9d0cff6996d786f3849dd77808181af06f0c3131fa48bf1b5",
+          "finished_at_ms": 8.072900000000004,
+          "closed_at_ms": 8.082499999999982,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 5.863900000000001,
+          "event": "client_socket_assigned",
+          "id": "unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 6.1743999999999915,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.358400000000017,
+          "event": "server_request",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.028700000000015,
+          "event": "server_response_finish",
+          "id": "unread"
+        },
+        {
+          "at_ms": 7.039100000000019,
+          "event": "server_response_close",
+          "id": "unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 7.110900000000015,
+          "event": "client_headers",
+          "id": "unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.220700000000022,
+          "event": "unread_body_snapshot",
+          "queued": 1,
+          "readable_ended": false,
+          "second_socket_assigned": false,
+          "consume_started": false
+        },
+        {
+          "at_ms": 7.225099999999998,
+          "event": "client_consume",
+          "id": "unread"
+        },
+        {
+          "at_ms": 7.355799999999988,
+          "event": "client_end",
+          "id": "unread"
+        },
+        {
+          "at_ms": 7.381599999999992,
+          "event": "client_socket_assigned",
+          "id": "behind-unread",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 7.961400000000026,
+          "event": "server_request",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 8.073399999999992,
+          "event": "server_response_finish",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 8.083199999999977,
+          "event": "server_response_close",
+          "id": "behind-unread",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 8.1327,
+          "event": "client_headers",
+          "id": "behind-unread",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 8.135699999999986,
+          "event": "client_consume",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 8.18610000000001,
+          "event": "client_end",
+          "id": "behind-unread"
+        },
+        {
+          "at_ms": 8.91360000000003,
+          "event": "client_socket_close",
+          "id": "unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 8.915099999999995,
+          "event": "client_socket_close",
+          "id": "behind-unread",
+          "had_error": false
+        },
+        {
+          "at_ms": 8.947099999999978,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 8.951000000000022,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "idle_close",
+      "repeat": 3,
+      "checks": {
+        "socket_in_free_pool": true,
+        "closed_socket_removed_from_pool": true,
+        "new_connection_after_observed_close": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 5.59190000000001,
+          "server_port": 60582,
+          "client_port": 60583,
+          "closed_at_ms": 12.105099999999993,
+          "had_error_at_close": false
+        },
+        {
+          "id": 2,
+          "accepted_at_ms": 11.686599999999999,
+          "server_port": 60582,
+          "client_port": 60584,
+          "closed_at_ms": 12.92919999999998,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "before-idle-close",
+          "created_at_ms": 3.813199999999995,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.5230999999999995,
+          "reused_socket": false,
+          "headers_at_ms": 8.057799999999986,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 8.170500000000004,
+          "end_at_ms": 8.4375,
+          "bytes": 20,
+          "sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc"
+        },
+        {
+          "id": "after-idle-close",
+          "created_at_ms": 9.767999999999972,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 11.004000000000019,
+          "reused_socket": false,
+          "headers_at_ms": 12.14179999999999,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 2,
+          "consume_at_ms": 12.1558,
+          "end_at_ms": 12.201399999999978,
+          "bytes": 19,
+          "sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "before-idle-close",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.3589999999999804,
+          "expected_bytes": 20,
+          "expected_sha256": "32f33249ce9ab95100d86250ad642c6ceef52564ac035b3085cbf0ed9c805acc",
+          "finished_at_ms": 7.672300000000007,
+          "closed_at_ms": 7.716200000000015,
+          "writable_finished_at_close": true
+        },
+        {
+          "id": "after-idle-close",
+          "method": "GET",
+          "connection_id": 2,
+          "http_version": "1.1",
+          "request_at_ms": 11.841999999999985,
+          "expected_bytes": 19,
+          "expected_sha256": "b1c67dc7d8aa1b00ea6f990d51628bf218245495396d33610a3d9f80d073fce0",
+          "finished_at_ms": 12.065799999999967,
+          "closed_at_ms": 12.07650000000001,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.524000000000001,
+          "event": "client_socket_assigned",
+          "id": "before-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 5.694199999999967,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.5172000000000025,
+          "event": "server_request",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.675000000000011,
+          "event": "server_response_finish",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 7.723700000000008,
+          "event": "server_response_close",
+          "id": "before-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 8.1284,
+          "event": "client_headers",
+          "id": "before-idle-close",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 8.173799999999972,
+          "event": "client_consume",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 8.532100000000014,
+          "event": "client_end",
+          "id": "before-idle-close"
+        },
+        {
+          "at_ms": 8.942200000000014,
+          "event": "explicit_server_close_idle"
+        },
+        {
+          "at_ms": 9.730999999999995,
+          "event": "client_socket_close",
+          "id": "before-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 11.00569999999999,
+          "event": "client_socket_assigned",
+          "id": "after-idle-close",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 11.721699999999998,
+          "event": "server_connection",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 11.873400000000004,
+          "event": "server_request",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 12.066300000000012,
+          "event": "server_response_finish",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 12.077400000000011,
+          "event": "server_response_close",
+          "id": "after-idle-close",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 12.105799999999988,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 12.151399999999967,
+          "event": "client_headers",
+          "id": "after-idle-close",
+          "connection_id": 2
+        },
+        {
+          "at_ms": 12.156299999999987,
+          "event": "client_consume",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 12.21139999999997,
+          "event": "client_end",
+          "id": "after-idle-close"
+        },
+        {
+          "at_ms": 12.904200000000003,
+          "event": "client_socket_close",
+          "id": "after-idle-close",
+          "had_error": false
+        },
+        {
+          "at_ms": 12.929699999999968,
+          "event": "server_socket_close",
+          "connection_id": 2,
+          "had_error": false
+        },
+        {
+          "at_ms": 12.933600000000013,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_notice",
+      "repeat": 3,
+      "checks": {
+        "timeout_did_not_destroy_request": true,
+        "server_response_still_held": true,
+        "body_completed_after_notice": true,
+        "expected_request_outcomes": true,
+        "completed_bodies_match_server": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 4.4973999999999705,
+          "server_port": 60585,
+          "client_port": 60586,
+          "closed_at_ms": 48.51559999999995,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "notice-only",
+          "created_at_ms": 3.5441000000000145,
+          "socket_assigned": true,
+          "completed": true,
+          "socket_at_ms": 4.211000000000013,
+          "reused_socket": false,
+          "headers_at_ms": 4.7070999999999685,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 4.718500000000006,
+          "end_at_ms": 46.85900000000004,
+          "bytes": 14,
+          "sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94"
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "notice-only",
+          "method": "GET",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 4.5774000000000115,
+          "expected_bytes": 14,
+          "expected_sha256": "041f200875b983497cbf00f7e1a5deb9df63ae9cf930bbc114c4b3d9e60bae94",
+          "finished_at_ms": 46.65769999999998,
+          "closed_at_ms": 46.67700000000002,
+          "writable_finished_at_close": true
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 4.211900000000014,
+          "event": "client_socket_assigned",
+          "id": "notice-only",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 4.5154,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 4.595799999999997,
+          "event": "server_request",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 4.71429999999998,
+          "event": "client_headers",
+          "id": "notice-only",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 4.718900000000019,
+          "event": "client_consume",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 45.12749999999994,
+          "event": "timeout_notice_snapshot",
+          "destroyed": false,
+          "completed": false,
+          "held_on_server": true
+        },
+        {
+          "at_ms": 46.65949999999998,
+          "event": "server_response_finish",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 46.678999999999974,
+          "event": "server_response_close",
+          "id": "notice-only",
+          "writable_finished": true
+        },
+        {
+          "at_ms": 46.895200000000045,
+          "event": "client_end",
+          "id": "notice-only"
+        },
+        {
+          "at_ms": 48.44539999999995,
+          "event": "client_socket_close",
+          "id": "notice-only",
+          "had_error": false
+        },
+        {
+          "at_ms": 48.51660000000004,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 48.5231,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    },
+    {
+      "name": "timeout_destroy",
+      "repeat": 3,
+      "checks": {
+        "explicit_destroy_ended_client": true,
+        "server_response_not_finished": true,
+        "memory_marker_not_rolled_back": true,
+        "expected_request_outcomes": true,
+        "all_client_requests_terminal": true,
+        "fixture_stopped": true
+      },
+      "connections": [
+        {
+          "id": 1,
+          "accepted_at_ms": 6.623399999999947,
+          "server_port": 60587,
+          "client_port": 60588,
+          "closed_at_ms": 42.26559999999995,
+          "had_error_at_close": false
+        }
+      ],
+      "requests": [
+        {
+          "id": "destroy-after-marker",
+          "created_at_ms": 4.9909999999999854,
+          "socket_assigned": true,
+          "completed": false,
+          "socket_at_ms": 6.186399999999935,
+          "reused_socket": false,
+          "headers_at_ms": 7.0079999999999245,
+          "http_version": "1.1",
+          "status": 200,
+          "connection_id": 1,
+          "consume_at_ms": 7.030299999999897,
+          "error": {
+            "code": "LAB_TIMEOUT",
+            "message": "Local inactivity budget"
+          },
+          "error_at_ms": 41.78629999999998
+        }
+      ],
+      "server_responses": [
+        {
+          "id": "destroy-after-marker",
+          "method": "POST",
+          "connection_id": 1,
+          "http_version": "1.1",
+          "request_at_ms": 6.760299999999916,
+          "expected_bytes": 23,
+          "expected_sha256": "8f90aed867988175fcbae06aaad71e57994acb212cadcf757ee5fa9239076468",
+          "closed_at_ms": 42.271999999999935,
+          "writable_finished_at_close": false
+        }
+      ],
+      "trace": [
+        {
+          "at_ms": 6.188099999999963,
+          "event": "client_socket_assigned",
+          "id": "destroy-after-marker",
+          "reused_socket": false
+        },
+        {
+          "at_ms": 6.651399999999967,
+          "event": "server_connection",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.790899999999965,
+          "event": "server_request",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 6.793799999999919,
+          "event": "server_memory_marker_applied",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 7.022799999999961,
+          "event": "client_headers",
+          "id": "destroy-after-marker",
+          "connection_id": 1
+        },
+        {
+          "at_ms": 7.031099999999924,
+          "event": "client_consume",
+          "id": "destroy-after-marker"
+        },
+        {
+          "at_ms": 41.180099999999925,
+          "event": "explicit_client_destroy",
+          "marker": "applied-in-memory"
+        },
+        {
+          "at_ms": 41.79689999999994,
+          "event": "client_error",
+          "id": "destroy-after-marker",
+          "code": "LAB_TIMEOUT",
+          "message": "Local inactivity budget"
+        },
+        {
+          "at_ms": 42.2672,
+          "event": "server_socket_close",
+          "connection_id": 1,
+          "had_error": false
+        },
+        {
+          "at_ms": 42.2743999999999,
+          "event": "server_response_close",
+          "id": "destroy-after-marker",
+          "writable_finished": false
+        },
+        {
+          "at_ms": 42.30029999999999,
+          "event": "marker_after_client_close",
+          "value": "applied-in-memory"
+        },
+        {
+          "at_ms": 43.52679999999998,
+          "event": "fixture_closed",
+          "listening": false
+        }
+      ]
+    }
+  ]
+}

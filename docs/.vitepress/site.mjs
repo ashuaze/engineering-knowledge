@@ -8,9 +8,46 @@ export const docsRoot = path.join(root, 'docs');
 // Only these public supporting files may be exposed by the local preview.
 export const sourceFiles = [
   'VALIDATION.md',
+  'examples/memory_governance/lab.py',
+  'examples/memory_governance/results/results.json',
+  'examples/memory_governance/results/run.txt',
+  'examples/memory_governance/results/manifest.json',
+  'examples/ai_tool_boundaries/lab.py',
+  'examples/ai_tool_boundaries/results/results.json',
+  'examples/ai_tool_boundaries/results/run.txt',
+  'examples/ai_tool_boundaries/results/manifest.json',
+  'examples/connection_lifecycle/lab.mjs',
+  'examples/connection_lifecycle/results/results.json',
+  'examples/connection_lifecycle/results/run.txt',
+  'examples/connection_lifecycle/results/manifest.json',
+  'examples/overload_control/lab.py', 'examples/overload_control/test_lab.py',
+  'examples/overload_control/results/results.json', 'examples/overload_control/results/tests.txt',
+  'examples/overload_control/results/manifest.json',
   'examples/idempotency/lab.py', 'examples/idempotency/test_lab.py',
   'examples/retry_budget/lab.py', 'examples/retry_budget/test_lab.py',
-  'examples/object_authorization/lab.py', 'examples/object_authorization/test_lab.py'
+  'examples/object_authorization/lab.py', 'examples/object_authorization/test_lab.py',
+  'examples/backup_recovery/lab.py',
+  'examples/backup_recovery/archive.py',
+  'examples/backup_recovery/test_archive.py',
+  'examples/backup_recovery/results/results.json',
+  'examples/backup_recovery/results/backup_manifest.json',
+  'examples/backup_recovery/results/source.log.txt',
+  'examples/backup_recovery/results/restored.log.txt',
+  'examples/backup_recovery/results/archive-tests.txt',
+  'examples/backup_recovery/results/manifest.json',
+  'examples/inventory_concurrency/lab.py',
+  'examples/inventory_concurrency/results/results.json',
+  'examples/inventory_concurrency/results/a.psql.txt',
+  'examples/inventory_concurrency/results/b.psql.txt',
+  'examples/inventory_concurrency/results/observer.psql.txt',
+  'examples/inventory_concurrency/results/manifest.json',
+  'examples/query_plans/lab.py', 'examples/query_plans/lab.sql',
+  'examples/query_plans/results/results.json', 'examples/query_plans/results/results.psql.txt',
+  'examples/query_plans/results/manifest.json',
+  'examples/browser_long_tasks/lab.html', 'examples/browser_long_tasks/run.mjs',
+  'examples/browser_long_tasks/results/results.json', 'examples/browser_long_tasks/results/manifest.json',
+  ...[1, 2, 3].flatMap(round => ['sync', 'microtask', 'yield', 'timer', 'heavy']
+    .map(mode => `examples/browser_long_tasks/results/${round}-${mode}.trace.json`))
 ];
 
 export function getSiteSettings(env = process.env) {

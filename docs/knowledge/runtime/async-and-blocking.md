@@ -6,30 +6,30 @@ domain: "runtime"
 status: "evolving"
 summary: "分清结果交付、线程等待和 CPU 工作，解释为什么 async 仍可能阻塞。"
 created: "2026-10-16"
-updated: "2026-10-16"
+updated: "2026-10-20"
 last_verified: "2026-10-16"
 verification: "source-checked"
 prerequisites: []
-related: ["kb-api-idempotency", "kb-performance-slow-api", "kb-frontend-long-tasks", "kb-systems-execution-units"]
+related: ["kb-api-idempotency", "kb-performance-slow-api", "kb-frontend-long-tasks", "kb-systems-execution-units", "kb-runtime-event-loop", "kb-systems-syscalls", "kb-systems-io-multiplexing"]
 tags: ["concurrency", "runtime"]
 ---
 
 # 同步、异步与阻塞：先说清观察边界
 
-学习入口：写了 async，其他请求为什么仍然卡住？前置知识：JavaScript 函数调用、Promise 与线程的基本概念。本文比较调用契约和线程等待两个维度，示例未作为自动实验执行。
+学习入口：写了 [async](../../glossary/runtime.md#runtime.async)，其他请求为什么仍然卡住？前置知识：JavaScript 函数调用、Promise 与[线程](../../glossary/systems.md#systems.execution-units)的基本概念。本文比较调用契约和线程等待两个维度，示例未作为自动实验执行。
 
 ## 比较基准：调用契约、线程等待与实际工作
 
-分析一个调用时，先说清“哪个调用、哪个线程、哪个时间段”。同步/异步主要讨论调用与完成结果的协调方式；阻塞/非阻塞讨论指定操作是否让当前执行线程等待。两组词描述不同维度，不能只凭函数名判断吞吐或执行成本。
+分析一个调用时，先说清“哪个调用、哪个线程、哪个时间段”。同步/异步主要讨论调用与完成结果的协调方式；[阻塞](../../glossary/systems.md#systems.blocking)/非阻塞讨论指定操作是否让当前执行线程等待。两组词描述不同维度，不能只凭函数名判断吞吐或执行成本。
 
 本文以 JavaScript / Node.js 的应用开发视角讨论，不试图用一张四象限表统一所有操作系统异步 I/O API。
 
 | 观察点 | 要问的问题 | 示例 |
 | --- | --- | --- |
 | 调用契约 | 结果在调用返回时提供，还是稍后交付？ | 返回结果对象，或返回 Promise |
-| 当前线程 | 指定操作等待期间，线程能否执行其他任务？ | 阻塞读、就绪通知 |
+| 当前线程 | 指定操作等待期间，线程能否执行其他任务？ | 阻塞读、[就绪通知](../../glossary/systems.md#systems.io-multiplexing) |
 | 实际工作 | 谁在计算或等待外部资源？ | JS 主线程、内核、线程池、远端服务 |
-| 容量 | 工作多了以后在哪里排队？ | 事件循环、工作线程池、连接池、服务端队列 |
+| 容量 | 工作多了以后在哪里[排队](../../glossary/performance.md#performance.queueing)？ | [事件循环](../../glossary/runtime.md#runtime.event-loop)、工作线程池、[连接池](../../glossary/api.md#api.pool)、服务端[队列](../../glossary/algorithms.md#algorithms.queues) |
 
 这些问题可以独立回答。Promise 是异步结果的抽象，不能据此推出工作已经转移到另一个线程。
 
@@ -37,7 +37,7 @@ tags: ["concurrency", "runtime"]
 
 Node.js 的事件循环协调回调与 I/O 通知；部分操作由操作系统处理，部分由 libuv 工作线程池承担。应用中的 JavaScript 回调仍可能长时间占用执行线程。不能用“所有异步调用都在后台线程运行”解释它。来源：Node.js 的 Event Loop 与 Don't Block 文档。
 
-实际排查时，可把“主线程忙”“工作线程池排队”“外部依赖等待”当作三个待验证的假设。观察事件循环延迟、CPU profile、任务类别与依赖耗时，避免只看到 CPU 不高便断定系统没有瓶颈。
+实际排查时，可把“主线程忙”“工作线程池排队”“外部依赖等待”当作三个待验证的假设。观察事件循环[延迟](../../glossary/performance.md#performance.latency-throughput)、CPU profile、任务类别与依赖耗时，避免只看到 CPU 不高便断定系统没有瓶颈。
 
 ## 反例：async 不会自动迁移计算
 
@@ -58,7 +58,7 @@ async function calculate() {
 ## 按工作类型和容量选择方案
 
 - Promise 便于表达稍后完成的结果；选择它时仍要核算工作实际占用的线程与资源。
-- 异步 I/O 的并发受线程池、连接池与下游容量约束，增加请求数量时要观察排队。
+- 异步 I/O 的[并发](../../glossary/systems.md#systems.concurrency)受线程池、连接池与下游容量约束，增加请求数量时要观察排队。
 - 需要并行 CPU 计算时，应另行设计 worker、独立进程或任务服务，并核算传输、调度和结果合并成本。
 
 比较方案时明确相同负载、运行环境与观察指标，避免只凭 async 关键字做性能判断。
@@ -68,7 +68,7 @@ async function calculate() {
 - 将同步大文件读取放进请求处理，其他请求可能一起等待。
 - 把大型 JSON 转换、压缩或循环塞进 Promise，以为获得了并行。
 - 用无限并发的异步请求压满连接池，下游开始排队。
-- 用大量微任务延迟其他任务的执行机会；具体调度规则需按宿主验证。
+- 用大量[微任务](../../glossary/runtime.md#runtime.microtasks)延迟其他任务的执行机会；具体调度规则需按宿主验证。
 
 这些是排查方向，是否发生需要观测证据。增加异步调用数量本身不能证明系统吞吐提高。
 
@@ -82,7 +82,11 @@ async function calculate() {
 
 ## 关联阅读
 
-- [API 幂等性](../api/idempotency.md)：异步完成与重试也会带来结果未知。
+底层等待继续读[系统调用与权限边界](../systems/syscalls-privilege-and-return-contracts.md)和 [I/O 多路复用与就绪通知](../systems/io-multiplexing-readiness-and-event-loops.md)：内核入口、线程睡眠、就绪和实际操作分别判断；新文不构成本文异步性能对照的实测。
+
+- [事件循环与微任务](event-loop-and-microtasks.md)：进一步区分结果就绪、回调排队与实际执行。
+
+- [API 幂等性](../api/idempotency.md)：异步完成与[重试](../../glossary/api.md#api.retries)也会带来结果未知。
 - [慢 API 排查](../performance/slow-api-investigation.md)：把等待时间拆开。
 - [浏览器长任务](../frontend/long-tasks-and-responsiveness.md)：在浏览器宿主中分析输入、任务与绘制，并设计让出策略。
 - [进程、线程与协程](../systems/process-thread-coroutine.md)：解释资源边界与调度位置，区分并发与并行。
